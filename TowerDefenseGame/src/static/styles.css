@@ -1,3 +1,9 @@
+.press-start2p-regular {
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
 body{
     background-image: url("../assets/SiteImages/nedladdning.png");
     margin: 0;
@@ -11,7 +17,7 @@ body{
 h1{
     color: #000000;
     margin-bottom: 100px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Press Start 2P", system-ui;
     font-size: 80px;
 
 }
@@ -29,6 +35,8 @@ div{
     align-items: center;
 }
 
+
+
 /*
 -------- BUTTON --------
  */
@@ -40,7 +48,7 @@ div#buttonContainer{
     filter: blur(10,10,10,10);
     border: 2px solid #402f1d;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.7);
     border-radius: 10px;
 }
 
@@ -55,6 +63,10 @@ button {
     font-size: 1.2em;
     font-weight: 550;
     font-family: 'Montserrat', sans-serif;
+}
+
+.highScores{
+
 }
 
 button:hover {
