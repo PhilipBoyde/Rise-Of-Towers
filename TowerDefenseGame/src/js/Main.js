@@ -1,11 +1,13 @@
 const gameCanvas = document.querySelector('.GameScreen');
-const interactiveCanvas = document.querySelector('.interactiveBar');
+const interactiveCanvas = document.querySelector('.GameUI');
+
+
 
 if (gameCanvas) {
     const gameCtx = gameCanvas.getContext('2d');
 
-    gameCanvas.width = 1280;
-    gameCanvas.height = 950;
+    gameCanvas.width = 1366;
+    gameCanvas.height = 768;
 
     gameCtx.fillStyle = 'white';
     gameCtx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
@@ -16,8 +18,8 @@ if (gameCanvas) {
 if (interactiveCanvas) {
     const interactiveCtx = interactiveCanvas.getContext('2d');
 
-    interactiveCanvas.width = 358;
-    interactiveCanvas.height = 100;
+    interactiveCanvas.width = 200;
+    interactiveCanvas.height = 768;
 
     interactiveCtx.fillStyle = '#A1662F';
     interactiveCtx.fillRect(0, 0, interactiveCanvas.width, interactiveCanvas.height);
