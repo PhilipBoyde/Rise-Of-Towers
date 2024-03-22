@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Tower-Defense-Game.iml" filepath="$PROJECT_DIR$/.idea/Tower-Defense-Game.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TowerDefenseGame.iml" filepath="$PROJECT_DIR$/TowerDefenseGame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/assets.iml" filepath="$PROJECT_DIR$/assets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src.iml" filepath="$PROJECT_DIR$/src.iml" />
+      <module fileurl="file://$PROJECT_DIR$/static.iml" filepath="$PROJECT_DIR$/static.iml" />
     </modules>
   </component>
 </project>
