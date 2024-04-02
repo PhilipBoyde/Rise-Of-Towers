@@ -6,7 +6,7 @@ function inRange(enemyPos,towerPos) {
 
      let inArea = false;
     
-    if (enemyPos < circleArea(radius)){
+    if (enemyPos <= circleArea(radius)){
         inArea = true;
         return inArea;
     }
