@@ -34,3 +34,11 @@ body {
     padding: 0;
     display: flex;
 }
+
+.tower-icon{
+    width: 70px;
+    height: 70px;
+  /*  background-image: url("hej.png");
+  
+   */
+}
