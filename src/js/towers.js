@@ -17,6 +17,8 @@ function inRange(enemyPos,towerPos) {
         }
     }
     function getPosition() {
+         const position = 1.10;
+        return position;
     }
     function circleArea(radius){
         return 2 * Math.PI * radius;
