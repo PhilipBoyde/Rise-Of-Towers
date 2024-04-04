@@ -5,6 +5,7 @@ const /** HTMLCanvasElement */ interactiveCanvas = document.querySelector('.Game
 const /** number */ activeMapNbr = 1;    // Change this to the map you want to load
 let /** number */ round = 0;
 let /** object */ activeMap;
+let playerHealth = 10;
 
 document.getElementById("GameWaveButton").addEventListener("click", nexWave);
 const /** CanvasRenderingContext2D */ gameCtx = gameCanvas.getContext('2d');
@@ -26,7 +27,7 @@ if (gameCanvas && interactiveCanvas){
     interactiveCanvas.height = 768;
 
     const interactiveCtx = interactiveCanvas.getContext('2d');
-    interactiveCtx.fillStyle = '#A1662F';
+    interactiveCtx.fillStyle = '#574629';
     interactiveCtx.fillRect(0, 0, interactiveCanvas.width, interactiveCanvas.height);
 }else {
     alert('Canvas not found!, Pleas try again later');
@@ -108,7 +109,10 @@ function enableButton(){
 
 }
 
-
+function reduceHealth(){
+    playerHealth--;
+    console.log('%cPlayer health left: ' + playerHealth, 'color: red; font-size: 15px;');
+}
 
 /**
  * Animates the enemies on the game screen.
@@ -117,25 +121,27 @@ function enableButton(){
  * @author Philip,
  */
 function animate(enemies) {
-
+    
         if (enemies.length === 0) {
             console.log('%cWave ' + round + ' Completed!', 'color: green; font-size: 20px;');
             enableButton()
             round++;
             return;
         }
+        const animationID = requestAnimationFrame(() => animate(enemies));
         
         gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
         gameCtx.drawImage(img, 0, 0, gameCanvas.width, gameCanvas.height);
         
-        console.log("Enemies", enemies);
+        //console.log("Enemies", enemies);
 
-        enemies = enemies.filter(enemy => !enemy.update(gameCtx));
+        enemies = enemies.filter(enemy => !enemy.update(gameCtx, reduceHealth));
 
-
-
-
-        requestAnimationFrame(() => animate(enemies));
+        if (playerHealth <= 0){
+            document.querySelector('.GameOver').style.display = 'flex';
+            console.log('%cGAME OVER!', 'color: red; font-size: 20px;');
+            cancelAnimationFrame(animationID)
+        }
     }
 
 

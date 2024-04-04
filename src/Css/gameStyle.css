@@ -17,21 +17,21 @@ body, html{
     display: flex;
     position: relative;
     filter: blur(10,10,10,10);
-    border: 2px solid #402f1d;
+    border: 2px solid #4F4537;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 10px;
 }
 
 #canvasContainer button {
-    border: 3px solid #402f1d;
+    border: 3px solid #4F4537;
     border-radius: 45px;
     transition: all 0.3s;
     cursor: pointer;
-    background: white;
+    background: #DFE0DF;
     font-weight: 550;
     font-family: "VT323", cursive;
-    font-size: 20px;
+    font-size: 30px;
 
     position: absolute;
     top: 92%;
@@ -42,32 +42,40 @@ body, html{
 }
 
 #canvasContainer button:hover {
-    background: #402f1d;
+    background: #8c343c;
     color: white;
-    font-size: 1.5em;
+    font-size: 2.3em;
 }
 
 #canvasContainer button:disabled {
     cursor: not-allowed;
-    background: white;
-    color: black;
-    font-size: 20px;
-}
-
-#canvasContainer button:disabled:hover {
-    background: white;
-    color: black;
-    font-size: 20px;
+    color: rgba(0, 0, 0, 0.36);
+    font-size: 30px;
 }
 
 .GameScreen, .GameUI {
     margin: 0;
 }
 
-
 body {
     background-color: black;
     margin: 0;
     padding: 0;
     display: flex;
+}
+
+#canvasContainer .GameOver{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(42, 42, 42, 0.53);
+    color: #ef0000;
+    -webkit-text-stroke: 3px black;
+    font-family: "VT323", cursive;
+    font-size: 200px;
 }
