@@ -1,15 +1,23 @@
-import {path1Route1} from "../model/map1/Map1Paths.js";
-import { Enemy } from './EnemyController.js';
-import {Startmap1 } from './map1Controller.js';
+import {Startmap1 } from './mapControllers/map1Controller.js';
 
-const gameCanvas = document.querySelector('.GameScreen');
-const interactiveCanvas = document.querySelector('.GameUI');
-const activeMapNbr = 1;    // Change this to the map you want to load
-let round = 0;
-let activeMap;
+const  /** HTMLCanvasElement */ gameCanvas = document.querySelector('.GameScreen');
+const /** HTMLCanvasElement */ interactiveCanvas = document.querySelector('.GameUI');
+const /** number */ activeMapNbr = 1;    // Change this to the map you want to load
+let /** number */ round = 0;
+let /** object */ activeMap;
+
 document.getElementById("GameWaveButton").addEventListener("click", nexWave);
-const gameCtx = gameCanvas.getContext('2d');
+const /** CanvasRenderingContext2D */ gameCtx = gameCanvas.getContext('2d');
 
+
+/**
+ * Sets up canvas dimensions and styling if both gameCanvas and interactiveCanvas exist.
+ * Otherwise, alerts the user.
+ *
+ * @param {Canvas} gameCanvas - The canvas element for the game screen.
+ * @param {Canvas} interactiveCanvas - The canvas element for the game UI.
+ * @author Philip
+ */
 if (gameCanvas && interactiveCanvas){
     gameCanvas.width = 1120;
     gameCanvas.height = 960;
@@ -24,43 +32,60 @@ if (gameCanvas && interactiveCanvas){
     alert('Canvas not found!, Pleas try again later');
 }
 
+
 let img = new Image();
 changeMap()
 img.onload = () => {
     gameCtx.drawImage(img, 0, 0, gameCanvas.width, gameCanvas.height);
 }
 
+/**
+ * Changes the map based on the activeMap variable.
+ *
+ * @param {number} activeMapNbr - The number of the active map to be loaded.
+ * @author Philip
+ */
 function changeMap(){
     switch (activeMapNbr) { // Load the map based on the activeMap variable
         case 1:
             img.src = '../assets/gamemap/Map1.png';
             activeMap = new Startmap1();
-
             break;
+
         case 2:
             img.src = '../assets/gamemap/Map2.png';
-
             break;
+
         case 3:
             img.src = '../assets/gamemap/Map3.png';
-
-            break
+            break;
 
         default:
-            console.log('Map not found!')
+            console.log('Map not found!');
             break;
     }
 }
 
-
+/**
+ * Loads the next wave of enemies.
+ *
+ * @param {number} round - The current round of the game.
+ * @author Philip
+ */
 function nexWave(){
     disableButton()
-    activeMap.nexWave(round);
-    
-    const enemies = test();
-    animate(enemies)
+    const enemies = activeMap.nexWave(round);
+
+    animate(enemies);
 }
 
+
+/**
+ * Disables the "GameWaveButton" button by changing its style and setting its disabled property to true.
+ *
+ * @param {Button} button - The button element to be disabled.
+ * @author Philip
+ */
 function disableButton(){
     let button = document.getElementById("GameWaveButton");
     button.style.backgroundColor = 'gray';
@@ -68,29 +93,30 @@ function disableButton(){
     document.getElementById("GameWaveButton").disabled = true;
 }
 
+
+/**
+ * Enables the "GameWaveButton" button by changing its style and setting its disabled property to false.
+ *
+ * @param {Button} button - The button element to be enabled.
+ * @author Philip
+ */
 function enableButton(){
     let button = document.getElementById("GameWaveButton");
     button.style.backgroundColor = '';
     button.style.filter = 'none';
     document.getElementById("GameWaveButton").disabled = false;
-    
+
 }
 
 
 
-
-function test() {
-    const enemies = [];
-    for (let i = 1; i <10;  i++){
-        const xOffSet = i * 80;
-        enemies.push(new Enemy({position: {x: path1Route1[0].x + xOffSet, y: path1Route1[0].y}}, 1, path1Route1, 100));
-    }
-
-    return enemies;
-}
-
-
-    function animate(enemies) {
+/**
+ * Animates the enemies on the game screen.
+ *
+ * @param enemies
+ * @author Philip,
+ */
+function animate(enemies) {
 
         if (enemies.length === 0) {
             console.log('%cWave ' + round + ' Completed!', 'color: green; font-size: 20px;');

@@ -16,10 +16,15 @@ export class Enemy {
         }
     }
     draw(gameCtx) { //draw the enemy sprite
-        gameCtx.fillStyle = '#ff0000';
-        gameCtx.fillRect(this.position.x, this.position.y, this.width, this.height);
+       this.drawHitBox(gameCtx);
+
     }
 
+    drawHitBox(gameCtx) {
+        gameCtx.strokeStyle = '#ff0000';
+        gameCtx.lineWidth = 3;
+        gameCtx.strokeRect(this.position.x, this.position.y, this.width, this.height);
+    }
     /*
     update(gameCtx) { //Makes calculation to get the next position of the enemy sprite
         this.draw(gameCtx);

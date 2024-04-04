@@ -1,4 +1,4 @@
-import {Startmap1} from "./map1Controller";
+import {Startmap1} from "./mapControllers/map1Controller";
 let img;
 
 switch (activeMap) { // Load the map based on the activeMap variable
