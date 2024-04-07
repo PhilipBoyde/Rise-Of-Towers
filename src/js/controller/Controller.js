@@ -1,92 +1,177 @@
-const gameCanvas = document.querySelector('.GameScreen');
-const interactiveCanvas = document.querySelector('.GameUI');
-const activeMap = 1;    // Change this to the map you want to load
-const gameCtx = gameCanvas.getContext('2d');
-import map1Controller from './map1Controller.js';
+import {Startmap1 } from './mapControllers/map1Controller.js';
+
+const  /** HTMLCanvasElement */ gameCanvas = document.querySelector('.GameScreen');
+const /** HTMLCanvasElement */ interactiveCanvas = document.querySelector('.GameUI');
+const /** number */ activeMapNbr = 1;    // Change this to the map you want to load
+let /** number */ round = 0;
+let /** object */ activeMap;
+let playerHealth = 10;
+
+document.getElementById("GameWaveButton").addEventListener("click", nexWave);
+const /** CanvasRenderingContext2D */ gameCtx = gameCanvas.getContext('2d');
 
 
-window.addEventListener('resize', function()        {
-    if (window.innerWidth < 1352  || window.innerHeight < 700) {
-        alert('Your browser window is too small!');
-    }
-});
-
-
-
-
-
-window.addEventListener('click', function(event) {
-    const rect = gameCanvas.getBoundingClientRect();
-
-    
-    //TESTING
-    let rectX = 135;
-    let rectY = 70;
-    let rectWidth = 85;
-    let rectHeight = 80;
-
-    // Get the x and y coordinates of the click event
-    let pointX = event.clientX - rect.left;
-    let pointY = event.clientY - rect.top;
-
-    if (pointX >= rectX && pointX <= rectX + rectWidth && pointY >= rectY && pointY <= rectY + rectHeight) {
-        alert( 'Clicked within the specified area!')
-    }
-});
-
-
-// Draw the game map
-if (gameCanvas) {
-    
-    gameCanvas.width = 1124;
-    gameCanvas.height = 768;
-
-    let img = new Image();
-    img.onload = function() {
-        gameCtx.drawImage(img, 0, 0, gameCanvas.width, gameCanvas.height);
-
-        drawTowerHitBox(gameCtx);
-
-       
-        if (activeMap === 1) {
-            map1Controller(gameCtx, interactiveCanvas);
-
-            //import Map1TowerHitBox from '../model/map1/Map1TowerHitBox.js';
-            //Map1TowerHitBox();
-        }else {
-            console.error('Map not found!');
-        }
-    }
-    img.src = '../assets/gameMap/map1.png';
-} else {
-    console.error('Game canvas element not found!');
-}
-
-//draw the sidebar canvas
-if (interactiveCanvas) {
-    const interactiveCtx = interactiveCanvas.getContext('2d');
+/**
+ * Sets up canvas dimensions and styling if both gameCanvas and interactiveCanvas exist.
+ * Otherwise, alerts the user.
+ *
+ * @param {Canvas} gameCanvas - The canvas element for the game screen.
+ * @param {Canvas} interactiveCanvas - The canvas element for the game UI.
+ * @author Philip
+ */
+if (gameCanvas && interactiveCanvas){
+    gameCanvas.width = 1120;
+    gameCanvas.height = 960;
 
     interactiveCanvas.width = 200;
     interactiveCanvas.height = 768;
 
-    interactiveCtx.fillStyle = '#A1662F';
+    const interactiveCtx = interactiveCanvas.getContext('2d');
+    interactiveCtx.fillStyle = '#574629';
     interactiveCtx.fillRect(0, 0, interactiveCanvas.width, interactiveCanvas.height);
-} else {
-    console.error('Interactive canvas element not found!');
+}else {
+    alert('Canvas not found!, Pleas try again later');
 }
 
 
+let img = new Image();
+changeMap()
+img.onload = () => {
+    gameCtx.drawImage(img, 0, 0, gameCanvas.width, gameCanvas.height);
+}
+
+/**
+ * Changes the map based on the activeMap variable.
+ *
+ * @param {number} activeMapNbr - The number of the active map to be loaded.
+ * @author Philip
+ */
+function changeMap(){
+    switch (activeMapNbr) { // Load the map based on the activeMap variable
+        case 1:
+            img.src = '../assets/gamemap/Map1.png';
+            activeMap = new Startmap1();
+            break;
+
+        case 2:
+            img.src = '../assets/gamemap/Map2.png';
+            break;
+
+        case 3:
+            img.src = '../assets/gamemap/Map3.png';
+            break;
+
+        default:
+            console.log('Map not found!');
+            break;
+    }
+}
+
+/**
+ * Loads the next wave of enemies.
+ *
+ * @param {number} round - The current round of the game.
+ * @author Philip
+ */
+function nexWave(){
+    disableButton()
+    const enemies = activeMap.nexWave(round);
+
+    animate(enemies);
+}
 
 
-function drawTowerHitBox(gameCtx){
-    gameCtx.strokeStyle = '#3cff00'; 
-    gameCtx.lineWidth = 2; 
-    
-    gameCtx.strokeRect(135, 70, 85, 80); //Tower 1
-    gameCtx.strokeRect(675, 70, 85, 80); //Tower 2
-    gameCtx.strokeRect(540, 265, 85, 80); //Tower 3
-    gameCtx.strokeRect(360, 265, 85, 80); //Tower 4
-    gameCtx.strokeRect(360, 685, 85, 80); //Tower 5
-    gameCtx.strokeRect(810, 535, 85, 80); //Tower 6
-    gameCtx.strokeRect(1035, 265, 85, 80); //Tower 7
+/**
+ * Disables the "GameWaveButton" button by changing its style and setting its disabled property to true.
+ *
+ * @param {Button} button - The button element to be disabled.
+ * @author Philip
+ */
+function disableButton(){
+    let button = document.getElementById("GameWaveButton");
+    button.style.backgroundColor = 'gray';
+    button.style.filter = 'blur(1px)';
+    document.getElementById("GameWaveButton").disabled = true;
+}
+
+
+/**
+ * Enables the "GameWaveButton" button by changing its style and setting its disabled property to false.
+ *
+ * @param {Button} button - The button element to be enabled.
+ * @author Philip
+ */
+function enableButton(){
+    let button = document.getElementById("GameWaveButton");
+    button.style.backgroundColor = '';
+    button.style.filter = 'none';
+    document.getElementById("GameWaveButton").disabled = false;
+
+}
+
+function reduceHealth(){
+    playerHealth--;
+    console.log('%cPlayer health left: ' + playerHealth, 'color: red; font-size: 15px;');
+}
+
+/**
+ * Animates the enemies on the game screen.
+ *
+ * @param enemies
+ * @author Philip,
+ */
+let lastTime = 0;
+const fpsInterval = 1000 / 60; // Assuming 60 FPS
+let lastFpsUpdateTime = 0;
+let currentTime;
+let elapsed;
+
+function animate(enemies) {
+    currentTime = performance.now();
+    elapsed = currentTime - lastTime;
+
+    if (elapsed > fpsInterval) { //Limit the frame rate to about 60 FPS
+        lastTime = currentTime - (elapsed % fpsInterval);
+
+        // Check if all enemies are dead
+        if (enemies.length === 0) {
+            console.log('%cWave ' + round + ' Completed!', 'color: green; font-size: 20px;');
+            enableButton();
+            round++;
+            return;
+        }
+
+        gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+        gameCtx.drawImage(img, 0, 0, gameCanvas.width, gameCanvas.height); // !!Try to optimize this, unnecessary to redraw each frame!!
+
+        enemies = enemies.filter(enemy => !enemy.update(gameCtx, reduceHealth));
+
+        // Check if player health is 0
+        if (playerHealth <= 0) {
+            document.querySelector('.GameOver').style.display = 'flex';
+            console.log('%cGAME OVER!', 'color: red; font-size: 20px;');
+            cancelAnimationFrame(animationID);
+        }
+
+
+    }
+
+    // Update FPS counter
+    fpsCounterUpdate(1000 / elapsed);
+
+    // Request next frame
+    const animationID = requestAnimationFrame(() => animate(enemies));
+}
+
+let frameCount = 0;
+let fpsAccumulator = 0;
+function fpsCounterUpdate(fps){
+    frameCount++;
+    fpsAccumulator += fps;
+
+    if (frameCount % 60 === 0) { // Update every 60 frames
+        const averageFPS = fpsAccumulator / 60;
+        document.querySelector('.fpsCounter').innerHTML = 'Average<br>FPS: ' + averageFPS.toFixed(2);
+        fpsAccumulator = 0;
+    }
 }

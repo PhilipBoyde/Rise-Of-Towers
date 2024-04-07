@@ -1,0 +1,93 @@
+* {
+    user-select: none;
+}
+
+body, html{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url("../assets/img/nedladdning.png");
+}
+
+#canvasContainer {
+    display: flex;
+    position: relative;
+    filter: blur(10,10,10,10);
+    border: 2px solid #4F4537;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+}
+
+#canvasContainer button {
+    border: 3px solid #4F4537;
+    border-radius: 45px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: #DFE0DF;
+    font-weight: 550;
+    font-family: "VT323", cursive;
+    font-size: 30px;
+
+    position: absolute;
+    top: 92%;
+    left: 85%;
+    z-index: 1;
+    width: 185px;
+    height: 50px;
+}
+
+#canvasContainer button:hover {
+    background: #8c343c;
+    color: white;
+    font-size: 2.3em;
+}
+
+#canvasContainer button:disabled {
+    cursor: not-allowed;
+    color: rgba(0, 0, 0, 0.36);
+    font-size: 30px;
+}
+
+.GameScreen, .GameUI {
+    margin: 0;
+}
+
+body {
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#canvasContainer .fpsCounter{
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    color: #3cff00;
+    background-color: black;
+    font-family: "VT323", cursive;
+    font-size: 30px;
+    z-index: 1;
+}
+
+#canvasContainer .GameOver{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(42, 42, 42, 0.53);
+    color: #ef0000;
+    -webkit-text-stroke: 3px black;
+    font-family: "VT323", cursive;
+    font-size: 200px;
+}
