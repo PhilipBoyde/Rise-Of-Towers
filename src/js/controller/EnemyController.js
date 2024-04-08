@@ -1,7 +1,13 @@
 import { SpriteController } from './SpriteController.js';
 export class Enemy extends SpriteController{
-    constructor({position = {x: 0, y: 0}}, speed, path, health){
-        super({position}, '../assets/EnemySprites/Slime/S_Walk.png', {max: 6, min: 0});
+    constructor({position = {x: 0, y: 0}}, speed, path, health) {
+
+        const imagePath = [
+            '../assets/EnemySprites/Wolf/D_Walk.png',
+            '../assets/EnemySprites/Wolf/S_Walk.png',
+            '../assets/EnemySprites/Wolf/U_Walk.png'
+        ]
+        super({position}, imagePath, {max: 6, min: 0});
 
         this.position = position;
         this.width = 48;
@@ -44,6 +50,8 @@ export class Enemy extends SpriteController{
         yDistance /= length;
 
 
+
+
         this.position.x += xDistance * this.speed;
         this.position.y += yDistance * this.speed;
         this.center = {
@@ -51,8 +59,14 @@ export class Enemy extends SpriteController{
             y: this.position.y + this.height / 2
         }
 
+       /* if (xDistance > 0) {
+            this.updateImagePath(1);
+        }*/
+
+
+
         //console.log(this.position.y)
-        
+
         const distanceToNextPoint = Math.sqrt(Math.pow(this.center.x - path.x, 2) + Math.pow(this.center.y - path.y, 2));
         if (distanceToNextPoint < this.threshold) {
             this.pathIndex++;

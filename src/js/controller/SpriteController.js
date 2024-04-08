@@ -6,10 +6,16 @@
  */
 
 export class SpriteController {
-    constructor({position = {x: 0, y: 0}}, spriteSrc, frames = {max: 6, min: 0}){
-        this.position = position
+    constructor({position = {x: 0, y: 0}}, imagePath, frames = {max: 6, min: 0}){
+        this.position = position;
         this.sprite = new Image();
-        this.sprite.src = spriteSrc;
+
+        let defaultImagePath = Array.isArray(imagePath) ? imagePath[0] : imagePath;
+
+
+        this.sprite.src = defaultImagePath;
+
+
 
         this.spriteFrames = {
             max: frames.max, //the number of frames in the sprite
@@ -19,6 +25,14 @@ export class SpriteController {
             hold: 6 // how many frames to hold each frame
         };
     }
+
+    updateImagePath(index) {
+        if (index >= 0 && index < this.imagePaths.length) {
+            this.sprite.src = this.imagePaths[index];
+            this.currentImagePathIndex = index;
+        }
+    }
+
 
     drawSprite(gameCtx){
         const cropWidth = this.sprite.width / this.spriteFrames.max;

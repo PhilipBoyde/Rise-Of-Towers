@@ -5,7 +5,7 @@ const /** HTMLCanvasElement */ interactiveCanvas = document.querySelector('.Game
 const /** number */ activeMapNbr = 1;    // Change this to the map you want to load
 let /** number */ round = 0;
 let /** object */ activeMap;
-let playerHealth = 10;
+let playerHealth = 20;
 
 document.getElementById("GameWaveButton").addEventListener("click", nexWave);
 const /** CanvasRenderingContext2D */ gameCtx = gameCanvas.getContext('2d');
@@ -112,6 +112,18 @@ function enableButton(){
 function reduceHealth(){
     playerHealth--;
     console.log('%cPlayer health left: ' + playerHealth, 'color: red; font-size: 15px;');
+    updateHealthCounter(playerHealth);
+}
+
+/**
+ * Updates the health with the new health in the game
+ * @param newHealth -New number for the health
+ * @author Mahyar
+ */
+function updateHealthCounter (newHealth) {
+    const healthCounter = document.querySelector('.healthCounter');
+
+    healthCounter.textContent = newHealth;
 }
 
 /**

@@ -91,3 +91,65 @@ body {
     font-family: "VT323", cursive;
     font-size: 200px;
 }
+
+#canvasContainer .heartAnimation {
+    position: absolute;
+    top: 37px;
+    right: 295px;
+    width: 45px;
+    height: 45px;
+    background-image: url('../assets/Life/heart_animated_2.png');
+    background-size: 500% 100%;
+    animation: heartAnimation 1s steps(1) infinite;
+}
+
+@keyframes heartAnimation {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+#canvasContainer .CoinsAnimation {
+    position: absolute;
+    top: 93px;
+    right: 295px;
+    width: 45px;
+    height: 45px;
+    font-family: "VT323", cursive;
+    background-image: url('../assets/Coins/MonedaD.png');
+    background-size: 500% 100%; /* 5 gånger bredden av din bild */
+    animation: coinAnimation 3s steps(2) infinite;
+}
+@keyframes coinAnimation {
+    0% { background-position: 0 0; }
+    20% { background-position: -0px 0; }
+    40% { background-position: -0px 0; }
+    60% { background-position: -90px 0; }
+    80% { background-position: -0px 0; }
+    100% { background-position: 0 0; }
+}
+
+
+#canvasContainer .healthCounter {
+    position: absolute;
+    top: 25px;
+    right: 240px;
+    font-size: 65px;
+    font-family: "VT323", cursive;
+    color: white;
+    -webkit-text-stroke: 1px aqua;
+}
+
+#canvasContainer .CoinsCounter {
+    position: absolute;
+    top: 82px;
+    right: 213px;
+    font-size: 65px;
+    font-family: "VT323", cursive;
+    color: #ff8800;
+    -webkit-text-stroke: 1px rgba(255, 221, 0, 0.87);
+
+}
