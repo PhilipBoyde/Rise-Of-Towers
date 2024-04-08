@@ -1,40 +1,84 @@
 /**
  * ToDo:
- * 1. make the sprite controller class take multiple sprite sheets, one for each direction
- * 2. make the sprite controller class take a direction parameter and use it to determine which sprite sheet to use
- * 3. add delay for every enemy. So the enemies are not synced
+ * 1. add delay for every enemy. So the enemies are not synced
  */
 
+
+/**
+ * Class for the sprite controller.
+ * Handles the sprite animations for the enemies.
+ * @class SpriteController
+ * @author Philip
+ * @author Mahyar
+ */
 export class SpriteController {
-    constructor({position = {x: 0, y: 0}}, imagePath, frames = {max: 6, min: 0}){
-        this.position = position;
+
+    /**
+     * Constructor for the sprite controller. Sets the position, sprite images and frames for the sprite.
+     * @param position
+     * @param spriteImages
+     * @param frames
+     * @author Philip
+     */
+    constructor({position = {x: 0, y: 0}}, {spriteImages = {upp: "", down: "", right: "", left: ""}}, frames = {max: 6, min: 0}){
+        this.position = position
         this.sprite = new Image();
-
-        let defaultImagePath = Array.isArray(imagePath) ? imagePath[0] : imagePath;
-
-
-        this.sprite.src = defaultImagePath;
-
-
+        this.spriteImages = spriteImages;
 
         this.spriteFrames = {
             max: frames.max, //the number of frames in the sprite
             min : frames.min, //the starting frame, typically 0
             current: 0, // current frame
             elapsedTime: 0, //how many frames have passed
-            hold: 6 // how many frames to hold each frame
+            hold: 6 // how many frames to hold each frame, made for fine-tuning the animation
         };
     }
 
-    updateImagePath(index) {
-        if (index >= 0 && index < this.imagePaths.length) {
-            this.sprite.src = this.imagePaths[index];
-            this.currentImagePathIndex = index;
+
+
+    /**
+     * Changes the orientation of the sprite.
+     * @param orientation
+     * @author Philip
+     * @author Mahyar
+     */
+    changeSpriteOrientation(orientation){
+        switch (orientation) {
+            case 'up':
+                this.sprite.src = this.spriteImages.up;
+                break;
+
+            case 'down':
+                this.sprite.src = this.spriteImages.down;
+                break;
+
+            case 'right':
+                this.sprite.src = this.spriteImages.right;
+                break;
+            case 'left':
+                this.sprite.src = this.spriteImages.left;
+                break;
+
+            case 'unknown':
+                console.log('Unknown orientation of enemy sprite!');
+                break;
+
+            default:
+                console.log('Something went wrong when setting the orientation')
+                break;
         }
     }
 
+    /**
+     * Draws the sprite on the canvas.
+     * crops the sprite and holds the animation.
+     * @param gameCtx
+     * @param orientation
+     * @author Philip
+     */
+    drawSprite(gameCtx, orientation){
+        this.changeSpriteOrientation(orientation);
 
-    drawSprite(gameCtx){
         const cropWidth = this.sprite.width / this.spriteFrames.max;
 
         //crop the sprite

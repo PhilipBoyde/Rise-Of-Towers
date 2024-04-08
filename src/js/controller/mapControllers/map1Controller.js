@@ -1,17 +1,25 @@
 import { path1Route1, path1Route2, path1Route3 } from '../../model/map1/Map1Paths.js';
-import {Enemy} from "../EnemyController.js";
+import {wolf, slime, bee, goblin} from "../../model/EnemyTypes.js";
 
 export class Startmap1{
     constructor() {
         console.log('Map1 Controller loaded');
     }
 
+    /**
+     * Loads the next wave of enemies.
+     * 
+     * @param round - The current round of the game.
+     * @returns {Array} enemies - An array of enemies to be loaded into the game.
+     * @author Philip
+     */
     nexWave(round){
         const enemies = [];
         let randomNumber = 0;
         let pathRoute;
 
-        for (let i = 1; i <56;  i++) {
+        for (let i = 1; i <10;  i++) {
+
 
             const random = Math.random();
             randomNumber = Math.floor(random * 3) + 1;
@@ -20,6 +28,7 @@ export class Startmap1{
             switch (randomNumber) {
                 case 1:
                     pathRoute = path1Route1;
+                    
                     break;
                     
                 case 2:
@@ -35,7 +44,10 @@ export class Startmap1{
                     break;
             }
 
-            enemies.push(new Enemy({position: {x: path1Route1[0].x + xOffSet, y: path1Route1[0].y}}, 1, pathRoute, 100));
+            enemies.push(new wolf({position: {x: pathRoute[0].x + xOffSet, y: pathRoute[0].y}}, pathRoute));
+            enemies.push(new slime({position: {x: pathRoute[0].x + xOffSet, y: pathRoute[0].y}}, pathRoute));
+            enemies.push(new bee({position: {x: pathRoute[0].x + xOffSet, y: pathRoute[0].y}}, pathRoute));
+            enemies.push(new goblin({position: {x: pathRoute[0].x + xOffSet, y: pathRoute[0].y}}, pathRoute));
         }
 
         return enemies;

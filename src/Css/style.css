@@ -14,7 +14,7 @@
 }
 
 body{
-    background-image: url("../assets/img/nedladdning.png");
+    background-image: url("../js/model/assets/img/nedladdning.png");
     margin: 0;
     padding: 0;
     display: flex;

@@ -49,16 +49,16 @@ img.onload = () => {
 function changeMap(){
     switch (activeMapNbr) { // Load the map based on the activeMap variable
         case 1:
-            img.src = '../assets/gamemap/Map1.png';
+            img.src = '../js/model/assets/gameMap/Map1.png';
             activeMap = new Startmap1();
             break;
 
         case 2:
-            img.src = '../assets/gamemap/Map2.png';
+            img.src = '../js/model/assets/gameMap/Map2.png';
             break;
 
         case 3:
-            img.src = '../assets/gamemap/Map3.png';
+            img.src = '../js/model/assets/gameMap/Map3.png';
             break;
 
         default:
@@ -126,18 +126,20 @@ function updateHealthCounter (newHealth) {
     healthCounter.textContent = newHealth;
 }
 
-/**
- * Animates the enemies on the game screen.
- *
- * @param enemies
- * @author Philip,
- */
+
 let lastTime = 0;
 const fpsInterval = 1000 / 60; // Assuming 60 FPS
 let lastFpsUpdateTime = 0;
 let currentTime;
 let elapsed;
 
+/**
+ * Animates the enemies on the game screen. 
+ * Also checks if all enemies are dead or if the player health is 0.
+ *
+ * @param enemies
+ * @author Philip,
+ */
 function animate(enemies) {
     currentTime = performance.now();
     elapsed = currentTime - lastTime;
@@ -177,6 +179,14 @@ function animate(enemies) {
 
 let frameCount = 0;
 let fpsAccumulator = 0;
+
+/**
+ * Updates the FPS counter on the game screen.
+ *
+ * @param {number} fps - The current FPS of the game.
+ * @returns {void}
+ * @author Philip
+ */
 function fpsCounterUpdate(fps){
     frameCount++;
     fpsAccumulator += fps;
