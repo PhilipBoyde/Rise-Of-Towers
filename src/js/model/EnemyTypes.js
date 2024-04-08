@@ -27,6 +27,13 @@ export class slime extends Enemy {
                     right: '../js/model/assets/EnemySprites/Slime/S_Walk.png',
                     left: '../js/model/assets/EnemySprites/Slime/S_Walk.png'
                 }},
+            48, //width of hit box
+            48, //height hit box
+            {frames: { // for sprite animation
+                    max: 6, // the number of frames in the sprite
+                    min: 0, // the starting frame, typically 0
+                    hold: 6 // how many frames to hold each frame, made for fine-tuning the animation
+                }}
         );
     }
 }
@@ -56,6 +63,13 @@ export class wolf extends Enemy {
                 right: '../js/model/assets/EnemySprites/Wolf/R_Walk.png',
                 left: '../js/model/assets/EnemySprites/Wolf/L_Walk.png'
             }},
+            48, //width of hit box
+            48, //height hit box
+            {frames: { // for sprite animation
+                    max: 6, // the number of frames in the sprite
+                    min: 0, // the starting frame, typically 0
+                    hold: 6 // how many frames to hold each frame, made for fine-tuning the animation
+                }}
         );
     }
 }
@@ -88,6 +102,13 @@ export class bee extends Enemy {
                     right: '../js/model/assets/EnemySprites/Bee/R_Walk.png',
                     left: '../js/model/assets/EnemySprites/Bee/L_Walk.png'
                 }},
+            48, //width of hit box
+            48, //height hit box
+            {frames: { // for sprite animation
+                    max: 6, // the number of frames in the sprite
+                    min: 0, // the starting frame, typically 0
+                    hold: 6 // how many frames to hold each frame, made for fine-tuning the animation
+                }}
         );
     }
 }
@@ -119,6 +140,13 @@ export class goblin extends Enemy {
                     right: '../js/model/assets/EnemySprites/Goblin/R_Walk.png',
                     left: '../js/model/assets/EnemySprites/Goblin/L_Walk.png'
                 }},
+            48, //width of hit box
+            48, //height hit box
+            {frames: { // for sprite animation
+                    max: 6, // the number of frames in the sprite
+                    min: 0, // the starting frame, typically 0
+                    hold: 6 // how many frames to hold each frame, made for fine-tuning the animation
+                }}
         );
     }
 }

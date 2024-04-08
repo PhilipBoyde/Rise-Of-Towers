@@ -20,7 +20,7 @@ export class SpriteController {
      * @param frames
      * @author Philip
      */
-    constructor({position = {x: 0, y: 0}}, {spriteImages = {upp: "", down: "", right: "", left: ""}}, frames = {max: 6, min: 0}){
+    constructor({position = {x: 0, y: 0}}, {spriteImages = {upp: "", down: "", right: "", left: ""}}, frames = {max: 6, min: 0, hold: 6}){
         this.position = position
         this.sprite = new Image();
         this.spriteImages = spriteImages;
@@ -30,7 +30,7 @@ export class SpriteController {
             min : frames.min, //the starting frame, typically 0
             current: 0, // current frame
             elapsedTime: 0, //how many frames have passed
-            hold: 6 // how many frames to hold each frame, made for fine-tuning the animation
+            hold: frames.hold // how many frames to hold each frame, made for fine-tuning the animation
         };
     }
 
@@ -80,7 +80,8 @@ export class SpriteController {
         this.changeSpriteOrientation(orientation);
 
         const cropWidth = this.sprite.width / this.spriteFrames.max;
-
+        console.log(this.sprite.width)
+        
         //crop the sprite
         const crop = {
             position: {

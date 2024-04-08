@@ -18,7 +18,7 @@ export class Startmap1{
         let randomNumber = 0;
         let pathRoute;
 
-        for (let i = 1; i <10;  i++) {
+        for (let i = 1; i <2;  i++) {
 
 
             const random = Math.random();
@@ -44,10 +44,10 @@ export class Startmap1{
                     break;
             }
 
-            enemies.push(new wolf({position: {x: pathRoute[0].x + xOffSet, y: pathRoute[0].y}}, pathRoute));
             enemies.push(new slime({position: {x: pathRoute[0].x + xOffSet, y: pathRoute[0].y}}, pathRoute));
-            enemies.push(new bee({position: {x: pathRoute[0].x + xOffSet, y: pathRoute[0].y}}, pathRoute));
+            enemies.push(new wolf({position: {x: pathRoute[0].x + xOffSet, y: pathRoute[0].y}}, pathRoute));
             enemies.push(new goblin({position: {x: pathRoute[0].x + xOffSet, y: pathRoute[0].y}}, pathRoute));
+            enemies.push(new bee({position: {x: pathRoute[0].x + xOffSet, y: pathRoute[0].y}}, pathRoute));
         }
 
         return enemies;

@@ -18,12 +18,12 @@ export class Enemy extends SpriteController{
      * @param spriteImages
      * @author Philip
      */
-    constructor({position = {x: 0, y: 0}}, speed, path, health, {spriteImages = {upp : '', down: '', right: '', left: ''}}) {
-        super({position}, {spriteImages}, {max: 6, min: 0});
+    constructor({position = {x: 0, y: 0}}, speed, path, health, {spriteImages = {upp : '', down: '', right: '', left: ''}}, width, height, {frames = {max: 6, min: 0, hold: 6}}) {
+        super({position}, {spriteImages}, {max: frames.max, min: frames.min, hold: frames.hold});
 
         this.position = position;
-        this.width = 48;
-        this.height = 48;
+        this.width = width;
+        this.height = height;
         this.speed = speed;
         this.path = path;
         this.pathIndex = 0;
