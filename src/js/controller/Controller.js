@@ -1,14 +1,28 @@
-import {Startmap1 } from './mapControllers/map1Controller.js';
-
-const  /** HTMLCanvasElement */ gameCanvas = document.querySelector('.GameScreen');
-const /** HTMLCanvasElement */ interactiveCanvas = document.querySelector('.GameUI');
-const /** number */ activeMapNbr = 1;    // Change this to the map you want to load
+import {calculateWave, changeMapRoutes, testEnemyType} from "../model/WaveCalculator.js";
+const  /** HTMLCanvasElement */ gameCanvas = document.querySelector('#GameScreen');
+const gameBackground = document.querySelector('#GameBackground');
+const /** HTMLCanvasElement */ interactiveCanvas = document.querySelector('#GameUI');
+const /** number */ activeMapNbr = 1;  
 let /** number */ round = 0;
-let /** object */ activeMap;
 let playerHealth = 20;
 
 document.getElementById("GameWaveButton").addEventListener("click", nexWave);
 const /** CanvasRenderingContext2D */ gameCtx = gameCanvas.getContext('2d');
+const gameBackgroundCtx = gameBackground.getContext('2d');
+
+addEventListener("click", function() {
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+        document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+        document.documentElement.msRequestFullscreen();
+    }
+});
+
+
 
 
 /**
@@ -19,12 +33,16 @@ const /** CanvasRenderingContext2D */ gameCtx = gameCanvas.getContext('2d');
  * @param {Canvas} interactiveCanvas - The canvas element for the game UI.
  * @author Philip
  */
+
+
 if (gameCanvas && interactiveCanvas){
     gameCanvas.width = 1120;
     gameCanvas.height = 960;
-
+    gameBackground.width = gameCanvas.width;
+    gameBackground.height = gameCanvas.height;
+    
     interactiveCanvas.width = 200;
-    interactiveCanvas.height = 768;
+    interactiveCanvas.height = 966;
 
     const interactiveCtx = interactiveCanvas.getContext('2d');
     interactiveCtx.fillStyle = '#574629';
@@ -36,9 +54,6 @@ if (gameCanvas && interactiveCanvas){
 
 let img = new Image();
 changeMap()
-img.onload = () => {
-    gameCtx.drawImage(img, 0, 0, gameCanvas.width, gameCanvas.height);
-}
 
 /**
  * Changes the map based on the activeMap variable.
@@ -50,7 +65,6 @@ function changeMap(){
     switch (activeMapNbr) { // Load the map based on the activeMap variable
         case 1:
             img.src = '../js/model/assets/gameMap/Map1.png';
-            activeMap = new Startmap1();
             break;
 
         case 2:
@@ -65,6 +79,10 @@ function changeMap(){
             console.log('Map not found!');
             break;
     }
+    changeMapRoutes(activeMapNbr)
+    img.onload = () => {
+        gameBackgroundCtx.drawImage(img, 0, 0, gameCanvas.width, gameCanvas.height);
+    }
 }
 
 /**
@@ -75,8 +93,9 @@ function changeMap(){
  */
 function nexWave(){
     disableButton()
-    const enemies = activeMap.nexWave(round);
-
+    
+    //const enemies = calculateWave(round);
+    const enemies = testEnemyType(); // Temporary test function
     animate(enemies);
 }
 
@@ -119,16 +138,47 @@ function reduceHealth(){
  * Updates the health with the new health in the game
  * @param newHealth -New number for the health
  * @author Mahyar
+ * @author Philip
  */
 function updateHealthCounter (newHealth) {
-    const healthCounter = document.querySelector('.healthCounter');
-
+    const healthCounter = document.querySelector('#healthCounter');
+    const heartAnimation = document.querySelector('#heartAnimation');
     healthCounter.textContent = newHealth;
+    
+    switch (newHealth) {
+        case 15:
+            heartAnimation.src = '../js/model/assets/Life/75.png';
+            break;
+            
+        case 10:
+            heartAnimation.src = '../js/model/assets/Life/50.png';
+            break;
+            
+        case 5:
+            heartAnimation.src = '../js/model/assets/Life/25.png';
+            break;
+            
+        case 0:
+            heartAnimation.src = '../js/model/assets/Life/0.png';
+            break;
+            
+        default:
+            console.log('Health not found!');
+            break;
+    }
 }
 
+function updateScoreCounter(newScore){
+    const scoreCounter = document.querySelector('#scoreCounter');
+    scoreCounter.textContent = newScore;
+}
+
+function updateWaveCounter(round){
+    const waveCounter = document.querySelector('#WaveCounter');
+    waveCounter.textContent = 'Wave ' + round;
+}
 
 let lastTime = 0;
-const fpsInterval = 1000 / 60; // Assuming 60 FPS
 let lastFpsUpdateTime = 0;
 let currentTime;
 let elapsed;
@@ -144,35 +194,33 @@ function animate(enemies) {
     currentTime = performance.now();
     elapsed = currentTime - lastTime;
 
-    if (elapsed > fpsInterval) { //Limit the frame rate to about 60 FPS
-        lastTime = currentTime - (elapsed % fpsInterval);
+    if (elapsed > 1000 / 60) { //Limit the frame rate to about 60 FPS
+        lastTime = currentTime - (elapsed % (1000 / 60));
 
         // Check if all enemies are dead
         if (enemies.length === 0) {
             console.log('%cWave ' + round + ' Completed!', 'color: green; font-size: 20px;');
             enableButton();
             round++;
+            updateWaveCounter(round);
             return;
         }
 
         gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
-        gameCtx.drawImage(img, 0, 0, gameCanvas.width, gameCanvas.height); // !!Try to optimize this, unnecessary to redraw each frame!!
-
         enemies = enemies.filter(enemy => !enemy.update(gameCtx, reduceHealth));
 
         // Check if player health is 0
         if (playerHealth <= 0) {
-            document.querySelector('.GameOver').style.display = 'flex';
+            document.querySelector('#GameOver').style.display = 'flex';
             console.log('%cGAME OVER!', 'color: red; font-size: 20px;');
             cancelAnimationFrame(animationID);
         }
 
 
+        // Update FPS counter
+        fpsCounterUpdate(1000 / elapsed);
     }
-
-    // Update FPS counter
-    fpsCounterUpdate(1000 / elapsed);
-
+    
     // Request next frame
     const animationID = requestAnimationFrame(() => animate(enemies));
 }
@@ -193,7 +241,7 @@ function fpsCounterUpdate(fps){
 
     if (frameCount % 60 === 0) { // Update every 60 frames
         const averageFPS = fpsAccumulator / 60;
-        document.querySelector('.fpsCounter').innerHTML = 'Average<br>FPS: ' + averageFPS.toFixed(2);
+        document.querySelector('#fpsCounter').innerHTML = 'Average<br>FPS: ' + averageFPS.toFixed(2);
         fpsAccumulator = 0;
     }
 }

@@ -1,4 +1,4 @@
-export const path1Route1 = [
+export const map3Path1Route1 = [
     {
         "x":-96,
         "y":96
@@ -56,7 +56,7 @@ export const path1Route1 = [
         "y":256
     }]
 
-export const path1Route2 = [
+export const map3Path1Route2 = [
     {
         "x":-96,
         "y":64
@@ -114,7 +114,7 @@ export const path1Route2 = [
         "y":224
     }]
 
-export const path1Route3 = [
+export const map3Path1Route3 = [
     {
         "x":-94.6667,
         "y":79.3333

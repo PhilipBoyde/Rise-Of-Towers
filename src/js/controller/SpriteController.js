@@ -20,7 +20,7 @@ export class SpriteController {
      * @param frames
      * @author Philip
      */
-    constructor({position = {x: 0, y: 0}}, {spriteImages = {upp: "", down: "", right: "", left: ""}}, frames = {max: 6, min: 0, hold: 6}){
+    constructor({position = {x: 0, y: 0}}, {spriteImages = {upp: "", down: "", right: "", left: ""}}, frames = {max: 6, min: 0, hold: 6, cropOffsetX: 0, cropOffsetY: 0, scale: 1}){
         this.position = position
         this.sprite = new Image();
         this.spriteImages = spriteImages;
@@ -30,7 +30,10 @@ export class SpriteController {
             min : frames.min, //the starting frame, typically 0
             current: 0, // current frame
             elapsedTime: 0, //how many frames have passed
-            hold: frames.hold // how many frames to hold each frame, made for fine-tuning the animation
+            hold: frames.hold, // how many frames to hold each frame, made for fine-tuning the animation
+            cropOffsetX: frames.cropOffsetX, // offset for the crop X
+            cropOffsetY: frames.cropOffsetY, // offset for the crop Y
+            scale: frames.scale // scale of the sprite
         };
     }
 
@@ -60,7 +63,6 @@ export class SpriteController {
                 break;
 
             case 'unknown':
-                console.log('Unknown orientation of enemy sprite!');
                 break;
 
             default:
@@ -80,19 +82,18 @@ export class SpriteController {
         this.changeSpriteOrientation(orientation);
 
         const cropWidth = this.sprite.width / this.spriteFrames.max;
-        console.log(this.sprite.width)
         
         //crop the sprite
         const crop = {
             position: {
-                x: cropWidth * this.spriteFrames.current,
-                y: 0
+                x: cropWidth * this.spriteFrames.current + this.spriteFrames.cropOffsetX,
+                y: this.spriteFrames.cropOffsetY
             },
 
             width: cropWidth,
             height:  this.sprite.height
         };
-
+        
         gameCtx.drawImage(
             this.sprite,
             crop.position.x,
@@ -101,8 +102,8 @@ export class SpriteController {
             crop.height,
             this.position.x,
             this.position.y,
-            crop.width,
-            crop.height
+            crop.width * this.spriteFrames.scale,
+            crop.height * this.spriteFrames.scale
         );
 
         //hold animation

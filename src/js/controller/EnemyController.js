@@ -9,17 +9,45 @@ import { SpriteController } from './SpriteController.js';
  */
 export class Enemy extends SpriteController{
     /**
-     * Constructor for the enemy sprite. Sets the position, speed, path, health and sprite images for the enemy sprite.
+     * Constructor for the enemy sprite. Sets the position, speed, path, health, sprite images, width, height and frames for the enemy sprite.
      * @constructor
      * @param position
      * @param speed
      * @param path
      * @param health
      * @param spriteImages
+     * @param width
+     * @param height
+     * @param frames
      * @author Philip
      */
-    constructor({position = {x: 0, y: 0}}, speed, path, health, {spriteImages = {upp : '', down: '', right: '', left: ''}}, width, height, {frames = {max: 6, min: 0, hold: 6}}) {
-        super({position}, {spriteImages}, {max: frames.max, min: frames.min, hold: frames.hold});
+    constructor( //start of constructor, sets the position, speed, path, health, sprite images, width, height and frames for the enemy sprite
+        {position = {x: 0, y: 0}},
+        speed,
+        path,
+        health,
+        {spriteImages = {upp : '', down: '', right: '', left: ''}},
+        width,
+        height,
+        {frames = {
+            max: 6,
+            min: 0,
+            hold: 6,
+            cropOffsetX: 0,
+            cropOffsetY: 0,
+            scale: 1}}) { // end of constructor
+        
+        super( // Set the sprite images for the enemy sprite and other sprite settings
+            {position}, 
+            {spriteImages}, 
+            {
+                max: frames.max, 
+                min: frames.min, 
+                hold: frames.hold, 
+                cropOffsetX: frames.cropOffsetX, 
+                cropOffsetY: frames.cropOffsetY, 
+                scale: frames.scale
+            }); // end of super
 
         this.position = position;
         this.width = width;

@@ -11,16 +11,26 @@
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 <body>
 
-<div id="canvasContainer">
-    <canvas class="GameScreen"></canvas>
-    <canvas class="GameUI"></canvas>
-    <div class="GameOver">Game Over</div>
-    <div class="healthCounter">20</div>
-    <div class="heartAnimation"></div>
-    <div class="CoinsCounter">100</div>
-    <div class="CoinsAnimation"></div>
-    <h1 class="fpsCounter">Average<br>FPS: .... </h1>
-    <button id = "GameWaveButton">Next Wave</button>
+<div class="canvasContainer">
+        <canvas id="GameBackground"></canvas>
+        <canvas id="GameScreen"></canvas>
+        <canvas id="GameUI"></canvas>
+
+        <!-- UI Screen -->
+        <div class="UIScreen">
+                <button id = "GameWaveButton">Next Wave</button>
+                <div id="healthCounter">20</div>
+                <img id="heartAnimation" src="../js/model/assets/Life/100.png" alt=""></img>
+                <div id="CoinsCounter">00000</div>
+                <div id="CoinsAnimation"></div>
+                <h1 id="WaveCounter">Wave 000</h1>
+        </div>
+
+        <!-- Canvas effects -->
+        <div id="GameOver">
+            Game Over
+        </div>
+        <h1 id="fpsCounter">Average<br>FPS: .... </h1>
 </div>
 
     <script type="module" src="../js/controller/Controller.js"></script>

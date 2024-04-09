@@ -1,5 +1,13 @@
 import {Enemy} from '../controller/EnemyController.js';
 
+/*
+-ToDO
+- Add more enemies
+- add boss
+- add resistance to enemies eg magic resistance, physical resistance
+- add easter egg?
+ */
+
 /**
  * Class for the slime enemy. Extends the Enemy class.
  * @extends Enemy
@@ -107,7 +115,10 @@ export class bee extends Enemy {
             {frames: { // for sprite animation
                     max: 6, // the number of frames in the sprite
                     min: 0, // the starting frame, typically 0
-                    hold: 6 // how many frames to hold each frame, made for fine-tuning the animation
+                    hold: 6, // how many frames to hold each frame, made for fine-tuning the animation
+                    cropOffsetX: 10, // offset for the crop
+                    cropOffsetY: 10, // offset for the crop
+                    scale: 1, // scale for the sprite, 1 = normal size
                 }}
         );
     }
@@ -146,6 +157,69 @@ export class goblin extends Enemy {
                     max: 6, // the number of frames in the sprite
                     min: 0, // the starting frame, typically 0
                     hold: 6 // how many frames to hold each frame, made for fine-tuning the animation
+                }}
+        );
+    }
+}
+
+
+export class Cyclops extends Enemy {
+
+    /**
+     * Constructor for the Cyclops enemy. Sets the position and path for the Cyclops enemy.
+     * Also sets the sprite images for the Cyclops enemy and sets the health and speed for the Cyclops enemy.
+     * @param position
+     * @param path
+     * @author Philip
+     */
+    constructor({position = {x: 0, y: 0}}, path) {
+        super(
+            {position},
+            0.3, //speed
+            path,
+            10000, //health
+            {spriteImages: {
+                    up: '../js/model/assets/EnemySprites/Boss/Cyclops/walk4.png',
+                    down: '../js/model/assets/EnemySprites/Boss/Cyclops/walk4.png',
+                    right: '../js/model/assets/EnemySprites/Boss/Cyclops/walk4.png',
+                    left: '../js/model/assets/EnemySprites/Boss/Cyclops/walk4.png'
+                }},
+            50, //width of hit box
+            80, //height hit box
+            {frames: { // for sprite animation
+                    max: 12, // the number of frames in the sprite
+                    min: 0, // the starting frame, typically 0
+                    hold: 15, // how many frames to hold each frame, made for fine-tuning the animation
+                    cropOffsetX: 16, // offset for the crop
+                    cropOffsetY: 0, // offset for the crop
+                    scale: 1.8, // scale for the sprite, 1 = normal size
+                }}
+        );
+    }
+}
+
+export class Mech extends Enemy {
+    constructor({position = {x: 0, y: 0}}, path) { // !!NOT DONE!!
+        super(
+            {position},
+            2.5, //speed
+            path,
+            10000, //health
+            {spriteImages: {
+                    up: '../js/model/assets/EnemySprites/Boss/Mech/walk.png',
+                    down: '../js/model/assets/EnemySprites/Boss/Mech/walk.png',
+                    right: '../js/model/assets/EnemySprites/Boss/Mech/walk.png',
+                    left: '../js/model/assets/EnemySprites/Boss/Mech/walk.png'
+                }},
+            50, //width of hit box
+            80, //height hit box
+            {frames: { // for sprite animation
+                    max: 8, // the number of frames in the sprite
+                    min: 0, // the starting frame, typically 0
+                    hold: 15, // how many frames to hold each frame, made for fine-tuning the animation
+                    cropOffset: 150, // offset for the crop
+                    cropOffsetY: 0, // offset for the crop
+                    scale: 1.6, // scale for the sprite, 1 = normal size
                 }}
         );
     }

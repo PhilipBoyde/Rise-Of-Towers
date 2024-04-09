@@ -9,118 +9,124 @@ body, html{
     align-items: center;
     justify-content: center;
     height: 100vh;
+    width: 100vw;
     overflow: hidden;
     background-image: url("../js/model/assets/img/nedladdning.png");
+    background-size: cover;
 }
 
-#canvasContainer {
+/*
+------ Canvas Styling ------
+ */
+.canvasContainer {
     display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     filter: blur(10,10,10,10);
     border: 2px solid #4F4537;
-    padding: 10px;
+    padding: 20px;
     background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
-#canvasContainer button {
-    border: 3px solid #4F4537;
-    border-radius: 45px;
-    transition: all 0.3s;
-    cursor: pointer;
-    background: #DFE0DF;
-    font-weight: 550;
-    font-family: "VT323", cursive;
-    font-size: 30px;
-
+#GameBackground, #GameBackground{ /* Everything that needs to be on top of the canvas */
     position: absolute;
-    top: 92%;
-    left: 85%;
-    z-index: 1;
-    width: 185px;
-    height: 50px;
-}
-
-#canvasContainer button:hover {
-    background: #8c343c;
-    color: white;
-    font-size: 2.3em;
-}
-
-#canvasContainer button:disabled {
-    cursor: not-allowed;
-    color: rgba(0, 0, 0, 0.36);
-    font-size: 30px;
-}
-
-.GameScreen, .GameUI {
-    margin: 0;
-}
-
-body {
-    background-color: black;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-#canvasContainer .fpsCounter{
-    display: flex;
-    position: absolute;
-    top: 0;
+    top: 20px;
     left: 20px;
-    color: #3cff00;
-    background-color: black;
-    font-family: "VT323", cursive;
-    font-size: 30px;
+}
+
+#GameBackground {
+    border: 3px solid #4F4537;
+    border-radius: 10px;
+    z-index: 0;
+}
+
+#GameScreen {
     z-index: 1;
 }
 
-#canvasContainer .GameOver{
-    display: none;
-    align-items: center;
-    justify-content: center;
+#GameUI {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(42, 42, 42, 0.53);
-    color: #ef0000;
-    -webkit-text-stroke: 3px black;
-    font-family: "VT323", cursive;
-    font-size: 200px;
+    top: 20px;
+    left: 1135px;
+    border-radius: 5px;
+    z-index:3;
 }
 
-#canvasContainer .heartAnimation {
+/*
+------ In-Game UI Styling ------
+ */
+.UIScreen {
+    height: 960px;
+    width: 190px;
+    z-index: 4;
+}
+/*
+--heart--
+ */
+
+.UIScreen #heartAnimation{
     position: absolute;
-    top: 37px;
-    right: 150px;
+    top: 25px;
+    right: 160px;
     width: 45px;
     height: 45px;
-    background-image: url('../js/model/assets/Life/heart_animated_2.png');
-    background-size: 500% 100%;
-    animation: heartAnimation 1s steps(1) infinite;
+    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.62));
+    animation: heartAnimation 1.5s infinite;
+
+}
+
+.UIScreen #healthCounter {
+    position: absolute;
+    top: 13px;
+    right: 95px;
+    font-size: 65px;
+    font-family: "VT323", cursive;
+    color: rgba(255, 0, 0, 0.62);
+    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.62));
 }
 
 @keyframes heartAnimation {
     0% {
-        background-position: 0 0;
+        width: 45px;
+        height: 45px;
+    }
+    50% {
+        width: 48px;
+        height: 48px;
     }
     100% {
-        background-position: 100% 0;
+        width: 45px;
+        height: 45px;
     }
 }
 
-#canvasContainer .CoinsAnimation {
+/*
+--coin--
+ */
+.UIScreen #CoinsCounter {
     position: absolute;
-    top: 93px;
-    right: 150px;
+    top: 78px;
+    right: 103px;
+    width: 45px;
+    height: 45px;
+    font-family: "VT323", cursive;
+    font-size: 65px;
+    color: rgb(253, 158, 0);
+    filter: drop-shadow(0 0 5px rgba(253, 158, 0));
+}
+
+.UIScreen #CoinsAnimation {
+    position: absolute;
+    top: 88px;
+    right: 160px;
     width: 45px;
     height: 45px;
     font-family: "VT323", cursive;
     background-image: url('../js/model/assets/Coins/MonedaD.png');
-    background-size: 500% 100%; /* 5 gånger bredden av din bild */
+    background-size: 500% 100%;
+    filter: drop-shadow(0 0 5px rgba(253, 158, 0));
     animation: coinAnimation 3s steps(2) infinite;
 }
 @keyframes coinAnimation {
@@ -132,24 +138,87 @@ body {
     100% { background-position: 0 0; }
 }
 
-
-#canvasContainer .healthCounter {
+/*
+--wave--
+ */
+.UIScreen #WaveCounter {
     position: absolute;
-    top: 25px;
-    right: 90px;
-    font-size: 65px;
+    top: 110px;
+    right: 0px;
+    width: 200px;
+    height: 65px;
     font-family: "VT323", cursive;
-    color: white;
-    -webkit-text-stroke: 1px aqua;
+    font-size: 55px;
+    color: rgb(44, 197, 0);
+    filter: drop-shadow(0 0 5px rgb(0, 0, 0));
 }
 
-#canvasContainer .CoinsCounter {
-    position: absolute;
-    top: 82px;
-    right: 65px;
-    font-size: 65px;
-    font-family: "VT323", cursive;
-    color: #ff8800;
-    -webkit-text-stroke: 1px rgba(255, 221, 0, 0.87);
 
+/*
+--button--
+ */
+
+.UIScreen #GameWaveButton {
+    border: 3px solid #4F4537;
+    border-radius: 45px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: #DFE0DF;
+    font-weight: 550;
+    font-family: "VT323", cursive;
+    font-size: 30px;
+    width: 185px;
+    height: 50px;
+
+    position: absolute;
+    top: 93%;
+    left: 84.6%;
+}
+
+.UIScreen #GameWaveButton:hover {
+    background: #8c343c;
+    color: white;
+    font-size: 2.3em;
+    filter: drop-shadow(0 0 20px #8c343c);
+}
+
+.UIScreen #GameWaveButton:disabled {
+    cursor: not-allowed;
+    color: rgba(0, 0, 0, 0.36);
+    font-size: 30px;
+}
+
+/*
+------ Effect Canvas Styling ------
+ */
+
+#fpsCounter{
+    display: flex;
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    color: #3cff00;
+    background-color: black;
+    font-family: "VT323", cursive;
+    font-size: 30px;
+    border-radius: 3px;
+    z-index: 4;
+}
+
+#GameOver{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(42, 42, 42, 0.8);
+    color: #ef0000;
+    -webkit-text-stroke: 3px black;
+    font-family: "VT323", cursive;
+    font-size: 200px;
+    border-radius: 19px;
+    z-index: 4;
 }
