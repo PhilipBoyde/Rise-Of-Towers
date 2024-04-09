@@ -155,8 +155,8 @@ export function testEnemyType(){
     let activePath = choosePath();
     let xOffSet = 0;
 
-    for (let i = 0; i < 23; i++) {
-        waveEnemies.push(new bee({position: {x: activePath[0].x + xOffSet, y: activePath[0].y}}, activePath));
+    for (let i = 0; i < 1; i++) {
+        waveEnemies.push(new Mech({position: {x: activePath[0].x + xOffSet, y: activePath[0].y}}, activePath));
         xOffSet += 40;
         activePath = choosePath();
     }

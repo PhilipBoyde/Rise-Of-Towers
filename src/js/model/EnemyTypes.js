@@ -189,7 +189,7 @@ export class Cyclops extends Enemy {
             {frames: { // for sprite animation
                     max: 12, // the number of frames in the sprite
                     min: 0, // the starting frame, typically 0
-                    hold: 15, // how many frames to hold each frame, made for fine-tuning the animation
+                    hold: 18, // how many frames to hold each frame, made for fine-tuning the animation
                     cropOffsetX: 16, // offset for the crop
                     cropOffsetY: 0, // offset for the crop
                     scale: 1.8, // scale for the sprite, 1 = normal size
@@ -202,24 +202,24 @@ export class Mech extends Enemy {
     constructor({position = {x: 0, y: 0}}, path) { // !!NOT DONE!!
         super(
             {position},
-            2.5, //speed
+            0.5, //speed
             path,
             10000, //health
             {spriteImages: {
-                    up: '../js/model/assets/EnemySprites/Boss/Mech/walk.png',
-                    down: '../js/model/assets/EnemySprites/Boss/Mech/walk.png',
-                    right: '../js/model/assets/EnemySprites/Boss/Mech/walk.png',
-                    left: '../js/model/assets/EnemySprites/Boss/Mech/walk.png'
+                    up: '../js/model/assets/EnemySprites/Boss/Mech/walk2.png',
+                    down: '../js/model/assets/EnemySprites/Boss/Mech/walk2.png',
+                    right: '../js/model/assets/EnemySprites/Boss/Mech/walk2.png',
+                    left: '../js/model/assets/EnemySprites/Boss/Mech/walk2.png'
                 }},
-            50, //width of hit box
-            80, //height hit box
+            110, //width of hit box
+            90, //height hit box
             {frames: { // for sprite animation
                     max: 8, // the number of frames in the sprite
                     min: 0, // the starting frame, typically 0
                     hold: 15, // how many frames to hold each frame, made for fine-tuning the animation
-                    cropOffset: 150, // offset for the crop
-                    cropOffsetY: 0, // offset for the crop
-                    scale: 1.6, // scale for the sprite, 1 = normal size
+                    cropOffsetX: 0, // offset for the crop X
+                    cropOffsetY: 0, // offset for the crop Y
+                    scale: 1.5, // scale for the sprite, 1 = normal size
                 }}
         );
     }
