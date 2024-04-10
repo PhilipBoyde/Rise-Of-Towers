@@ -10,6 +10,11 @@ document.getElementById("GameWaveButton").addEventListener("click", nexWave);
 const /** CanvasRenderingContext2D */ gameCtx = gameCanvas.getContext('2d');
 const gameBackgroundCtx = gameBackground.getContext('2d');
 
+/**
+ * Event listener for the fullscreen button.
+ * @param {Button} fullscreenButton - The button element to be clicked.
+ * @author Philip
+ */
 addEventListener("click", function() {
     if (document.documentElement.requestFullscreen) {
         document.documentElement.requestFullscreen();
@@ -33,8 +38,6 @@ addEventListener("click", function() {
  * @param {Canvas} interactiveCanvas - The canvas element for the game UI.
  * @author Philip
  */
-
-
 if (gameCanvas && interactiveCanvas){
     gameCanvas.width = 1120;
     gameCanvas.height = 960;
@@ -128,9 +131,14 @@ function enableButton(){
 
 }
 
+/**
+ * Reduces the player health by 1.
+ * Updates the health counter on the game screen.
+ * @param {number} playerHealth - The current health of the player.
+ * @author Philip
+ */
 function reduceHealth(){
     playerHealth--;
-    console.log('%cPlayer health left: ' + playerHealth, 'color: red; font-size: 15px;');
     updateHealthCounter(playerHealth);
 }
 
@@ -173,6 +181,11 @@ function updateScoreCounter(newScore){
     scoreCounter.textContent = newScore;
 }
 
+/**
+ * Updates the wave counter on the game screen.
+ * @param round
+ * @author Philip
+ */
 function updateWaveCounter(round){
     const waveCounter = document.querySelector('#WaveCounter');
     waveCounter.textContent = 'Wave ' + round;
@@ -207,7 +220,7 @@ function animate(enemies) {
         }
 
         gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
-        enemies = enemies.filter(enemy => !enemy.update(gameCtx, reduceHealth));
+        enemies = enemies.filter(enemy => !enemy.update(gameCtx, reduceHealth)); // Remove dead enemies, !!Optimization needed, maybe a web worker per enemy?!!
 
         // Check if player health is 0
         if (playerHealth <= 0) {

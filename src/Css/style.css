@@ -1,5 +1,6 @@
 * {
     user-select: none;
+    overflow: hidden;
 }
 
 @keyframes zoomInOut {
@@ -22,7 +23,7 @@ body{
     justify-content: center;
     height: 100vh;
     animation: zoomInOut 20s infinite;
-    overflow: hidden;
+
 }
 
 @keyframes colorWave {
@@ -34,60 +35,36 @@ body{
     }
 }
 
-h1{
-    color: #000000;
-    margin-top: 10px;
-    margin-right: 40px;
-    margin-left: 40px;
-    margin-bottom: 100px;
-    font-family: "VT323", cursive;
-    font-size: 150px;
-    text-align: center;
-    animation: colorWave 4s infinite;
+.mainBorder{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    filter: blur(10,10,10,10);
+    border: 2px solid #402f1d;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
 }
 
-h3, h2{
-    color: rgb(35, 29, 29);
-    margin-top: 10px;
-    margin-right: 40px;
-    margin-left: 40px;
-    margin-bottom: 20px;
-    font-family: "VT323", cursive;
-    font-size: 50px;
-    text-align: center;
-}
-a{
-    display: block;
-    margin-bottom: 20px;
-}
-
-div{
-
-    width: auto;
+.buttonContainer, .highScoreListContainer{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin: 10px;
+    gap: 10px;
 }
 
-
-
-/*
--------- BUTTON --------
- */
-
-div{
-
-    display: flex;
-    flex-direction: column;
-    filter: blur(10,10,10,10);
-    border: 2px solid #402f1d;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
+#highScores{
+    width: 80%;
+    height: 80%;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 2px;
 }
 
-button {
+.buttonContainer button{
     width: 350px;
     height: 60px;
     border: 3px solid #402f1d;
@@ -100,12 +77,33 @@ button {
     font-size: 40px;
 }
 
-.highScores{
-
-}
-
-button:hover {
+.buttonContainer button:hover {
     background: #402f1d;
     color: white;
     font-size: 3.2em;
+}
+
+#GameName{
+    color: #000000;
+    margin-top: 10px;
+    margin-right: 40px;
+    margin-left: 40px;
+    margin-bottom: 100px;
+    font-family: "VT323", cursive;
+    font-size: 150px;
+    text-align: center;
+    filter: drop-shadow(0 0 10px rgb(96, 126, 69));
+    animation: colorWave 4s infinite;
+}
+
+.highScoreListContainer h2{
+    color: rgb(35, 29, 29);
+    margin-top: 10px;
+    margin-right: 40px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+    font-family: "VT323", cursive;
+    font-size: 50px;
+    text-align: center;
+    filter: drop-shadow(0 0 10px rgb(96, 126, 69));
 }

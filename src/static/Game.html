@@ -6,10 +6,14 @@
 
     <link rel="icon" href="../js/model/assets/img/SiteIcon.png" type="image/x-icon">
     <link rel="stylesheet" href="../Css/gameStyle.css">
+    <link rel="stylesheet" href="../Css/transition.css">
 
 </head>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 <body>
+
+<div class="transition transition-3 is-active"></div>
+
 
 <div class="canvasContainer">
         <canvas id="GameBackground"></canvas>
@@ -29,10 +33,21 @@
         <!-- Canvas effects -->
         <div id="GameOver">
             Game Over
+
+            <div class="buttonContainer">
+                <a href="Game.html">
+                    <button>Restart</button>
+                </a>
+
+                <a href="index.html">
+                    <button>Back</button>
+                </a>
+            </div>
         </div>
         <h1 id="fpsCounter">Average<br>FPS: .... </h1>
 </div>
 
+    <script type="module" src="../js/transitionAnimation.js"></script>
     <script type="module" src="../js/controller/Controller.js"></script>
 </body>
 </html>

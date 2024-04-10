@@ -40,7 +40,10 @@ export class slime extends Enemy {
             {frames: { // for sprite animation
                     max: 6, // the number of frames in the sprite
                     min: 0, // the starting frame, typically 0
-                    hold: 6 // how many frames to hold each frame, made for fine-tuning the animation
+                    hold: 6, // how many frames to hold each frame, made for fine-tuning the animation
+                    cropOffsetX: 0, // offset for the crop
+                    cropOffsetY: 0, // offset for the crop
+                    scale: 1, // scale for the sprite, 1 = normal size
                 }}
         );
     }
@@ -76,7 +79,10 @@ export class wolf extends Enemy {
             {frames: { // for sprite animation
                     max: 6, // the number of frames in the sprite
                     min: 0, // the starting frame, typically 0
-                    hold: 6 // how many frames to hold each frame, made for fine-tuning the animation
+                    hold: 6, // how many frames to hold each frame, made for fine-tuning the animation
+                    cropOffsetX: 0, // offset for the crop
+                    cropOffsetY: 0, // offset for the crop
+                    scale: 1, // scale for the sprite, 1 = normal size
                 }}
         );
     }
@@ -110,8 +116,8 @@ export class bee extends Enemy {
                     right: '../js/model/assets/EnemySprites/Bee/R_Walk.png',
                     left: '../js/model/assets/EnemySprites/Bee/L_Walk.png'
                 }},
-            48, //width of hit box
-            48, //height hit box
+            28, //width of hit box
+            28, //height hit box
             {frames: { // for sprite animation
                     max: 6, // the number of frames in the sprite
                     min: 0, // the starting frame, typically 0
@@ -156,7 +162,10 @@ export class goblin extends Enemy {
             {frames: { // for sprite animation
                     max: 6, // the number of frames in the sprite
                     min: 0, // the starting frame, typically 0
-                    hold: 6 // how many frames to hold each frame, made for fine-tuning the animation
+                    hold: 6, // how many frames to hold each frame, made for fine-tuning the animation
+                    cropOffsetX: 0, // offset for the crop
+                    cropOffsetY: 0, // offset for the crop
+                    scale: 1, // scale for the sprite, 1 = normal size
                 }}
         );
     }
@@ -220,6 +229,60 @@ export class Mech extends Enemy {
                     cropOffsetX: 0, // offset for the crop X
                     cropOffsetY: 0, // offset for the crop Y
                     scale: 1.5, // scale for the sprite, 1 = normal size
+                }}
+        );
+    }
+}
+
+export class dragonWiz extends Enemy {
+    constructor({position = {x: 0, y: 0}}, path) { // !!NOT DONE!!
+        super(
+            {position},
+            1.5, //speed
+            path,
+            10000, //health
+            {spriteImages: {
+                    up: '../js/model/assets/EnemySprites/dragonWiz/walk.png',
+                    down: '../js/model/assets/EnemySprites/dragonWiz/walk.png',
+                    right: '../js/model/assets/EnemySprites/dragonWiz/walk.png',
+                    left: '../js/model/assets/EnemySprites/dragonWiz/walk.png'
+                }},
+            55, //width of hit box
+            48, //height hit box
+            {frames: { // for sprite animation
+                    max: 8, // the number of frames in the sprite
+                    min: 0, // the starting frame, typically 0
+                    hold: 6, // how many frames to hold each frame, made for fine-tuning the animation
+                    cropOffsetX: 0, // offset for the crop X
+                    cropOffsetY: 0, // offset for the crop Y
+                    scale: 1.7, // scale for the sprite, 1 = normal size
+                }}
+        );
+    }
+}
+
+export class akaname extends Enemy {
+    constructor({position = {x: 0, y: 0}}, path) { // !!NOT DONE!!
+        super(
+            {position},
+            1.5, //speed
+            path,
+            10000, //health
+            {spriteImages: {
+                    up: '../js/model/assets/EnemySprites/Akaname/walk.png',
+                    down: '../js/model/assets/EnemySprites/Akaname/walk.png',
+                    right: '../js/model/assets/EnemySprites/Akaname/walk.png',
+                    left: '../js/model/assets/EnemySprites/Akaname/walk.png'
+                }},
+            55, //width of hit box
+            48, //height hit box
+            {frames: { // for sprite animation
+                    max: 8, // the number of frames in the sprite
+                    min: 0, // the starting frame, typically 0
+                    hold: 6, // how many frames to hold each frame, made for fine-tuning the animation
+                    cropOffsetX: 0, // offset for the crop X
+                    cropOffsetY: 0, // offset for the crop Y
+                    scale: 1.7, // scale for the sprite, 1 = normal size
                 }}
         );
     }

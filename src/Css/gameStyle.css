@@ -178,7 +178,7 @@ body, html{
 .UIScreen #GameWaveButton:hover {
     background: #8c343c;
     color: white;
-    font-size: 2.3em;
+    font-size: 2.5em;
     filter: drop-shadow(0 0 20px #8c343c);
 }
 
@@ -209,6 +209,7 @@ body, html{
     display: none;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -216,9 +217,36 @@ body, html{
     right: 0;
     background: rgba(42, 42, 42, 0.8);
     color: #ef0000;
-    -webkit-text-stroke: 3px black;
     font-family: "VT323", cursive;
     font-size: 200px;
     border-radius: 19px;
     z-index: 4;
+}
+
+#GameOver .buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 0;
+    gap: 10px;
+}
+
+#GameOver .buttonContainer button{
+    width: 350px;
+    height: 60px;
+    border: 3px solid #000000;
+    border-radius: 45px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: white;
+    font-weight: 550;
+    font-family: "VT323", cursive;
+    font-size: 30px;
+}
+
+#GameOver .buttonContainer button:hover {
+    background: #dc0000;
+    color: white;
+    font-size: 0.2em;
 }

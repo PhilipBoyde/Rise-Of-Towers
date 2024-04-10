@@ -1,5 +1,5 @@
 import {Map1Paths, Map2Paths, Map3Paths} from "./pathRouteManager.js";
-import {goblin, slime, wolf, bee, Cyclops, Mech} from "./EnemyTypes.js";
+import {goblin, slime, wolf, bee, Cyclops, Mech, dragonWiz, akaname} from "./EnemyTypes.js";
 
 const enemyType = { // spawn rates for the different enemy types counted in percentage
     "Goblin": 0.12,
@@ -70,7 +70,6 @@ export function calculateWave(round){
                 break; // break the loop when the random number is less than the sum
             }
         }
-
     }
 
 
@@ -86,7 +85,6 @@ export function calculateWave(round){
         switch (type) {
             case 'Goblin':
                 for (let i = 0; i < 5; i++) { //create 5 goblin in a group
-
 
                     waveEnemies.push(new goblin({position: {x: activePath[0].x + xOffSet, y: activePath[0].y}}, activePath));
                     xOffSet += 40;
@@ -110,6 +108,8 @@ export function calculateWave(round){
                 break;
         }
     }
+
+    waveEnemies.reverse(); // reverse the array to get the enemies to spawn in the correct order and so sprite animation is correct
     return waveEnemies;
 
 
@@ -155,12 +155,14 @@ export function testEnemyType(){
     let activePath = choosePath();
     let xOffSet = 0;
 
-    for (let i = 0; i < 1; i++) {
-        waveEnemies.push(new Mech({position: {x: activePath[0].x + xOffSet, y: activePath[0].y}}, activePath));
+    for (let i = 0; i < 21; i++) {
+        const enemy = new akaname({position: {x: activePath[0].x + xOffSet, y: activePath[0].y}}, activePath)
+        waveEnemies.push(enemy);
         xOffSet += 40;
         activePath = choosePath();
     }
 
+    waveEnemies.reverse();
     return waveEnemies;
 }
 

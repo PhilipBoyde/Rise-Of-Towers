@@ -5,7 +5,9 @@
     <title>Rise Of Towers</title>
 
     <link rel="icon" href="../js/model/assets/img/SiteIcon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../Css/transition.css">
     <link rel="stylesheet" href="../Css/style.css">
+
 
 </head>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
@@ -13,26 +15,37 @@
 
 <audio src="../js/model/assets/sounds/relax-intro-103890.mp3" autoplay loop></audio>
 
+<div class="transition transition-1 is-active"></div>
 
-<div id="buttonContainer">
-    <h1 class="animated-heading">Rise Of <br> Towers</h1>
+<div class="mainBorder">
 
-    <a href="Game.html">
-        <button>Play Game</button>
-    </a>
+    <!-- Contains all the buttons, Left Side -->
+    <div class="buttonContainer">
+        <h1 id="GameName">Rise Of <br> Towers</h1>
 
-    <a href="Tutorial.html">
-        <button>Tutorial</button>
-    </a>
+        <a href="Game.html">
+            <button>Play Game</button>
+        </a>
 
-    <a href="Credits.html">
-     <button>Credits</button>
-    </a>
+        <a href="Tutorial.html">
+            <button>Tutorial</button>
+        </a>
 
-    <ol id="highScores">
+        <a href="Credits.html">
+            <button>Credits</button>
+        </a>
+    </div>
 
-    </ol>
+    <!-- Contains the highscore list, Right side -->
+    <div class="highScoreListContainer">
+        <h2>HighScores</h2>
+
+        <ol id="highScores">
+            1. OFFLINE
+        </ol>
+    </div>
+
 </div>
-
+    <script type="module" src="../js/transitionAnimation.js"></script>
 </body>
 </html>
