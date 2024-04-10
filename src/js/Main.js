@@ -41,6 +41,7 @@ function gameLoop() {
     gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
 
     towers.forEach(tower => {
+        tower.update();
         tower.draw(gameCtx);
     });
 

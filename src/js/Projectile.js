@@ -5,6 +5,8 @@ export class Projectile {
         this.speed = speed;
         this.damage = damage;
         this.target = target;
+        this.onDelete = onDelete; // cons for when projectile needs to be removed
+        this.markedForDeletion = false;
     }
 
     move() {
@@ -14,11 +16,15 @@ export class Projectile {
 
         dx /= distance;
         dy /= distance;
-        if (Math.abs(dx) < 5 && Math.abs(dy) < 5) {
-            this.target.hit(this.damage);
-            this.remove();
-        }
-    }
+        this.x += dx * this.speed; // moving projectile
+        this.y += dy * this.speed;
+
+       if (Math.abs(this.x - this.target.position.x) < 5 && Math.abs(this.y - this.target.position.y) < 5) {
+             this.target.health -= this.damage; // damaging
+             this.markedForDeletion = true; // marking it to be deleted
+             this.onDelete(this); // Now tower remove this projectile
+           }
+         }
 
     draw(context) {
         context.fillStyle = '#654321'; // brown color
@@ -28,6 +34,6 @@ export class Projectile {
     }
 
     remove() {
-        this.projectiles.splice(this.projectiles.indexOf(this), 1);
+        this.onDelete(this);
     }
 }
