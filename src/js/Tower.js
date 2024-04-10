@@ -3,11 +3,13 @@ export default class Tower {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.range = 100 // not a value we want, just to try
+        this.range = 100; // not a value we want, just to try
         this.damage = 50; // start damage, test values
         this.cost = 100; // test, susceptible to changes
         this.upgradeCost = 100; // Starting upgrade cost
         this.maxLevel = 5; // Maximum level of the tower
+        this.shootingSpeed = 2; // needs reworking and more specification
+        this.level = 1;
     }
 
     draw(context) {
