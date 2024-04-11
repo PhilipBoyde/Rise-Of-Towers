@@ -13,7 +13,7 @@ export default class Tower {
     }
 
     draw(context) {
-        context.fillStyle = '#000';
+        context.fillStyle = '#d90808';
         context.beginPath();
         context.arc(this.x, this.y, 20, 0, Math.PI * 2); // test value
         context.fill();
