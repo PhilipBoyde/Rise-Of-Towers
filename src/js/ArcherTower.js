@@ -8,7 +8,8 @@ class ArcherTower extends Tower {
          this.level = 1;
          this.effect = 'none';
          this.projectiles = []; // amo to RELOAD in an array of objects :)
-
+         this.timeSinceLastShot = 0;
+     }
 
     findTargets(enemies) {
         //  enemies within the tower range
@@ -63,7 +64,8 @@ class ArcherTower extends Tower {
              }
 
          }
-     }
+
  }
+ export default ArcherTower;
 
 
