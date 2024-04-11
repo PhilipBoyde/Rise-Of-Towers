@@ -1,0 +1,4 @@
+export class Tower{
+    constructor() {
+    }
+}

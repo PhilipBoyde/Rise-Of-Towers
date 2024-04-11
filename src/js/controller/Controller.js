@@ -1,4 +1,6 @@
 import {calculateWave, changeMapRoutes, testEnemyType} from "../model/WaveCalculator.js";
+import {gameIsRunning, setGameInfo, updateHoverTiles} from "./placementTiles.js";
+
 const  /** HTMLCanvasElement */ gameCanvas = document.querySelector('#GameScreen');
 const gameBackground = document.querySelector('#GameBackground');
 const /** HTMLCanvasElement */ interactiveCanvas = document.querySelector('#GameUI');
@@ -25,8 +27,11 @@ addEventListener("click", function() {
     } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
         document.documentElement.msRequestFullscreen();
     }
-});
 
+
+
+
+});
 
 
 
@@ -50,6 +55,7 @@ if (gameCanvas && interactiveCanvas){
     const interactiveCtx = interactiveCanvas.getContext('2d');
     interactiveCtx.fillStyle = '#574629';
     interactiveCtx.fillRect(0, 0, interactiveCanvas.width, interactiveCanvas.height);
+    setGameInfo(gameCanvas, gameCtx)
 }else {
     alert('Canvas not found!, Pleas try again later');
 }
@@ -99,6 +105,7 @@ function nexWave(){
     
     //const enemies = calculateWave(round);
     const enemies = testEnemyType(); // Temporary test function
+    gameIsRunning(true);
     animate(enemies);
 }
 
@@ -171,7 +178,6 @@ function updateHealthCounter (newHealth) {
             break;
             
         default:
-            console.log('Health not found!');
             break;
     }
 }
@@ -216,11 +222,13 @@ function animate(enemies) {
             enableButton();
             round++;
             updateWaveCounter(round);
+            gameIsRunning(false)
             return;
         }
 
         gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
         enemies = enemies.filter(enemy => !enemy.update(gameCtx, reduceHealth)); // Remove dead enemies, !!Optimization needed, maybe a web worker per enemy?!!
+        updateHoverTiles()
 
         // Check if player health is 0
         if (playerHealth <= 0) {
@@ -228,8 +236,6 @@ function animate(enemies) {
             console.log('%cGAME OVER!', 'color: red; font-size: 20px;');
             cancelAnimationFrame(animationID);
         }
-
-
         // Update FPS counter
         fpsCounterUpdate(1000 / elapsed);
     }
@@ -258,3 +264,4 @@ function fpsCounterUpdate(fps){
         fpsAccumulator = 0;
     }
 }
+
