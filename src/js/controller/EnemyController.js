@@ -3,22 +3,23 @@ import { SpriteController } from './SpriteController.js';
 /**
  * Class for the enemy sprite. Extends the SpriteController class.
  *
- * @extends SpriteController
- * @class Enemy
+ * @extends SpriteController - controls the sprite images for the enemy sprite
+ * @class Enemy - controls the enemy sprite
  * @author Philip
  */
 export class Enemy extends SpriteController{
     /**
-     * Constructor for the enemy sprite. Sets the position, speed, path, health, sprite images, width, height and frames for the enemy sprite.
+     * Constructor for the enemy sprite. Sets the position, speed, path, health, coins, sprite images, width, height and frames for the enemy sprite.
      * @constructor
-     * @param position
-     * @param speed
-     * @param path
-     * @param health
-     * @param spriteImages
-     * @param width
-     * @param height
-     * @param frames
+     * @param position - position of the enemy sprite
+     * @param speed - speed of the enemy sprite
+     * @param path - path the enemy sprite should follow
+     * @param health - health of the enemy sprite
+     * @param coins - coins the enemy is worth
+     * @param spriteImages - sprite images for the enemy sprite
+     * @param width - width of the enemy hitbox
+     * @param height - height of the enemy hitbox
+     * @param frames - settings for sprite frames in sprite controller
      * @author Philip
      */
     constructor( //start of constructor, sets the position, speed, path, health, sprite images, width, height and frames for the enemy sprite
@@ -26,6 +27,7 @@ export class Enemy extends SpriteController{
         speed,
         path,
         health,
+        coins,
         {spriteImages = {upp : '', down: '', right: '', left: ''}},
         width,
         height,
@@ -58,6 +60,7 @@ export class Enemy extends SpriteController{
         this.health = health;
         this.threshold = 2;
         this.oriantaion = 'unknown';
+        this.worth = coins;
 
         this.center = { //give the enemy sprite a center point
             x: this.position.x + this.width / 2,
@@ -68,7 +71,7 @@ export class Enemy extends SpriteController{
 
     /**
      * function to control what should be drawn on the canvas.
-     * @param gameCtx
+     * @param gameCtx - the game context
      * @author Philip
      */
     draw(gameCtx) {
@@ -78,7 +81,7 @@ export class Enemy extends SpriteController{
 
     /**
      * Draws the hitbox for the enemy sprite.
-     * @param gameCtx
+     * @param gameCtx - the game context
      * @author Philip
      */
     drawHitBox(gameCtx) {
@@ -90,12 +93,12 @@ export class Enemy extends SpriteController{
     /**
      * Updates the enemy sprite. Makes calculations to get the next position of the enemy sprite. based on the path.
      * Also checks if the enemy sprite has reached the end of the path.
-     * @param gameCtx
-     * @param reduceHealth
-     * @returns {boolean}
+     * @param gameCtx - the game context
+     * @param reduceHealth - function to reduce the health of the player
+     * @returns {boolean} - returns true if the enemy sprite has reached the end of the path or if the health of the enemy sprite is 0.
      * @author Philip
      */
-    update(gameCtx, reduceHealth) {
+    update(gameCtx, reduceHealth, addCoins) {
         this.draw(gameCtx);
 
         const path = this.path[this.pathIndex]
@@ -117,6 +120,12 @@ export class Enemy extends SpriteController{
 
         this.oriantaion = this.calculateOrientation(xDistance, yDistance);
 
+        if (this.health <= 0) {
+            addCoins(10);
+            this.oriantaion = 'death';
+            return true;
+        }
+
         const distanceToNextPoint = Math.sqrt(Math.pow(this.center.x - path.x, 2) + Math.pow(this.center.y - path.y, 2));
         if (distanceToNextPoint < this.threshold) {
             this.pathIndex++;
@@ -128,11 +137,12 @@ export class Enemy extends SpriteController{
         }
     }
 
+
     /**
      * Calculates the orientation of the enemy sprite based on the distance between the current position and the next position in the path.
-     * @param xDistance
-     * @param yDistance
-     * @returns {string}
+     * @param xDistance - distance between the current x position and the next x position in the path
+     * @param yDistance - distance between the current y position and the next y position in the path
+     * @returns {string} - returns the orientation of the enemy sprite based on the distance between the current position and the next position in the path.
      * @author Philip
      */
     calculateOrientation(xDistance, yDistance) {
@@ -153,9 +163,9 @@ export class Enemy extends SpriteController{
     }
 }
 
-
-
 /*
+--- Old code used for reference ---
+
     update(gameCtx) { //Makes calculation to get the next position of the enemy sprite
         this.draw(gameCtx);
 

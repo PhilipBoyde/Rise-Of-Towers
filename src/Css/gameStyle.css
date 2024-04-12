@@ -30,7 +30,7 @@ body, html{
     border-radius: 20px;
 }
 
-#GameBackground, #GameBackground{ /* Everything that needs to be on top of the canvas */
+#GameBackground, #GameBackground, #GameHover{ /* Everything that needs to be on top of the canvas */
     position: absolute;
     top: 20px;
     left: 20px;
@@ -44,6 +44,10 @@ body, html{
 
 #GameScreen {
     z-index: 1;
+}
+
+#GameHover {
+    z-index: 2;
 }
 
 #GameUI {
@@ -87,7 +91,7 @@ body, html{
     filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.62));
 }
 
-@keyframes heartAnimation {
+@keyframes heartAnimation { /* Heartbeat animation !!OPTIMIZE!!*/
     0% {
         width: 45px;
         height: 45px;
@@ -155,7 +159,7 @@ body, html{
 
 
 /*
---button--
+--button GameWave--
  */
 
 .UIScreen #GameWaveButton {
@@ -183,6 +187,82 @@ body, html{
 }
 
 .UIScreen #GameWaveButton:disabled {
+    cursor: not-allowed;
+}
+
+/*
+--button towers--
+ */
+
+.UIScreen #sellButton {
+    border: 3px solid #4F4537;
+    border-radius: 45px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: #DFE0DF;
+    font-weight: 550;
+    font-family: "VT323", cursive;
+    font-size: 30px;
+    width: 185px;
+    height: 50px;
+
+    position: absolute;
+    top: 88%;
+    left: 84.6%;
+}
+
+.UIScreen #sellButton:hover {
+    background: #fd9e00;
+    color: white;
+    font-size: 2.2em;
+    filter: drop-shadow(0 0 20px #fd9e00);
+}
+
+.UIScreen #sellButton:hover:disabled {
+    cursor: not-allowed;
+}
+
+.UIScreen #tower1 {
+    border: 3px solid #4F4537;
+    border-radius: 10px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: #DFE0DF;
+    font-weight: 550;
+    font-family: "VT323", cursive;
+    font-size: 30px;
+    width: 47px;
+    height: 45px;
+
+    position: absolute;
+    top: 83%;
+    left: 84.6%;
+}
+
+.UIScreen #tower1:disabled {
+    cursor: not-allowed;
+    color: rgba(0, 0, 0, 0.36);
+    font-size: 30px;
+}
+
+.UIScreen #tower2 {
+    border: 3px solid #4F4537;
+    border-radius: 10px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: #DFE0DF;
+    font-weight: 550;
+    font-family: "VT323", cursive;
+    font-size: 30px;
+    width: 47px;
+    height: 45px;
+
+    position: absolute;
+    top: 83%;
+    left: 88%;
+}
+
+.UIScreen #tower2:disabled {
     cursor: not-allowed;
     color: rgba(0, 0, 0, 0.36);
     font-size: 30px;

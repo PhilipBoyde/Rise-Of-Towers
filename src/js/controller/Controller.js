@@ -1,46 +1,70 @@
 import {calculateWave, changeMapRoutes, testEnemyType} from "../model/WaveCalculator.js";
 import {gameIsRunning, setGameInfo, updateHoverTiles} from "./placementTiles.js";
+import {ArcherTower, WizardTower,} from "../model/towerTypes.js";
+
+/**
+ *  -TODO-
+ *  - Add a way to upgrade towers
+ *  - Add a way to change the map
+ *  - add functionality to the sell button
+ *  - add more towers
+ *  - balance the game
+ *  - add more bosses
+ *  - add enemy death animations
+ *  - add sprites for the towers
+ *  - add sprites for projectiles
+ *  - add animations for the towers
+ *  - flush out the tower targeting system
+ */
+
+/*
+--- variables ---
+ */
 
 const  /** HTMLCanvasElement */ gameCanvas = document.querySelector('#GameScreen');
 const gameBackground = document.querySelector('#GameBackground');
 const /** HTMLCanvasElement */ interactiveCanvas = document.querySelector('#GameUI');
+const /** HTMLCanvasElement */ gameHover = document.querySelector('#GameHover');
 const /** number */ activeMapNbr = 1;  
 let /** number */ round = 0;
 let playerHealth = 20;
+let coins = 350;
+let activeTowers = [];
+let img = new Image();
 
-document.getElementById("GameWaveButton").addEventListener("click", nexWave);
+
+let lastTime = 0;
+let currentTime;
+let elapsed;
+let frameCount = 0;
+let fpsAccumulator = 0;
+
+let activeTiles;
+let activeTileID;
+let allPlacedTowers = [];
+
 const /** CanvasRenderingContext2D */ gameCtx = gameCanvas.getContext('2d');
+document.getElementById("GameWaveButton").addEventListener("click", nexWave);
+document.getElementById("tower1").addEventListener("click", () => selectTower(1));
+document.getElementById("tower2").addEventListener("click", () => selectTower(2));
+document.getElementById("sellButton").addEventListener("click", sellTower);
+let sellButton = document.querySelector('#sellButton');
+let tower1Button = document.querySelector('#tower1');
+let tower2Button = document.querySelector('#tower2');
+
 const gameBackgroundCtx = gameBackground.getContext('2d');
 
-/**
- * Event listener for the fullscreen button.
- * @param {Button} fullscreenButton - The button element to be clicked.
- * @author Philip
+/*
+--- stop of variables ---
  */
-addEventListener("click", function() {
-    if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-    } else if (document.documentElement.mozRequestFullScreen) { // Firefox
-        document.documentElement.mozRequestFullScreen();
-    } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
-        document.documentElement.webkitRequestFullscreen();
-    } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-        document.documentElement.msRequestFullscreen();
-    }
-
-
-
-
-});
-
-
+/*
+--- program initialization ---
+ */
 
 /**
  * Sets up canvas dimensions and styling if both gameCanvas and interactiveCanvas exist.
  * Otherwise, alerts the user.
  *
- * @param {Canvas} gameCanvas - The canvas element for the game screen.
- * @param {Canvas} interactiveCanvas - The canvas element for the game UI.
  * @author Philip
  */
 if (gameCanvas && interactiveCanvas){
@@ -48,7 +72,9 @@ if (gameCanvas && interactiveCanvas){
     gameCanvas.height = 960;
     gameBackground.width = gameCanvas.width;
     gameBackground.height = gameCanvas.height;
-    
+    gameHover.width = gameCanvas.width;
+    gameHover.height = gameCanvas.height;
+
     interactiveCanvas.width = 200;
     interactiveCanvas.height = 966;
 
@@ -60,14 +86,9 @@ if (gameCanvas && interactiveCanvas){
     alert('Canvas not found!, Pleas try again later');
 }
 
-
-let img = new Image();
-changeMap()
-
 /**
  * Changes the map based on the activeMap variable.
  *
- * @param {number} activeMapNbr - The number of the active map to be loaded.
  * @author Philip
  */
 function changeMap(){
@@ -94,26 +115,144 @@ function changeMap(){
     }
 }
 
+/*
+-- start upp methods --
+ */
+updateCoins()
+changeMap()
+
+/*
+--- end of program initialization ---
+ */
+
+/**
+ * Selects the tile that the player clicked on.
+ * If the tile is already occupied by a tower, the player can sell the tower.
+ * Disables towers based on the kind of tile that was clicked.
+ * @param tile
+ * @author Philip
+ */
+export function selectTile(tile){
+
+    if(allPlacedTowers.length >= 0){
+
+        if (tile === undefined){
+
+            tower1Button.style.backgroundColor = 'gray';
+            tower1Button.style.filter = 'blur(1px)';
+            tower1Button.disabled = true;
+
+            tower2Button.style.backgroundColor = 'gray';
+            tower2Button.style.filter = 'blur(1px)';
+            tower2Button.disabled = true;
+
+            sellButton.style.backgroundColor = 'gray';
+            sellButton.style.filter = 'blur(1px)';
+            sellButton.disabled = true;
+
+        } else {
+
+            if (allPlacedTowers.includes(tile.positionID)){
+                sellButton.disabled = false;
+                sellButton.style.backgroundColor = '';
+                sellButton.style.filter = 'blur(0px)';
+
+            } else {
+
+                activeTiles = tile;
+                activeTileID = activeTiles.positionID;
+                console.log(activeTiles.positionID)
+                tower1Button.style.backgroundColor = 'white';
+                tower1Button.style.filter = 'blur(0px)';
+                tower1Button.disabled = false;
+
+                tower2Button.style.backgroundColor = 'white';
+                tower2Button.style.filter = 'blur(0px)';
+                tower2Button.disabled = false;
+
+                sellButton.style.backgroundColor = 'gray';
+                sellButton.style.filter = 'blur(1px)';
+                sellButton.disabled = true;
+            }
+        }
+    }
+}
+
+/**
+ * Gives the player the option to sell the tower that is placed on the selected tile.
+ * @author Philip
+ */
+function sellTower(){
+    allPlacedTowers.forEach((tower) => {
+        if (tower === activeTileID) {
+            allPlacedTowers.splice(allPlacedTowers.indexOf(tower), 1);
+            activeTowers.splice(activeTowers.includes(activeTileID), 1);
+            coins += 50;
+            updateCoins()
+            selectTile(undefined);
+        }
+
+    });
+}
+
+/**
+ * Based on the buttonID, the player can select a tower to place on the selected tile.
+ * if the player has enough coins, the tower will be placed on the selected tile.
+ * else the player will not be able to place the tower.
+ * @param buttonID
+ * @author Philip
+ */
+function selectTower(buttonID) {
+
+    switch (buttonID) {
+        case 1:
+            if(coins >= 100){
+                activeTowers.push(new ArcherTower(gameCtx, activeTiles));
+                allPlacedTowers.push(activeTileID);
+                coins -= 100;
+                selectTile(undefined);
+            }
+            break;
+
+        case 2:
+            if(coins >= 200){
+                activeTowers.push(new WizardTower(gameCtx, activeTiles));
+                allPlacedTowers.push(activeTileID);
+                coins -= 200;
+                selectTile(undefined);
+            }
+            break;
+
+        default:
+            console.log('Tower not found!')
+            break;
+    }
+
+    activeTowers.forEach(tower => { // tower
+        tower.drawTower();
+    });
+    updateCoins()
+}
+
+
 /**
  * Loads the next wave of enemies.
- *
- * @param {number} round - The current round of the game.
+ * Disables the "GameWaveButton" button while the wave is running.
  * @author Philip
  */
 function nexWave(){
     disableButton()
     
-    //const enemies = calculateWave(round);
-    const enemies = testEnemyType(); // Temporary test function
+    const enemies = calculateWave(round);
+    //const enemies = testEnemyType(); // Temporary test function
     gameIsRunning(true);
-    animate(enemies);
+    gameLoop(enemies);
 }
 
 
 /**
  * Disables the "GameWaveButton" button by changing its style and setting its disabled property to true.
  *
- * @param {Button} button - The button element to be disabled.
  * @author Philip
  */
 function disableButton(){
@@ -127,7 +266,6 @@ function disableButton(){
 /**
  * Enables the "GameWaveButton" button by changing its style and setting its disabled property to false.
  *
- * @param {Button} button - The button element to be enabled.
  * @author Philip
  */
 function enableButton(){
@@ -141,7 +279,6 @@ function enableButton(){
 /**
  * Reduces the player health by 1.
  * Updates the health counter on the game screen.
- * @param {number} playerHealth - The current health of the player.
  * @author Philip
  */
 function reduceHealth(){
@@ -182,9 +319,18 @@ function updateHealthCounter (newHealth) {
     }
 }
 
-function updateScoreCounter(newScore){
-    const scoreCounter = document.querySelector('#scoreCounter');
-    scoreCounter.textContent = newScore;
+function addCoins(amount){
+    coins += amount;
+    updateCoins();
+}
+
+/**
+ * Updates the coin counter on the game screen. based on the amount of coins the player has.
+ * @author Philip
+ */
+function updateCoins(){
+    const CoinsCounter = document.querySelector('#CoinsCounter');
+    CoinsCounter.textContent = coins;
 }
 
 /**
@@ -197,24 +343,22 @@ function updateWaveCounter(round){
     waveCounter.textContent = 'Wave ' + round;
 }
 
-let lastTime = 0;
-let lastFpsUpdateTime = 0;
-let currentTime;
-let elapsed;
+
 
 /**
- * Animates the enemies on the game screen. 
- * Also checks if all enemies are dead or if the player health is 0.
- *
+ * The main game loop. Updates the game state and draws the game.
+ * is limited to about 60 FPS and is called recursively.
+ * Activated by the nextWave button.
  * @param enemies
  * @author Philip,
  */
-function animate(enemies) {
+function gameLoop(enemies) {
     currentTime = performance.now();
     elapsed = currentTime - lastTime;
 
     if (elapsed > 1000 / 60) { //Limit the frame rate to about 60 FPS
         lastTime = currentTime - (elapsed % (1000 / 60));
+        gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
 
         // Check if all enemies are dead
         if (enemies.length === 0) {
@@ -223,29 +367,36 @@ function animate(enemies) {
             round++;
             updateWaveCounter(round);
             gameIsRunning(false)
+
+            activeTowers.forEach(tower => { // tower
+                tower.drawTower();
+            });
+
             return;
         }
 
-        gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
-        enemies = enemies.filter(enemy => !enemy.update(gameCtx, reduceHealth)); // Remove dead enemies, !!Optimization needed, maybe a web worker per enemy?!!
+        enemies = enemies.filter(enemy => !enemy.update(gameCtx, reduceHealth, addCoins)); // Remove dead enemies, !!Optimization needed, maybe a web worker per enemy?!!
         updateHoverTiles()
+
+        activeTowers.forEach(tower => { // tower
+            tower.update(enemies);
+        });
+        updateCoins()
 
         // Check if player health is 0
         if (playerHealth <= 0) {
             document.querySelector('#GameOver').style.display = 'flex';
             console.log('%cGAME OVER!', 'color: red; font-size: 20px;');
-            cancelAnimationFrame(animationID);
+            cancelAnimationFrame(animationID); // fix animationID not defined
         }
         // Update FPS counter
         fpsCounterUpdate(1000 / elapsed);
     }
     
     // Request next frame
-    const animationID = requestAnimationFrame(() => animate(enemies));
+    const animationID = requestAnimationFrame(() => gameLoop(enemies));
 }
 
-let frameCount = 0;
-let fpsAccumulator = 0;
 
 /**
  * Updates the FPS counter on the game screen.
@@ -264,4 +415,24 @@ function fpsCounterUpdate(fps){
         fpsAccumulator = 0;
     }
 }
+
+/*
+--- event listeners ---
+ */
+
+/**
+ * Event listener for the fullscreen button.
+ * @author Philip
+ */
+addEventListener("click", function() {
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+        document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+        document.documentElement.msRequestFullscreen();
+    }
+});
 

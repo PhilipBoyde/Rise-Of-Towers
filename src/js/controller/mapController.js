@@ -1,6 +1,12 @@
 import {Startmap1} from "./mapControllers/map1Controller";
 let img;
 
+
+/*
+Will be removed when the game is finished and the maps are implemented, for now its reference code.
+ */
+
+/*
 switch (activeMap) { // Load the map based on the activeMap variable
     case 1:
         img.src = '../assets/gamemap/Map1.png';
@@ -34,4 +40,6 @@ switch (activeMap) { // Load the map based on the activeMap variable
         console.log('Map not found!')
         break;
 }
+
+ */
 

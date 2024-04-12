@@ -1,14 +1,22 @@
 import {Map1Paths, Map2Paths, Map3Paths} from "./pathRouteManager.js";
 import {goblin, slime, wolf, bee, Cyclops, Mech, dragonWiz, akaname} from "./EnemyTypes.js";
 
+/*
+--- variables ---
+ */
 const enemyType = { // spawn rates for the different enemy types counted in percentage
     "Goblin": 0.12,
     "Slime": 0.10,
     "Wolf": 0.4,
-    "Bee": 0.10
+    "Bee": 0.10,
+    "Cyclops": 0.01,
 }
 
 let pathRoutesForMap = []; // path to be used for the wave
+
+/*
+--- end of variables ---
+ */
 
 /**
  * Changes the map based on the activeMap variable.
@@ -46,8 +54,8 @@ let numEnemiyIncrese = 0; // number of enemies to increase per round
  * @author Philip
  */
 export function calculateWave(round){
-    const baseEnemies = 10; // 5 enemies in the first round
-    const enemiesMultiplier = 1.02; // 2% increase in enemies per round
+    const baseEnemies = 4; // 5 enemies in the first round
+    const enemiesMultiplier = 1.05; // 2% increase in enemies per round
 
     let numEnemies = Math.floor(baseEnemies * Math.pow(enemiesMultiplier, round - 1));
 
@@ -84,7 +92,7 @@ export function calculateWave(round){
     function createEnemyType(xOffSet, activePath, type){
         switch (type) {
             case 'Goblin':
-                for (let i = 0; i < 5; i++) { //create 5 goblin in a group
+                for (let i = 0; i < 4; i++) { //create 5 goblin in a group
 
                     waveEnemies.push(new goblin({position: {x: activePath[0].x + xOffSet, y: activePath[0].y}}, activePath));
                     xOffSet += 40;
@@ -103,6 +111,14 @@ export function calculateWave(round){
                 waveEnemies.push(new bee({position: {x: activePath[0].x + xOffSet, y: activePath[0].y}}, activePath));
                 break;
 
+            case 'Cyclops':
+                waveEnemies.push(new Cyclops({position: {x: activePath[0].x + xOffSet, y: activePath[0].y}}, activePath));
+                break;
+
+            case 'Akane':
+                waveEnemies.push(new akaname({position: {x: activePath[0].x + xOffSet, y: activePath[0].y}}, activePath));
+                break;
+
             default:
                 console.log('Something went wrong when creating the enemy type!')
                 break;
@@ -111,13 +127,6 @@ export function calculateWave(round){
 
     waveEnemies.reverse(); // reverse the array to get the enemies to spawn in the correct order and so sprite animation is correct
     return waveEnemies;
-
-
-    /**
-     * Test function to test the enemy types added, will be removed in the final version.
-     * @returns {*[]}
-     * @author Philip
-     */
 }
 
 /**
@@ -150,13 +159,16 @@ function choosePath(){
     return activePath;
 }
 
+/*
+--- for testing purposes only not used in the final version ---
+ */
 export function testEnemyType(){
     let waveEnemies = [];
     let activePath = choosePath();
     let xOffSet = 0;
 
-    for (let i = 0; i < 21; i++) {
-        const enemy = new akaname({position: {x: activePath[0].x + xOffSet, y: activePath[0].y}}, activePath)
+    for (let i = 0; i < 1; i++) {
+        const enemy = new Cyclops({position: {x: activePath[0].x + xOffSet, y: activePath[0].y}}, activePath)
         waveEnemies.push(enemy);
         xOffSet += 40;
         activePath = choosePath();

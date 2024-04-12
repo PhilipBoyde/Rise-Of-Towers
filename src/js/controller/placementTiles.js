@@ -1,69 +1,56 @@
 import {map1TowerArea} from "../model/map1/Map1PlacebleArea.js";
+import {selectTile} from "./Controller.js";
 
+/*
+--- variables ---
+ */
+const /** HTMLCanvasElement */ gameHover = document.querySelector('#GameHover');
+const gameHoverCtx = gameHover.getContext('2d');
+let gameCanvas;
+let lastHovered = undefined;
+let gameStatus = false
 const placementTilesData2D = [];
-for (let i = 0; i < map1TowerArea.length; i+= 35) { // 35 is the width of the map
-    placementTilesData2D.push(map1TowerArea.slice(i, i + 35));
-}
-
 const mouse = {
     x: 'undefined',
     y: 'undefined'
 }
-const neighbors = [];
-let hoverColor = 'rgba(235,232,237,0.015)';
-let gameStatus;
+/*
+--- end of variables ---
+ */
 
+/**
+ * 2D array to hold the placement tiles data. Used to create the placement tiles. Right now only supports map1TowerArea.
+ * @type {*[]}
+ * @author Philip
+ */
+for (let i = 0; i < map1TowerArea.length; i+= 35) { // 35 is the width of the map
+    placementTilesData2D.push(map1TowerArea.slice(i, i + 35));
+}
+
+/**
+ * Boolean to check if the game is running or not.
+ * @type {boolean}
+ * @author Philip
+ */
 export function gameIsRunning(running){
     gameStatus = running;
-    if (gameStatus === true){
-        hoverColor = 'rgba(235,232,237,0.5)';
-    }else {
-        hoverColor = 'rgba(235,232,237,0.015)';
-    }
 }
 
-let hoverTile = undefined;
-let activeTile = undefined;
-let hoveredTiles = undefined;
-
-export function setGameInfo(newGamecanvas, newGameCtx){
-    gameCanvas = newGamecanvas
-    gameCtx = newGameCtx
+/**
+ * Sets the game canvas to the canvas that is used for the game.
+ * @param newGameCanvas - The canvas that is used for the game.
+ * @author Philip
+ */
+export function setGameInfo(newGameCanvas){
+    gameCanvas = newGameCanvas
 }
 
-let gameCanvas;
-let gameCtx
-let lastTile = undefined;
 
-let lastHover = false;
-window.addEventListener('mousemove', (ev) => { // Use canvas
-    const rect = gameCanvas.getBoundingClientRect()
-    mouse.x = ev.clientX - rect.left
-    mouse.y = ev.clientY - rect.top
-
-    if (mouse.x >= 0 && mouse.x <= rect.width && mouse.y >= 0 && mouse.y <= rect.height) { //inside canvas
-        hoveredTiles = isTile()
-
-        updateHoverTiles()
-    }
-});
-
-
-
-window.addEventListener('click', (ev) =>{
-    const rect = gameCanvas.getBoundingClientRect()
-    mouse.x = ev.clientX - rect.left
-    mouse.y = ev.clientY - rect.top
-
-    if (mouse.x >= 0 && mouse.x <= rect.width && mouse.y >= 0 && mouse.y <= rect.height) { //inside canvas
-        const hoveredTiles = isTile()
-
-    }
-
-
-
-});
-
+/**
+ * Function to check if the mouse is hovering over a valid tile.
+ * @returns {{tile2: *, tile3: *, tile4: *, positionID: *, tile1}}
+ * @author Philip
+ */
 function isTile(){
     for (let i = 0; i < placementTiles.length; i++){
         const tile = placementTiles[i]
@@ -76,6 +63,14 @@ function isTile(){
     }
 }
 
+
+/**
+ * Function to get the tiles that are next to the tile that is clicked.
+ * @param tile
+ * @param allTiles
+ * @returns {{tile2: *, tile3: *, tile4: *, positionID: *, tile1}}
+ * @author Philip
+ */
 function getTiles(tile, allTiles) {
     const tileX = tile.position.x;
     const tileY = tile.position.y;
@@ -105,72 +100,169 @@ function getTiles(tile, allTiles) {
         tile1: tile,
         tile2: neighbors[0],
         tile3: neighbors[1],
-        tile4: neighbors[2]
-    }
-}
-let lastHovered = undefined;
-export function updateHoverTiles(){
-
-    if(hoveredTiles !== undefined){
-        console.log("update")
-        hoveredTiles.tile1.hovered(true)
-        hoveredTiles.tile1.update(gameCtx)
-
-        hoveredTiles.tile2.hovered(true)
-        hoveredTiles.tile2.update(gameCtx)
-
-        hoveredTiles.tile3.hovered(true)
-        hoveredTiles.tile3.update(gameCtx)
-
-        hoveredTiles.tile4.hovered(true)
-        hoveredTiles.tile4.update(gameCtx)
-
-        if(!gameStatus){
-
-        }
+        tile4: neighbors[2],
+        positionID: tile.position.x + tile.position.y + neighbors[0].position.x + neighbors[0].position.y + neighbors[1].position.x + neighbors[1].position.y + neighbors[2].position.x + neighbors[2].position.y,
     }
 }
 
-    export class PlaceableTile{
-        constructor({position}) {
-            this.position = position;
-            this.size =  32; // tile size
-            this.isHovered = false;
-        }
 
-        draw(gameCtx){
-            gameCtx.fillStyle = hoverColor;
-            gameCtx.fillRect(this.position.x, this.position.y, this.size, this.size);
-        }
+/**
+ * Function to update the hover effect on the tiles. When clicked on a tile, the tile will be highlighted.
+ * @param hoveredTiles - The tiles that are clicked on.
+ * @author Philip
+ */
+export function updateHoverTiles(hoveredTiles){
 
-        hovered(status){
-            this.isHovered = status;
-        }
-        
-        update(gameCtx) {
-            if(this.isHovered){
-                this.draw(gameCtx)
+    if (hoveredTiles !== undefined){
+        if(lastHovered !== undefined){
+            if(lastHovered.tile1.tileID !== hoveredTiles.tile1.tileID && lastHovered.tile1.tileID !== hoveredTiles.tile2.tileID &&
+                lastHovered.tile1.tileID !== hoveredTiles.tile3.tileID && lastHovered.tile1.tileID !== hoveredTiles.tile4.tileID){
+                updateTilesState(hoveredTiles)
+
+            }else {
+                updateTilesState(hoveredTiles)
             }
+        }else {
+            updateTilesState(hoveredTiles)
+        }
+    }
+}
+
+
+/**
+ * Function to deselect the tiles that are highlighted. Used every time the mouse is clicked on tiles.
+ * @author Philip
+ */
+    function deselect() {
+        if (lastHovered !== undefined){
+            gameHoverCtx.clearRect(lastHovered.tile1.position.x, lastHovered.tile1.position.y, 32, 32);
+            gameHoverCtx.clearRect(lastHovered.tile2.position.x, lastHovered.tile2.position.y, 32, 32);
+            gameHoverCtx.clearRect(lastHovered.tile3.position.x, lastHovered.tile3.position.y, 32, 32);
+            gameHoverCtx.clearRect(lastHovered.tile4.position.x, lastHovered.tile4.position.y, 32, 32);
         }
     }
 
 
+/**
+ * Function to update the state of the tiles. Used to highlight the tiles that are clicked on.
+ * @param hoveredTiles - The tiles that are clicked on.
+ * @author Philip
+ */
+function updateTilesState(hoveredTiles){
+    deselect()
+
+    lastHovered = hoveredTiles
+    hoveredTiles.tile1.update()
+    hoveredTiles.tile2.update()
+    hoveredTiles.tile3.update()
+    hoveredTiles.tile4.update()
+}
+
+
+/**
+ * Class for the placeable tiles. Used to create the tiles that are placeable on the map.
+ * @class PlaceableTile
+ * @author Philip
+ */
+export class PlaceableTile{
+
+    /**
+     * Constructor for the placeable tiles. Sets the position and tileID for the tile.
+     * @param position - The position of the tile.
+     * @param tileID - The ID of the tile.
+     * @author Philip
+     */
+    constructor({position}, tileID) {
+        this.position = position;
+        this.size =  32; // tile size
+        this.tileID = tileID; //used to id the tile
+    }
+
+    /**
+     * Function to draw the tiles on the canvas.
+     * @author Philip
+     */
+    draw(){
+        gameHoverCtx.fillStyle = 'rgba(50,171,255,0.5)';
+        gameHoverCtx.fillRect(this.position.x, this.position.y, this.size, this.size);
+    }
+
+    /**
+     * Function to update the tiles on the canvas. Used to draw the tiles on the canvas.
+     * @author Philip
+     */
+    update(){
+        this.draw()
+    }
+}
+
+/**
+ * Array to hold the placement tiles. Used to create the placement tiles.
+ * @type {*[]} - Array to hold the placement tiles.
+ * @param placementTilesData2D - The 2D array that holds the placement tiles data.
+ * @author Philip
+ */
 const placementTiles = []
 placementTilesData2D.forEach(((row, yIndex) => {
     row.forEach((tile , xIndex) => {
-
         if (tile === 61){
             placementTiles.push(new PlaceableTile(
                 {position: {
                         x: xIndex * 32,
                         y: yIndex * 32,
-                    }
-                }
-            ))
+                    }},
+                (yIndex * xIndex) //tile ID
+            ));
         }
     })
 }));
 
 
+/*
+--- Event listeners ---
+ */
 
+/**
+ * Event listener for the mouse click. Used to check if the mouse is clicking on a tile and if so, update the tile.
+ * @param ev
+ * @author Philip
+ */
+window.addEventListener('click', (ev) =>{
+    const rect = gameCanvas.getBoundingClientRect()
+    mouse.x = ev.clientX - rect.left
+    mouse.y = ev.clientY - rect.top
+
+    if (mouse.x >= 0 && mouse.x <= rect.width && mouse.y >= 0 && mouse.y <= rect.height) { //inside canvas
+        const hoveredTiles = isTile()
+
+        if(hoveredTiles !== undefined){
+
+            updateHoverTiles(hoveredTiles)
+            console.log(hoveredTiles)
+            selectTile(hoveredTiles)
+
+        }else {
+            console.log(hoveredTiles)
+            selectTile(hoveredTiles)
+            deselect()
+        }
+    }
+});
+
+// The following code is used to check if the mouse is hovering over a tile and if so, update the hover effect on the tile. It is right now only used for reference and is not used in the game.
+/*
+let lastHover = false;
+window.addEventListener('mousemove', (ev) => { // Use canvas
+    const rect = gameCanvas.getBoundingClientRect()
+    mouse.x = ev.clientX - rect.left
+    mouse.y = ev.clientY - rect.top
+
+    if (mouse.x >= 0 && mouse.x <= rect.width && mouse.y >= 0 && mouse.y <= rect.height) { //inside canvas
+        hoveredTiles = isTile()
+
+        updateHoverTiles()
+    }
+});
+
+ */
 
