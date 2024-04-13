@@ -238,11 +238,9 @@ window.addEventListener('click', (ev) =>{
         if(hoveredTiles !== undefined){
 
             updateHoverTiles(hoveredTiles)
-            console.log(hoveredTiles)
             selectTile(hoveredTiles)
 
         }else {
-            console.log(hoveredTiles)
             selectTile(hoveredTiles)
             deselect()
         }

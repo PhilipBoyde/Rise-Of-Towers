@@ -161,7 +161,6 @@ export function selectTile(tile){
 
                 activeTiles = tile;
                 activeTileID = activeTiles.positionID;
-                console.log(activeTiles.positionID)
                 tower1Button.style.backgroundColor = 'white';
                 tower1Button.style.filter = 'blur(0px)';
                 tower1Button.disabled = false;

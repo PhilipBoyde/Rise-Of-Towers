@@ -76,7 +76,6 @@ export class Tower{
             }
         }
 
-        console.log(closestTile)
         return closestTile;
     }
 
@@ -100,7 +99,6 @@ export class Tower{
      */
     findTargets(enemies) {
         enemies.sort((a, b) => a.pathIndex - b.pathIndex); // sort enemies by pathIndex (the further the enemy is on the path, the higher the pathIndex)
-        console.log(enemies)
 
         //  enemies within the tower range
         return enemies.filter(enemy => {
