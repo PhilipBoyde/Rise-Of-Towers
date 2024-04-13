@@ -1,4 +1,7 @@
 import {Projectile} from "./Projectile.js";
+import {SpriteController} from "./SpriteController";
+import {SpriteTowerController} from "./SpriteTowerController";
+
 
 /**
  * Class for the Tower. The tower has a position, range, damage, cost, upgrade cost, max level, speed and projectile speed.
@@ -16,7 +19,7 @@ import {Projectile} from "./Projectile.js";
  * @author Muhammed
  * @author Philip
  */
-export class Tower{
+export class Tower extends SpriteTowerController{
 
     /**
      * Constructor for the Tower. Sets the position, range, damage, cost, upgrade cost, max level, speed and projectile speed for the tower.
@@ -33,6 +36,14 @@ export class Tower{
      * @author Philip
      */
     constructor(gameCtx, tiles, cost, range, damage, upgradeCost, maxLevel, speed, projectileSpeed) {
+        super({
+            position,
+            imageSrc : "./assets/Tower/Tower1/3.png",
+            frames : {
+                max : 4
+            }
+
+        })
         this.gameCtx = gameCtx
         this.positionID = tiles.positionID;
         delete tiles.positionID;
@@ -85,6 +96,7 @@ export class Tower{
      * @author Philip
      */
     drawTower() {
+        super.draw()
         this.displayRange()
         this.gameCtx.fillStyle = '#121311';
         this.gameCtx.fillRect(this.x, this.y, 64, 64); // test value

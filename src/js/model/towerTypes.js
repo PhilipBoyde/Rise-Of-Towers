@@ -54,10 +54,10 @@ export class WizardTower extends Tower {
  * @author Emil
  */
 export class StoneTower extends Tower {
-    constructor(gameCtx, tile) {
+    constructor(gameCtx, tiles) {
         super(
             gameCtx,
-            tile,
+            tiles,
             120, // cost, higher cost than archer-
             80, // range, smaller range than archer
             80, // damage, higher damage than archer
