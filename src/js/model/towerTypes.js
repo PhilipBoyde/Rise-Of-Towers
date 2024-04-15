@@ -47,6 +47,28 @@ export class WizardTower extends Tower {
 
 
 /**
+ * @class InfernoTower
+ * @extends Tower
+ * @author Emil
+ */
+export class InfernoTower extends Tower{
+    constructor(gameCtx, tiles) {
+        super(
+            gameCtx,
+            tiles,
+            700,
+            50,
+            250,
+            1000,
+            2,
+            400,
+            4.5,
+            imagePaths //Insert path for picture/s
+        );
+    }
+}
+
+/**
  * Class for the Stone Tower. Extends the Tower class.
  * @class StoneTower
  * @extends Tower
@@ -54,7 +76,7 @@ export class WizardTower extends Tower {
  * @author Emil
  */
 export class StoneTower extends Tower {
-    constructor(gameCtx, tile) {
+    constructor(gameCtx, tiles) {
         super(
             gameCtx,
             tile,
@@ -63,7 +85,36 @@ export class StoneTower extends Tower {
             80, // damage, higher damage than archer
             150, // upgradeCost
             5, //
-            5 //Shooting speed, lower than archer.
+            15, //Shooting speed
+            1 // projectile speed
         );
     }
+/**
+    *Class for the Fast(4th) tower. Extends the Tower class.
+    * @class FastTower
+    * @extends Tower
+    * @author Muhammed
+    */
+
+    export class FastTower extends Tower {
+
+    constructor(gameCtx, tiles)
+    super (
+    gameCtx,
+    tiles,
+    150, // cost
+    250, // range
+    10, // damage
+    180, // upgradeCost
+    3, // maxLevel
+    30, // shooting speed
+    12 // projectile speed
+
+
+    )
+    }
+
+
+
 }
+
