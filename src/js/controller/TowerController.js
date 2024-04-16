@@ -1,54 +1,42 @@
-import {Projectile} from "./Projectile.js";
-import {SpriteController} from "./SpriteController";
-import {SpriteTowerController} from "./SpriteTowerController";
-
+import { Projectile } from "./Projectile.js";
 
 /**
  * Class for the Tower. The tower has a position, range, damage, cost, upgrade cost, max level, speed and projectile speed.
  * @class Tower
  * @constructor
- * @param gameCtx
- * @param tiles
- * @param cost
- * @param range
- * @param damage
- * @param upgradeCost
- * @param maxLevel
- * @param speed
- * @param projectileSpeed
+ * @param {CanvasRenderingContext2D} gameCtx - The canvas rendering context.
+ * @param {Object} tiles - Tiles information.
+ * @param {number} cost - The cost of the tower.
+ * @param {number} range - The range of the tower.
+ * @param {number} damage - The damage of the tower.
+ * @param {number} upgradeCost - The cost of upgrading the tower.
+ * @param {number} maxLevel - The maximum level of the tower.
+ * @param {number} speed - The shooting speed of the tower.
+ * @param {number} projectileSpeed - The speed of the projectile.
+ * @param {string[]} imagePaths - Array of image paths for tower frames.
  * @author Muhammed
  * @author Philip
  */
-export class Tower extends SpriteTowerController{
-
+export class Tower {
     /**
-     * Constructor for the Tower. Sets the position, range, damage, cost, upgrade cost, max level, speed and projectile speed for the tower.
-     * @param gameCtx
-     * @param tiles
-     * @param cost
-     * @param range
-     * @param damage
-     * @param upgradeCost
-     * @param maxLevel
-     * @param speed
-     * @param projectileSpeed
-     * @author Muhammed
-     * @author Philip
+     * Constructor for the Tower.
+     * @param {CanvasRenderingContext2D} gameCtx - The canvas rendering context.
+     * @param {Object} tiles - Tiles information.
+     * @param {number} cost - The cost of the tower.
+     * @param {number} range - The range of the tower.
+     * @param {number} damage - The damage of the tower.
+     * @param {number} upgradeCost - The cost of upgrading the tower.
+     * @param {number} maxLevel - The maximum level of the tower.
+     * @param {number} speed - The shooting speed of the tower.
+     * @param {number} projectileSpeed - The speed of the projectile.
+     * @param {string[]} imagePaths - Array of image paths for tower frames.
      */
-    constructor(gameCtx, tiles, cost, range, damage, upgradeCost, maxLevel, speed, projectileSpeed) {
-        super({
-            position,
-            imageSrc : "./assets/Tower/Tower1/3.png",
-            frames : {
-                max : 4
-            }
-
-        })
-        this.gameCtx = gameCtx
+    constructor(gameCtx, tiles, cost, range, damage, upgradeCost, maxLevel, speed, projectileSpeed, imagePaths) {
+        this.gameCtx = gameCtx;
         this.positionID = tiles.positionID;
         delete tiles.positionID;
 
-        const closets = this.findClosestToTopLeft(tiles)
+        const closets = this.findClosestToTopLeft(tiles);
 
         this.x = closets.position.x; // top left corner of the tower
         this.y = closets.position.y; // top left corner of the tower
@@ -62,13 +50,44 @@ export class Tower extends SpriteTowerController{
         this.level = 1;
         this.projectileSpeed = projectileSpeed;
         this.projectiles = [];
+        this.imagePaths = imagePaths; // Store the image paths for later use
+
+        this.loadImages(imagePaths);
+
+        this.frameWidth = 70; // Bredden på varje frame (280 / 4)
+        this.frameHeight = 130; // Höjden på varje frame
+        this.frameIndex = 0; // Aktuell frame-index
+        this.frameCount = 4; // Antal frames i bilden
+        this.frameUpdateCounter = 0;
+        this.frameSpeed = 20; // Hastigheten för att byta frame (? frames per sekund)
+
+    }
+
+    /**
+     * Loads tower images.
+     * @param {string[]} imagePaths - Array of image paths for tower frames.
+     */
+    loadImages(imagePaths) {
+        this.towerImages = [];
+        let loadedImages = 0;
+        imagePaths.forEach((path, index) => {
+            const towerImage = new Image();
+            towerImage.src = path;
+            towerImage.onload = () => {
+                loadedImages++;
+                if (loadedImages === imagePaths.length) {
+                    this.drawTower();
+                }
+            };
+            this.towerImages[index] = towerImage;
+        });
     }
 
     /**
      * Finds the tile in the left corner of the different tiles.
      * it is used to paint the tower on the selected tiles.
-     * @param Tiles - the selected tiles.
-     * @returns {closestTile} - the tile in the left corner.
+     * @param {Object} Tiles - the selected tiles.
+     * @returns {Object} - the tile in the left corner.
      * @author Philip
      */
     findClosestToTopLeft(Tiles) {
@@ -87,30 +106,38 @@ export class Tower extends SpriteTowerController{
             }
         }
 
+        console.log(closestTile)
         return closestTile;
     }
 
     /**
      * Draws the tower on the canvas.
-     * @author Muhammed
-     * @author Philip
+     * @private
      */
     drawTower() {
-        super.draw()
-        this.displayRange()
-        this.gameCtx.fillStyle = '#121311';
-        this.gameCtx.fillRect(this.x, this.y, 64, 64); // test value
+        this.displayRange();
+        if (this.towerImages.every(image => image.complete)) {
+            // Alla bilder har laddats, rita tornet med den aktuella frame från towerImages-arrayen
+            const towerImage = this.towerImages[0];
+            const frameX = this.frameIndex * this.frameWidth; // X-koordinaten för den aktuella frame
+            const frameY = 0; // Y-koordinaten är 0 eftersom vi bara använder en rad av frames
+            // Justera this.y för att flytta tornbilden uppåt
+            this.gameCtx.drawImage(towerImage, frameX, frameY, this.frameWidth, this.frameHeight, this.x, this.y - 65, this.frameWidth, this.frameHeight); // Flytta upp tornbilden med 32 pixlar
+        } else {
+            // Om inte alla bilder har laddats än, rita en enkel rektangel som tidigare
+            this.gameCtx.fillStyle = 'rgba(18,19,17,0)';
+            this.gameCtx.fillRect(this.x, this.y, 64, 64); // test value
+        }
     }
 
     /**
      * Finds the enemies within the tower range.
-     * @param enemies - the enemies on the canvas.
-     * @returns {[]} - the enemies within the tower range.
-     * @author Muhammed
-     * @author Philip
+     * @param {Object[]} enemies - the enemies on the canvas.
+     * @returns {Object[]} - the enemies within the tower range.
      */
     findTargets(enemies) {
         enemies.sort((a, b) => a.pathIndex - b.pathIndex); // sort enemies by pathIndex (the further the enemy is on the path, the higher the pathIndex)
+        console.log(enemies)
 
         //  enemies within the tower range
         return enemies.filter(enemy => {
@@ -121,12 +148,8 @@ export class Tower extends SpriteTowerController{
     }
 
     /**
-     * Shoots the enemies within the tower range. by creating a projectile
-     * with the tower position, projectile speed, damage, target, handleProjectileRemoval and gameCtx.
-     * @param enemies
-     * @returns {Projectile} - the projectile that is shot from the tower.
-     * @author Muhammed
-     * @author Philip
+     * Shoots the enemies within the tower range.
+     * @param {Object[]} enemies - The enemies on the canvas.
      */
     shoot(enemies) {
         //  targeting part
@@ -134,29 +157,27 @@ export class Tower extends SpriteTowerController{
 
         if (target.length > 0) {
 
-                target.reverse();
+            target.reverse();
 
-                const projectile = new Projectile(  // AMO
-                    this.x,
-                    this.y,
-                    this.projectileSpeed,
-                    this.damage,
-                    target[0],
-                    this.handleProjectileRemoval.bind(this), // Bind the current context
-                    this.gameCtx
-                );
-                this.projectiles.push(projectile);
+            const projectile = new Projectile(
+                this.x,
+                this.y,
+                this.projectileSpeed,
+                this.damage,
+                target[0],
+                this.handleProjectileRemoval.bind(this), // Bind the current context
+                this.gameCtx
+            );
+            this.projectiles.push(projectile);
 
         }
     }
 
     /**
      * Handles the removal of the projectile from the canvas when it hits the target.
-     * @param projectile - the projectile that is shot from the tower.
-     * @returns {[]} - the projectiles that are not marked for deletion.
-     * @author Muhammed
+     * @param {Projectile} projectile - The projectile that is shot from the tower.
      */
-    handleProjectileRemoval(projectile) {  // should hopefully remove shot arrow
+    handleProjectileRemoval(projectile) {
         const index = this.projectiles.indexOf(projectile);
         if (index > -1) {
             this.projectiles.splice(index, 1);
@@ -164,14 +185,27 @@ export class Tower extends SpriteTowerController{
     }
 
     /**
-     * Updates the tower. Draws the tower on the canvas, moves the projectiles, filters the projectiles that are not marked for deletion.
-     * @param enemies
-     * @author Muhammed
-     * @author Philip
-     * @author Emil
+     * Updates the tower animation.
+     */
+    updateAnimation() {
+        if (this.frameUpdateCounter >= this.frameSpeed) {
+            this.frameIndex++; // Öka frame-indexet
+            this.frameUpdateCounter = 0; // Återställ räknaren
+        } else {
+            this.frameUpdateCounter++; // Öka räknaren
+        }
+
+        if (this.frameIndex >= this.frameCount) {
+            this.frameIndex = 0; // Återgå till första frame när vi når slutet av frames
+        }
+    }
+
+    /**
+     * Updates the tower.
+     * @param {Object[]} enemies - The enemies on the canvas.
      */
     update(enemies) {
-
+        this.updateAnimation();
         this.drawTower()
         this.projectiles.forEach(projectile => projectile.move());
         this.projectiles = this.projectiles.filter(projectile => !projectile.markedForDeletion);
@@ -179,53 +213,18 @@ export class Tower extends SpriteTowerController{
         if (this.delay === this.speed) {
             this.delay = 0;
             this.shoot(enemies);
-        }else {
+        } else {
             this.delay++;
         }
     }
 
     /**
      * Displays the range of the tower on the canvas.
-     * @author Philip
      */
     displayRange() {
         this.gameCtx.fillStyle = '#d90808';
         this.gameCtx.beginPath();
-        this.gameCtx.arc(this.x+32, this.y+32, this.range, 0, Math.PI * 2); // test value
+        this.gameCtx.arc(this.x + 32, this.y + 32, this.range, 0, Math.PI * 2); // test value
         this.gameCtx.stroke();
     }
-
-
-
-    // The following code is not used in the final version of the game, and is kept for reference for later development.
-
-    /*
-    upgrade() {
-        if (this.level < this.maxLevel) {
-            this.level += 1;
-            this.range += 20; // for ex. Increase range by 20 each upgrade
-            this.damage += 15; // and damage by 15 each upgrade
-            this.upgradeCost *= 1.5; // it increases cost for upgrading by 50%
-        } else {
-            console.log("Tower is at maximum level!");
-        }
-    }
-
-    canUpgrade(playerCoins) {
-        return playerCoins >= this.upgradeCost;
-    }
-
-
-    performUpgrade(player) {
-        if (this.canUpgrade(player.coins)) {
-            player.coins -= this.upgradeCost; // update players coins, do cost
-            this.upgrade();
-            console.log("Tower upgraded to level" ${this.level});
-        } else {
-            console.log("Not enough coins to upgrade!");
-        }
-
-
-    }
-     */
 }

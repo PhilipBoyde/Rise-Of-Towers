@@ -1,5 +1,4 @@
-import {Tower} from "../controller/TowerController.js";
-
+import { Tower } from "../controller/TowerController.js";
 
 /**
  * Class for the Archer Tower. Extends the Tower class.
@@ -9,6 +8,7 @@ import {Tower} from "../controller/TowerController.js";
  */
 export class ArcherTower extends Tower {
     constructor(gameCtx, tiles) {
+        const imagePaths = ["../js/model/assets/Tower/Tower1/2.png"];
         super(
             gameCtx,
             tiles,
@@ -18,7 +18,8 @@ export class ArcherTower extends Tower {
             120, // upgradeCost
             5, // maxLevel
             60, // Shooting speed
-            10 // Projectile speed
+            10, // Projectile speed
+            imagePaths // Skicka bildsökvägar till överordnad Tower-klass
         );
     }
 }
@@ -31,6 +32,8 @@ export class ArcherTower extends Tower {
  */
 export class WizardTower extends Tower {
     constructor(gameCtx, tiles) {
+        // Lägg till bildsökvägar för Wizard Tower
+        const imagePaths = ["path/to/wizardTowerImage1.png", "path/to/wizardTowerImage2.png"];
         super(
             gameCtx,
             tiles,
@@ -40,11 +43,11 @@ export class WizardTower extends Tower {
             300, // upgradeCost
             5, // maxLevel
             110, // Shooting speed
-            4.5 // Projectile speed
+            4.5, // Projectile speed
+            imagePaths // Skicka bildsökvägar till överordnad Tower-klass
         );
     }
 }
-
 
 /**
  * Class for the Stone Tower. Extends the Tower class.
@@ -55,6 +58,8 @@ export class WizardTower extends Tower {
  */
 export class StoneTower extends Tower {
     constructor(gameCtx, tiles) {
+        // Lägg till bildsökvägar för Stone Tower
+        const imagePaths = ["path/to/stoneTowerImage1.png", "path/to/stoneTowerImage2.png"];
         super(
             gameCtx,
             tiles,
@@ -62,8 +67,9 @@ export class StoneTower extends Tower {
             80, // range, smaller range than archer
             80, // damage, higher damage than archer
             150, // upgradeCost
-            5, //
-            5 //Shooting speed, lower than archer.
+            5, // maxLevel
+            5, // Shooting speed, lower than archer.
+            imagePaths // Skicka bildsökvägar till överordnad Tower-klass
         );
     }
 }
