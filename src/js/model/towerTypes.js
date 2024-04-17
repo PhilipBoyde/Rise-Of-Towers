@@ -79,7 +79,7 @@ export class StoneTower extends Tower {
     constructor(gameCtx, tiles) {
         super(
             gameCtx,
-            tile,
+            tiles,
             120, // cost, higher cost than archer-
             80, // range, smaller range than archer
             80, // damage, higher damage than archer
@@ -89,34 +89,26 @@ export class StoneTower extends Tower {
             1 // projectile speed
         );
     }
+}
 /**
     *Class for the Fast(4th) tower. Extends the Tower class.
     * @class FastTower
     * @extends Tower
     * @author Muhammed
     */
-/*
-    export class FastTower extends Tower {
-
-    constructor(gameCtx, tiles)
-    super (
-    gameCtx,
-    tiles,
-    150, // cost
-    250, // range
-    10, // damage
-    180, // upgradeCost
-    3, // maxLevel
-    30, // shooting speed
-    12 // projectile speed
-
-
-    )
+export class FastTower extends Tower {
+    constructor(gameCtx, tiles) {
+        super(
+            gameCtx,
+            tiles,
+            150, // cost, higher cost than archer-
+            250, // range, smaller range than archer
+            10, // damage, higher damage than archer
+            180, // upgradeCost
+            3, //
+            30, //Shooting speed
+            12 // projectile speed
+        );
     }
-
- */
-
-
-
 }
 

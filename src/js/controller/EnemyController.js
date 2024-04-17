@@ -57,7 +57,7 @@ export class Enemy extends SpriteController{
         this.speed = speed;
         this.path = path;
         this.pathIndex = 0;
-        this.maxHealth = maxHealth;
+        this.maxHealth = health;
         this.health = health;
         this.threshold = 2;
         this.oriantaion = 'unknown';
@@ -81,6 +81,7 @@ export class Enemy extends SpriteController{
         // health bar
 
     }
+    
     /**
      * Draws the hitbox for the enemy sprite.
      * @param gameCtx - the game context
@@ -90,6 +91,7 @@ export class Enemy extends SpriteController{
         gameCtx.strokeStyle = '#ff0000';
         gameCtx.lineWidth = 3;
         gameCtx.strokeRect(this.position.x, this.position.y, this.width, this.height);
+        this.drawHealthBar(gameCtx)
     }
 
     /**
@@ -112,6 +114,7 @@ export class Enemy extends SpriteController{
         gameCtx.fillStyle = 'green';
         gameCtx.fillRect(x,y, healthBarWidth * healthPercentage, healthBarHeight);
     }
+
     /**
      * Updates the enemy sprite. Makes calculations to get the next position of the enemy sprite. based on the path.
      * Also checks if the enemy sprite has reached the end of the path.
@@ -143,7 +146,7 @@ export class Enemy extends SpriteController{
         this.oriantaion = this.calculateOrientation(xDistance, yDistance);
 
         if (this.health <= 0) {
-            addCoins(10);
+            addCoins(this.worth);
             this.oriantaion = 'death';
             return true;
         }
