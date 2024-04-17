@@ -95,7 +95,7 @@ export class StoneTower extends Tower {
     * @extends Tower
     * @author Muhammed
     */
-
+/*
     export class FastTower extends Tower {
 
     constructor(gameCtx, tiles)
@@ -113,6 +113,8 @@ export class StoneTower extends Tower {
 
     )
     }
+
+ */
 
 
 

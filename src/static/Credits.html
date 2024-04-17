@@ -4,29 +4,97 @@
     <meta charset="UTF-8">
     <title>Rise Of Towers | Credits</title>
     <link rel="icon" href="../js/model/assets/img/SiteIcon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../Css/style.css">
+    <style>
+        body {
+            font-family: 'Press Start 2P', sans-serif;
+            margin: 0;
+            height: 100vh;
+            color: #090908;
+            background: url('../js/model/assets/img/Credits.png') no-repeat center center fixed; /* Ensure the image is fixed */
+            background-size: cover;
+            overflow: hidden;
+        }
 
+        #credits-container {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .crawl-text {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            transform-origin: 50% 100%; /* Adjust origin to bottom center */
+            transform: perspective(400px) rotateX(25deg); /* Start the text at a perspective */
+            animation: crawl 70s linear forwards; /* Adjust timing as necessary */
+            text-align: justify;
+            font-size: 1.5rem; /* Adjust font size for better readability */
+            padding: 0 10%;
+        }
+
+        @keyframes crawl {
+            0% {
+                bottom: -100vh; /* Start just out of view */
+            }
+            100% {
+                bottom: 250vh; /* Finish above the view */
+            }
+        }
+
+
+        #credits-back-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        button {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #333;
+            border: none;
+            color: #feda4a;
+            padding: 0.5rem 1rem;
+            text-transform: uppercase;
+            outline: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #feda4a;
+            color: #333;
+        }
+    </style>
 </head>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 <body>
-<div>
-    <h2 id="credits">Credits</h2>
-
-    <div id="creatorsContainer">
-        <h2>Made By</h2>
-        <h3> Philip <br> Emil <br> Mahyar <br> Muhamed </h3>
+<div id="credits-container">
+    <div class="crawl-text">
+        <div class="title">Rise Of Towers</div>
+        This Year From March to June<br>
+        4 brave Warriors/Students embarked on a journey to make the best game for the hot summer days.<br>
+        They are known as<br>
+        EMIL,<br>
+        MAHYAR,<br>
+        MUHAMED,<br>
+        and<br>
+        PHILIP.<br>
+        Together with the help of teachers and mentors at Malmö University, they put pain, sweat, and no tears to make this game and possibly get a passing grade.<br>
+        If you read through the whole credits, you deserved one extra life, but sadly we couldn't implement that in code.<br>
+        THANK YOU FOR SUPPORT AND PLAYING OUR GAME<br>
+        Hopefully, you liked it.
     </div>
-
-    <div>
-        <h2>Assets Used</h2>
-        <h3> Thank you for playing our game</h3>
-    </div>
-
+</div>
+<div id="credits-back-button">
     <a href="index.html">
-        <button>back</button>
+        <button>Back</button>
     </a>
 </div>
-
-
 </body>
 </html>
