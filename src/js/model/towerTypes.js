@@ -112,4 +112,18 @@ export class FastTower extends Tower {
         );
     }
 }
+export class IceTower extends Tower{
+    constructor(gameCtx,tiles) {
+        super(gameCtx,
+            tiles,
+            175,
+            250,
+            10,
+            200,
+            2,
+            12,
+            12,
+        );
+    }
+}
 

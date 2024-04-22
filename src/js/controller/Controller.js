@@ -57,8 +57,10 @@ document.getElementById("sellButton").addEventListener("click", sellTower);
 let sellButton = document.querySelector('#sellButton');
 let tower1Button = document.querySelector('#tower1');
 let tower2Button = document.querySelector('#tower2');
+/*
 let tower3Button = document.querySelector('#tower3');
 let tower4Button = document.querySelector('#tower4');
+ */
 
 
 const gameBackgroundCtx = gameBackground.getContext('2d');
@@ -197,6 +199,7 @@ export function selectTile(tile){
                 tower4Button.style.backgroundColor = 'white';
                 tower4Button.style.filter = 'blur(0px)';
                 tower4Button.disabled = false;
+
                  */
 
                 sellButton.style.backgroundColor = 'gray';

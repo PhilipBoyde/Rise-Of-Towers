@@ -186,6 +186,23 @@ export class Enemy extends SpriteController{
         }
 
     }
+    slowEffect(){
+        if(!isFrozen){
+            this.speed /= 2;
+            this.isFrozen = true;
+            setTimeout(()=>{
+                this.removeFreeze();
+            },7000); //Enemies remain frozen for 7 seconds. Then the effect is removed.
+        }
+    }
+    removeFreeze(){
+        this.speed = ordinarySpeed; /*Is yet to be added to the constructor, ordinary speed should be the regular speed
+        before the freeze.
+        */
+        this.isFrozen = false; /*isFrozen is also not added to the constructor, should originally be false, but is set
+        to true when the slowEffect is enabled (slowEffect method is ran).
+        */
+    }
 }
 
 /*
