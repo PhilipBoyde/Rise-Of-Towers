@@ -122,7 +122,7 @@ export class IceTower extends Tower{
             200,
             2,
             12,
-            12,
+            12
         );
     }
 }
