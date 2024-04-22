@@ -47,6 +47,7 @@ export class WizardTower extends Tower {
 
 
 /**
+ * Class for the Inferno Tower. Extends the Tower Class.
  * @class InfernoTower
  * @extends Tower
  * @author Emil
