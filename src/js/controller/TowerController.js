@@ -36,6 +36,7 @@ export class Tower{
         this.gameCtx = gameCtx
         this.positionID = tiles.positionID;
         delete tiles.positionID;
+        this.level = 1;
 
         const closets = this.findClosestToTopLeft(tiles)
 
@@ -179,43 +180,39 @@ export class Tower{
      * @author Philip
      */
     displayRange() {
-        this.gameCtx.fillStyle = '#d90808';
+        this.gameCtx.fillStyle = '#ff0000';
         this.gameCtx.beginPath();
         this.gameCtx.arc(this.x+32, this.y+32, this.range, 0, Math.PI * 2); // test value
         this.gameCtx.stroke();
     }
-
-
+/*
 
     // The following code is not used in the final version of the game, and is kept for reference for later development.
 
-    /*
+canUpgrade() {
+        return this.level < this.maxLeve && coins >= this.upgradeCost;
+
+    }
+
     upgrade() {
-        if (this.level < this.maxLevel) {
-            this.level += 1;
+        if (this.canUpgrade()) {
+            this.level ++;
             this.range += 20; // for ex. Increase range by 20 each upgrade
             this.damage += 15; // and damage by 15 each upgrade
             this.upgradeCost *= 1.5; // it increases cost for upgrading by 50%
+            coins -= this.upgradeCost; // subtract the cost from player's coins
+            this.updateTowerStats(); // Redraw or recalculate relevant stats
         } else {
-            console.log("Tower is at maximum level!");
+            console.log("Tower is at maximum level! or Not enough coins to upgrade!");
         }
     }
 
-    canUpgrade(playerCoins) {
-        return playerCoins >= this.upgradeCost;
+    updateTowerStats() {
+        this.drawTower(); // Redraw the tower
     }
 
 
-    performUpgrade(player) {
-        if (this.canUpgrade(player.coins)) {
-            player.coins -= this.upgradeCost; // update players coins, do cost
-            this.upgrade();
-            console.log("Tower upgraded to level" ${this.level});
-        } else {
-            console.log("Not enough coins to upgrade!");
-        }
 
+ */
 
-    }
-     */
 }
