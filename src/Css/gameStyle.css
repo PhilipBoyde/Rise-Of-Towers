@@ -298,12 +298,27 @@ body, html{
 .UIScreen #tower3{
     position: absolute;
     border-radius: 10px;
+    background: #DFE0DF;
+    font-weight: 550;
+    font-family: "VT323", cursive;
     top: 70%;
     left:85% ;
-    width:60px;
-    height:60px;
-
-
+    width:75px;
+    height:75px;
+    opacity: 100%;
+    border: 3px solid #4F4537;
+}
+#tower3 .cost{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+    top: 65%;
+}
+#tower3 .image{
+    top: 65%;
 }
 .UIScreen #tower3:disabled{
     cursor: not-allowed;
