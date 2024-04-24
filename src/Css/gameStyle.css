@@ -159,9 +159,9 @@ body, html{
 .UIScreen #TowersText{
     position: absolute;
     top: 160px;
-    right: 10px;
-    width: auto;
-    height: auto;
+    right: 140px;
+    width: 60px;
+    height: 60px;
     font-family: "VT323", cursive;
     font-size: 55px;
     color: wheat;
@@ -322,7 +322,7 @@ body, html{
     background: #DFE0DF;
     font-weight: 550;
     font-family: "VT323", cursive;
-    top: 70%;
+    top: 32%;
     left:85% ;
     width:75px;
     height:75px;
@@ -332,11 +332,23 @@ body, html{
 #tower3 .cost{
     position: absolute;
     bottom: 5px;
-    right: 10px;
+    right: 5px;
     font-weight: bold;
     font-size: 16px;
     color: black;
-    top: 65%;
+    top: 70%;
+}
+#tower3 .infoInferno{
+    position: absolute;
+    top: 8%;
+    font-family: "VT323", cursive;
+    height: 1px;
+    bottom: 10px;
+    font-weight: bolder;
+
+    right: 5px;
+    font-size: 12px;
+    text-decoration: underline;
 }
 .UIScreen #tower3:hover{
     background: #fd9e00;
@@ -355,9 +367,32 @@ body, html{
 
 
 
+
 .UIScreen #tower4{
     position: absolute;
+    top: 32%;
+    right: 30px;
+    border-radius: 10px;
+    height: 75px;
+    width: 75px;
+}
+#tower4 .cost1{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-family: "VT323", cursive;
+    font-weight: bold;
+    font-size: 16px;
+    height: 1px;
+    color: black;
+    top: 70%;
+}
 
+.UIScreen #tower4:hover{
+    background: #fd9e00;
+    color: white;
+    font-size:2.2em ;
+    filter: drop-shadow(0 0 20px #fd9e00);
 }
 
 

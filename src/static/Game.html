@@ -25,23 +25,32 @@
         <div class="UIScreen">
                 <button id = "GameWaveButton">Start Wave</button>
                  <button id = "sellButton">Sell Tower</button>
-            <button id="mainMenuButton">Main Menu</button>
+            <a href="index.html">
+                <button id="mainMenuButton">Main Menu</button>
+            </a>
+
+            <!-- Archer -->
                 <button id = "tower1">
                     <img src="../js/model/assets/icons/tower/arrow_02e.png" alt=""></img>
                     Cost: 100
                 </button>
 
+            <!-- Wizard -->
                 <button id = "tower2">
                     <img src="../js/model/assets/icons/tower/book_04g.png" alt=""></img>
                 </button>
+            <!-- Inferno -->
                 <button id = "tower3">
                     <img class ="image" src="../js/model/assets/icons/tower/flamma32.png" alt="">
                     <span class="cost">Cost: 500</span>
+                    <span class="infoInferno">Inferno Tower</span>
                 </button>
-            <!-- Input fire? -->
+            <!-- Stone -->
                 <button id = "tower4">
-                    <img src="" alt="">
-                    <span class="cost1">Cost: 500</span>
+                    <img src="../js/model/assets/icons/tower/sten.png" alt="">
+                    <span class="cost1">Cost: 100</span>
+                    <span class="infoSten">Stone Tower</span>
+
                 </button>
 
 
@@ -51,8 +60,7 @@
                 <div id="CoinsCounter">00000</div>
                 <div id="CoinsAnimation"></div>
                 <h1 id="WaveCounter">Wave 000</h1>
-                <h1 id="TowersText">Buy
-                    Tower</h1>
+                <h1 id="TowersText">Buy Tower:</h1>
         </div>
 
         <!-- Canvas effects -->
