@@ -148,7 +148,6 @@ body, html{
 .UIScreen #WaveCounter {
     position: absolute;
     top: 110px;
-    right: 0px;
     width: 200px;
     height: 65px;
     font-family: "VT323", cursive;
