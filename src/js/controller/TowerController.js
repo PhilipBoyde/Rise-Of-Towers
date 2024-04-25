@@ -16,6 +16,7 @@ import { Projectile } from "./Projectile.js";
  * @param {string[]} imagePaths - Array of image paths for tower frames.
  * @author Muhammed
  * @author Philip
+ * @author Mahyar
  */
 export class Tower {
     /**
