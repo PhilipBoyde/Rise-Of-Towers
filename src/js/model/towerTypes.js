@@ -32,8 +32,7 @@ export class ArcherTower extends Tower {
  */
 export class WizardTower extends Tower {
     constructor(gameCtx, tiles) {
-        // Lägg till bildsökvägar för Wizard Tower
-        const imagePaths = ["path/to/wizardTowerImage1.png", "path/to/wizardTowerImage2.png"];
+        const imagePaths = ["../js/model/assets/Tower/Tower1/7.png"];
         super(
             gameCtx,
             tiles,
@@ -58,8 +57,8 @@ export class WizardTower extends Tower {
  */
 export class StoneTower extends Tower {
     constructor(gameCtx, tiles) {
-        // Lägg till bildsökvägar för Stone Tower
-        const imagePaths = ["path/to/stoneTowerImage1.png", "path/to/stoneTowerImage2.png"];
+
+        const imagePaths = [""];
         super(
             gameCtx,
             tiles,
