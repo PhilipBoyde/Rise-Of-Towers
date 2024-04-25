@@ -17,6 +17,7 @@ body, html{
 
 /*
 ------ Canvas Styling ------
+@Author Philip
  */
 .canvasContainer {
     display: flex;
@@ -60,6 +61,7 @@ body, html{
 
 /*
 ------ In-Game UI Styling ------
+              @Author Philip
  */
 .UIScreen {
     height: 960px;
@@ -68,6 +70,7 @@ body, html{
 }
 /*
 --heart--
+@Author: Philip & Mahyar
  */
 
 .UIScreen #heartAnimation{
@@ -108,6 +111,7 @@ body, html{
 
 /*
 --coin--
+@Author Philip & Mahyar
  */
 .UIScreen #CoinsCounter {
     position: absolute;
@@ -144,6 +148,7 @@ body, html{
 
 /*
 --wave--
+@Author Philip
  */
 .UIScreen #WaveCounter {
     position: absolute;
@@ -160,6 +165,7 @@ body, html{
 
 /*
 --button GameWave--
+@Author Philip
  */
 
 .UIScreen #GameWaveButton {
@@ -192,6 +198,7 @@ body, html{
 
 /*
 --button towers--
+@Author Philip
  */
 
 .UIScreen #sellButton {
@@ -270,6 +277,7 @@ body, html{
 
 /*
 --button Setting--
+@Author Philip
  */
 
 .UIScreen #settingsButton {
@@ -292,6 +300,7 @@ body, html{
 
 /*
 --settings--
+@author Philip
  */
 .settings {
     display: none;
@@ -471,6 +480,7 @@ body, html{
 
 /*
 ------ Effect Canvas Styling ------
+@Author Philip
  */
 
 #fpsCounter{

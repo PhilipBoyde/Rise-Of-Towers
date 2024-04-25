@@ -430,6 +430,11 @@ function fpsCounterUpdate(fps){
     }
 }
 
+/**
+ * Opens the settings menu.
+ * Cancels the game loop if the game is active.
+ * @author Philip
+ */
 function openSettings(){
     if (!inSettings){ //Check if already in settings
         inSettings = true;
@@ -440,6 +445,11 @@ function openSettings(){
     }
 }
 
+/**
+ * Closes the settings menu.
+ * Restarts the game loop if the game is active.
+ * @author Philip
+ */
 function closeSettings(){
         inSettings = false;
         settingsElement.classList.add('flyOut');
@@ -457,7 +467,7 @@ function closeSettings(){
  */
 
 /**
- * Event listener for the fullscreen button.
+ * Event listener for the fullscreen button. Makes the game fullscreen when clicked.
  * @author Philip
  */
 addEventListener("click", function() {
@@ -472,6 +482,11 @@ addEventListener("click", function() {
     }
 });
 
+/**
+ * An event listener for the animation of settings window closing. Checks if the animation that ended is 'flyOut'. If it is, the settings window is hidden.
+ * @param e - the event that triggered the animationend event listener.
+ * @author Philip
+ */
 settingsElement.addEventListener('animationend', (e) => {
     // Check if the animation that ended is 'flyOut'
     if (e.animationName === 'flyOut') {
@@ -480,6 +495,11 @@ settingsElement.addEventListener('animationend', (e) => {
     }
 });
 
+/**
+ * Event listener for checkboxFPS in the settings menu. Checks if the checkbox is checked or unchecked and updates the game accordingly.
+ * @param e - the event that triggered the change event listener.
+ * @author Philip
+ */
 checkboxFPS.addEventListener('change', function() {
     // This function will be called whenever the checkbox is checked or unchecked
     // 'this' refers to the checkbox
@@ -494,6 +514,10 @@ checkboxFPS.addEventListener('change', function() {
     }
 });
 
+/**
+ * Event listener for checkboxTowerRadius in the settings menu. Checks if the checkbox is checked or unchecked and updates the game accordingly.
+ * @author Philip
+ */
 checkboxTowerRadius.addEventListener('change', function() {
     // This function will be called whenever the checkbox is checked or unchecked
     // 'this' refers to the checkbox
@@ -505,7 +529,7 @@ checkboxTowerRadius.addEventListener('change', function() {
         showTowerRadius = false;
     }
 
-    activeTowers.forEach(tower => { // tower
+    activeTowers.forEach(tower => {
         tower.setStatusOfTowerRange(showTowerRadius);
     });
 });
