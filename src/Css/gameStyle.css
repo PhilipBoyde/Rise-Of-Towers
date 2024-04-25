@@ -269,11 +269,212 @@ body, html{
 }
 
 /*
+--button Setting--
+ */
+
+.UIScreen #settingsButton {
+    transition: all 0.3s;
+    border: 3px solid rgba(79, 69, 55, 0);
+    cursor: pointer;
+    background: rgba(223, 224, 223, 0);
+    width: auto;
+    height: auto;
+
+    position: absolute;
+    top: 25px;
+    right: 15px;
+}
+
+.UIScreen #settingsButton:hover {
+    transform: rotate(360deg);
+    transition: transform 0.5s ease-in-out;
+}
+
+/*
+--settings--
+ */
+.settings {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    background: rgba(86, 69, 41, 0.86);
+    font-family: "VT323", cursive;
+    border-radius: 9px;
+    width: 400px;
+    height: 300px;
+    z-index: 4;
+    animation: flyIn 1.5s forwards;
+}
+
+.settings.flyOut {
+    animation: flyOut 1s forwards;
+}
+
+@keyframes flyIn {
+    0% {
+        transform: translateY(-100vh);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes flyOut {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100vh);
+    }
+}
+
+.settings #restartButton {
+    border: 3px solid #4F4537;
+    border-radius: 45px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: #DFE0DF;
+    font-family: "VT323", monospace;
+    font-size: 30px;
+    width: 185px;
+    height: 50px;
+
+    position: absolute;
+    top: 90%;
+    left: 50%;
+}
+
+.settings #restartButton:hover {
+    background: #ad0000;
+    color: white;
+    font-size: 43px;
+    filter: drop-shadow(0 0 20px #ef0000);
+}
+
+.settings h1 {
+    color: #ffffff;
+    font-weight: lighter;
+    font-size: 20px;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+}
+
+.settings #closeSettings {
+    position: absolute;
+    top: 10px;
+    font-family: "VT323", cursive;
+    right: 15px;
+    width: auto;
+    height: auto;
+    font-size: 50px;
+    color: #ffffff;
+    background: rgba(86, 69, 41, 0.86);
+    border: 3px solid #4F4537;
+    border-radius: 9px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.settings #closeSettings:hover {
+    color: #c8160d;
+    transition: transform 1s ease-in-out;
+}
+
+.settings #homeScreenButton {
+    border: 3px solid #4F4537;
+    border-radius: 45px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: #DFE0DF;
+    font-family: "VT323", monospace;
+    font-size: 30px;
+    width: 185px;
+    height: 50px;
+
+    position: absolute;
+    top: 90%;
+    left: 3%;
+}
+
+.settings #homeScreenButton:hover {
+    background: #3c6229;
+    color: white;
+    font-size: 43px;
+    filter: drop-shadow(0 0 20px #3c6229);
+}
+
+.checkbox1, .checkbox2 {
+    appearance: none;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    background-color: transparent;
+    display: inline-block;
+    position: absolute;
+
+
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.checkbox1:before, .checkbox2:before {
+    content: "";
+    background-color: #2ebb00;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+.checkbox1:checked:before, .checkbox2:checked:before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.checkbox1 {
+    top: 20%;
+    left: 5%;
+}
+
+.checkbox2 {
+    top: 40%;
+    left: 5%;
+}
+
+#CheckboxFPSLabel {
+    font-family: "VT323", cursive;
+    font-weight: lighter;
+    color: #ffffff;
+    font-size: 28px;
+    position: absolute;
+    top: 15%;
+    left: 19%;
+}
+
+#CheckboxTowerRadiusLabel{
+    font-family: "VT323", cursive;
+    font-weight: lighter;
+    color: #ffffff;
+    font-size: 28px;
+    position: absolute;
+    top: 35%;
+    left: 19%;
+}
+
+/*
 ------ Effect Canvas Styling ------
  */
 
 #fpsCounter{
-    display: flex;
+    display: none;
     position: absolute;
     top: 10px;
     left: 30px;

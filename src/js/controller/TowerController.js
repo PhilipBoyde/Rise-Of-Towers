@@ -38,9 +38,11 @@ export class Tower {
         delete tiles.positionID;
 
         const closets = this.findClosestToTopLeft(tiles);
-
+        this.showTowerRange = false;
         this.x = closets.position.x; // top left corner of the tower
         this.y = closets.position.y; // top left corner of the tower
+        this.projectileSpawnX = this.x + 32; // center of the tower
+        this.projectileSpawnY = this.y + 10; // center of the tower
         this.range = range; // not a value we want, just to try
         this.damage = damage; // start damage, test values
         this.cost = cost; // test, susceptible to changes
@@ -107,8 +109,12 @@ export class Tower {
             }
         }
 
-        console.log(closestTile)
         return closestTile;
+    }
+
+    setStatusOfTowerRange(status) {
+        this.showTowerRange = status;
+        this.drawTower()
     }
 
     /**
@@ -116,7 +122,10 @@ export class Tower {
      * @private
      */
     drawTower() {
-        this.displayRange();
+        if (this.showTowerRange){
+            this.displayRange();
+        }
+
         if (this.towerImages.every(image => image.complete)) {
             // Alla bilder har laddats, rita tornet med den aktuella frame från towerImages-arrayen
             const towerImage = this.towerImages[0];
@@ -161,8 +170,8 @@ export class Tower {
             target.reverse();
 
             const projectile = new Projectile(
-                this.x,
-                this.y,
+                this.projectileSpawnX,
+                this.projectileSpawnY,
                 this.projectileSpeed,
                 this.damage,
                 target[0],

@@ -21,6 +21,8 @@
         <canvas id="GameHover"></canvas>
         <canvas id="GameUI"></canvas>
 
+
+
         <!-- UI Screen -->
         <div class="UIScreen">
                 <button id = "GameWaveButton">Next Wave</button>
@@ -33,6 +35,12 @@
                     <img src="../js/model/assets/icons/tower/book_04g.png" alt=""></img>
                 </button>
 
+
+
+                <button id = "settingsButton">
+                    <img src="../js/model/assets/icons/Setting.png" alt=""></img>
+                </button>
+
                 <div id="healthCounter">20</div>
                 <img id="heartAnimation" src="../js/model/assets/Life/100.png" alt=""></img>
                 <div id="CoinsCounter">00000</div>
@@ -41,6 +49,28 @@
         </div>
 
         <!-- Canvas effects -->
+        <div class="settings">
+            <h1>Settings</h1>
+
+            <button id="closeSettings">Close</button>
+
+            <a href="../../index.html">
+                <button id="homeScreenButton">Main Menu</button>
+            </a>
+
+            <a href="Game.html">
+                <button id="restartButton">Restart</button>
+            </a>
+
+            <input type="checkbox" class="checkbox1">
+            <h2 id="CheckboxFPSLabel">Display FPS</h2>
+
+            <input type="checkbox" class="checkbox2">
+            <h2 id="CheckboxTowerRadiusLabel">Show Tower radius</h2>
+
+        </div>
+
+
         <div id="GameOver">
             Game Over
 

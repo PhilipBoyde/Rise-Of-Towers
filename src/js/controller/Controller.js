@@ -31,7 +31,12 @@ let playerHealth = 20;
 let coins = 350;
 let activeTowers = [];
 let img = new Image();
-
+let inSettings = false;
+let animationID;
+let enemies = [];
+let showFPS = false;
+let showTowerRadius = false;
+let gameIsActive = false;
 
 let lastTime = 0;
 let currentTime;
@@ -45,6 +50,12 @@ let allPlacedTowers = [];
 
 const /** CanvasRenderingContext2D */ gameCtx = gameCanvas.getContext('2d');
 document.getElementById("GameWaveButton").addEventListener("click", nexWave);
+document.getElementById("settingsButton").addEventListener("click", openSettings);
+const  fpsCounterElement = document.querySelector('#fpsCounter');
+const settingsElement = document.querySelector('.settings');
+const checkboxFPS = document.querySelector(".checkbox1");
+const checkboxTowerRadius = document.querySelector(".checkbox2");
+document.getElementById("closeSettings").addEventListener("click", closeSettings);
 document.getElementById("tower1").addEventListener("click", () => selectTower(1));
 document.getElementById("tower2").addEventListener("click", () => selectTower(2));
 document.getElementById("sellButton").addEventListener("click", sellTower);
@@ -241,8 +252,9 @@ function selectTower(buttonID) {
  */
 function nexWave(){
     disableButton()
-    
-    const enemies = calculateWave(round);
+    gameIsActive = true;
+
+    enemies = calculateWave(round);
     //const enemies = testEnemyType(); // Temporary test function
     gameIsRunning(true);
     gameLoop(enemies);
@@ -371,6 +383,7 @@ function gameLoop(enemies) {
                 tower.drawTower();
             });
 
+            gameIsActive = false;
             return;
         }
 
@@ -389,11 +402,13 @@ function gameLoop(enemies) {
             cancelAnimationFrame(animationID); // fix animationID not defined
         }
         // Update FPS counter
-        fpsCounterUpdate(1000 / elapsed);
+        if (showFPS){
+            fpsCounterUpdate(1000 / elapsed);
+        }
     }
     
     // Request next frame
-    const animationID = requestAnimationFrame(() => gameLoop(enemies));
+    animationID = requestAnimationFrame(() => gameLoop(enemies));
 }
 
 
@@ -410,10 +425,32 @@ function fpsCounterUpdate(fps){
 
     if (frameCount % 60 === 0) { // Update every 60 frames
         const averageFPS = fpsAccumulator / 60;
-        document.querySelector('#fpsCounter').innerHTML = 'Average<br>FPS: ' + averageFPS.toFixed(2);
+        fpsCounterElement.innerHTML = 'Average<br>FPS: ' + averageFPS.toFixed(2);
         fpsAccumulator = 0;
     }
 }
+
+function openSettings(){
+    if (!inSettings){ //Check if already in settings
+        inSettings = true;
+        cancelAnimationFrame(animationID);
+        settingsElement.style.display = 'flex';
+    }else {
+        console.log("ERROR WHILE OPENING SETTINGS!")
+    }
+}
+
+function closeSettings(){
+        inSettings = false;
+        settingsElement.classList.add('flyOut');
+
+        if (gameIsActive){
+            console.log(gameIsActive)
+            animationID = requestAnimationFrame(() => gameLoop(enemies));
+        }
+}
+
+
 
 /*
 --- event listeners ---
@@ -435,3 +472,40 @@ addEventListener("click", function() {
     }
 });
 
+settingsElement.addEventListener('animationend', (e) => {
+    // Check if the animation that ended is 'flyOut'
+    if (e.animationName === 'flyOut') {
+        settingsElement.style.display = 'none';
+        settingsElement.classList.remove('flyOut');
+    }
+});
+
+checkboxFPS.addEventListener('change', function() {
+    // This function will be called whenever the checkbox is checked or unchecked
+    // 'this' refers to the checkbox
+    if (this.checked) {
+        console.log('Checkbox is checked');
+        showFPS = true;
+        fpsCounterElement.style.display = 'block';
+    } else {
+        console.log('Checkbox is unchecked');
+        showFPS = false;
+        fpsCounterElement.style.display = 'none';
+    }
+});
+
+checkboxTowerRadius.addEventListener('change', function() {
+    // This function will be called whenever the checkbox is checked or unchecked
+    // 'this' refers to the checkbox
+    if (this.checked) {
+        console.log('Checkbox is checked');
+        showTowerRadius = true;
+    } else {
+        console.log('Checkbox is unchecked');
+        showTowerRadius = false;
+    }
+
+    activeTowers.forEach(tower => { // tower
+        tower.setStatusOfTowerRange(showTowerRadius);
+    });
+});
