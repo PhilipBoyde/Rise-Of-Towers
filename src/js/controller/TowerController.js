@@ -185,17 +185,18 @@ export class Tower{
         this.gameCtx.arc(this.x+32, this.y+32, this.range, 0, Math.PI * 2); // test value
         this.gameCtx.stroke();
     }
-/*
 
     // The following code is not used in the final version of the game, and is kept for reference for later development.
-
-canUpgrade() {
-        return this.level < this.maxLeve && coins >= this.upgradeCost;
+/*
+canUpgrade(coins) {
+        return this.level < this.maxLevel && coins >= this.upgradeCost;
 
     }
 
-    upgrade() {
-        if (this.canUpgrade()) {
+    export
+
+    upgrade(coins) {
+        if (this.canUpgrade(coins)) {
             this.level ++;
             this.range += 20; // for ex. Increase range by 20 each upgrade
             this.damage += 15; // and damage by 15 each upgrade
@@ -207,12 +208,11 @@ canUpgrade() {
         }
     }
 
-    updateTowerStats() {
-        this.drawTower(); // Redraw the tower
+    updateTowerStats() { // Redraw the tower with new stats
+        this.drawTower();
+        this.displayRange();
     }
 
 
-
  */
-
 }

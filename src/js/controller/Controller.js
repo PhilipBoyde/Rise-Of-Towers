@@ -42,21 +42,27 @@ let fpsAccumulator = 0;
 let activeTiles;
 let activeTileID;
 let allPlacedTowers = [];
+// let selectedTower = null;
 
 const /** CanvasRenderingContext2D */ gameCtx = gameCanvas.getContext('2d');
 document.getElementById("GameWaveButton").addEventListener("click", nexWave);
 document.getElementById("tower1").addEventListener("click", () => selectTower(1));
 document.getElementById("tower2").addEventListener("click", () => selectTower(2));
+/*
+
 document.getElementById("tower3").addEventListener("click", () => selectTower(3));
 document.getElementById("tower4").addEventListener("click", () => selectTower(4))
 
+ */
 
 document.getElementById("sellButton").addEventListener("click", sellTower);
 let sellButton = document.querySelector('#sellButton');
 let tower1Button = document.querySelector('#tower1');
 let tower2Button = document.querySelector('#tower2');
+/*
 let tower3Button = document.querySelector('#tower3');
 let tower4Button = document.querySelector('#tower4');
+ */
 
 
 const gameBackgroundCtx = gameBackground.getContext('2d');
@@ -153,6 +159,7 @@ export function selectTile(tile){
             tower2Button.style.filter = 'blur(1px)';
             tower2Button.disabled = true;
 
+            /*
             tower3Button.style.backgroundColor = 'gray';
             tower3Button.style.filter = 'blur(1px)';
             tower3Button.disabled = true;
@@ -160,6 +167,7 @@ export function selectTile(tile){
             tower4Button.style.backgroundColor = 'gray';
             tower4Button.style.filter = 'blur(1px)';
             tower4Button.disabled = true;
+             */
 
             sellButton.style.backgroundColor = 'gray';
             sellButton.style.filter = 'blur(1px)';
@@ -185,6 +193,7 @@ export function selectTile(tile){
                 tower2Button.style.filter = 'blur(0px)';
                 tower2Button.disabled = false;
 
+                /*
                 tower3Button.style.backgroundColor = 'white';
                 tower3Button.style.filter = 'blur(0px)';
                 tower3Button.disabled = false;
@@ -192,6 +201,8 @@ export function selectTile(tile){
                 tower4Button.style.backgroundColor = 'white';
                 tower4Button.style.filter = 'blur(0px)';
                 tower4Button.disabled = false;
+
+                 */
 
                 sellButton.style.backgroundColor = 'gray';
                 sellButton.style.filter = 'blur(1px)';
@@ -475,4 +486,3 @@ addEventListener("click", function() {
         document.documentElement.msRequestFullscreen();
     }
 });
-
