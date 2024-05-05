@@ -8,21 +8,23 @@ import { Tower } from "../controller/TowerController.js";
  */
 export class ArcherTower extends Tower {
     constructor(gameCtx, tiles) {
-        const imagePaths = ["../js/model/assets/Tower/IceTower/towersIce.png"];
+        const imagePaths = ["../js/model/assets/Tower/IceTower/IceT.png"];
         //const projectileImagePaths =["../js/model/assets/Tower/Projectile/FB500-2.png"];
 
         const projectileImagePaths = [
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-2.png",
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-3.png",
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-4.png",
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-5.png"
+            "../js/model/assets/Tower/Projectile/Ice/Ice3.png",
+            "../js/model/assets/Tower/Projectile/Ice/Ice4.png",
+            "../js/model/assets/Tower/Projectile/Ice/Ice5.png",
+            "../js/model/assets/Tower/Projectile/Ice/Ice6.png",
+            "../js/model/assets/Tower/Projectile/Ice/Ice7.png",
+
         ];
         const towerType = "Archer";
         const towerOptions = {
-            frameWidth: 1792, // Bredden på varje frame (280 / 4)
-            frameHeight:  1024, // Höjden på varje frame
-            frameIndex: 6, // Aktuell frame-index
-            frameCount:0, // Antal frames i bilden
+            frameWidth: 420/6, // Bredden på varje frame (280 / 4)
+            frameHeight:  130, // Höjden på varje frame
+            frameIndex: 0, // Aktuell frame-index
+            frameCount:6, // Antal frames i bilden
             frameUpdateCounter:  0,
             frameSpeed: 10
         };

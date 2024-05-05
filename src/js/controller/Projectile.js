@@ -92,7 +92,7 @@ export class Projectile {
      * @returns {void}
      */
     draw() {
-        const frameChangeInterval = 200;
+        const frameChangeInterval = 400;
 
         if (this.markedForDeletion) {
             return;
@@ -100,7 +100,7 @@ export class Projectile {
 
         if (this.imageLoaded) {
             const currentImage = this.images[this.imageIndex];
-            this.gameCtx.drawImage(currentImage, this.x, this.y, 40, 40);
+            this.gameCtx.drawImage(currentImage, this.x, this.y, 30, 30);
 
             this.frameCount++;
             if (this.frameCount >= frameChangeInterval / this.speed) {

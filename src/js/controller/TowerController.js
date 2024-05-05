@@ -138,11 +138,6 @@ export class Tower {
             const frameX = this.frameIndex * this.frameWidth; // X-koordinaten för den aktuella frame
             const frameY = 0; // Y-koordinaten är 0 eftersom vi bara använder en rad av frames
 
-            if (this.towerType === "Archer") {
-                adjustedWidth *= 0.8;
-                adjustedHeight *= 0.8;
-            }
-
             this.gameCtx.drawImage(towerImage, frameX, frameY, adjustedWidth, adjustedHeight, this.x, this.y - 65, adjustedWidth, adjustedHeight);
         } else {
             this.gameCtx.fillStyle = 'rgba(18,19,17,0)';
