@@ -161,7 +161,12 @@ export class Enemy extends SpriteController{
         }
 
     }
+    slowEnemy(speedDecrease){
+        this.speed -= speedDecrease;
+    }
 }
+
+
 
 /*
 --- Old code used for reference ---
