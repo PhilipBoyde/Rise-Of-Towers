@@ -16,6 +16,7 @@ import { Projectile } from "./Projectile.js";
  * @param {string[]} imagePaths - Array of image paths for tower frames.
  * @author Muhammed
  * @author Philip
+ * @author Mahyar
  */
 export class Tower {
     /**
@@ -30,15 +31,25 @@ export class Tower {
      * @param {number} speed - The shooting speed of the tower.
      * @param {number} projectileSpeed - The speed of the projectile.
      * @param {string[]} imagePaths - Array of image paths for tower frames.
+     * @param projectileImagePath
+     * @param options
+     * @param towerType
      */
-    constructor(gameCtx, tiles, cost, range, damage, upgradeCost, maxLevel, speed, projectileSpeed, imagePaths) {
+    constructor(gameCtx, tiles, cost, range, damage, upgradeCost, maxLevel, speed, projectileSpeed, imagePaths,projectileImagePath, options, towerType) {
         this.gameCtx = gameCtx;
         this.positionID = tiles.positionID;
         delete tiles.positionID;
+        this.towerType = towerType.toString();
+
 
         const closets = this.findClosestToTopLeft(tiles);
 
-        this.x = closets.position.x; // top left corner of the tower
+        if(this.towerType === "Wizard"){ //Check if it's a Wizard tower to calibrate
+            this.x = closets.position.x -15;// top left corner of the tower
+        } else {
+            this.x = closets.position.x;// top left corner of the tower
+        }
+
         this.y = closets.position.y; // top left corner of the tower
         this.range = range; // not a value we want, just to try
         this.damage = damage; // start damage, test values
@@ -51,15 +62,16 @@ export class Tower {
         this.projectileSpeed = projectileSpeed;
         this.projectiles = [];
         this.imagePaths = imagePaths; // Store the image paths for later use
+        this.projectileImagePath = projectileImagePath;
 
         this.loadImages(imagePaths);
 
-        this.frameWidth = 70; // Bredden på varje frame (280 / 4)
-        this.frameHeight = 130; // Höjden på varje frame
-        this.frameIndex = 0; // Aktuell frame-index
-        this.frameCount = 4; // Antal frames i bilden
-        this.frameUpdateCounter = 0;
-        this.frameSpeed = 20; // Hastigheten för att byta frame (? frames per sekund)
+        this.frameWidth = options.frameWidth; // Bredden på varje frame (280 / 4)
+        this.frameHeight = options.frameHeight; // Höjden på varje frame
+        this.frameIndex = options.frameIndex; // Aktuell frame-index
+        this.frameCount = options.frameCount; // Antal frames i bilden
+        this.frameUpdateCounter = options.frameUpdateCounter;
+        this.frameSpeed = options.frameSpeed; // Hastigheten för att byta frame (? frames per sekund)
 
     }
 
@@ -87,10 +99,12 @@ export class Tower {
      * Finds the tile in the left corner of the different tiles.
      * it is used to paint the tower on the selected tiles.
      * @param {Object} Tiles - the selected tiles.
+     * @param towerType
      * @returns {Object} - the tile in the left corner.
      * @author Philip
      */
-    findClosestToTopLeft(Tiles) {
+    findClosestToTopLeft(Tiles,towerType) {
+
         let closestTile = undefined;
         let minDistance = Infinity;
 
@@ -119,16 +133,23 @@ export class Tower {
         if (this.towerImages.every(image => image.complete)) {
             // Alla bilder har laddats, rita tornet med den aktuella frame från towerImages-arrayen
             const towerImage = this.towerImages[0];
+            let adjustedWidth = this.frameWidth;
+            let adjustedHeight = this.frameHeight;
             const frameX = this.frameIndex * this.frameWidth; // X-koordinaten för den aktuella frame
             const frameY = 0; // Y-koordinaten är 0 eftersom vi bara använder en rad av frames
-            // Justera this.y för att flytta tornbilden uppåt
-            this.gameCtx.drawImage(towerImage, frameX, frameY, this.frameWidth, this.frameHeight, this.x, this.y - 65, this.frameWidth, this.frameHeight); // Flytta upp tornbilden med 32 pixlar
+
+            if (this.towerType === "Archer") {
+                adjustedWidth *= 0.8;
+                adjustedHeight *= 0.8;
+            }
+
+            this.gameCtx.drawImage(towerImage, frameX, frameY, adjustedWidth, adjustedHeight, this.x, this.y - 65, adjustedWidth, adjustedHeight);
         } else {
-            // Om inte alla bilder har laddats än, rita en enkel rektangel som tidigare
             this.gameCtx.fillStyle = 'rgba(18,19,17,0)';
             this.gameCtx.fillRect(this.x, this.y, 64, 64); // test value
         }
     }
+
 
     /**
      * Finds the enemies within the tower range.
@@ -166,9 +187,11 @@ export class Tower {
                 this.damage,
                 target[0],
                 this.handleProjectileRemoval.bind(this), // Bind the current context
-                this.gameCtx
+                this.gameCtx,
+                this.projectileImagePath
             );
             this.projectiles.push(projectile);
+
 
         }
     }

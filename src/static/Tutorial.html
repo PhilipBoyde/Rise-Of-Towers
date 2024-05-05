@@ -5,24 +5,73 @@
     <title>Rise Of Towers | Tutorial</title>
     <link rel="icon" href="../js/model/assets/img/SiteIcon.png" type="image/x-icon">
     <link rel="stylesheet" href="../Css/tutorialStyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<h1>Tutorial :O</h1>
-<p>This is the tutorial page.</p>
-<a href="../../index.html">
-    <button class="button">Main Menu</button>
-</a>
-<video autoplay loop muted id="bakgrundTutorial">
-    <source src="../assets/video/loopande.mp4" type="video/mp4">
-</video>
-<div id="info1">
-    <h2 id="textInfo1Head">How to play</h2>
-    <p id="textInfo1Small">Click on the towers to place them on the map
-        <br>
-        Click on the enemies to attack them.
-        <br>
-        Click on the towers to upgrade them.</p>
+<audio src="../js/model/assets/sounds/relax-intro-103890.mp3" autoplay loop></audio>
+<div class="mainBorder">
+    <div class="headerAndButtons">
+        <h1 id="GameName">Welcome Home Mighty Defender</h1>
+        <div class="buttonContainer">
+            <!-- Previous picture function -->
+            <a href="javascript:prevSlide()">
+                <button>Previous</button>
+            </a>
+            <!-- Next picture function -->
+            <a href="javascript: nextSlide()">
+                <button id="nextButton">Next</button>
+            </a>
+        </div>
+    </div>
+    <div class="howToPlay">
+        <h2 class="textInfoHead">How to play</h2>
+        <div class="textAndImageContainer">
+            <div class="textContainer">
+                <p class="textInfoSmall slide1">Your mission is to defend the valley by strategically placing towers and eliminating any enemies attempting to infiltrate.
+                    <br>Please press next to see how <br>
+                </p>
+                <p class="textInfoSmall slide2" id="slide2Text" style="display: none;">Place your towers <br> by clicking on the <br> marked
+                    locations  <br> on the maps,<br>
+                    then choose the  <br>  type of tower you want<br>
+                <div id="towerImageContainerSlide2" class="towerImageContainer" style=" display: none;">
+                    <img id="towerImageSlide2" src="../js/model/assets/Tutorial/baseTower.jpg">
+                </div>
+                </p>
+                <p class="textInfoSmall slide3" id="slide3Text" style="display: none;">You can Choose <br> your tower by <br> clicking on each
+                      <br> tower<br> on to your right<br>  where I marked for you<br></p>
+                <div id="towerImageContainerSlide3" class="towerImageContainer" style="display: none;">
+                    <img id="towerImageSlide3" src="../js/model/assets/Tutorial/Base.png">
+                </div>
+                </p>
+                <p class="textInfoSmall slide4" id="slide4Text" style="display: none;">You also have <br> life and coins <br> lives are your
+                    <br> hearts and coins are<br>  the money<br>  you can use to buy<br> and upgrade your towers<br></p>
+                <div id="towerImageContainerSlide4" class="towerImageContainer" style="display: none;">
+                    <img id="towerImageSlide4" src="../js/model/assets/Tutorial/baseTower.jpg">
+                </div>
+                <p class="textInfoSmall slide5" id="slide5Text" style="display: none;">There are several <br> types of enemies <br> each with varying
+                    <br> amounts of life,<br> and your mission is<br> to KILL <br> THEM ALL! <br>  </p>
+                <div id="towerImageContainerSlide5" class="towerImageContainer" style="display: none;">
+                    <img id="towerImageSlide5" src="../js/model/assets/Tutorial/baseTower.jpg" >
+                </div>
+                <p class="textInfoSmall slide6" id="slide6Text" style="display: none;">There are <br> also boss enemies <br> who can decrease
+                      <br> your lives ,<br>
+                    more rapidly than <br> regular enemies<br>  if they cross the line."<br> </p>
+                <div id="towerImageContainerSlide6" class="towerImageContainer" style="display: none;">
+                    <img id="towerImageSlide6" src="../js/model/assets/Tutorial/baseTower.jpg" >
+                </div>
+                <p class="textInfoSmall slide7"> Each enemy you kill will grant you some amount of coins.
+                    Choose,buy and upgrade your towers wisely and be careful how you spend your coins.<br> GOOD LUCK, MIGHTY DEFENDER,<br> MAKE US PROUD!<br>
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div id="textHead" class="custom-title"></div>
+<div id="textSmall" class="custom-content"></div>
+
+<script src="../js/controller/script.js"></script>
+
 </body>
 </html>
