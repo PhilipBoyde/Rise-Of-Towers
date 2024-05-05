@@ -1,7 +1,7 @@
 import {calculateWave, changeMapRoutes, testEnemyType} from "../model/WaveCalculator.js";
 import {gameIsRunning, setGameInfo, updateHoverTiles} from "./placementTiles.js";
 import {ArcherTower, FastTower, InfernoTower, WizardTower} from "../model/towerTypes.js";
-
+import {upgradeTower} from "../controller/TowerController.js";
 /**
  *  -TODO-
  *  - Add a way to upgrade towers
@@ -42,14 +42,25 @@ let fpsAccumulator = 0;
 let activeTiles;
 let activeTileID;
 let allPlacedTowers = [];
+// let selectedTower = null;
 
 const /** CanvasRenderingContext2D */ gameCtx = gameCanvas.getContext('2d');
 document.getElementById("GameWaveButton").addEventListener("click", nexWave);
-document.getElementById("tower1").addEventListener("click", () => selectTower(1));
-document.getElementById("tower2").addEventListener("click", () => selectTower(2));
+document.getElementById("tower1").addEventListener("click", () => selectTowerType(1));
+document.getElementById("tower2").addEventListener("click", () => selectTowerType(2));
 /*
-document.getElementById("tower3").addEventListener("click", () => selectTower(3));
-document.getElementById("tower4").addEventListener("click", () => selectTower(4))
+document.getElementById("upgradeButton").addEventListener("click", function() {
+    if (selectedTower && selectedTower.canUpgrade(coins)) {
+        selectedTower.upgrade(coins);
+        updateCoins();
+        updateUI();
+    } else {
+        alert("Cannot upgrade: either at max level or insufficient coins.");
+    }
+});
+
+document.getElementById("tower3").addEventListener("click", () => selectTowerType(3));
+document.getElementById("tower4").addEventListener("click", () => selectTowerType(4))
 
  */
 
@@ -235,7 +246,7 @@ function sellTower(){
  * @author Philip
  * @author Emil
  */
-function selectTower(buttonID) {
+function selectTowerType(buttonID) {
 
     switch (buttonID) {
         case 1:
@@ -484,4 +495,14 @@ addEventListener("click", function() {
         document.documentElement.msRequestFullscreen();
     }
 });
+/*
+function updateUI() {
+    const upgradeBtn = document.getElementById("upgradeButton");
+    upgradeBtn.disabled = !selectedTower || !selectedTower.canUpgrade(coins);
+}
+function selectTower(tower) {
+    selectedTower = tower;
+    updateUI();
+}
 
+ */
