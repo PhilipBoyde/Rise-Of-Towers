@@ -301,12 +301,12 @@ body, html{
     font-weight: 550;
     font-family: "VT323", cursive;
     font-size: 30px;
-    width: 47px;
-    height: 45px;
+    width: 75px;
+    height: 75px;
 
     position: absolute;
-    top: 83%;
-    left: 88%;
+    top: 40%;
+    left: 85%;
 }
 
 .UIScreen #tower2:disabled {
@@ -315,7 +315,36 @@ body, html{
     font-size: 30px;
 }
 
+.UIScreen #tower2:hover{
+    background: #fd9e00;
+    color: white;
+    font-size:2.2em ;
+    filter: drop-shadow(0 0 20px #fd9e00);
+}
+
+#tower2 .infoWizard{
+    position: absolute;
+    top: 5%;
+    font-family: "VT323", cursive;
+    height: 1px;
+    bottom: 10px;
+    right: 5px;
+    font-size: 12px;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.cost2{
+    top: 68%;
+    right: 5px;
+    position: absolute;
+    font-size: 16px;
+    font-weight: bold;
+}
+
 .UIScreen #tower3{
+    transition: all 0.3s;
+    cursor: pointer;
     position: absolute;
     border-radius: 10px;
     background: #DFE0DF;
@@ -328,7 +357,7 @@ body, html{
     opacity: 100%;
     border: 3px solid #4F4537;
 }
-#tower3 .cost{
+#tower3 .cost3{
     position: absolute;
     bottom: 5px;
     right: 5px;
@@ -375,7 +404,7 @@ body, html{
     height: 75px;
     width: 75px;
 }
-#tower4 .cost1{
+#tower4 .cost4{
     position: absolute;
     bottom: 5px;
     right: 5px;
@@ -385,6 +414,18 @@ body, html{
     height: 1px;
     color: black;
     top: 70%;
+}
+#tower4 .infoSten{
+    position: absolute;
+    top: 8%;
+    font-family: "VT323", cursive;
+    height: 1px;
+    bottom: 10px;
+    font-weight: bolder;
+
+    right: 5px;
+    font-size: 12px;
+    text-decoration: underline;
 }
 
 .UIScreen #tower4:hover{

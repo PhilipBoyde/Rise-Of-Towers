@@ -58,13 +58,13 @@ export class InfernoTower extends Tower{
             gameCtx,
             tiles,
             700,
+            150,
             50,
-            250,
             1000,
             2,
-            400,
-            4.5,
-            imagePaths //Insert path for picture/s
+            10,
+            4.5
+
         );
     }
 }
