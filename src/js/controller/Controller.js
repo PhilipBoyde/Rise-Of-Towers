@@ -1,6 +1,10 @@
 import {calculateWave, changeMapRoutes, testEnemyType} from "../model/WaveCalculator.js";
 import {gameIsRunning, setGameInfo, updateHoverTiles} from "./placementTiles.js";
+<<<<<<< HEAD
 import {ArcherTower, WizardTower, StoneTower, IceTower, FastTower} from "../model/towerTypes.js";
+=======
+import {ArcherTower, FastTower, InfernoTower, WizardTower} from "../model/towerTypes.js";
+>>>>>>> MergeTowerAndEnemyClone
 
 /**
  *  -TODO-
@@ -42,15 +46,28 @@ let fpsAccumulator = 0;
 let activeTiles;
 let activeTileID;
 let allPlacedTowers = [];
+// let selectedTower = null;
 
 const /** CanvasRenderingContext2D */ gameCtx = gameCanvas.getContext('2d');
 document.getElementById("GameWaveButton").addEventListener("click", nexWave);
 document.getElementById("tower1").addEventListener("click", () => selectTower(1));
 document.getElementById("tower2").addEventListener("click", () => selectTower(2));
+/*
+
+document.getElementById("tower3").addEventListener("click", () => selectTower(3));
+document.getElementById("tower4").addEventListener("click", () => selectTower(4))
+
+ */
+
 document.getElementById("sellButton").addEventListener("click", sellTower);
 let sellButton = document.querySelector('#sellButton');
 let tower1Button = document.querySelector('#tower1');
 let tower2Button = document.querySelector('#tower2');
+/*
+let tower3Button = document.querySelector('#tower3');
+let tower4Button = document.querySelector('#tower4');
+ */
+
 
 const gameBackgroundCtx = gameBackground.getContext('2d');
 
@@ -146,6 +163,16 @@ export function selectTile(tile){
             tower2Button.style.filter = 'blur(1px)';
             tower2Button.disabled = true;
 
+            /*
+            tower3Button.style.backgroundColor = 'gray';
+            tower3Button.style.filter = 'blur(1px)';
+            tower3Button.disabled = true;
+
+            tower4Button.style.backgroundColor = 'gray';
+            tower4Button.style.filter = 'blur(1px)';
+            tower4Button.disabled = true;
+             */
+
             sellButton.style.backgroundColor = 'gray';
             sellButton.style.filter = 'blur(1px)';
             sellButton.disabled = true;
@@ -168,6 +195,17 @@ export function selectTile(tile){
                 tower2Button.style.backgroundColor = 'white';
                 tower2Button.style.filter = 'blur(0px)';
                 tower2Button.disabled = false;
+
+                /*
+                tower3Button.style.backgroundColor = 'white';
+                tower3Button.style.filter = 'blur(0px)';
+                tower3Button.disabled = false;
+
+                tower4Button.style.backgroundColor = 'white';
+                tower4Button.style.filter = 'blur(0px)';
+                tower4Button.disabled = false;
+
+                 */
 
                 sellButton.style.backgroundColor = 'gray';
                 sellButton.style.filter = 'blur(1px)';
@@ -200,6 +238,7 @@ function sellTower(){
  * else the player will not be able to place the tower.
  * @param buttonID
  * @author Philip
+ * @author Emil
  */
 function selectTower(buttonID) {
 
@@ -243,6 +282,22 @@ function selectTower(buttonID) {
                 selectTile(undefined);
             }
 
+            break;
+        case 3:
+            if (coins >= 700){
+                activeTowers.push(new InfernoTower(gameCtx, activeTiles));
+                allPlacedTowers.push(activeTileID);
+                coins -=700;
+                selectTile(undefined);
+            }
+            break;
+        case 4:
+            if (coins >= 150){
+            activeTowers.push(new FastTower(gameCtx, activeTiles));
+            allPlacedTowers.push(activeTileID);
+            coins -= 150;
+            selectTile(undefined);
+            }
             break;
 
         default:
@@ -457,4 +512,3 @@ addEventListener("click", function() {
         document.documentElement.msRequestFullscreen();
     }
 });
-

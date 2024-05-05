@@ -54,6 +54,29 @@ export class Projectile {
             this.images.push(image);
         });
     }
+    /*
+    constructor(x,y,speed,damage,target,onDelete,gameCtx,isIce) {
+        this.gameCtx = gameCtx;
+        this.onDelete = onDelete;
+        this.x = x;
+        this.y = y;
+        this.speed = speed;
+        this.damage = damage;
+        this.target = target;
+        this.markedForDeletion = false;
+        this.isIce;
+    }
+
+     */
+/*
+    iceCheck(){
+        if(this === instanceof IceTower){
+            let isIce;
+            return isIce = true;
+        }
+    }
+
+ */
 
     /**
      * Moves the projectile towards the target. If the projectile hits the target, the target's health is reduced by the damage of the projectile.

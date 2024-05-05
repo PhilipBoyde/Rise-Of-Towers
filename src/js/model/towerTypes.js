@@ -89,6 +89,29 @@ export class WizardTower extends Tower {
 }
 
 /**
+ * Class for the Inferno Tower. Extends the Tower Class.
+ * @class InfernoTower
+ * @extends Tower
+ * @author Emil
+ */
+export class InfernoTower extends Tower{
+    constructor(gameCtx, tiles) {
+        super(
+            gameCtx,
+            tiles,
+            700,
+            50,
+            250,
+            1000,
+            2,
+            400,
+            4.5,
+            imagePaths //Insert path for picture/s
+        );
+    }
+}
+
+/**
  * Class for the Stone Tower. Extends the Tower class.
  * @class StoneTower
  * @extends Tower
@@ -97,6 +120,7 @@ export class WizardTower extends Tower {
  */
 export class StoneTower extends Tower {
     constructor(gameCtx, tiles) {
+<<<<<<< HEAD
 
         const imagePaths = ["../js/model/assets/Tower/Tower1/7.png"];
         const projectileImagePaths = [
@@ -115,6 +139,8 @@ export class StoneTower extends Tower {
             frameUpdateCounter:  0,
             frameSpeed: 10
         };
+=======
+>>>>>>> MergeTowerAndEnemyClone
         super(
             gameCtx,
             tiles,
@@ -122,6 +148,7 @@ export class StoneTower extends Tower {
             80, // range, smaller range than archer
             80, // damage, higher damage than archer
             150, // upgradeCost
+<<<<<<< HEAD
             5, // maxLevel
             5, // Shooting speed, lower than archer.
             imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
@@ -143,6 +170,22 @@ export class FastTower extends Tower {
             frameUpdateCounter:  0,
             frameSpeed: 10
         };
+=======
+            5, //
+            15, //Shooting speed
+            1 // projectile speed
+        );
+    }
+}
+/**
+    *Class for the Fast(4th) tower. Extends the Tower class.
+    * @class FastTower
+    * @extends Tower
+    * @author Muhammed
+    */
+export class FastTower extends Tower {
+    constructor(gameCtx, tiles) {
+>>>>>>> MergeTowerAndEnemyClone
         super(
             gameCtx,
             tiles,
@@ -152,6 +195,7 @@ export class FastTower extends Tower {
             180, // upgradeCost
             3, //
             30, //Shooting speed
+<<<<<<< HEAD
             12, // projectile speed
             imagePaths,
             projectileImagePath,
@@ -180,6 +224,14 @@ export class IceTower extends Tower{
             frameUpdateCounter:  0,
             frameSpeed: 10
         };
+=======
+            12 // projectile speed
+        );
+    }
+}
+export class IceTower extends Tower{
+    constructor(gameCtx,tiles) {
+>>>>>>> MergeTowerAndEnemyClone
         super(gameCtx,
             tiles,
             175,
@@ -188,11 +240,15 @@ export class IceTower extends Tower{
             200,
             2,
             12,
+<<<<<<< HEAD
             12,
             imagePaths,
             projectileImagePaths,
             towerOptions,
             towerType
+=======
+            12
+>>>>>>> MergeTowerAndEnemyClone
         );
     }
 }

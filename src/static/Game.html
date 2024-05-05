@@ -23,21 +23,44 @@
 
         <!-- UI Screen -->
         <div class="UIScreen">
-                <button id = "GameWaveButton">Next Wave</button>
+                <button id = "GameWaveButton">Start Wave</button>
                  <button id = "sellButton">Sell Tower</button>
+            <a href="index.html">
+                <button id="mainMenuButton">Main Menu</button>
+            </a>
+            
+            <!-- Archer -->
                 <button id = "tower1">
-                    <img src="../js/model/assets/icons/tower/arrow_02e.png" alt=""></img>
+                    <img src="../js/model/assets/icons/tower/arrow_02e.png" alt="">
+                    Cost: 100
                 </button>
 
+            <!-- Wizard -->
                 <button id = "tower2">
-                    <img src="../js/model/assets/icons/tower/book_04g.png" alt=""></img>
+                    <img src="../js/model/assets/icons/tower/book_04g.png" alt="">
                 </button>
+            <!-- Inferno -->
+                <button id = "tower3">
+                    <img class ="image" src="../js/model/assets/icons/tower/flamma32.png" alt="">
+                    <span class="cost">Cost: 500</span>
+                    <span class="infoInferno">Inferno Tower</span>
+                </button>
+            <!-- Stone -->
+                <button id = "tower4">
+                    <img src="../js/model/assets/icons/tower/sten.png" alt="">
+                    <span class="cost1">Cost: 100</span>
+                    <span class="infoSten">Stone Tower</span>
+
+                </button>
+
+
 
                 <div id="healthCounter">20</div>
-                <img id="heartAnimation" src="../js/model/assets/Life/100.png" alt=""></img>
+                <img id="heartAnimation" src="../js/model/assets/Life/100.png" alt="">
                 <div id="CoinsCounter">00000</div>
                 <div id="CoinsAnimation"></div>
                 <h1 id="WaveCounter">Wave 000</h1>
+                <h1 id="TowersText">Buy Tower:</h1>
         </div>
 
         <!-- Canvas effects -->

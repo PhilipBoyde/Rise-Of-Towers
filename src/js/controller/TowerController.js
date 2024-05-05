@@ -39,7 +39,11 @@ export class Tower {
         this.gameCtx = gameCtx;
         this.positionID = tiles.positionID;
         delete tiles.positionID;
+<<<<<<< HEAD
         this.towerType = towerType.toString();
+=======
+        this.level = 1;
+>>>>>>> MergeTowerAndEnemyClone
 
 
         const closets = this.findClosestToTopLeft(tiles);
@@ -245,9 +249,43 @@ export class Tower {
      * Displays the range of the tower on the canvas.
      */
     displayRange() {
-        this.gameCtx.fillStyle = '#d90808';
+        this.gameCtx.fillStyle = '#ff0000';
         this.gameCtx.beginPath();
         this.gameCtx.arc(this.x + 32, this.y + 32, this.range, 0, Math.PI * 2); // test value
         this.gameCtx.stroke();
     }
+<<<<<<< HEAD
 }
+=======
+
+    // The following code is not used in the final version of the game, and is kept for reference for later development.
+/*
+canUpgrade(coins) {
+        return this.level < this.maxLevel && coins >= this.upgradeCost;
+
+    }
+
+    export
+
+    upgrade(coins) {
+        if (this.canUpgrade(coins)) {
+            this.level ++;
+            this.range += 20; // for ex. Increase range by 20 each upgrade
+            this.damage += 15; // and damage by 15 each upgrade
+            this.upgradeCost *= 1.5; // it increases cost for upgrading by 50%
+            coins -= this.upgradeCost; // subtract the cost from player's coins
+            this.updateTowerStats(); // Redraw or recalculate relevant stats
+        } else {
+            console.log("Tower is at maximum level! or Not enough coins to upgrade!");
+        }
+    }
+
+    updateTowerStats() { // Redraw the tower with new stats
+        this.drawTower();
+        this.displayRange();
+    }
+
+
+ */
+}
+>>>>>>> MergeTowerAndEnemyClone
