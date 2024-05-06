@@ -130,6 +130,7 @@ export class Projectile {
                 this.imageIndex = (this.imageIndex + 1) % this.images.length;
                 this.frameCount = 0;
             }
+
         }
         requestAnimationFrame(this.draw.bind(this));
     }

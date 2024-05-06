@@ -8,7 +8,7 @@ import { Tower } from "../controller/TowerController.js";
  */
 export class ArcherTower extends Tower {
     constructor(gameCtx, tiles) {
-        const imagePaths = ["../js/model/assets/Tower/IceTower/towersIce.png"];
+        const imagePaths = ["../js/model/assets/Tower/Tower1/4.png"];
         //const projectileImagePaths =["../js/model/assets/Tower/Projectile/FB500-2.png"];
 
         const projectileImagePaths = [
@@ -19,11 +19,11 @@ export class ArcherTower extends Tower {
         ];
         const towerType = "Archer";
         const towerOptions = {
-            frameWidth: 1792, // Bredden på varje frame (280 / 4)
+            frameWidth: 280/4, // Bredden på varje frame (280 / 4)
             frameHeight:  1024, // Höjden på varje frame
             frameIndex: 6, // Aktuell frame-index
-            frameCount:0, // Antal frames i bilden
-            frameUpdateCounter:  0,
+            frameCount:4, // Antal frames i bilden
+            frameUpdateCounter:0  ,
             frameSpeed: 10
         };
 
@@ -96,17 +96,41 @@ export class WizardTower extends Tower {
  */
 export class InfernoTower extends Tower{
     constructor(gameCtx, tiles) {
+        const imagePaths = ["../js/model/assets/Tower/InfernoT.png"];
+        const projectileImagePaths = [
+            "../js/model/assets/Tower/Projectile/Inferno/FB500-1.png",
+            "../js/model/assets/Tower/Projectile/Inferno/FB500-2.png",
+            "../js/model/assets/Tower/Projectile/Inferno/FB500-3.png",
+            "../js/model/assets/Tower/Projectile/Inferno/FB500-4.png",
+            "../js/model/assets/Tower/Projectile/Inferno/FB500-5.png",
+            "../js/model/assets/Tower/Projectile/Inferno/B500-2.png",
+            "../js/model/assets/Tower/Projectile/Inferno/B500-3.png",
+            "../js/model/assets/Tower/Projectile/Inferno/B500-4.png"
+        ];
+        const towerOptions = {
+            frameWidth: 280/ 4, // Bredden på varje frame (280 / 4)
+            frameHeight: 130, // Höjden på varje frame
+            frameIndex: 0, // Aktuell frame-index
+            frameCount:4, // Antal frames i bilden
+            frameUpdateCounter:  0,
+            frameSpeed: 10
+        };
+        const towerType = "Inferno";
         super(
             gameCtx,
             tiles,
             700,
-            50,
             250,
+            20,
             1000,
             2,
-            400,
+            35,
             4.5,
-            imagePaths //Insert path for picture/s
+            imagePaths,
+            projectileImagePaths,
+            towerOptions,
+            towerType
+
         );
     }
 }
@@ -120,7 +144,7 @@ export class InfernoTower extends Tower{
  */
 export class StoneTower extends Tower {
     constructor(gameCtx, tiles) {
-<<<<<<< HEAD
+
 
         const imagePaths = ["../js/model/assets/Tower/Tower1/7.png"];
         const projectileImagePaths = [
@@ -139,8 +163,7 @@ export class StoneTower extends Tower {
             frameUpdateCounter:  0,
             frameSpeed: 10
         };
-=======
->>>>>>> MergeTowerAndEnemyClone
+
         super(
             gameCtx,
             tiles,
@@ -148,7 +171,7 @@ export class StoneTower extends Tower {
             80, // range, smaller range than archer
             80, // damage, higher damage than archer
             150, // upgradeCost
-<<<<<<< HEAD
+
             5, // maxLevel
             5, // Shooting speed, lower than archer.
             imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
@@ -157,6 +180,12 @@ export class StoneTower extends Tower {
         );
     }
 }
+/**
+    *Class for the Fast(4th) tower. Extends the Tower class.
+    * @class FastTower
+    * @extends Tower
+    * @author Muhammed
+    */
 export class FastTower extends Tower {
     constructor(gameCtx, tiles) {
         const imagePaths = [""];
@@ -170,22 +199,6 @@ export class FastTower extends Tower {
             frameUpdateCounter:  0,
             frameSpeed: 10
         };
-=======
-            5, //
-            15, //Shooting speed
-            1 // projectile speed
-        );
-    }
-}
-/**
-    *Class for the Fast(4th) tower. Extends the Tower class.
-    * @class FastTower
-    * @extends Tower
-    * @author Muhammed
-    */
-export class FastTower extends Tower {
-    constructor(gameCtx, tiles) {
->>>>>>> MergeTowerAndEnemyClone
         super(
             gameCtx,
             tiles,
@@ -195,7 +208,6 @@ export class FastTower extends Tower {
             180, // upgradeCost
             3, //
             30, //Shooting speed
-<<<<<<< HEAD
             12, // projectile speed
             imagePaths,
             projectileImagePath,
@@ -224,14 +236,6 @@ export class IceTower extends Tower{
             frameUpdateCounter:  0,
             frameSpeed: 10
         };
-=======
-            12 // projectile speed
-        );
-    }
-}
-export class IceTower extends Tower{
-    constructor(gameCtx,tiles) {
->>>>>>> MergeTowerAndEnemyClone
         super(gameCtx,
             tiles,
             175,
@@ -240,15 +244,11 @@ export class IceTower extends Tower{
             200,
             2,
             12,
-<<<<<<< HEAD
             12,
             imagePaths,
             projectileImagePaths,
             towerOptions,
             towerType
-=======
-            12
->>>>>>> MergeTowerAndEnemyClone
         );
     }
 }

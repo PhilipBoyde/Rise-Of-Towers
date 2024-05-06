@@ -35,21 +35,20 @@ export class Tower {
      * @param options
      * @param towerType
      */
-    constructor(gameCtx, tiles, cost, range, damage, upgradeCost, maxLevel, speed, projectileSpeed, imagePaths,projectileImagePath, options, towerType) {
+    constructor(gameCtx, tiles, cost, range, damage, upgradeCost, maxLevel, speed, projectileSpeed, imagePaths, projectileImagePath, options, towerType) {
         this.gameCtx = gameCtx;
         this.positionID = tiles.positionID;
         delete tiles.positionID;
-<<<<<<< HEAD
+
         this.towerType = towerType.toString();
-=======
+
         this.level = 1;
->>>>>>> MergeTowerAndEnemyClone
 
 
         const closets = this.findClosestToTopLeft(tiles);
 
-        if(this.towerType === "Wizard"){ //Check if it's a Wizard tower to calibrate
-            this.x = closets.position.x -15;// top left corner of the tower
+        if (this.towerType === "Wizard") { //Check if it's a Wizard tower to calibrate
+            this.x = closets.position.x - 15;// top left corner of the tower
         } else {
             this.x = closets.position.x;// top left corner of the tower
         }
@@ -107,7 +106,7 @@ export class Tower {
      * @returns {Object} - the tile in the left corner.
      * @author Philip
      */
-    findClosestToTopLeft(Tiles,towerType) {
+    findClosestToTopLeft(Tiles, towerType) {
 
         let closestTile = undefined;
         let minDistance = Infinity;
@@ -142,10 +141,7 @@ export class Tower {
             const frameX = this.frameIndex * this.frameWidth; // X-koordinaten för den aktuella frame
             const frameY = 0; // Y-koordinaten är 0 eftersom vi bara använder en rad av frames
 
-            if (this.towerType === "Archer") {
-                adjustedWidth *= 0.8;
-                adjustedHeight *= 0.8;
-            }
+
 
             this.gameCtx.drawImage(towerImage, frameX, frameY, adjustedWidth, adjustedHeight, this.x, this.y - 65, adjustedWidth, adjustedHeight);
         } else {
@@ -254,9 +250,8 @@ export class Tower {
         this.gameCtx.arc(this.x + 32, this.y + 32, this.range, 0, Math.PI * 2); // test value
         this.gameCtx.stroke();
     }
-<<<<<<< HEAD
-}
-=======
+
+
 
     // The following code is not used in the final version of the game, and is kept for reference for later development.
 /*
@@ -288,4 +283,4 @@ canUpgrade(coins) {
 
  */
 }
->>>>>>> MergeTowerAndEnemyClone
+
