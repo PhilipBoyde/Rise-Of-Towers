@@ -1,6 +1,6 @@
 import {calculateWave, changeMapRoutes, testEnemyType} from "../model/WaveCalculator.js";
 import {gameIsRunning, setGameInfo, updateHoverTiles} from "./placementTiles.js";
-import {ArcherTower, WizardTower,} from "../model/towerTypes.js";
+import {ArcherTower, WizardTower, StoneTower, IceTower, FastTower} from "../model/towerTypes.js";
 
 /**
  *  -TODO-
@@ -231,6 +231,29 @@ function selectTower(buttonID) {
                 coins -= 200;
                 selectTile(undefined);
             }
+        case 3:
+            if(coins >= 200){
+                activeTowers.push(new StoneTower(gameCtx, activeTiles));
+                allPlacedTowers.push(activeTileID);
+                coins -= 200;
+                selectTile(undefined);
+            }
+        case 4:
+            if(coins >= 200){
+                activeTowers.push(new IceTower(gameCtx, activeTiles));
+                allPlacedTowers.push(activeTileID);
+                coins -= 200;
+                selectTile(undefined);
+            }
+
+        case 5:
+            if(coins >= 200){
+                activeTowers.push(new FastTower(gameCtx, activeTiles));
+                allPlacedTowers.push(activeTileID);
+                coins -= 200;
+                selectTile(undefined);
+            }
+
             break;
 
         default:

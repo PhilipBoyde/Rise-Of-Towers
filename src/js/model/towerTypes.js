@@ -8,7 +8,27 @@ import { Tower } from "../controller/TowerController.js";
  */
 export class ArcherTower extends Tower {
     constructor(gameCtx, tiles) {
-        const imagePaths = ["../js/model/assets/Tower/Tower1/2.png"];
+        const imagePaths = ["../js/model/assets/Tower/IceTower/IceT.png"];
+        //const projectileImagePaths =["../js/model/assets/Tower/Projectile/FB500-2.png"];
+
+        const projectileImagePaths = [
+            "../js/model/assets/Tower/Projectile/Ice/Ice3.png",
+            "../js/model/assets/Tower/Projectile/Ice/Ice4.png",
+            "../js/model/assets/Tower/Projectile/Ice/Ice5.png",
+            "../js/model/assets/Tower/Projectile/Ice/Ice6.png",
+            "../js/model/assets/Tower/Projectile/Ice/Ice7.png",
+
+        ];
+        const towerType = "Archer";
+        const towerOptions = {
+            frameWidth: 420/6, // Bredden på varje frame (280 / 4)
+            frameHeight:  130, // Höjden på varje frame
+            frameIndex: 0, // Aktuell frame-index
+            frameCount:6, // Antal frames i bilden
+            frameUpdateCounter:  0,
+            frameSpeed: 10
+        };
+
         super(
             gameCtx,
             tiles,
@@ -18,8 +38,10 @@ export class ArcherTower extends Tower {
             120, // upgradeCost
             5, // maxLevel
             60, // Shooting speed
-            10, // Projectile speed
-            imagePaths // Skicka bildsökvägar till överordnad Tower-klass
+            5, // Projectile speed
+            imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
+            projectileImagePaths,
+            towerOptions, towerType
         );
     }
 }
@@ -32,7 +54,25 @@ export class ArcherTower extends Tower {
  */
 export class WizardTower extends Tower {
     constructor(gameCtx, tiles) {
-        const imagePaths = ["../js/model/assets/Tower/Tower1/7.png"];
+        const imagePaths = ["../js/model/assets/Tower/Tower1/RedMoonTower_free_idle_animation4.png"];
+        const projectileImagePaths = [
+            "../js/model/assets/Tower/Projectile/Mage/Mage.png",
+            "../js/model/assets/Tower/Projectile/Mage/Mage3.png",
+            "../js/model/assets/Tower/Projectile/Mage/Mage4.png",
+            "../js/model/assets/Tower/Projectile/Mage/Mage5.png",
+            "../js/model/assets/Tower/Projectile/Mage/Mage6.png",
+            "../js/model/assets/Tower/Projectile/Mage/Mage7.png",
+        ];
+        const towerType = "Wizard";
+        const towerOptions = {
+            frameWidth: 1100/ 11, // Bredden på varje frame (280 / 4)
+            frameHeight: 1300, // Höjden på varje frame
+            frameIndex: 0, // Aktuell frame-index
+            frameCount:11, // Antal frames i bilden
+            frameUpdateCounter:  0,
+            frameSpeed: 12
+        };
+
         super(
             gameCtx,
             tiles,
@@ -43,7 +83,9 @@ export class WizardTower extends Tower {
             5, // maxLevel
             110, // Shooting speed
             4.5, // Projectile speed
-            imagePaths // Skicka bildsökvägar till överordnad Tower-klass
+            imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
+            projectileImagePaths, towerOptions, towerType
+
         );
     }
 }
@@ -58,7 +100,23 @@ export class WizardTower extends Tower {
 export class StoneTower extends Tower {
     constructor(gameCtx, tiles) {
 
-        const imagePaths = [""];
+        const imagePaths = ["../js/model/assets/Tower/Tower1/7.png"];
+        const projectileImagePaths = [
+            "../js/model/assets/Tower/Projectile/Stone/Stone3.png",
+            "../js/model/assets/Tower/Projectile/Stone/Stone4.png",
+            "../js/model/assets/Tower/Projectile/Stone/Stone5.png",
+            "../js/model/assets/Tower/Projectile/Stone/Stone6.png",
+            "../js/model/assets/Tower/Projectile/Stone/Stone7.png",
+        ];
+        const towerType = "Stone";
+        const towerOptions = {
+            frameWidth: 280/ 4, // Bredden på varje frame (280 / 4)
+            frameHeight: 130, // Höjden på varje frame
+            frameIndex: 0, // Aktuell frame-index
+            frameCount:4, // Antal frames i bilden
+            frameUpdateCounter:  0,
+            frameSpeed: 10
+        };
         super(
             gameCtx,
             tiles,
@@ -68,7 +126,76 @@ export class StoneTower extends Tower {
             150, // upgradeCost
             5, // maxLevel
             5, // Shooting speed, lower than archer.
-            imagePaths // Skicka bildsökvägar till överordnad Tower-klass
+            imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
+            projectileImagePaths,
+            towerOptions,towerType
         );
     }
 }
+export class FastTower extends Tower {
+    constructor(gameCtx, tiles) {
+        const imagePaths = [""];
+        const projectileImagePath = [""];
+        const towerType = "Fast";
+        const towerOptions = {
+            frameWidth: 410/ 4, // Bredden på varje frame (280 / 4)
+            frameHeight: 130, // Höjden på varje frame
+            frameIndex: 0, // Aktuell frame-index
+            frameCount:4, // Antal frames i bilden
+            frameUpdateCounter:  0,
+            frameSpeed: 10
+        };
+        super(
+            gameCtx,
+            tiles,
+            150, // cost, higher cost than archer-
+            250, // range, smaller range than archer
+            10, // damage, higher damage than archer
+            180, // upgradeCost
+            3, //
+            30, //Shooting speed
+            12, // projectile speed
+            imagePaths,
+            projectileImagePath,
+            towerOptions,
+            towerType
+        );
+    }
+}
+
+export class IceTower extends Tower{
+    constructor(gameCtx,tiles) {
+        const imagePaths = [""];
+        const projectileImagePaths = [
+            "../js/model/assets/Tower/Projectile/Ice/Ice3.png",
+            "../js/model/assets/Tower/Projectile/Ice/Ice4.png",
+            "../js/model/assets/Tower/Projectile/Ice/Ice5.png",
+            "../js/model/assets/Tower/Projectile/Ice/Ice6.png",
+            "../js/model/assets/Tower/Projectile/Ice/Ice7.png",
+        ];
+        const towerType = "Ice";
+        const towerOptions = {
+            frameWidth: 410/ 4, // Bredden på varje frame (280 / 4)
+            frameHeight: 130, // Höjden på varje frame
+            frameIndex: 0, // Aktuell frame-index
+            frameCount:4, // Antal frames i bilden
+            frameUpdateCounter:  0,
+            frameSpeed: 10
+        };
+        super(gameCtx,
+            tiles,
+            175,
+            250,
+            10,
+            200,
+            2,
+            12,
+            12,
+            imagePaths,
+            projectileImagePaths,
+            towerOptions,
+            towerType
+        );
+    }
+}
+
