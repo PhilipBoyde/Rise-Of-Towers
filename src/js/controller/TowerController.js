@@ -35,7 +35,7 @@ export class Tower {
      * @param options
      * @param towerType
      */
-    constructor(gameCtx, tiles, cost, range, damage, upgradeCost, maxLevel, speed, projectileSpeed, imagePaths, projectileImagePath, options, towerType) {
+    constructor(gameCtx, tiles, cost, range, damage, upgradeCost, maxLevel, speed, projectileSpeed, imagePaths, projectileImagePath, options, towerType, showRange) {
         this.gameCtx = gameCtx;
         this.positionID = tiles.positionID;
         delete tiles.positionID;
@@ -66,6 +66,7 @@ export class Tower {
         this.projectiles = [];
         this.imagePaths = imagePaths; // Store the image paths for later use
         this.projectileImagePath = projectileImagePath;
+        this.showRange = showRange;
 
         this.loadImages(imagePaths);
 
@@ -127,12 +128,20 @@ export class Tower {
         return closestTile;
     }
 
+    setStatusOfTowerRange(status){
+        this.showRange = status;
+    }
     /**
      * Draws the tower on the canvas.
      * @private
      */
     drawTower() {
-        this.displayRange();
+        this.updateAnimation();
+
+        if (this.showRange){
+            this.displayRange();
+        }
+
         if (this.towerImages.every(image => image.complete)) {
             // Alla bilder har laddats, rita tornet med den aktuella frame från towerImages-arrayen
             const towerImage = this.towerImages[0];
@@ -230,8 +239,6 @@ export class Tower {
      * @param {Object[]} enemies - The enemies on the canvas.
      */
     update(enemies) {
-        this.updateAnimation();
-        this.drawTower();
         this.projectiles.forEach(projectile => projectile.move());
         this.projectiles = this.projectiles.filter(projectile => !projectile.markedForDeletion);
 

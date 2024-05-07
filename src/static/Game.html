@@ -19,52 +19,75 @@
         <canvas id="GameBackground"></canvas>
         <canvas id="GameScreen"></canvas>
         <canvas id="GameHover"></canvas>
+         <canvas id="TowerScreen"></canvas>
         <canvas id="GameUI"></canvas>
 
         <!-- UI Screen -->
         <div class="UIScreen">
                 <button id = "GameWaveButton">Start Wave</button>
-                 <button id = "sellButton">Sell Tower</button>
-            <a href="../../index.html">
-                <button id="mainMenuButton">Main Menu</button>
-            </a>
-            
-            <!-- Archer -->
+
+                 <button id = "sellButton">Sell</button>
+                 <button id = "speedButton"> >>> </button>
+
+            <div class="towers">
+                <!-- Archer -->
                 <button id = "tower1">
-                    <img src="../js/model/assets/icons/tower/IceIcon2.png" alt="">
-                    <span class="cost1"> Cost: 100</span>
-                    <span class = "infoIce">Ice Tower</span>
+                    <img id ="tower1Image" src="../js/model/assets/icons/tower/arrow_02e.png" alt="">
+                    <span id="tower1Cost">Cost: 100</span>
                 </button>
 
-            <!-- Wizard -->
+                <!-- Wizard -->
                 <button id = "tower2">
-                    <img src="../js/model/assets/icons/tower/book_04g.png" alt="">
-                    <span class="cost2">Cost: 200</span>
-                    <span class="infoWizard">Wizard Tower</span>
+                    <img id= "tower2Image" src="../js/model/assets/icons/tower/book_04g.png" alt="">
+                    <span id="tower2Cost">Cost: 200</span>
                 </button>
-            <!-- Inferno -->
+
+                <!-- Inferno -->
                 <button id = "tower3">
-                    <img class ="image" src="../js/model/assets/icons/tower/flamma32.png" alt="">
-                    <span class="cost3">Cost: 500</span>
-                    <span class="infoInferno">Inferno Tower</span>
+                    <img id = "tower3Image" src="../js/model/assets/icons/tower/candle.png" alt="">
+                    <span id="tower3Cost">Cost: 700</span>
                 </button>
-            <!-- Stone -->
+
+                <!-- Stone -->
                 <button id = "tower4">
-                    <img src="../js/model/assets/icons/tower/sten.png" alt="">
-                    <span class="cost4">Cost: 100</span>
-                    <span class="infoSten">Stone Tower</span>
-
+                    <img id = "tower4Image" src="../js/model/assets/icons/tower/stone.png" alt="">
+                    <span id="tower4Cost">Cost: 300</span>
                 </button>
-
-
+            </div>
 
                 <div id="healthCounter">20</div>
                 <img id="heartAnimation" src="../js/model/assets/Life/100.png" alt="">
                 <div id="CoinsCounter">00000</div>
                 <div id="CoinsAnimation"></div>
                 <h1 id="WaveCounter">Wave 000</h1>
-                <h1 id="TowersText">Buy Tower:</h1>
+
+                <button id ="settingsButton">
+                    <img id ="settingsIMG" src="../js/model/assets/icons/settingsButton.png" alt="">
+                </button>
         </div>
+
+    <!-- Settings Screen -->
+    <div class="settingsScreen">
+        <h1>Settings</h1>
+
+        <button id ="closeSettings"> Close </button>
+
+        |<a href="../../index.html">
+            <button id="homeScreenButton">Main Menu</button>
+        </a>|
+
+        <a href="Game.html">
+            <button id="restartButton">Restart</button>
+        </a>
+
+        <input  type="checkbox" class="checkbox1">
+        <h2 id="CheckboxFPSLabel">Display FPS</h2>
+
+        <input  type="checkbox" class="checkbox2">
+        <h2 id="CheckboxTowerRadiusLabel">Show Tower Radius</h2>
+
+    </div>
+
 
         <!-- Canvas effects -->
         <div id="GameOver">
@@ -81,7 +104,7 @@
             </div>
         </div>
         <h1 id="fpsCounter">Average<br>FPS: .... </h1>
-</div>
+    </div>
 
 <script type="module" src="../js/controller/SpriteTowerController.js"></script>
 <script type="module" src="../js/controller/SpriteController.js"></script>

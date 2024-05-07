@@ -7,7 +7,7 @@ import { Tower } from "../controller/TowerController.js";
  * @author Philip
  */
 export class ArcherTower extends Tower {
-    constructor(gameCtx, tiles) {
+    constructor(gameCtx, tiles, status) {
         const imagePaths = ["../js/model/assets/Tower/Tower1/4.png"];
         //const projectileImagePaths =["../js/model/assets/Tower/Projectile/FB500-2.png"];
 
@@ -39,7 +39,9 @@ export class ArcherTower extends Tower {
             5, // Projectile speed
             imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
             projectileImagePaths,
-            towerOptions, towerType
+            towerOptions,
+            towerType,
+            status
         );
     }
 }
@@ -51,7 +53,7 @@ export class ArcherTower extends Tower {
  * @author Philip
  */
 export class WizardTower extends Tower {
-    constructor(gameCtx, tiles) {
+    constructor(gameCtx, tiles, status) {
         const imagePaths = ["../js/model/assets/Tower/Tower1/RedMoonTower_free_idle_animation4.png"];
         const projectileImagePaths = [
             "../js/model/assets/Tower/Projectile/Mage/Mage.png",
@@ -82,8 +84,10 @@ export class WizardTower extends Tower {
             110, // Shooting speed
             4.5, // Projectile speed
             imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
-            projectileImagePaths, towerOptions, towerType
-
+            projectileImagePaths,
+            towerOptions,
+            towerType,
+            status
         );
     }
 }
@@ -95,7 +99,7 @@ export class WizardTower extends Tower {
  * @author Emil
  */
 export class InfernoTower extends Tower{
-    constructor(gameCtx, tiles) {
+    constructor(gameCtx, tiles, status) {
         const imagePaths = ["../js/model/assets/Tower/InfernoT.png"];
         const projectileImagePaths = [
             "../js/model/assets/Tower/Projectile/Inferno/FB500-1.png",
@@ -129,7 +133,8 @@ export class InfernoTower extends Tower{
             imagePaths,
             projectileImagePaths,
             towerOptions,
-            towerType
+            towerType,
+            status
 
         );
     }
@@ -143,7 +148,7 @@ export class InfernoTower extends Tower{
  * @author Emil
  */
 export class StoneTower extends Tower {
-    constructor(gameCtx, tiles) {
+    constructor(gameCtx, tiles, status) {
 
 
         const imagePaths = ["../js/model/assets/Tower/StoneT.png"];
@@ -176,7 +181,8 @@ export class StoneTower extends Tower {
             imagePaths,
             projectileImagePaths,
             towerOptions,
-            towerType
+            towerType,
+            status
 
         );
     }
@@ -188,7 +194,7 @@ export class StoneTower extends Tower {
     * @author Muhammed
     */
 export class FastTower extends Tower {
-    constructor(gameCtx, tiles) {
+    constructor(gameCtx, tiles, status) {
         const imagePaths = [""];
         const projectileImagePath = [""];
         const towerType = "Fast";
@@ -213,13 +219,14 @@ export class FastTower extends Tower {
             imagePaths,
             projectileImagePath,
             towerOptions,
-            towerType
+            towerType,
+            status
         );
     }
 }
 
 export class IceTower extends Tower{
-    constructor(gameCtx, tiles) {
+    constructor(gameCtx, tiles, status) {
         const imagePaths = ["../js/model/assets/Tower/IceT.png"];
         //const projectileImagePaths =["../js/model/assets/Tower/Projectile/FB500-2.png"];
 
@@ -253,7 +260,9 @@ export class IceTower extends Tower{
             5, // Projectile speed
             imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
             projectileImagePaths,
-            towerOptions, towerType
+            towerOptions,
+            towerType,
+            status
         );
     }
 }
