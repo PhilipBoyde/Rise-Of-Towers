@@ -16,10 +16,13 @@
 
 
 <div class="canvasContainer">
+
+        <!-- Game Canvas -->
         <canvas id="GameBackground"></canvas>
         <canvas id="GameScreen"></canvas>
         <canvas id="GameHover"></canvas>
         <canvas id="GameUI"></canvas>
+
 
         <!-- UI Screen -->
         <div class="UIScreen">
@@ -58,6 +61,12 @@
 
 
 
+
+
+                <button id = "settingsButton">
+                    <img src="../js/model/assets/icons/Setting.png" alt=""></img>
+                </button>
+
                 <div id="healthCounter">20</div>
                 <img id="heartAnimation" src="../js/model/assets/Life/100.png" alt="">
                 <div id="CoinsCounter">00000</div>
@@ -66,7 +75,29 @@
                 <h1 id="TowersText">Buy Tower:</h1>
         </div>
 
-        <!-- Canvas effects -->
+        <!-- Settings page-->
+        <div class="settings">
+            <h1>Settings</h1>
+
+            <button id="closeSettings">Close</button>
+
+            <a href="../../index.html">
+                <button id="homeScreenButton">Main Menu</button>
+            </a>
+
+            <a href="Game.html">
+                <button id="restartButton">Restart</button>
+            </a>
+
+            <input type="checkbox" class="checkbox1">
+            <h2 id="CheckboxFPSLabel">Display FPS</h2>
+
+            <input type="checkbox" class="checkbox2">
+            <h2 id="CheckboxTowerRadiusLabel">Show Tower radius</h2>
+
+        </div>
+
+        <!-- GameOver page-->
         <div id="GameOver">
             Game Over
 
@@ -91,3 +122,5 @@
     <script type="module" src="../js/controller/Controller.js"></script>
 </body>
 </html>
+
+<!-- @Author: Philip -->
