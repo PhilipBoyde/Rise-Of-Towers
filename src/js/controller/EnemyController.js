@@ -7,7 +7,8 @@ import { SpriteController } from './SpriteController.js';
  * @class Enemy - controls the enemy sprite
  * @author Philip
  */
-export class Enemy extends SpriteController{
+export class Enemy extends SpriteController {
+    isFrozen = false;
     /**
      * Constructor for the enemy sprite. Sets the position, speed, path, health, coins, sprite images, width, height and frames for the enemy sprite.
      * @constructor
@@ -28,26 +29,29 @@ export class Enemy extends SpriteController{
         path,
         health,
         coins,
-        {spriteImages = {upp : '', down: '', right: '', left: ''}},
+        {spriteImages = {upp: '', down: '', right: '', left: ''}},
         width,
         height,
-        {frames = {
-            max: 6,
-            min: 0,
-            hold: 6,
-            cropOffsetX: 0,
-            cropOffsetY: 0,
-            scale: 1}}) { // end of constructor
-        
+        {
+            frames = {
+                max: 6,
+                min: 0,
+                hold: 6,
+                cropOffsetX: 0,
+                cropOffsetY: 0,
+                scale: 1
+            }
+        }) { // end of constructor
+
         super( // Set the sprite images for the enemy sprite and other sprite settings
-            {position}, 
-            {spriteImages}, 
+            {position},
+            {spriteImages},
             {
-                max: frames.max, 
-                min: frames.min, 
-                hold: frames.hold, 
-                cropOffsetX: frames.cropOffsetX, 
-                cropOffsetY: frames.cropOffsetY, 
+                max: frames.max,
+                min: frames.min,
+                hold: frames.hold,
+                cropOffsetX: frames.cropOffsetX,
+                cropOffsetY: frames.cropOffsetY,
                 scale: frames.scale
             }); // end of super
 
@@ -57,6 +61,7 @@ export class Enemy extends SpriteController{
         this.speed = speed;
         this.path = path;
         this.pathIndex = 0;
+        this.maxHealth = health;
         this.health = health;
         this.threshold = 2;
         this.oriantaion = 'unknown';
@@ -77,6 +82,8 @@ export class Enemy extends SpriteController{
     draw(gameCtx) {
         super.drawSprite(gameCtx, this.oriantaion);
         this.drawHitBox(gameCtx);
+        // health bar
+
     }
 
     /**
@@ -88,6 +95,28 @@ export class Enemy extends SpriteController{
         gameCtx.strokeStyle = '#ff0000';
         gameCtx.lineWidth = 3;
         gameCtx.strokeRect(this.position.x, this.position.y, this.width, this.height);
+        this.drawHealthBar(gameCtx)
+    }
+
+    /**
+     * Draws a health bar above the enemy sprite on the canvas.
+     * The health bar is green and overlays a red background that represents the total health.
+     * The method calculates the percentage of remaining health and draws two rectangles:
+     * The health bar is drawn above the enemy sprite, offset by a small margin.
+     * @param gameCtx - context
+     * @author Muhamed
+     */
+    drawHealthBar(gameCtx) {
+        const healthPercentage = this.health / this.maxHealth;
+        const healthBarWidth = this.width;
+        const healthBarHeight = 5;
+        const x = this.position.x;
+        const y = this.position.y - healthBarHeight - 5; //y == height, so it should be just above them
+
+        gameCtx.fillStyle = 'red';
+        gameCtx.fillRect(x, y, healthBarWidth, healthBarHeight);
+        gameCtx.fillStyle = 'green';
+        gameCtx.fillRect(x, y, healthBarWidth * healthPercentage, healthBarHeight);
     }
 
     /**
@@ -95,6 +124,7 @@ export class Enemy extends SpriteController{
      * Also checks if the enemy sprite has reached the end of the path.
      * @param gameCtx - the game context
      * @param reduceHealth - function to reduce the health of the player
+     * @param addCoins - Adds coins
      * @returns {boolean} - returns true if the enemy sprite has reached the end of the path or if the health of the enemy sprite is 0.
      * @author Philip
      */
@@ -102,8 +132,8 @@ export class Enemy extends SpriteController{
         this.draw(gameCtx);
 
         const path = this.path[this.pathIndex]
-        let xDistance = path.x -  this.center.x
-        let yDistance = path.y -  this.center.y
+        let xDistance = path.x - this.center.x
+        let yDistance = path.y - this.center.y
 
 
         const length = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
@@ -121,7 +151,7 @@ export class Enemy extends SpriteController{
         this.oriantaion = this.calculateOrientation(xDistance, yDistance);
 
         if (this.health <= 0) {
-            addCoins(10);
+            addCoins(this.worth);
             this.oriantaion = 'death';
             return true;
         }
@@ -161,7 +191,33 @@ export class Enemy extends SpriteController{
         }
 
     }
+
+
+
+    slowEffect() {
+
+        if (!this.isFrozen) {
+            this.speed /= 3;
+            this.isFrozen = true;
+            setTimeout(() => {
+                this.removeFreeze();
+            }, 7000); //Enemies remain frozen for 7 seconds. Then the effect is removed.
+        }
+    }
+
+    removeFreeze() {
+        this.speed *= 4; /*Is yet to be added to the constructor, ordinary speed should be the regular speed
+        before the freeze.
+        */
+        this.isFrozen = false; /*isFrozen is also not added to the constructor, should originally be false, but is set
+        to true when the slowEffect is enabled (slowEffect method is ran).
+        */
+
+    }
+
 }
+
+
 
 /*
 --- Old code used for reference ---

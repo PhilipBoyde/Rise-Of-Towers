@@ -1,0 +1,68 @@
+body {
+    font-family: 'Rockwell Extra Bold', serif;
+    margin: 0;
+    height: 100vh;
+    color: #ecab08;
+    background: url('../js/model/assets/img/Credits3.png') no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden;
+}
+
+#credits-container {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.crawl-text {
+    width: 100%;
+    position: absolute;
+    bottom: -50vh; /* appearin faster */
+    transform-origin: 50% 100%;
+    transform: perspective(800px) rotateX(15deg); /*  angle */
+    animation: crawl 200s linear forwards; /*  crawl speed */
+    text-align: justify;
+    font-size: 2rem;
+    padding: 0 10%;
+}
+
+@keyframes crawl {
+    0% {
+        bottom: -50vh;
+    }
+    70% {
+        bottom: 250vh;
+    }
+    100% {
+        bottom: 100vh;
+    }
+}
+
+#credits-back-button {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+button {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #0c0b0b;
+    border: none;
+    color: #d50909;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0a0a0a;
+    color: #5aff00;
+}
