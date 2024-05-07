@@ -1,12 +1,12 @@
 /**
  * Projectile class that handles the projectile movement and damage.
  * @class Projectile
- * @author Muhammed
  */
 export class Projectile {
     /**
-     * Constructor for the projectile. Sets the position, speed, damage, target, onDelete and gameCtx for the projectile.
+     * Constructor for the projectile.
      * @constructor
+     * @param towerType - The type of the tower
      * @param {number} x - x position of the projectile
      * @param {number} y - y position of the projectile
      * @param {number} speed - speed of the projectile
@@ -15,9 +15,9 @@ export class Projectile {
      * @param {function} onDelete - function to delete the projectile
      * @param {CanvasRenderingContext2D} gameCtx - the game context
      * @param {string[]} imagePaths - array of image paths for the projectile
-     * @author Muhammed
      */
-    constructor(x, y, speed, damage, target, onDelete, gameCtx, imagePaths) {
+    constructor(towerType, x, y, speed, damage, target, onDelete, gameCtx, imagePaths) {
+        this.towerType = towerType;
         this.gameCtx = gameCtx;
         this.onDelete = onDelete;
         this.x = x;
@@ -37,7 +37,6 @@ export class Projectile {
     /**
      * Loads images from the given image paths.
      * @param {string[]} imagePaths - array of image paths
-     * @returns {void}
      */
     loadImage(imagePaths) {
         this.images = [];
@@ -54,38 +53,9 @@ export class Projectile {
             this.images.push(image);
         });
     }
-    /*
-    constructor(x,y,speed,damage,target,onDelete,gameCtx,isIce) {
-        this.gameCtx = gameCtx;
-        this.onDelete = onDelete;
-        this.x = x;
-        this.y = y;
-        this.speed = speed;
-        this.damage = damage;
-        this.target = target;
-        this.markedForDeletion = false;
-        this.isIce;
-    }
-
-     */
-/*
-    iceCheck(){
-        if(this === instanceof IceTower){
-            let isIce;
-            return isIce = true;
-        }
-    }
-
- */
 
     /**
-     * Moves the projectile towards the target. If the projectile hits the target, the target's health is reduced by the damage of the projectile.
-     * If the projectile hits the target, it is marked for deletion.
-     * @method move
-     * @memberof Projectile
-     * @instance
-     * @public
-     * @returns {void}
+     * Moves the projectile towards the target.
      */
     move() {
         this.draw();
@@ -96,28 +66,26 @@ export class Projectile {
         this.x += dx * ratio;
         this.y += dy * ratio;
 
+
+        // Check if the projectile hits the target
         if (Math.abs(this.x - this.target.center.x) < 5 && Math.abs(this.y - this.target.center.y) < 5) {
             this.target.health -= this.damage;
-            if (this.towerType === "Ice") {
-                this.target.slowEnemy(0.5) //Fiendens hastighet subtraheras med 0.5, vanligtvis ungefär 1/3 av sin normala hastighet
-            }
+           if (this.towerType === "Ice") {
+               this.target.slowEffect();
+           }
             this.markedForDeletion = true;
-            this.onDelete(this);
         }
     }
 
     /**
      * Draws the projectile on the canvas.
-     * @method draw
-     * @memberof Projectile
-     * @instance
-     * @public
-     * @returns {void}
      */
     draw() {
         const frameChangeInterval = 200;
 
         if (this.markedForDeletion) {
+            // If the projectile is marked for deletion, remove it and exit the draw() method
+            this.onDelete(this);
             return;
         }
 
@@ -130,9 +98,11 @@ export class Projectile {
                 this.imageIndex = (this.imageIndex + 1) % this.images.length;
                 this.frameCount = 0;
             }
-
         }
         requestAnimationFrame(this.draw.bind(this));
     }
 
+    setInvisible() {
+        this.markedForDeletion = true;
+    }
 }

@@ -1,6 +1,6 @@
 import {calculateWave, changeMapRoutes, testEnemyType} from "../model/WaveCalculator.js";
 import {gameIsRunning, setGameInfo, updateHoverTiles} from "./placementTiles.js";
-import {ArcherTower, FastTower, InfernoTower, WizardTower} from "../model/towerTypes.js";
+import {ArcherTower, FastTower, InfernoTower, WizardTower, IceTower, StoneTower} from "../model/towerTypes.js";
 
 
 /**
@@ -49,8 +49,6 @@ const /** CanvasRenderingContext2D */ gameCtx = gameCanvas.getContext('2d');
 document.getElementById("GameWaveButton").addEventListener("click", nexWave);
 document.getElementById("tower1").addEventListener("click", () => selectTower(1));
 document.getElementById("tower2").addEventListener("click", () => selectTower(2));
-
-
 document.getElementById("tower3").addEventListener("click", () => selectTower(3));
 document.getElementById("tower4").addEventListener("click", () => selectTower(4))
 
@@ -242,7 +240,7 @@ function selectTower(buttonID) {
     switch (buttonID) {
         case 1:
             if(coins >= 100){
-                activeTowers.push(new ArcherTower(gameCtx, activeTiles));
+                activeTowers.push(new IceTower(gameCtx, activeTiles));
                 allPlacedTowers.push(activeTileID);
                 coins -= 100;
                 selectTile(undefined);
@@ -256,25 +254,8 @@ function selectTower(buttonID) {
                 coins -= 200;
                 selectTile(undefined);
             }
-
-        case 4:
-            if(coins >= 200){
-                activeTowers.push(new IceTower(gameCtx, activeTiles));
-                allPlacedTowers.push(activeTileID);
-                coins -= 200;
-                selectTile(undefined);
-            }
             break;
 
-        case 5:
-            if(coins >= 200){
-                activeTowers.push(new FastTower(gameCtx, activeTiles));
-                allPlacedTowers.push(activeTileID);
-                coins -= 200;
-                selectTile(undefined);
-            }
-
-            break;
         case 3:
             if (coins >= 700){
                 activeTowers.push(new InfernoTower(gameCtx, activeTiles));
@@ -283,6 +264,26 @@ function selectTower(buttonID) {
                 selectTile(undefined);
             }
             break;
+
+        case 4:
+            if(coins >= 200){
+                activeTowers.push(new StoneTower(gameCtx, activeTiles));
+                allPlacedTowers.push(activeTileID);
+                coins -= 200;
+                selectTile(undefined);
+            }
+            break;
+
+        /*case 5:
+            if(coins >= 200){
+                activeTowers.push(new FastTower(gameCtx, activeTiles));
+                allPlacedTowers.push(activeTileID);
+                coins -= 200;
+                selectTile(undefined);
+            }
+
+            break;*/
+
             /*
         case 4:
             if (coins >= 150){
@@ -464,7 +465,7 @@ function gameLoop(enemies) {
         // Update FPS counter
         fpsCounterUpdate(1000 / elapsed);
     }
-    
+
     // Request next frame
     const animationID = requestAnimationFrame(() => gameLoop(enemies));
 }

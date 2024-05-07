@@ -8,6 +8,7 @@ import { SpriteController } from './SpriteController.js';
  * @author Philip
  */
 export class Enemy extends SpriteController {
+    isFrozen = false;
     /**
      * Constructor for the enemy sprite. Sets the position, speed, path, health, coins, sprite images, width, height and frames for the enemy sprite.
      * @constructor
@@ -192,9 +193,11 @@ export class Enemy extends SpriteController {
     }
 
 
+
     slowEffect() {
-        if (!isFrozen) {
-            this.speed /= 2;
+
+        if (!this.isFrozen) {
+            this.speed /= 3;
             this.isFrozen = true;
             setTimeout(() => {
                 this.removeFreeze();
@@ -203,7 +206,7 @@ export class Enemy extends SpriteController {
     }
 
     removeFreeze() {
-        this.speed = ordinarySpeed; /*Is yet to be added to the constructor, ordinary speed should be the regular speed
+        this.speed *= 4; /*Is yet to be added to the constructor, ordinary speed should be the regular speed
         before the freeze.
         */
         this.isFrozen = false; /*isFrozen is also not added to the constructor, should originally be false, but is set

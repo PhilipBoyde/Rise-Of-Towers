@@ -146,7 +146,7 @@ export class StoneTower extends Tower {
     constructor(gameCtx, tiles) {
 
 
-        const imagePaths = ["../js/model/assets/Tower/Tower1/7.png"];
+        const imagePaths = ["../js/model/assets/Tower/StoneT.png"];
         const projectileImagePaths = [
             "../js/model/assets/Tower/Projectile/Stone/Stone3.png",
             "../js/model/assets/Tower/Projectile/Stone/Stone4.png",
@@ -154,7 +154,6 @@ export class StoneTower extends Tower {
             "../js/model/assets/Tower/Projectile/Stone/Stone6.png",
             "../js/model/assets/Tower/Projectile/Stone/Stone7.png",
         ];
-        const towerType = "Stone";
         const towerOptions = {
             frameWidth: 280/ 4, // Bredden på varje frame (280 / 4)
             frameHeight: 130, // Höjden på varje frame
@@ -163,20 +162,22 @@ export class StoneTower extends Tower {
             frameUpdateCounter:  0,
             frameSpeed: 10
         };
-
+        const towerType = "Stone";
         super(
             gameCtx,
             tiles,
-            120, // cost, higher cost than archer-
-            80, // range, smaller range than archer
-            80, // damage, higher damage than archer
-            150, // upgradeCost
-
-            5, // maxLevel
-            5, // Shooting speed, lower than archer.
-            imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
+            700,
+            250,
+            20,
+            1000,
+            2,
+            35,
+            4.5,
+            imagePaths,
             projectileImagePaths,
-            towerOptions,towerType
+            towerOptions,
+            towerType
+
         );
     }
 }
@@ -218,37 +219,41 @@ export class FastTower extends Tower {
 }
 
 export class IceTower extends Tower{
-    constructor(gameCtx,tiles) {
-        const imagePaths = [""];
+    constructor(gameCtx, tiles) {
+        const imagePaths = ["../js/model/assets/Tower/IceT.png"];
+        //const projectileImagePaths =["../js/model/assets/Tower/Projectile/FB500-2.png"];
+
         const projectileImagePaths = [
             "../js/model/assets/Tower/Projectile/Ice/Ice3.png",
             "../js/model/assets/Tower/Projectile/Ice/Ice4.png",
             "../js/model/assets/Tower/Projectile/Ice/Ice5.png",
             "../js/model/assets/Tower/Projectile/Ice/Ice6.png",
             "../js/model/assets/Tower/Projectile/Ice/Ice7.png",
+
         ];
         const towerType = "Ice";
         const towerOptions = {
-            frameWidth: 410/ 4, // Bredden på varje frame (280 / 4)
-            frameHeight: 130, // Höjden på varje frame
+            frameWidth: 280/4, // Bredden på varje frame (280 / 4)
+            frameHeight:  1024, // Höjden på varje frame
             frameIndex: 0, // Aktuell frame-index
             frameCount:4, // Antal frames i bilden
-            frameUpdateCounter:  0,
+            frameUpdateCounter:0  ,
             frameSpeed: 10
         };
-        super(gameCtx,
+
+        super(
+            gameCtx,
             tiles,
-            175,
-            250,
-            10,
-            200,
-            2,
-            12,
-            12,
-            imagePaths,
+            100, // cost
+            200, // range
+            20, // damage
+            120, // upgradeCost
+            5, // maxLevel
+            60, // Shooting speed
+            5, // Projectile speed
+            imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
             projectileImagePaths,
-            towerOptions,
-            towerType
+            towerOptions, towerType
         );
     }
 }

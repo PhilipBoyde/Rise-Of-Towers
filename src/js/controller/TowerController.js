@@ -138,8 +138,8 @@ export class Tower {
             const towerImage = this.towerImages[0];
             let adjustedWidth = this.frameWidth;
             let adjustedHeight = this.frameHeight;
-            const frameX = this.frameIndex * this.frameWidth; // X-koordinaten för den aktuella frame
-            const frameY = 0; // Y-koordinaten är 0 eftersom vi bara använder en rad av frames
+            const frameX = this.frameIndex * this.frameWidth; // X cordination for frames
+            const frameY = 0; // y is 0 bcs we only use on row of frames
 
 
 
@@ -181,6 +181,7 @@ export class Tower {
             target.reverse();
 
             const projectile = new Projectile(
+                this.towerType,
                 this.x,
                 this.y,
                 this.projectileSpeed,
@@ -204,6 +205,7 @@ export class Tower {
         const index = this.projectiles.indexOf(projectile);
         if (index > -1) {
             this.projectiles.splice(index, 1);
+            this.projectiles.setInvisible();
         }
     }
 
@@ -229,7 +231,7 @@ export class Tower {
      */
     update(enemies) {
         this.updateAnimation();
-        this.drawTower()
+        this.drawTower();
         this.projectiles.forEach(projectile => projectile.move());
         this.projectiles = this.projectiles.filter(projectile => !projectile.markedForDeletion);
 
@@ -238,6 +240,14 @@ export class Tower {
             this.shoot(enemies);
         } else {
             this.delay++;
+        }
+
+        // Check if all enemies are dead
+        const allEnemiesDead = enemies.every(enemy => enemy.isDead);
+
+        // If all enemies are dead, mark all projectiles as invisible
+        if (allEnemiesDead) {
+            this.projectiles.forEach(projectile => projectile.markedForDeletion = true);
         }
     }
 
