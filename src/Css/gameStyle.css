@@ -1,5 +1,7 @@
 * {
     user-select: none;
+    font-family: "VT323", monospace;
+    font-weight: lighter;
 }
 
 body, html{
@@ -264,7 +266,28 @@ body, html{
 /*
 ------ Tower Button Styling ------
  */
-.UIScreen #tower1, .UIScreen #tower2, .UIScreen #tower3, .UIScreen #tower4, .UIScreen #tower5 {
+.UIScreen .towers {
+    position: absolute;
+    width: 183px;
+    height: 250px;
+    top: 20%;
+    background: #483d27;
+    border: #0a0a0a;
+    border: 3px solid;
+    border-radius: 20px;
+}
+
+.towers #towerLabel {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    font-size: 50px;
+    top: 3%;
+    left: 15%;
+    color: white;
+}
+
+.UIScreen #tower1, .UIScreen #tower2, .UIScreen #tower3, .UIScreen #tower4 {
     border: 2px solid #4F4537;
     border-radius: 10px;
     background: #ffffff;
@@ -273,39 +296,42 @@ body, html{
     font-weight: 550;
     font-family: "VT323", cursive;
     font-size: 30px;
-    width: 185px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
 
     position: absolute;
 }
 
-.UIScreen #tower1Image, .UIScreen #tower2Image, .UIScreen #tower3Image, .UIScreen #tower4Image, .UIScreen #tower5Image {
+.UIScreen #tower1Image, .UIScreen #tower2Image, .UIScreen #tower3Image, .UIScreen #tower4Image {
     position: absolute;
-    top: 17%;
-    left: 4%;
+    top: 30%;
+    left: 30%;
+    filter: drop-shadow(4px 4px #000000);
 }
 
-.UIScreen #tower1Cost, .UIScreen #tower2Cost, .UIScreen #tower3Cost, .UIScreen #tower4Cost, .UIScreen #tower5Cost{
+.UIScreen #tower1Cost, .UIScreen #tower2Cost, .UIScreen #tower3Cost, .UIScreen #tower4Cost {
     position: absolute;
     font-size: 18px;
-    top: 50%;
-    left: 25%;
+    top: 75%;
+    left: 10%;
 }
 
-.UIScreen #tower1Name, .UIScreen #tower2Name, .UIScreen #tower3Name, .UIScreen #tower4Name, .UIScreen #tower5Name{
-    position: absolute;
+.UIScreen #tower1Name, .UIScreen #tower2Name, .UIScreen #tower3Name, .UIScreen #tower4Name {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 25px;
-    top: 10%;
-    left: 25%;
+    top: -35%;
 }
 
-.UIScreen #tower1:disabled, .UIScreen #tower2:disabled, .UIScreen #tower3:disabled, .UIScreen #tower4:disabled, .UIScreen #tower5:disabled {
+.UIScreen #tower1:disabled, .UIScreen #tower2:disabled, .UIScreen #tower3:disabled, .UIScreen #tower4:disabled {
     cursor: not-allowed;
     filter: blur(1px);
     background-color: gray;
 }
 
-.UIScreen #tower1:disabled:hover, .UIScreen #tower2:disabled:hover, .UIScreen #tower3:disabled:hover, .UIScreen #tower4:disabled:hover, .UIScreen #tower5:disabled:hover {
+.UIScreen #tower1:disabled:hover, .UIScreen #tower2:disabled:hover, .UIScreen #tower3:disabled:hover, .UIScreen #tower4:disabled:hover {
     background: gray;
     color: #676767;
     font-size: 30px;
@@ -313,39 +339,34 @@ body, html{
 
 }
 
-.UIScreen #tower1:hover, .UIScreen #tower2:hover, .UIScreen #tower3:hover, .UIScreen #tower4:hover, .UIScreen #tower5:hover {
-    background: #8c343c;
+.UIScreen #tower1:hover, .UIScreen #tower2:hover, .UIScreen #tower3:hover, .UIScreen #tower4:hover {
+    background: rgba(0, 255, 227, 0.45);
     color: white;
     font-size: 2em;
-    filter: drop-shadow(0 0 20px #8c343c);
+    filter: drop-shadow(0 0 20px #118275);
 }
 
 .UIScreen #tower1 {
-    top: 80%;
-    left: 84.6%;
+    top: 25%;
+    left: 5%;
 }
 
 
 .UIScreen #tower2 {
-    top: 75%;
-    left: 84.6%;
+    top: 25%;
+    left: 50%;
 }
 
 .UIScreen #tower3 {
-    top: 70%;
-    left: 84.6%;
+    top: 63%;
+    left: 5%;
 }
 
 .UIScreen #tower4 {
-    top: 65%;
-    left: 84.6%;
+    top: 63%;
+    left: 50%;
 }
 
-.UIScreen #tower5 {
-    top: 60%;
-    left: 84.6%;
-
-}
 
 
 /*

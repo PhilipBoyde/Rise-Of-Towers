@@ -12,7 +12,9 @@
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 <body>
 
-<div class="transition transition-3 is-active"></div>
+<div class="transition transition-3 is-active">
+    <div class = "transitionText"></div>
+</div>
 
 
 <div class="canvasContainer">
@@ -33,40 +35,37 @@
                  <button id = "speedButton"> >>> </button>
 
             <div class="towers">
-                <!-- Archer -->
+
+                <h1 id="towerLabel">Towers</h1>
+
+                <!-- Ice -->
                 <button id = "tower1">
-                    <img id ="tower1Image" src="../js/model/assets/icons/tower/arrow_02e.png" alt="">
-                    <span id="tower1Name">Archer Tower</span>
-                    <span id="tower1Cost">Cost: 100</span>
+                    <img id ="tower1Image" src="../js/model/assets/icons/tower/IceIcon2.png" alt="">
+                    <span id="tower1Name">Ice</span>
+                    <span id="tower1Cost">Cost: 700</span>
                 </button>
 
                 <!-- Wizard -->
                 <button id = "tower2">
                     <img id= "tower2Image" src="../js/model/assets/icons/tower/book_04g.png" alt="">
-                    <span id="tower2Name">Wizard Tower</span>
+                    <span id="tower2Name">Wizard</span>
                     <span id="tower2Cost">Cost: 200</span>
                 </button>
 
                 <!-- Inferno -->
                 <button id = "tower3">
                     <img id = "tower3Image" src="../js/model/assets/icons/tower/candle.png" alt="">
-                    <span id="tower3Name">Inferno Tower</span>
+                    <span id="tower3Name">Inferno</span>
                     <span id="tower3Cost">Cost: 700</span>
                 </button>
 
                 <!-- Stone -->
                 <button id = "tower4">
                     <img id = "tower4Image" src="../js/model/assets/icons/tower/stone2Icon.png" alt="">
-                    <span id="tower4Name">Stone Tower</span>
+                    <span id="tower4Name">Stone</span>
                     <span id="tower4Cost">Cost: 300</span>
                 </button>
 
-                <!-- Ice -->
-                <button id = "tower5">
-                    <img id = "tower5Image" src="../js/model/assets/icons/tower/IceIcon2.png" alt="">
-                    <span id="tower5Name">Ice Tower</span>
-                    <span id="tower5Cost">Cost: 700</span>
-                </button>
             </div>
 
                 <div id="healthCounter">20</div>

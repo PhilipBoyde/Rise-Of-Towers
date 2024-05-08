@@ -63,7 +63,6 @@ document.getElementById("tower1").addEventListener("click", () => selectTower(1)
 document.getElementById("tower2").addEventListener("click", () => selectTower(2));
 document.getElementById("tower3").addEventListener("click", () => selectTower(3));
 document.getElementById("tower4").addEventListener("click", () => selectTower(4));
-document.getElementById("tower5").addEventListener("click", () => selectTower(5));
 const settingsElement = document.querySelector('.settingsScreen');
 
 
@@ -74,7 +73,6 @@ let tower1Button = document.querySelector('#tower1');
 let tower2Button = document.querySelector('#tower2');
 let tower3Button = document.querySelector('#tower3');
 let tower4Button = document.querySelector('#tower4');
-let tower5Button = document.querySelector('#tower5');
 
 
 
@@ -176,7 +174,6 @@ export function selectTile(tile){
             tower2Button.disabled = true;
             tower3Button.disabled = true;
             tower4Button.disabled = true;
-            tower5Button.disabled = true;
 
 
             sellButton.disabled = true;
@@ -197,7 +194,6 @@ export function selectTile(tile){
                 tower2Button.disabled = false;
                 tower3Button.disabled = false;
                 tower4Button.disabled = false;
-                tower5Button.disabled = false;
 
                 sellButton.style.backgroundColor = 'gray';
                 sellButton.style.filter = 'blur(1px)';
@@ -235,11 +231,11 @@ function sellTower(){
 function selectTower(buttonID) {
 
     switch (buttonID) {
-        case 1: // ArcherTower
-            if(coins >= 100){
-                activeTowers.push(new ArcherTower(towerCtx, activeTiles, showTowerRadius));
+        case 1: // Ice Tower
+            if (coins >= 700){
+                activeTowers.push(new IceTower(towerCtx, activeTiles, showTowerRadius));
                 allPlacedTowers.push(activeTileID);
-                coins -= 100;
+                coins -=700;
                 selectTile(undefined);
             }
             break;
@@ -267,15 +263,6 @@ function selectTower(buttonID) {
                 activeTowers.push(new StoneTower(towerCtx, activeTiles, showTowerRadius));
                 allPlacedTowers.push(activeTileID);
                 coins -= 300;
-                selectTile(undefined);
-            }
-            break;
-
-        case 5: // IceTower
-            if (coins >= 700){
-                activeTowers.push(new IceTower(towerCtx, activeTiles, showTowerRadius));
-                allPlacedTowers.push(activeTileID);
-                coins -=700;
                 selectTile(undefined);
             }
             break;
@@ -447,6 +434,8 @@ function gameLoop(enemies) {
                 tower.drawTower();
             });
 
+            addCoins(100)
+
             return;
         }
 
@@ -510,7 +499,6 @@ function openSettings(){
         tower2Button.disabled = true;
         tower3Button.disabled = true;
         tower4Button.disabled = true;
-        tower5Button.disabled = true;
 
         disableButton();
 

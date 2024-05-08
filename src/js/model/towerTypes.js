@@ -253,12 +253,12 @@ export class IceTower extends Tower{
         super(
             gameCtx,
             tiles,
-            100, // cost
+            700, // cost
             200, // range
-            20, // damage
+            5, // damage
             120, // upgradeCost
             5, // maxLevel
-            60, // Shooting speed
+            80, // Shooting speed
             5, // Projectile speed
             imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
             projectileImagePaths,

@@ -191,7 +191,7 @@ export class Cyclops extends Enemy {
             0.3, //speed
             path,
             1500, //health
-            100, //coins
+            300, //coins
             {spriteImages: {
                     up: '../js/model/assets/EnemySprites/Boss/Cyclops/walk4.png',
                     down: '../js/model/assets/EnemySprites/Boss/Cyclops/walk4.png',
