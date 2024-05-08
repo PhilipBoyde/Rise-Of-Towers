@@ -35,7 +35,7 @@ export class Tower {
      * @param options
      * @param towerType
      */
-    constructor(gameCtx, tiles, cost, range, damage, upgradeCost, maxLevel, speed, projectileSpeed, imagePaths, projectileImagePath, options, towerType) {
+    constructor(gameCtx, tiles, cost, range, damage, upgradeCost, maxLevel, speed, projectileSpeed, imagePaths, projectileImagePath, options, towerType, showRange) {
         this.gameCtx = gameCtx;
         this.positionID = tiles.positionID;
         delete tiles.positionID;
@@ -66,6 +66,7 @@ export class Tower {
         this.projectiles = [];
         this.imagePaths = imagePaths; // Store the image paths for later use
         this.projectileImagePath = projectileImagePath;
+        this.showRange = showRange;
 
         this.loadImages(imagePaths);
 
@@ -127,19 +128,27 @@ export class Tower {
         return closestTile;
     }
 
+    setStatusOfTowerRange(status){
+        this.showRange = status;
+    }
     /**
      * Draws the tower on the canvas.
      * @private
      */
     drawTower() {
-        this.displayRange();
+        this.updateAnimation();
+
+        if (this.showRange){
+            this.displayRange();
+        }
+
         if (this.towerImages.every(image => image.complete)) {
             // Alla bilder har laddats, rita tornet med den aktuella frame från towerImages-arrayen
             const towerImage = this.towerImages[0];
             let adjustedWidth = this.frameWidth;
             let adjustedHeight = this.frameHeight;
-            const frameX = this.frameIndex * this.frameWidth; // X-koordinaten för den aktuella frame
-            const frameY = 0; // Y-koordinaten är 0 eftersom vi bara använder en rad av frames
+            const frameX = this.frameIndex * this.frameWidth; // X cordination for frames
+            const frameY = 0; // y is 0 bcs we only use on row of frames
 
 
 
@@ -181,6 +190,7 @@ export class Tower {
             target.reverse();
 
             const projectile = new Projectile(
+                this.towerType,
                 this.x,
                 this.y,
                 this.projectileSpeed,
@@ -204,6 +214,7 @@ export class Tower {
         const index = this.projectiles.indexOf(projectile);
         if (index > -1) {
             this.projectiles.splice(index, 1);
+            this.projectiles.setInvisible();
         }
     }
 
@@ -228,8 +239,6 @@ export class Tower {
      * @param {Object[]} enemies - The enemies on the canvas.
      */
     update(enemies) {
-        this.updateAnimation();
-        this.drawTower()
         this.projectiles.forEach(projectile => projectile.move());
         this.projectiles = this.projectiles.filter(projectile => !projectile.markedForDeletion);
 
@@ -238,6 +247,14 @@ export class Tower {
             this.shoot(enemies);
         } else {
             this.delay++;
+        }
+
+        // Check if all enemies are dead
+        const allEnemiesDead = enemies.every(enemy => enemy.isDead);
+
+        // If all enemies are dead, mark all projectiles as invisible
+        if (allEnemiesDead) {
+            this.projectiles.forEach(projectile => projectile.markedForDeletion = true);
         }
     }
 
