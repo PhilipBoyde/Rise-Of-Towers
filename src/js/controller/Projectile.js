@@ -31,21 +31,20 @@ export class Projectile {
         this.imageIndex = 0;
         this.frameCount = 0;
         this.images = [];
-        this.loadImage(imagePaths);
+        this.loadImage();
     }
 
     /**
      * Loads images from the given image paths.
-     * @param {string[]} imagePaths - array of image paths
      */
-    loadImage(imagePaths) {
+    loadImage() {
         this.images = [];
         let loadedImages = 0;
-        imagePaths.forEach((path, index) => {
+        this.imagePaths.forEach((path, index) => {
             const image = new Image();
             image.onload = () => {
                 loadedImages++;
-                if (loadedImages === imagePaths.length) {
+                if (loadedImages === this.imagePaths.length) {
                     this.imageLoaded = true;
                 }
             };

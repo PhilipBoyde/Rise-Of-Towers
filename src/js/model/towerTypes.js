@@ -55,6 +55,7 @@ export class ArcherTower extends Tower {
 export class WizardTower extends Tower {
     constructor(gameCtx, tiles, status) {
         const imagePaths = ["../js/model/assets/Tower/Tower1/RedMoonTower_free_idle_animation4.png"];
+
         const projectileImagePaths = [
             "../js/model/assets/Tower/Projectile/Mage/Mage.png",
             "../js/model/assets/Tower/Projectile/Mage/Mage3.png",
@@ -63,6 +64,7 @@ export class WizardTower extends Tower {
             "../js/model/assets/Tower/Projectile/Mage/Mage6.png",
             "../js/model/assets/Tower/Projectile/Mage/Mage7.png",
         ];
+
         const towerType = "Wizard";
         const towerOptions = {
             frameWidth: 1100/ 11, // Bredden på varje frame (280 / 4)

@@ -264,7 +264,7 @@ body, html{
 /*
 ------ Tower Button Styling ------
  */
-.UIScreen #tower1, .UIScreen #tower2, .UIScreen #tower3, .UIScreen #tower4{
+.UIScreen #tower1, .UIScreen #tower2, .UIScreen #tower3, .UIScreen #tower4, .UIScreen #tower5 {
     border: 2px solid #4F4537;
     border-radius: 10px;
     background: #ffffff;
@@ -279,25 +279,33 @@ body, html{
     position: absolute;
 }
 
-.UIScreen #tower1Image, .UIScreen #tower2Image, .UIScreen #tower3Image, .UIScreen #tower4Image {
+.UIScreen #tower1Image, .UIScreen #tower2Image, .UIScreen #tower3Image, .UIScreen #tower4Image, .UIScreen #tower5Image {
     position: absolute;
     top: 17%;
     left: 4%;
 }
 
-.UIScreen #tower1Cost, .UIScreen #tower2Cost, .UIScreen #tower3Cost, .UIScreen #tower4Cost{
+.UIScreen #tower1Cost, .UIScreen #tower2Cost, .UIScreen #tower3Cost, .UIScreen #tower4Cost, .UIScreen #tower5Cost{
     position: absolute;
-    top: 20%;
-    left: 32%;
+    font-size: 18px;
+    top: 50%;
+    left: 25%;
 }
 
-.UIScreen #tower1:disabled, .UIScreen #tower2:disabled, .UIScreen #tower3:disabled, .UIScreen #tower4:disabled {
+.UIScreen #tower1Name, .UIScreen #tower2Name, .UIScreen #tower3Name, .UIScreen #tower4Name, .UIScreen #tower5Name{
+    position: absolute;
+    font-size: 25px;
+    top: 10%;
+    left: 25%;
+}
+
+.UIScreen #tower1:disabled, .UIScreen #tower2:disabled, .UIScreen #tower3:disabled, .UIScreen #tower4:disabled, .UIScreen #tower5:disabled {
     cursor: not-allowed;
     filter: blur(1px);
     background-color: gray;
 }
 
-.UIScreen #tower1:disabled:hover, .UIScreen #tower2:disabled:hover, .UIScreen #tower3:disabled:hover, .UIScreen #tower4:disabled:hover {
+.UIScreen #tower1:disabled:hover, .UIScreen #tower2:disabled:hover, .UIScreen #tower3:disabled:hover, .UIScreen #tower4:disabled:hover, .UIScreen #tower5:disabled:hover {
     background: gray;
     color: #676767;
     font-size: 30px;
@@ -305,7 +313,7 @@ body, html{
 
 }
 
-.UIScreen #tower1:hover, .UIScreen #tower2:hover, .UIScreen #tower3:hover, .UIScreen #tower4:hover {
+.UIScreen #tower1:hover, .UIScreen #tower2:hover, .UIScreen #tower3:hover, .UIScreen #tower4:hover, .UIScreen #tower5:hover {
     background: #8c343c;
     color: white;
     font-size: 2em;
@@ -331,6 +339,12 @@ body, html{
 .UIScreen #tower4 {
     top: 65%;
     left: 84.6%;
+}
+
+.UIScreen #tower5 {
+    top: 60%;
+    left: 84.6%;
+
 }
 
 
@@ -570,7 +584,7 @@ body, html{
     font-family: "VT323", cursive;
     font-size: 200px;
     border-radius: 19px;
-    z-index: 4;
+    z-index: 20;
 }
 
 #GameOver .buttonContainer{
