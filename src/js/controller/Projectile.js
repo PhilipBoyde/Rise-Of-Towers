@@ -31,21 +31,20 @@ export class Projectile {
         this.imageIndex = 0;
         this.frameCount = 0;
         this.images = [];
-        this.loadImage(imagePaths);
+        this.loadImage();
     }
 
     /**
      * Loads images from the given image paths.
-     * @param {string[]} imagePaths - array of image paths
      */
-    loadImage(imagePaths) {
+    loadImage() {
         this.images = [];
         let loadedImages = 0;
-        imagePaths.forEach((path, index) => {
+        this.imagePaths.forEach((path, index) => {
             const image = new Image();
             image.onload = () => {
                 loadedImages++;
-                if (loadedImages === imagePaths.length) {
+                if (loadedImages === this.imagePaths.length) {
                     this.imageLoaded = true;
                 }
             };
@@ -81,7 +80,7 @@ export class Projectile {
      * Draws the projectile on the canvas.
      */
     draw() {
-        const frameChangeInterval = 200;
+        const frameChangeInterval = 400;
 
         if (this.markedForDeletion) {
             // If the projectile is marked for deletion, remove it and exit the draw() method
@@ -91,7 +90,7 @@ export class Projectile {
 
         if (this.imageLoaded) {
             const currentImage = this.images[this.imageIndex];
-            this.gameCtx.drawImage(currentImage, this.x, this.y, 40, 40);
+            this.gameCtx.drawImage(currentImage, this.x, this.y, 30, 30);
 
             this.frameCount++;
             if (this.frameCount >= frameChangeInterval / this.speed) {

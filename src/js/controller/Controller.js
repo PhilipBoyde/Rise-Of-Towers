@@ -62,17 +62,19 @@ document.getElementById("GameWaveButton").addEventListener("click", nexWave);
 document.getElementById("tower1").addEventListener("click", () => selectTower(1));
 document.getElementById("tower2").addEventListener("click", () => selectTower(2));
 document.getElementById("tower3").addEventListener("click", () => selectTower(3));
-document.getElementById("tower4").addEventListener("click", () => selectTower(4))
+document.getElementById("tower4").addEventListener("click", () => selectTower(4));
+document.getElementById("tower5").addEventListener("click", () => selectTower(5));
 const settingsElement = document.querySelector('.settingsScreen');
 
 
 document.getElementById("sellButton").addEventListener("click", sellTower);
 let sellButton = document.querySelector('#sellButton');
+
 let tower1Button = document.querySelector('#tower1');
 let tower2Button = document.querySelector('#tower2');
-
 let tower3Button = document.querySelector('#tower3');
 let tower4Button = document.querySelector('#tower4');
+let tower5Button = document.querySelector('#tower5');
 
 
 
@@ -174,6 +176,7 @@ export function selectTile(tile){
             tower2Button.disabled = true;
             tower3Button.disabled = true;
             tower4Button.disabled = true;
+            tower5Button.disabled = true;
 
 
             sellButton.disabled = true;
@@ -194,8 +197,7 @@ export function selectTile(tile){
                 tower2Button.disabled = false;
                 tower3Button.disabled = false;
                 tower4Button.disabled = false;
-
-
+                tower5Button.disabled = false;
 
                 sellButton.style.backgroundColor = 'gray';
                 sellButton.style.filter = 'blur(1px)';
@@ -508,6 +510,8 @@ function openSettings(){
         tower2Button.disabled = true;
         tower3Button.disabled = true;
         tower4Button.disabled = true;
+        tower5Button.disabled = true;
+
         disableButton();
 
         settingsElement.style.display = 'flex';
@@ -531,10 +535,7 @@ function closeSettings(){
         enableButton();
     }
 
-    tower1Button.disabled = false;
-    tower2Button.disabled = false;
-    tower3Button.disabled = false;
-    tower4Button.disabled = false;
+    selectTile();
 }
 
 
