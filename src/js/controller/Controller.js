@@ -29,7 +29,7 @@ const /** HTMLCanvasElement */ gameHover = document.querySelector('#GameHover');
 const /** number */ activeMapNbr = 1;  
 let /** number */ round = 0;
 let playerHealth = 20;
-let coins = 1350;
+let coins = 1000;
 let activeTowers = [];
 let img = new Image();
 
