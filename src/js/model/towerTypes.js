@@ -41,7 +41,7 @@ export class ArcherTower extends Tower {
             projectileImagePaths,
             towerOptions,
             towerType,
-            status
+            status,
         );
     }
 }

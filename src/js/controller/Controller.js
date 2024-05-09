@@ -14,6 +14,11 @@ import {ArcherTower, InfernoTower, WizardTower, IceTower, StoneTower} from "../m
  *  - flush out the tower targeting system
  */
 
+/**
+ * -BUGS-
+ * If you sell a tower to fast it does not find the tower
+ */
+
 /*
 --- variables ---
  */
@@ -165,42 +170,62 @@ changeMap()
  * @author Philip
  */
 export function selectTile(tile){
+    console.log(tile)
 
     if(allPlacedTowers.length >= 0 && !inSettings){
 
-        if (tile === undefined){
+        if (tile === undefined){ //no valid tile found
 
             tower1Button.disabled = true;
             tower2Button.disabled = true;
             tower3Button.disabled = true;
             tower4Button.disabled = true;
 
-
             sellButton.disabled = true;
+            sellButton.style.backgroundColor = 'gray';
+            sellButton.style.filter = 'blur(1px)';
 
-        } else {
+        } else { //found a valid tile
 
-            if (allPlacedTowers.includes(tile.positionID)){
-                sellButton.disabled = false;
-                sellButton.style.backgroundColor = '';
-                sellButton.style.filter = 'blur(0px)';
+            if (allPlacedTowers.includes(tile.positionID)){ // has a tower on it
+                tilesHasTower()
 
-            } else {
-
-                activeTiles = tile;
-                activeTileID = activeTiles.positionID;
-
-                tower1Button.disabled = false;
-                tower2Button.disabled = false;
-                tower3Button.disabled = false;
-                tower4Button.disabled = false;
-
-                sellButton.style.backgroundColor = 'gray';
-                sellButton.style.filter = 'blur(1px)';
-                sellButton.disabled = true;
+            } else { // has no tower on it
+                tileValidButHasNoTower()
             }
+
+            activeTiles = tile;
+            activeTileID = activeTiles.positionID; // the id of the tile that was clicked
         }
     }
+}
+
+/**
+ *
+ */
+function tileValidButHasNoTower(){
+    tower1Button.disabled = false;
+    tower2Button.disabled = false;
+    tower3Button.disabled = false;
+    tower4Button.disabled = false;
+
+    sellButton.style.backgroundColor = 'gray';
+    sellButton.style.filter = 'blur(1px)';
+    sellButton.disabled = true;
+}
+
+/**
+ *
+ */
+function tilesHasTower(){
+    sellButton.disabled = false;
+    sellButton.style.backgroundColor = '';
+    sellButton.style.filter = 'blur(0px)';
+
+    tower1Button.disabled = true;
+    tower2Button.disabled = true;
+    tower3Button.disabled = true;
+    tower4Button.disabled = true;
 }
 
 /**
@@ -208,7 +233,24 @@ export function selectTile(tile){
  * @author Philip
  */
 function sellTower(){
+
+    activeTowers.forEach((tower) => {
+
+        const towerID = tower.getPositionID()
+        if(towerID === activeTileID){
+
+            allPlacedTowers.splice(allPlacedTowers.indexOf(towerID), 1);
+            activeTowers.splice(activeTowers.indexOf(tower), 1);
+            coins += (tower.getTowerValue() * 0.8); // 80% of the tower value
+            updateCoins();
+            tileValidButHasNoTower()
+        }
+
+    });
+
+    /*
     allPlacedTowers.forEach((tower) => {
+
         if (tower === activeTileID) {
             allPlacedTowers.splice(allPlacedTowers.indexOf(tower), 1);
             activeTowers.splice(activeTowers.includes(activeTileID), 1);
@@ -218,6 +260,8 @@ function sellTower(){
         }
 
     });
+
+     */
 }
 
 /**
@@ -236,7 +280,7 @@ function selectTower(buttonID) {
                 activeTowers.push(new IceTower(towerCtx, activeTiles, showTowerRadius));
                 allPlacedTowers.push(activeTileID);
                 coins -=700;
-                selectTile(undefined);
+
             }
             break;
 
@@ -245,7 +289,6 @@ function selectTower(buttonID) {
                 activeTowers.push(new WizardTower(towerCtx, activeTiles, showTowerRadius));
                 allPlacedTowers.push(activeTileID);
                 coins -= 200;
-                selectTile(undefined);
             }
             break;
 
@@ -254,7 +297,6 @@ function selectTower(buttonID) {
                 activeTowers.push(new InfernoTower(towerCtx, activeTiles, showTowerRadius));
                 allPlacedTowers.push(activeTileID);
                 coins -= 700;
-                selectTile(undefined);
             }
             break;
 
@@ -263,7 +305,6 @@ function selectTower(buttonID) {
                 activeTowers.push(new StoneTower(towerCtx, activeTiles, showTowerRadius));
                 allPlacedTowers.push(activeTileID);
                 coins -= 300;
-                selectTile(undefined);
             }
             break;
 
@@ -273,10 +314,12 @@ function selectTower(buttonID) {
             break;
     }
 
+
     activeTowers.forEach(tower => { // tower
         tower.drawTower();
     });
     updateCoins()
+    tilesHasTower()
 }
 
 

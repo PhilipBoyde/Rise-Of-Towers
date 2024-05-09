@@ -37,11 +37,11 @@ export class Tower {
      */
     constructor(gameCtx, tiles, cost, range, damage, upgradeCost, maxLevel, speed, projectileSpeed, imagePaths, projectileImagePath, options, towerType, showRange) {
         this.gameCtx = gameCtx;
+
         this.positionID = tiles.positionID;
         delete tiles.positionID;
 
         this.towerType = towerType.toString();
-
         this.level = 1;
 
 
@@ -77,6 +77,14 @@ export class Tower {
         this.frameUpdateCounter = options.frameUpdateCounter;
         this.frameSpeed = options.frameSpeed; // Hastigheten för att byta frame (? frames per sekund)
 
+    }
+
+    getPositionID(){
+        return this.positionID;
+    }
+
+    getTowerValue(){
+        return this.cost;
     }
 
     /**
