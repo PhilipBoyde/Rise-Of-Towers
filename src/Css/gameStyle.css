@@ -838,3 +838,37 @@ body, html{
     top: 35%;
     left: 19%;
 }
+
+/*
+------ TowerInfo Styling ------
+ */
+
+
+.towerInfo {
+    position: absolute;
+    background: rgba(86, 69, 41, 0.86);
+    border-radius: 4px;
+
+
+    width: 125px;
+    height: 150px;
+
+    top: 256px; /* TopLeft 20px */
+    left: 254px; /* TopLeft 20px */
+}
+
+.towerInfo #towerInfoName {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: lighter;
+}
+
+.towerInfo #towerInfoStats {
+    color: white;
+    position: relative;
+    left: 5px;
+    font-size: 23px;
+}

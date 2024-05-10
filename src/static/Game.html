@@ -23,7 +23,7 @@
         <canvas id="GameBackground"></canvas>
         <canvas id="GameScreen"></canvas>
         <canvas id="GameHover"></canvas>
-         <canvas id="TowerScreen"></canvas>
+        <canvas id="TowerScreen"></canvas>
         <canvas id="GameUI"></canvas>
 
 
@@ -77,6 +77,7 @@
                 <button id ="settingsButton">
                     <img id ="settingsIMG" src="../js/model/assets/icons/settingsButton.png" alt="">
                 </button>
+
         </div>
 
 
@@ -117,7 +118,19 @@
             </div>
         </div>
         <h1 id="fpsCounter">Average<br>FPS: .... </h1>
-    </div>
+
+
+        <div class = "towerInfo">
+            <span id="towerInfoName">Tower Name</span>
+            <span id="towerInfoStats">Level: 1 <br> Damage: 0 <br>Speed: 0 <br> ----------- <br> Upgrade: 200</span>
+
+
+        </div>
+
+</div>
+
+
+
 
 <script type="module" src="../js/controller/SpriteTowerController.js"></script>
 <script type="module" src="../js/controller/SpriteController.js"></script>
