@@ -33,7 +33,7 @@ const towerCtx = towerCanvas.getContext('2d');
 const /** number */ activeMapNbr = 1;  
 let /** number */ round = 0;
 let playerHealth = 20;
-let coins = 1350;
+let coins = 10000000000;
 let activeTowers = [];
 let img = new Image();
 
@@ -249,10 +249,9 @@ function updateTowerStatus(){
 
 function upgradeTower(){
     if (coins >= activeTower.upgradeCost){
-        activeTower.
-
-    }else {
-        console.log("No money")
+        coins = coins - activeTower.upgradeCost;
+        activeTower.upgradeTower()
+        updateCoins();
     }
 }
 

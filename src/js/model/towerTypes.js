@@ -31,9 +31,9 @@ export class ArcherTower extends Tower {
             gameCtx,
             tiles,
             100, // base cost
+            200,
             200, // range
             20, // Base damage
-            120, // upgradeCost
             5, // maxLevel
             60, // Base Shooting speed
             5, // Projectile speed
@@ -79,17 +79,30 @@ export class WizardTower extends Tower {
             gameCtx,
             tiles,
             200, // cost
+            300,
             170, // range
             80, // damage
-            300, // upgradeCost
-            5, // maxLevel
+            3, // maxLevel
             110, // Shooting speed
             4.5, // Projectile speed
             imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
             projectileImagePaths,
             towerOptions,
             towerType,
-            status
+            status,
+            {upgradeInfo: { //Info about the different upgrades
+                level2: {
+                    cost: 200,
+                    damage: 200,
+                    speed: 115
+                },
+
+                level3: {
+                    cost: "$$$",
+                    damage: 300,
+                    speed: 120
+                }
+                }},
         );
     }
 }
@@ -126,17 +139,30 @@ export class InfernoTower extends Tower{
             gameCtx,
             tiles,
             700,
+            400,
             250,
             20,
-            1000,
-            2,
+            3,
             35,
             4.5,
             imagePaths,
             projectileImagePaths,
             towerOptions,
             towerType,
-            status
+            status,
+            {upgradeInfo: { //Info about the different upgrades
+                    level2: {
+                        cost: 200,
+                        damage: 200,
+                        speed: 115
+                    },
+
+                    level3: {
+                        cost: "$$$",
+                        damage: 300,
+                        speed: 120
+                    }
+                }},
 
         );
     }
@@ -174,63 +200,40 @@ export class StoneTower extends Tower {
             gameCtx,
             tiles,
             700,
+            500,
             250,
             20,
-            1000,
-            2,
+            3,
             35,
             4.5,
             imagePaths,
             projectileImagePaths,
             towerOptions,
             towerType,
-            status
+            status,
+            {upgradeInfo: { //Info about the different upgrades
+                    level2: {
+                        cost: 200,
+                        damage: 200,
+                        speed: 115
+                    },
 
-        );
-    }
-}
-/**
-    *Class for the Fast(4th) tower. Extends the Tower class.
-    * @class FastTower
-    * @extends Tower
-    * @author Muhammed
-    */
-export class FastTower extends Tower {
-    constructor(gameCtx, tiles, status) {
-        const imagePaths = [""];
-        const projectileImagePath = [""];
-        const towerType = "Fast";
-        const towerOptions = {
-            frameWidth: 410/ 4, // Bredden på varje frame (280 / 4)
-            frameHeight: 130, // Höjden på varje frame
-            frameIndex: 0, // Aktuell frame-index
-            frameCount:4, // Antal frames i bilden
-            frameUpdateCounter:  0,
-            frameSpeed: 10
-        };
-        super(
-            gameCtx,
-            tiles,
-            150, // cost, higher cost than archer-
-            250, // range, smaller range than archer
-            10, // damage, higher damage than archer
-            180, // upgradeCost
-            3, //
-            30, //Shooting speed
-            12, // projectile speed
-            imagePaths,
-            projectileImagePath,
-            towerOptions,
-            towerType,
-            status
+                    level3: {
+                        cost: "$$$",
+                        damage: 300,
+                        speed: 120
+                    }
+                }},
+
         );
     }
 }
 
 export class IceTower extends Tower{
     constructor(gameCtx, tiles, status) {
-        const imagePaths = ["../js/model/assets/Tower/IceT.png"];
+        const imagePaths = ["../js/model/assets/Tower/Tower1/walla.png"];
         //const projectileImagePaths =["../js/model/assets/Tower/Projectile/FB500-2.png"];
+        // ../js/model/assets/Tower/IceT.png
 
         const projectileImagePaths = [
             "../js/model/assets/Tower/Projectile/Ice/Ice3.png",
@@ -247,24 +250,38 @@ export class IceTower extends Tower{
             frameIndex: 0, // Aktuell frame-index
             frameCount:4, // Antal frames i bilden
             frameUpdateCounter:0  ,
-            frameSpeed: 10
+            frameSpeed: 19
         };
 
         super(
             gameCtx,
             tiles,
             700, // cost
+            800,
             200, // range
             5, // damage
-            120, // upgradeCost
-            5, // maxLevel
+            3, // maxLevel
             80, // Shooting speed
             5, // Projectile speed
             imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
             projectileImagePaths,
             towerOptions,
             towerType,
-            status
+            status,
+            {upgradeInfo: { //Info about the different upgrades
+                    level2: {
+                        cost: 200,
+                        damage: 200,
+                        speed: 115
+                    },
+
+                    level3: {
+                        cost: "$$$",
+                        damage: 300,
+                        speed: 120,
+                        img: "../js/model/assets/Tower/IceT.png"
+                    }
+                }},
         );
     }
 }

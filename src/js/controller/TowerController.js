@@ -35,8 +35,9 @@ export class Tower {
      * @param options
      * @param towerType
      */
-    constructor(gameCtx, tiles, cost, range, damage, upgradeCost, maxLevel, speed, projectileSpeed, imagePaths, projectileImagePath, options, towerType, showRange) {
+    constructor(gameCtx, tiles, cost,upgradeCost, range, damage, maxLevel, speed, projectileSpeed, imagePaths, projectileImagePath, options, towerType, showRange, {upgradeInfo}) {
         this.gameCtx = gameCtx;
+        this.upgradeInfo = upgradeInfo;
 
         this.positionID = tiles.positionID;
         delete tiles.positionID;
@@ -69,7 +70,7 @@ export class Tower {
         this.showRange = showRange;
 
 
-        this.loadImages(imagePaths);
+        this.loadImages(this.imagePaths);
 
         this.frameWidth = options.frameWidth; // Bredden på varje frame (280 / 4)
         this.frameHeight = options.frameHeight; // Höjden på varje frame
@@ -88,17 +89,40 @@ export class Tower {
         return this.cost;
     }
 
-    level2(){
-        this.level = 2
-    }
+    upgradeTower(){
+        this.level += 1;
 
-    level3(){
-        this.level = 3
+        switch (this.level){
+            case 2:
+                this.upgradeCost = this.upgradeInfo.level2.cost;
+                this.damage = this.upgradeInfo.level2.damage;
+                this.speed = this.upgradeInfo.level2.speed;
+                break;
+
+            case 3:
+                this.upgradeCost = this.upgradeInfo.level3.cost;
+                this.damage = this.upgradeInfo.level3.damage;
+                this.speed = this.upgradeInfo.level3.speed;
+                this.imagePaths = this.upgradeInfo.level3.img;
+                this.towerImages = []
+                this.loadImages(this.imagePaths);
+                break;
+
+            case "MAX":
+                console.log("Tower is at MAX level")
+                break;
+
+            default:
+                break;
+        }
+
+        if (this.level === this.maxLevel){
+            this.level = this.level + " MAX";
+        }
     }
 
     /**
      * Loads tower images.
-     * @param {string[]} imagePaths - Array of image paths for tower frames.
      */
     loadImages(imagePaths) {
         this.towerImages = [];
@@ -108,7 +132,7 @@ export class Tower {
             towerImage.src = path;
             towerImage.onload = () => {
                 loadedImages++;
-                if (loadedImages === imagePaths.length) {
+                if (loadedImages === this.imagePaths.length) {
                     this.drawTower();
                 }
             };
