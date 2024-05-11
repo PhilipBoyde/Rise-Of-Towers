@@ -1,6 +1,13 @@
 import {map1Path1Route1, map1Path1Route2, map1Path1Route3 } from './map1/Map1Paths.js';
-import {map2Path1Route1, map2Path1Route2, map2Path1Route3 } from './map2/Map2Paths.js';
-import {map3Path1Route1, map3Path1Route2, map3Path1Route3 } from './map3/Map3Paths.js';
+import {map2Path1Route1, map2Path1Route2, map2Path1Route3, map2Path2Route1} from './map2/Map2Paths.js';
+import {
+        map3Path1Route1,
+        map3Path1Route2,
+        map3Path1Route3,
+        map3Path1Route4,
+        map3Path1Route5,
+        map3Path2Route1
+} from './map3/Map3Paths.js';
 
 /**
  * Object to hold the paths for the map1.
