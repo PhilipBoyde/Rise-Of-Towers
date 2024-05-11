@@ -68,6 +68,7 @@ export class Tower {
         this.projectileImagePath = projectileImagePath;
         this.showRange = showRange;
 
+
         this.loadImages(imagePaths);
 
         this.frameWidth = options.frameWidth; // Bredden på varje frame (280 / 4)
@@ -85,6 +86,14 @@ export class Tower {
 
     getTowerValue(){
         return this.cost;
+    }
+
+    level2(){
+        this.level = 2
+    }
+
+    level3(){
+        this.level = 3
     }
 
     /**

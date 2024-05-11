@@ -1,6 +1,7 @@
 import {calculateWave, changeMapRoutes, testEnemyType} from "../model/WaveCalculator.js";
 import {gameIsRunning, setGameInfo, updateHoverTiles} from "./placementTiles.js";
 import {ArcherTower, InfernoTower, WizardTower, IceTower, StoneTower} from "../model/towerTypes.js";
+import {smokeEffect} from "../model/effectsCenter.js";
 
 
 /**
@@ -38,6 +39,7 @@ let img = new Image();
 
 let showFPS = false;
 let showTowerRadius = false;
+let activeTower = undefined;
 
 let enemies;
 let inSettings = false;
@@ -58,8 +60,10 @@ const fpsCounterElement = document.querySelector('#fpsCounter');
 
 document.getElementById("closeSettings").addEventListener("click", closeSettings);
 document.getElementById("settingsButton").addEventListener("click", openSettings);
+document.getElementById("upgradeButton").addEventListener("click", upgradeTower);
 const checkboxFPS = document.querySelector('.checkbox1');
 const checkboxTowerRadius = document.querySelector('.checkbox2');
+const towerStatsElement = document.querySelector('.towerInfo');
 
 
 const /** CanvasRenderingContext2D */ gameCtx = gameCanvas.getContext('2d');
@@ -182,13 +186,13 @@ export function selectTile(tile){
             tower4Button.disabled = true;
 
             sellButton.disabled = true;
-            sellButton.style.backgroundColor = 'gray';
-            sellButton.style.filter = 'blur(1px)';
+            towerStatsElement.style.display = 'none';
 
         } else { //found a valid tile
 
             if (allPlacedTowers.includes(tile.positionID)){ // has a tower on it
                 tilesHasTower()
+
 
             } else { // has no tower on it
                 tileValidButHasNoTower()
@@ -197,6 +201,58 @@ export function selectTile(tile){
             activeTiles = tile;
             activeTileID = activeTiles.positionID; // the id of the tile that was clicked
         }
+    }
+}
+
+function updateTowerStatus(){
+    let tempX = undefined;
+    let tempY = undefined;
+
+    activeTowers.forEach((tower) => {
+
+        const towerID = tower.getPositionID()
+
+        if(towerID === activeTileID){
+            console.log(tower.x + ", " + tower.y)
+            activeTower = tower;
+
+            //updates stats
+            const name =  document.querySelector('#towerInfoName');
+            const tempName = tower.towerType + ' Tower';
+            name.textContent = tempName;
+
+            const stats =  document.querySelector('#towerInfoStats');
+            const tempStats = 'Level: ' + tower.level + '<br>' + 'Damage: ' + tower.damage + '<br>' + 'Speed: ' + tower.speed + '<br>' + '-----------' + '<br>' + 'Upgrade: ' + tower.upgradeCost;
+            stats.innerHTML = tempStats;
+
+            //Position
+            towerStatsElement.style.display = 'block';
+
+            tempX = tower.x + 94
+            tempY = tower.y - 20
+
+            tempX = tempX + "px";
+            tempY = tempY + "px";
+
+            towerStatsElement.style.top = tempY;
+            towerStatsElement.style.left = tempX;
+
+        }
+
+    });
+
+
+
+
+
+}
+
+function upgradeTower(){
+    if (coins >= activeTower.upgradeCost){
+        activeTower.
+
+    }else {
+        console.log("No money")
     }
 }
 
@@ -209,23 +265,25 @@ function tileValidButHasNoTower(){
     tower3Button.disabled = false;
     tower4Button.disabled = false;
 
-    sellButton.style.backgroundColor = 'gray';
-    sellButton.style.filter = 'blur(1px)';
-    sellButton.disabled = true;
+    sellButton.disabled = true; //rm?
+    towerStatsElement.style.display = 'none';
 }
 
 /**
  *
  */
 function tilesHasTower(){
-    sellButton.disabled = false;
-    sellButton.style.backgroundColor = '';
-    sellButton.style.filter = 'blur(0px)';
+    sellButton.disabled = false; //rm?
 
     tower1Button.disabled = true;
     tower2Button.disabled = true;
     tower3Button.disabled = true;
     tower4Button.disabled = true;
+
+    setTimeout(() => { // timmer needed to let variables keep up
+        updateTowerStatus()
+    }, 1);
+
 }
 
 /**
@@ -318,7 +376,15 @@ function selectTower(buttonID) {
     activeTowers.forEach(tower => { // tower
         tower.drawTower();
     });
+    /*
+    const position = {x: 100, y: 100}
+    const smokeEffect1 = new smokeEffect(position, towerCtx)
+    const status = smokeEffect1.drawEffect()
+
+     */
     updateCoins()
+
+
     tilesHasTower()
 }
 

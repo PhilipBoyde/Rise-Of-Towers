@@ -30,12 +30,12 @@ export class ArcherTower extends Tower {
         super(
             gameCtx,
             tiles,
-            100, // cost
+            100, // base cost
             200, // range
-            20, // damage
+            20, // Base damage
             120, // upgradeCost
             5, // maxLevel
-            60, // Shooting speed
+            60, // Base Shooting speed
             5, // Projectile speed
             imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
             projectileImagePaths,

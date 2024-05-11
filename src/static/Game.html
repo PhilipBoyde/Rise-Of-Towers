@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <title>Rise Of Towers | Game</title>
 
     <link rel="icon" href="../js/model/assets/img/SiteIcon.png" type="image/x-icon">
@@ -30,8 +31,6 @@
         <!-- UI Screen -->
         <div class="UIScreen">
                 <button id = "GameWaveButton">Start Wave</button>
-
-                 <button id = "sellButton">Sell</button>
                  <button id = "speedButton"> >>> </button>
 
             <div class="towers">
@@ -74,7 +73,7 @@
                 <div id="CoinsAnimation"></div>
                 <h1 id="WaveCounter">Wave 000</h1>
 
-                <button id ="settingsButton">
+                <button id ="settingsButton" title="Open/Close Settings">
                     <img id ="settingsIMG" src="../js/model/assets/icons/settingsButton.png" alt="">
                 </button>
 
@@ -95,10 +94,10 @@
             <button id="restartButton">Restart</button>
         </a>
 
-        <input  type="checkbox" class="checkbox1">
+        <input type="checkbox" class="checkbox1">
         <h2 id="CheckboxFPSLabel">Display FPS</h2>
 
-        <input  type="checkbox" class="checkbox2">
+        <input type="checkbox" class="checkbox2">
         <h2 id="CheckboxTowerRadiusLabel">Show Tower Radius</h2>
 
     </div>
@@ -120,9 +119,18 @@
         <h1 id="fpsCounter">Average<br>FPS: .... </h1>
 
 
-        <div class = "towerInfo">
+        <div class ="towerInfo">
             <span id="towerInfoName">Tower Name</span>
             <span id="towerInfoStats">Level: 1 <br> Damage: 0 <br>Speed: 0 <br> ----------- <br> Upgrade: 200</span>
+
+            <button id="upgradeButton" title="Upgrade Tower to next level">
+                <img id="upgradeButtonIMG" src="../js/model/assets/icons/uppgrade.png" alt=" ">
+            </button>
+
+            <button id="sellButton" title="Sell current tower. (get 80% of placement value back)">
+                <img id="sellButtonIMG" src="../js/model/assets/icons/SellButton.png" alt=" ">
+            </button>
+
 
 
         </div>
