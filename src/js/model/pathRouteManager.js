@@ -21,7 +21,8 @@ export const Map1Paths = {
 export const Map2Paths = {
         map2Path1Route1,
         map2Path1Route2,
-        map2Path1Route3
+        map2Path1Route3,
+        map2Path2Route1,
 }
 
 /**
@@ -31,5 +32,8 @@ export const Map2Paths = {
 export const Map3Paths = {
         map3Path1Route1,
         map3Path1Route2,
-        map3Path1Route3
+        map3Path1Route3,
+        map3Path1Route4,
+        map3Path1Route5,
+        map3Path2Route1,
 }
