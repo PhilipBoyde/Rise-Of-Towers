@@ -1,14 +1,19 @@
 /** Controller for map selection page. */
 
+document.getElementById("Map1").addEventListener("click", () => selectMap(1));
+document.getElementById("Map2").addEventListener("click", () => selectMap(2));
+document.getElementById("Map3").addEventListener("click", () => selectMap(3));
+
 /**
  * Global variable to keep track of the selected map.
  */
-let selectedMap = '';
+let selectedMap;
+let mapId = 0;
 
 /**
  * Highlights the selected map and shows the confirmation modal.
  *
- * @param {string} mapId - The ID of the selected map.
+ * @param mapId - The ID of the selected map.
  * @author Muhamed
  */
 function selectMap(mapId) {
@@ -40,6 +45,9 @@ function selectMap(mapId) {
 function showConfirmation(mapId) {
     selectedMap = mapId;
     document.getElementById('confirmationModal').style.display = 'block';
+
+    console.log(mapId);
+    console.log(selectedMap);
 }
 
 /**

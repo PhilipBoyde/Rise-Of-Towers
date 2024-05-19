@@ -155,7 +155,7 @@ export class goblin extends Enemy {
             path,
             100, //health
             20, //coins
-            {spriteImages: { //Sprite images for the wolf enemy
+            {spriteImages: {
                     up: '../js/model/assets/EnemySprites/Goblin/U_Walk.png',
                     down: '../js/model/assets/EnemySprites/Goblin/D_Walk.png',
                     right: '../js/model/assets/EnemySprites/Goblin/R_Walk.png',

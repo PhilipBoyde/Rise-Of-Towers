@@ -7,6 +7,9 @@
     <link rel="icon" href="../js/model/assets/img/SiteIcon.png" type="image/x-icon">
     <link rel="stylesheet" href="../Css/gameStyle.css">
     <link rel="stylesheet" href="../Css/transition.css">
+
+
+
 </head>
 <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 <body>
@@ -75,6 +78,7 @@
         </label>
         <h2 id="CheckboxTowerRadiusLabel">Show Tower Radius</h2>
     </div>
+
     <!-- GameOver page-->
     <div id="GameOver">
         Game Over
@@ -88,29 +92,25 @@
         </div>
 
         <h1 id="fpsCounter">Average<br>FPS: .... </h1>
+    </div>
 
-        <!-- Tower Info -->
-        <div class ="towerInfo">
-            <span id="towerInfoName">Tower Name</span>
-            <span id="towerInfoStats">Level: 1 <br> Damage: 0 <br>Speed: 0 <br> ----------- <br> Upgrade: 200</span>
+    <!-- Tower Info -->
+    <div class ="towerInfo">
+        <span id="towerInfoName">Tower Name</span>
+        <span id="towerInfoStats">Level: 1 <br> Damage: 0 <br>Speed: 0 <br> ----------- <br> Upgrade: 200</span>
 
-            <button id="upgradeButton" title="Upgrade Tower to next level">
-                <img id="upgradeButtonIMG" src="../js/model/assets/icons/uppgrade.png" alt=" ">
-            </button>
+        <button id="upgradeButton" title="Upgrade Tower to next level">
+            <img id="upgradeButtonIMG" src="../js/model/assets/icons/uppgrade.png" alt=" ">
+        </button>
 
-            <button id="sellButton" title="Sell current tower. (get 80% of placement value back)">
-                <img id="sellButtonIMG" src="../js/model/assets/icons/SellButton.png" alt=" ">
-            </button>
+        <button id="sellButton" title="Sell current tower. (get 80% of placement value back)">
+            <img id="sellButtonIMG" src="../js/model/assets/icons/SellButton.png" alt=" ">
+        </button>
+    </div>
 
-
-
-        </div>
 </div>
-<script type="module" src="../js/controller/SpriteTowerController.js"></script>
-<script type="module" src="../js/controller/SpriteController.js"></script>
-<script type="module" src="../js/model/towerTypes.js"></script>
-<script type="module" src="../js/transitionAnimation.js"></script>
-<script type="module" src="../js/controller/Controller.js"></script>
-<script src="../js/controller/Controller.js"></script>
+
+    <script type="module" src="../js/controller/SetUp.js"></script>
+    <script type="module" src="../js/transitionAnimation.js"></script>
 </body>
 </html>

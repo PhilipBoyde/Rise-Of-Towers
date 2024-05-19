@@ -1,393 +1,81 @@
-import {calculateWave, changeMapRoutes, testEnemyType} from "../model/WaveCalculator.js";
-import {gameIsRunning, setGameInfo, updateHoverTiles} from "./placementTiles.js";
-import {ArcherTower, InfernoTower, WizardTower, IceTower, StoneTower} from "../model/towerTypes.js";
-import { MapController } from './mapController.js';
-import {smokeEffect} from "../model/effectsCenter.js";
+import {calculateWave, testEnemyType} from "../model/WaveCalculator.js";
+import {gameIsRunning, updateHoverTiles} from "./placementTiles.js";
+import {gameStatus} from "./SettingsController.js";
+//import {} from "../controller/SpriteTowerController.js";
+//import {} from "../controller/SpriteController.js";
+//import { MapController } from './mapController.js';
 
 
 /**
  *  -TODO-
- *  - Add a way to upgrade towers
- *  - Add a way to change the map
- *  - add functionality to the sell button
  *  - balance the game
  *  - add more bosses
  *  - add enemy death animations
  *  - flush out the tower targeting system
  */
 
-/**
- * -BUGS-
- * If you sell a tower to fast it does not find the tower
- */
-
 /*
 --- variables ---
  */
 
-const  /** HTMLCanvasElement */ gameCanvas = document.querySelector('#GameScreen');
-const gameBackground = document.querySelector('#GameBackground');
-const /** HTMLCanvasElement */ interactiveCanvas = document.querySelector('#GameUI');
-const /** HTMLCanvasElement */ towerCanvas = document.querySelector('#TowerScreen');
-const /** HTMLCanvasElement */ gameHover = document.querySelector('#GameHover');
-const towerCtx = towerCanvas.getContext('2d');
-const /** number */ activeMapNbr = 1;  
-let /** number */ round = 0;
-let playerHealth = 20;
-let coins = 10000000000;
-let activeTowers = [];
-let img = new Image();
+let /** @type number */ activeWave = 0;
+let /** @type number */ playerHealth = 20;
+let /** @type number */ coins = 10000000000;
+updateCoins();
 
-let showFPS = false;
-let showTowerRadius = false;
-let activeTower = undefined;
+let /** @type array */ activeTowers = [];
+let /** @type boolean */ showFPS = false;
+let /** @type array */ enemies = [];
+let /** @type number */ lastTime = 0;
+let /** @type number */ currentTime;
+let /** @type number */ elapsed;
+let /** @type number */ frameCount = 0;
+let /** @type number */ fpsAccumulator = 0;
+let /** @type boolean */ gameActive = false;
+let /** @type number */ enemyAnimationID = undefined;
 
-let enemies;
-let inSettings = false;
-let lastTime = 0;
-let currentTime;
-let elapsed;
-let frameCount = 0;
-let fpsAccumulator = 0;
+let /** @type HTMLCanvasElement */ enemyCanvas;
+let /** @type HTMLCanvasElement */ gameHoverCanvas;
+let /** @type CanvasRenderingContext2D */ enemyCtx;
+let /** @type CanvasRenderingContext2D */ gameHoverCtx;
 
-let gameActive = false;
-let animationID;
-let activeTiles;
-let activeTileID;
-let allPlacedTowers = [];
+const /** @type HTMLElement */fpsCounterElement = document.querySelector('#fpsCounter');
+
+/** @type HTMLElement */ document.getElementById("GameWaveButton").addEventListener("click", nexWave);
+
 // let selectedTower = null;
 
-const fpsCounterElement = document.querySelector('#fpsCounter');
-
-document.getElementById("closeSettings").addEventListener("click", closeSettings);
-document.getElementById("settingsButton").addEventListener("click", openSettings);
-document.getElementById("upgradeButton").addEventListener("click", upgradeTower);
-const checkboxFPS = document.querySelector('.checkbox1');
-const checkboxTowerRadius = document.querySelector('.checkbox2');
-const towerStatsElement = document.querySelector('.towerInfo');
-
-
-const /** CanvasRenderingContext2D */ gameCtx = gameCanvas.getContext('2d');
-document.getElementById("GameWaveButton").addEventListener("click", nexWave);
-document.getElementById("tower1").addEventListener("click", () => selectTower(1));
-document.getElementById("tower2").addEventListener("click", () => selectTower(2));
-document.getElementById("tower3").addEventListener("click", () => selectTower(3));
-document.getElementById("tower4").addEventListener("click", () => selectTower(4));
-const settingsElement = document.querySelector('.settingsScreen');
-
-
-document.getElementById("sellButton").addEventListener("click", sellTower);
-let sellButton = document.querySelector('#sellButton');
-
-let tower1Button = document.querySelector('#tower1');
-let tower2Button = document.querySelector('#tower2');
-let tower3Button = document.querySelector('#tower3');
-let tower4Button = document.querySelector('#tower4');
-
-
-
-const gameBackgroundCtx = gameBackground.getContext('2d');
-
 /*
---- stop of variables ---
+--- dependencies ---
  */
-/*
---- program initialization ---
- */
-
-/**
- * Sets up canvas dimensions and styling if both gameCanvas and interactiveCanvas exist.
- * Otherwise, alerts the user.
- *
- * @author Philip
- */
-if (gameCanvas && interactiveCanvas && towerCanvas && gameHover){
-    const canvasWidth = 1120;
-    const canvasHeight = 960;
-
-    gameCanvas.width = canvasWidth;
-    gameCanvas.height = canvasHeight;
-
-    gameBackground.width = canvasWidth;
-    gameBackground.height = canvasHeight;
-
-    gameHover.width = canvasWidth;
-    gameHover.height = canvasHeight;
-
-    towerCanvas.width = canvasWidth;
-    towerCanvas.height = canvasHeight;
-
-    interactiveCanvas.width = 200;
-    interactiveCanvas.height = 966;
-
-    const interactiveCtx = interactiveCanvas.getContext('2d');
-    interactiveCtx.fillStyle = '#574629';
-    interactiveCtx.fillRect(0, 0, interactiveCanvas.width, interactiveCanvas.height);
-    setGameInfo(gameCanvas, gameCtx)
-}else {
-    alert('Canvas not found!, Pleas try again later');
+export function setGameControllerDependencies(newEnemyCanvas, newEnemyCtx, newGameHoverCanvas, newGameHoverCtx){
+    enemyCanvas = newEnemyCanvas;
+    enemyCtx = newEnemyCtx;
+    gameHoverCanvas = newGameHoverCanvas;
+    gameHoverCtx = newGameHoverCtx;
 }
 
-/**
- * Changes the map based on the activeMap variable.
- *
- * @author Philip
- */
-function changeMap(){
-    switch (activeMapNbr) { // Load the map based on the activeMap variable
-        case 1:
-            img.src = '../js/model/assets/gameMap/Map1.png';
-            break;
+export function setActiveTowers(towers){
+    activeTowers = towers;
+}
 
-        case 2:
-            img.src = '../js/model/assets/gameMap/Map2.png';
-            break;
+export function stopGame(){
+    cancelAnimationFrame(enemyAnimationID);
+}
 
-        case 3:
-            img.src = '../js/model/assets/gameMap/Map3.png';
-            break;
+export function startGame(){
+    gameLoop(enemies);
+}
 
-        default:
-            console.log('Map not found!');
-            break;
-    }
-    changeMapRoutes(activeMapNbr)
-    img.onload = () => {
-        gameBackgroundCtx.drawImage(img, 0, 0, gameCanvas.width, gameCanvas.height);
+export function setFpsStatus(status){
+    showFPS = status;
+
+    if (showFPS){
+        fpsCounterElement.style.display = 'block';
+    }else{
+        fpsCounterElement.style.display = 'none';
     }
 }
-
-/*
--- start upp methods --
- */
-updateCoins()
-changeMap()
-
-/*
---- end of program initialization ---
- */
-
-/**
- * Selects the tile that the player clicked on.
- * If the tile is already occupied by a tower, the player can sell the tower.
- * Disables towers based on the kind of tile that was clicked.
- * @param tile
- * @author Philip
- */
-export function selectTile(tile){
-    console.log(tile)
-
-    if(allPlacedTowers.length >= 0 && !inSettings){
-
-        if (tile === undefined){ //no valid tile found
-
-            tower1Button.disabled = true;
-            tower2Button.disabled = true;
-            tower3Button.disabled = true;
-            tower4Button.disabled = true;
-
-            sellButton.disabled = true;
-            towerStatsElement.style.display = 'none';
-
-        } else { //found a valid tile
-
-            if (allPlacedTowers.includes(tile.positionID)){ // has a tower on it
-                tilesHasTower()
-
-
-            } else { // has no tower on it
-                tileValidButHasNoTower()
-            }
-
-            activeTiles = tile;
-            activeTileID = activeTiles.positionID; // the id of the tile that was clicked
-        }
-    }
-}
-
-function updateTowerStatus(){
-    let tempX = undefined;
-    let tempY = undefined;
-
-    activeTowers.forEach((tower) => {
-
-        const towerID = tower.getPositionID()
-
-        if(towerID === activeTileID){
-            console.log(tower.x + ", " + tower.y)
-            activeTower = tower;
-
-            //updates stats
-            const name =  document.querySelector('#towerInfoName');
-            const tempName = tower.towerType + ' Tower';
-            name.textContent = tempName;
-
-            const stats =  document.querySelector('#towerInfoStats');
-            const tempStats = 'Level: ' + tower.level + '<br>' + 'Damage: ' + tower.damage + '<br>' + 'Speed: ' + tower.speed + '<br>' + '-----------' + '<br>' + 'Upgrade: ' + tower.upgradeCost;
-            stats.innerHTML = tempStats;
-
-            //Position
-            towerStatsElement.style.display = 'block';
-
-            tempX = tower.x + 94
-            tempY = tower.y - 20
-
-            tempX = tempX + "px";
-            tempY = tempY + "px";
-
-            towerStatsElement.style.top = tempY;
-            towerStatsElement.style.left = tempX;
-
-        }
-
-    });
-
-
-
-
-
-}
-
-function upgradeTower(){
-    if (coins >= activeTower.upgradeCost){
-        coins = coins - activeTower.upgradeCost;
-        activeTower.upgradeTower()
-        updateCoins();
-    }
-}
-
-/**
- *
- */
-function tileValidButHasNoTower(){
-    tower1Button.disabled = false;
-    tower2Button.disabled = false;
-    tower3Button.disabled = false;
-    tower4Button.disabled = false;
-
-    sellButton.disabled = true; //rm?
-    towerStatsElement.style.display = 'none';
-}
-
-/**
- *
- */
-function tilesHasTower(){
-    sellButton.disabled = false; //rm?
-
-    tower1Button.disabled = true;
-    tower2Button.disabled = true;
-    tower3Button.disabled = true;
-    tower4Button.disabled = true;
-
-    setTimeout(() => { // timmer needed to let variables keep up
-        updateTowerStatus()
-    }, 1);
-
-}
-
-/**
- * Gives the player the option to sell the tower that is placed on the selected tile.
- * @author Philip
- */
-function sellTower(){
-
-    activeTowers.forEach((tower) => {
-
-        const towerID = tower.getPositionID()
-        if(towerID === activeTileID){
-
-            allPlacedTowers.splice(allPlacedTowers.indexOf(towerID), 1);
-            activeTowers.splice(activeTowers.indexOf(tower), 1);
-            coins += (tower.getTowerValue() * 0.8); // 80% of the tower value
-            updateCoins();
-            tileValidButHasNoTower()
-        }
-
-    });
-
-    /*
-    allPlacedTowers.forEach((tower) => {
-
-        if (tower === activeTileID) {
-            allPlacedTowers.splice(allPlacedTowers.indexOf(tower), 1);
-            activeTowers.splice(activeTowers.includes(activeTileID), 1);
-            coins += 50;
-            updateCoins()
-            selectTile(undefined);
-        }
-
-    });
-
-     */
-}
-
-/**
- * Based on the buttonID, the player can select a tower to place on the selected tile.
- * if the player has enough coins, the tower will be placed on the selected tile.
- * else the player will not be able to place the tower.
- * @param buttonID
- * @author Philip
- * @author Emil
- */
-function selectTower(buttonID) {
-
-    switch (buttonID) {
-        case 1: // Ice Tower
-            if (coins >= 700){
-                activeTowers.push(new IceTower(towerCtx, activeTiles, showTowerRadius));
-                allPlacedTowers.push(activeTileID);
-                coins -=700;
-
-            }
-            break;
-
-        case 2: // WizardTower
-            if(coins >= 200){
-                activeTowers.push(new WizardTower(towerCtx, activeTiles, showTowerRadius));
-                allPlacedTowers.push(activeTileID);
-                coins -= 200;
-            }
-            break;
-
-        case 3: // InfernoTower
-            if(coins >= 700){
-                activeTowers.push(new InfernoTower(towerCtx, activeTiles, showTowerRadius));
-                allPlacedTowers.push(activeTileID);
-                coins -= 700;
-            }
-            break;
-
-        case 4: // StoneTower
-            if(coins >= 300){
-                activeTowers.push(new StoneTower(towerCtx, activeTiles, showTowerRadius));
-                allPlacedTowers.push(activeTileID);
-                coins -= 300;
-            }
-            break;
-
-
-        default:
-            console.log('Tower not found!')
-            break;
-    }
-
-
-    activeTowers.forEach(tower => { // tower
-        tower.drawTower();
-    });
-    /*
-    const position = {x: 100, y: 100}
-    const smokeEffect1 = new smokeEffect(position, towerCtx)
-    const status = smokeEffect1.drawEffect()
-
-     */
-    updateCoins()
-
-
-    tilesHasTower()
-}
-
 
 /**
  * Loads the next wave of enemies.
@@ -395,22 +83,22 @@ function selectTower(buttonID) {
  * @author Philip
  */
 function nexWave(){
-    disableButton()
+    disableGameWaveButton()
     gameActive = true;
 
-    enemies = calculateWave(round);
+    enemies = calculateWave(activeWave);
     //const enemies = testEnemyType(); // Temporary test function
+    gameStatus(true)
     gameIsRunning(true);
-    gameLoop(enemies);
+    startGame();
 }
-
 
 /**
  * Disables the "GameWaveButton" button by changing its style and setting its disabled property to true.
  *
  * @author Philip
  */
-function disableButton(){
+export function disableGameWaveButton(){
     let button = document.getElementById("GameWaveButton");
     button.style.backgroundColor = 'gray';
     button.style.filter = 'blur(1px)';
@@ -423,12 +111,21 @@ function disableButton(){
  *
  * @author Philip
  */
-function enableButton(){
+export function enableGameWaveButton(){
     let button = document.getElementById("GameWaveButton");
     button.style.backgroundColor = '';
     button.style.filter = 'none';
     document.getElementById("GameWaveButton").disabled = false;
+}
 
+/**
+ * Updates the wave counter on the game screen.
+ * @param round
+ * @author Philip
+ */
+function updateWaveCounter(round){
+    const waveCounter = document.querySelector('#WaveCounter');
+    waveCounter.textContent = 'Wave ' + round;
 }
 
 /**
@@ -479,8 +176,13 @@ function updateHealthCounter (newHealth) {
  * @param amount - The amount of coins the received has.
  * @author Philip
  */
-function addCoins(amount){
+export function addCoins(amount){
     coins += amount;
+    updateCoins();
+}
+
+export function removeCoins(amount){
+    coins -= amount;
     updateCoins();
 }
 
@@ -491,30 +193,13 @@ function addCoins(amount){
 function updateCoins(){
     const CoinsCounter = document.querySelector('#CoinsCounter');
     CoinsCounter.textContent = coins;
+    //setCoinsToTowerGameLoop(coins);
 }
 
-/**
- * Updates the wave counter on the game screen.
- * @param round
- * @author Philip
- */
-function updateWaveCounter(round){
-    const waveCounter = document.querySelector('#WaveCounter');
-    waveCounter.textContent = 'Wave ' + round;
+export function getCoins(){
+    return coins;
 }
 
-/**
- * The main tower loop. Updates the tower state and draws the towers.
- * @author Philip
- */
-towerLoop();
-function towerLoop(){
-    towerCtx.clearRect(0, 0, towerCanvas.width, towerCanvas.height);
-    activeTowers.forEach(tower => { // drawTower
-        tower.drawTower();
-    });
-    requestAnimationFrame(towerLoop);
-}
 
 /**
  * The main game loop. Updates the game state and draws the game.
@@ -529,26 +214,30 @@ function gameLoop(enemies) {
 
     if (elapsed > 1000 / 60) { //Limit the frame rate to about 60 FPS
         lastTime = currentTime - (elapsed % (1000 / 60));
-        gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+        enemyCtx.clearRect(0, 0, enemyCanvas.width, enemyCanvas.height);
 
         // Check if all enemies are dead
         if (enemies.length === 0) {
-            console.log('%cWave ' + round + ' Completed!', 'color: green; font-size: 20px;');
-            enableButton();
-            round++;
-            updateWaveCounter(round);
+            console.log('%cWave ' + activeWave + ' Completed!', 'color: green; font-size: 20px;');
+            enableGameWaveButton();
+            activeWave++;
+            updateWaveCounter(activeWave);
+
+            gameStatus(false)
             gameIsRunning(false)
 
+            /*
             activeTowers.forEach(tower => { // tower
                 tower.drawTower();
             });
 
-            addCoins(100)
+             */
 
+            addCoins(100)
             return;
         }
 
-        enemies = enemies.filter(enemy => !enemy.update(gameCtx, reduceHealth, addCoins)); // Remove dead enemies, !!Optimization needed, maybe a web worker per enemy?!!
+        enemies = enemies.filter(enemy => !enemy.update(enemyCtx, reduceHealth, addCoins)); // Remove dead enemies, !!Optimization needed, maybe a web worker per enemy?!!
         updateHoverTiles()
 
         activeTowers.forEach(tower => { // tower shooting
@@ -560,7 +249,7 @@ function gameLoop(enemies) {
         if (playerHealth <= 0) {
             document.querySelector('#GameOver').style.display = 'flex';
             console.log('%cGAME OVER!', 'color: red; font-size: 20px;');
-            cancelAnimationFrame(animationID); // fix animationID not defined
+            cancelAnimationFrame(enemyAnimationID); // fix enemyAnimationID not defined
         }
 
         // Update FPS counter
@@ -570,7 +259,7 @@ function gameLoop(enemies) {
     }
 
     // Request next frame
-    animationID = requestAnimationFrame(() => gameLoop(enemies));
+    enemyAnimationID = requestAnimationFrame(() => gameLoop(enemies));
 }
 
 
@@ -592,128 +281,3 @@ function fpsCounterUpdate(fps){
     }
 }
 
-/**
- * Opens the settings screen and pauses the game.
- * If the game is active, the game loop will be paused.
- * If the game is not active, the buttons will be disabled.
- * @author Philip
- */
-function openSettings(){
-
-    if (!inSettings){
-        inSettings = true;
-        cancelAnimationFrame(animationID)
-
-        tower1Button.disabled = true;
-        tower2Button.disabled = true;
-        tower3Button.disabled = true;
-        tower4Button.disabled = true;
-
-        disableButton();
-
-        settingsElement.style.display = 'flex';
-    }else {
-        closeSettings();
-    }
-}
-
-/**
- * Closes the settings screen and resumes the game.
- * If the game is not active, the buttons will be enabled.
- * If the game is active, the game loop will be resumed.
- * @author Philip
- */
-function closeSettings(){
-    settingsElement.classList.add('flyOut');
-
-    if(gameActive){
-        requestAnimationFrame(() => gameLoop(enemies));
-    }else {
-        enableButton();
-    }
-
-    selectTile();
-}
-
-
-/*
---- event listeners ---
- */
-
-/**
- * Event listener for the fullscreen button.
- * @author Philip
- */
-addEventListener("click", function() {
-    if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-    } else if (document.documentElement.mozRequestFullScreen) { // Firefox
-        document.documentElement.mozRequestFullScreen();
-    } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
-        document.documentElement.webkitRequestFullscreen();
-    } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-        document.documentElement.msRequestFullscreen();
-    }
-});
-
-
-/**
- * animation for settings element tels the element to hide when the animation is done.
- * @param e - The animation event of the settings element.
- * @author Philip
- */
-settingsElement.addEventListener('animationend', (e ) => {
-    if (e.animationName === 'flyOut'){
-        settingsElement.style.display = 'none';
-        settingsElement.classList.remove('flyOut');
-        inSettings = false;
-    }
-});
-
-
-/**
- * Event listener for the FPS checkbox. Shows the FPS counter if the checkbox is checked. Hides the FPS counter if the checkbox is unchecked.
- * @param {Event} change - The change event of the FPS checkbox.
- * @author Philip
- */
-checkboxFPS.addEventListener('change', function () {
-    if (this.checked){
-        showFPS = true;
-        fpsCounterElement.style.display = 'block';
-    }else {
-        showFPS = false;
-        fpsCounterElement.style.display = 'none';
-    }
-});
-
-/**
- * Event listener for the tower radius checkbox. Shows the tower radius if the checkbox is checked. Hides the tower radius if the checkbox is unchecked.
- * @param {Event} change - The change event of the tower radius checkbox.
- * @author Philip
- */
-checkboxTowerRadius.addEventListener('change', function () {
-    if (this.checked){
-        showTowerRadius = true;
-    }else {
-        showTowerRadius = false;
-    }
-
-    activeTowers.forEach(tower => {
-        tower.setStatusOfTowerRange(showTowerRadius);
-    });
-});
-
-/**
- * Event listener for the window resize event. Updates the canvas dimensions and styling.
- *
- */
-document.addEventListener('DOMContentLoaded', () => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const map = queryParams.get('map') || 'Map1';
-
-    const gameCanvas = document.getElementById('GameBackground');
-    const backgroundCtx = gameCanvas.getContext('2d');
-
-    const mapController = new MapController(gameCanvas, backgroundCtx);
-    mapController.changeMap(map);
-});

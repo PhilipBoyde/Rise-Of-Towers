@@ -255,9 +255,14 @@ export class Tower {
         const index = this.projectiles.indexOf(projectile);
         if (index > -1) {
             this.projectiles.splice(index, 1);
-            this.projectiles.setInvisible();
+
+            try{
+                this.projectiles.setInvisible();
+            }catch (e) {} //Projectiles can sometimes be called when they don't exist. This fixes that
         }
-    }
+
+
+        }
 
     /**
      * Updates the tower animation.

@@ -33,15 +33,15 @@ let pathRoutesForMap = []; // path to be used for the wave
  */
 export function changeMapRoutes(activeMapNbr){
     switch (activeMapNbr) { // Load the map based paths based on the activeMap variable
-        case 1:
+        case "1":
             pathRoutesForMap = Map1Paths;
             break;
 
-        case 2:
+        case "2":
             pathRoutesForMap = Map2Paths;
             break;
 
-        case 3:
+        case "3":
             pathRoutesForMap = Map3Paths;
             break;
 
@@ -163,7 +163,7 @@ function createEnemyType(xOffSet, activePath, type, waveEnemies) {
 function choosePath(){
     let activePath;
     const random = Math.random();
-    const randomNumber = Math.floor(random * 3) + 1;
+    const randomNumber = Math.floor(random * 3) + 1; // !!!!add path for each map. Only hase 3 right now
 
     switch (randomNumber) {
         case 1:
@@ -176,6 +176,18 @@ function choosePath(){
 
         case 3:
             activePath = pathRoutesForMap.Route3
+            break;
+
+        case 4:
+            activePath = pathRoutesForMap.Route4
+            break;
+
+        case 5:
+            activePath = pathRoutesForMap.Route5
+            break;
+
+        case 6:
+            activePath = pathRoutesForMap.Route6
             break;
 
         default:
