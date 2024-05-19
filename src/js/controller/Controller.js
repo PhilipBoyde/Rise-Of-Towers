@@ -1,6 +1,7 @@
 import {calculateWave, changeMapRoutes, testEnemyType} from "../model/WaveCalculator.js";
 import {gameIsRunning, setGameInfo, updateHoverTiles} from "./placementTiles.js";
 import {ArcherTower, InfernoTower, WizardTower, IceTower, StoneTower} from "../model/towerTypes.js";
+import { MapController } from './mapController.js';
 import {smokeEffect} from "../model/effectsCenter.js";
 
 
@@ -700,4 +701,19 @@ checkboxTowerRadius.addEventListener('change', function () {
     activeTowers.forEach(tower => {
         tower.setStatusOfTowerRange(showTowerRadius);
     });
+});
+
+/**
+ * Event listener for the window resize event. Updates the canvas dimensions and styling.
+ *
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const map = queryParams.get('map') || 'Map1';
+
+    const gameCanvas = document.getElementById('GameBackground');
+    const backgroundCtx = gameCanvas.getContext('2d');
+
+    const mapController = new MapController(gameCanvas, backgroundCtx);
+    mapController.changeMap(map);
 });
