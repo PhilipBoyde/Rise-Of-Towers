@@ -4,149 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <title>Rise Of Towers | Game</title>
-
     <link rel="icon" href="../js/model/assets/img/SiteIcon.png" type="image/x-icon">
     <link rel="stylesheet" href="../Css/gameStyle.css">
     <link rel="stylesheet" href="../Css/transition.css">
-
 </head>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 <body>
-
 <div class="transition transition-3 is-active">
-    <div class = "transitionText"></div>
+    <div class="transitionText"></div>
 </div>
-
-
 <div class="canvasContainer">
-
-        <!-- Game Canvas -->
-        <canvas id="GameBackground"></canvas>
-        <canvas id="GameScreen"></canvas>
-        <canvas id="GameHover"></canvas>
-        <canvas id="TowerScreen"></canvas>
-        <canvas id="GameUI"></canvas>
-
-
-        <!-- UI Screen -->
-        <div class="UIScreen">
-                <button id = "GameWaveButton">Start Wave</button>
-                 <button id = "speedButton"> >>> </button>
-
-            <div class="towers">
-
-                <h1 id="towerLabel">Towers</h1>
-
-                <!-- Ice -->
-                <button id = "tower1">
-                    <img id ="tower1Image" src="../js/model/assets/icons/tower/IceIcon2.png" alt="">
-                    <span id="tower1Name">Ice</span>
-                    <span id="tower1Cost">Cost: 700</span>
-                </button>
-
-                <!-- Wizard -->
-                <button id = "tower2">
-                    <img id= "tower2Image" src="../js/model/assets/icons/tower/book_04g.png" alt="">
-                    <span id="tower2Name">Wizard</span>
-                    <span id="tower2Cost">Cost: 200</span>
-                </button>
-
-                <!-- Inferno -->
-                <button id = "tower3">
-                    <img id = "tower3Image" src="../js/model/assets/icons/tower/candle.png" alt="">
-                    <span id="tower3Name">Inferno</span>
-                    <span id="tower3Cost">Cost: 700</span>
-                </button>
-
-                <!-- Stone -->
-                <button id = "tower4">
-                    <img id = "tower4Image" src="../js/model/assets/icons/tower/stone2Icon.png" alt="">
-                    <span id="tower4Name">Stone</span>
-                    <span id="tower4Cost">Cost: 300</span>
-                </button>
-
-            </div>
-
-                <div id="healthCounter">20</div>
-                <img id="heartAnimation" src="../js/model/assets/Life/100.png" alt="">
-                <div id="CoinsCounter">00000</div>
-                <div id="CoinsAnimation"></div>
-                <h1 id="WaveCounter">Wave 000</h1>
-
-                <button id ="settingsButton" title="Open/Close Settings">
-                    <img id ="settingsIMG" src="../js/model/assets/icons/settingsButton.png" alt="">
-                </button>
-
+    <!-- Game Canvas -->
+    <canvas id="GameBackground"></canvas>
+    <canvas id="GameScreen"></canvas>
+    <canvas id="GameHover"></canvas>
+    <canvas id="TowerScreen"></canvas>
+    <canvas id="GameUI"></canvas>
+    <!-- UI Screen -->
+    <div class="UIScreen">
+        <button id="GameWaveButton">Start Wave</button>
+        <button id="speedButton"> >>></button>
+        <div class="towers">
+            <h1 id="towerLabel">Towers</h1>
+            <button id="tower1">
+                <img id="tower1Image" src="../js/model/assets/icons/tower/IceIcon2.png" alt="">
+                <span id="tower1Name">Ice</span>
+                <span id="tower1Cost">Cost: 700</span>
+            </button>
+            <button id="tower2">
+                <img id="tower2Image" src="../js/model/assets/icons/tower/book_04g.png" alt="">
+                <span id="tower2Name">Wizard</span>
+                <span id="tower2Cost">Cost: 200</span>
+            </button>
+            <button id="tower3">
+                <img id="tower3Image" src="../js/model/assets/icons/tower/candle.png" alt="">
+                <span id="tower3Name">Inferno</span>
+                <span id="tower3Cost">Cost: 700</span>
+            </button>
+            <button id="tower4">
+                <img id="tower4Image" src="../js/model/assets/icons/tower/stone2Icon.png" alt="">
+                <span id="tower4Name">Stone</span>
+                <span id="tower4Cost">Cost: 300</span>
+            </button>
         </div>
-
-
+        <div id="healthCounter">20</div>
+        <img id="heartAnimation" src="../js/model/assets/Life/100.png" alt="">
+        <div id="CoinsCounter">00000</div>
+        <div id="CoinsAnimation"></div>
+        <h1 id="WaveCounter">Wave 000</h1>
+        <button id="settingsButton" title="Open/Close Settings">
+            <img id="settingsIMG" src="../js/model/assets/icons/settingsButton.png" alt="">
+        </button>
+    </div>
     <!-- Settings Screen -->
     <div class="settingsScreen">
         <h1>Settings</h1>
-
-        <button id ="closeSettings"> Close </button>
-
+        <button id="closeSettings"> Close </button>
         <a href="../../index.html">
             <button id="homeScreenButton">Main Menu</button>
         </a>
-
         <a href="Game.html">
             <button id="restartButton">Restart</button>
         </a>
-
-        <input type="checkbox" class="checkbox1">
+        <label>
+            <input type="checkbox" class="checkbox1">
+        </label>
         <h2 id="CheckboxFPSLabel">Display FPS</h2>
-
-        <input type="checkbox" class="checkbox2">
+        <label>
+            <input type="checkbox" class="checkbox2">
+        </label>
         <h2 id="CheckboxTowerRadiusLabel">Show Tower Radius</h2>
-
     </div>
-
-        <!-- GameOver page-->
-        <div id="GameOver">
-            Game Over
-
-            <div class="buttonContainer">
-                <a href="Game.html">
-                    <button>Restart</button>
-                </a>
-
-                <a href="../../index.html">
-                    <button>Back</button>
-                </a>
-            </div>
+    <!-- GameOver page-->
+    <div id="GameOver">
+        Game Over
+        <div class="buttonContainer">
+            <a href="Game.html">
+                <button>Restart</button>
+            </a>
+            <a href="../../index.html">
+                <button>Back</button>
+            </a>
         </div>
-        <h1 id="fpsCounter">Average<br>FPS: .... </h1>
-
-
-        <div class ="towerInfo">
-            <span id="towerInfoName">Tower Name</span>
-            <span id="towerInfoStats">Level: 1 <br> Damage: 0 <br>Speed: 0 <br> ----------- <br> Upgrade: 200</span>
-
-            <button id="upgradeButton" title="Upgrade Tower to next level">
-                <img id="upgradeButtonIMG" src="../js/model/assets/icons/uppgrade.png" alt=" ">
-            </button>
-
-            <button id="sellButton" title="Sell current tower. (get 80% of placement value back)">
-                <img id="sellButtonIMG" src="../js/model/assets/icons/SellButton.png" alt=" ">
-            </button>
-
-
-
-        </div>
-
+    </div>
 </div>
-
-
-
-
 <script type="module" src="../js/controller/SpriteTowerController.js"></script>
 <script type="module" src="../js/controller/SpriteController.js"></script>
 <script type="module" src="../js/model/towerTypes.js"></script>
-
-    <script type="module" src="../js/transitionAnimation.js"></script>
-    <script type="module" src="../js/controller/Controller.js"></script>
+<script type="module" src="../js/transitionAnimation.js"></script>
+<script type="module" src="../js/controller/Controller.js"></script>
+<script src="../js/controller/Controller.js"></script>
 </body>
 </html>
-
-<!-- @Author: Philip -->

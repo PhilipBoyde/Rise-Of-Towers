@@ -12,7 +12,7 @@ import {
 /**
  * Object to hold the paths for the map1.
  * @type {{Route1: [{x: number, y: number},{x: number, y: number}]}}; - the path for the first route on map1.
- * @author Philip
+ * @author Philip, Muhamed
  */
 export const Map1Paths = {
         Route1: map1Path1Route1,
@@ -23,7 +23,7 @@ export const Map1Paths = {
 /**
  * Object to hold the paths for the map2.
  * @type {{map2Path1Route1: [{x: number, y: number},{x: number, y: number}]}} - the path for the first route on map2.
- * @author Philip
+ * @author Philip, Muhamed
  */
 export const Map2Paths = {
         map2Path1Route1,
@@ -35,6 +35,7 @@ export const Map2Paths = {
 /**
  * Object to hold the paths for the map3.
  * @type {{map3Path1Route1: [{x: number, y: number},{x: number, y: number}]}} - the path for the first route on map3.
+ * @author Muhamed
  */
 export const Map3Paths = {
         map3Path1Route1,
