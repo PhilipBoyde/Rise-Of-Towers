@@ -10,30 +10,45 @@
 
 </head>
 <body>
-<div id="mapSelectionScreen">
+
+<div class="content">
     <h1>Select a Map</h1>
-    <div class="map" id="Map1">
-        <img src="../js/model/assets/gameMap/Map1.png" alt="Map 1">
-        <p>Map 1: Welcome to the open fields that are waiting for you to explore. Great choice for those who are just discovering fauna of our little region. </p>
-    </div>
-    <div class="map" id="Map2">
-        <img src="../js/model/assets/gameMap/Map2.png" alt="Map 2">
-        <p>Map 2: Forest area that hides some secrets. For those who need a bit more umf in life!</p>
-    </div>
-    <div class="map" id="Map3">
-        <img src="../js/model/assets/gameMap/Map3.png" alt="Map 3">
-        <p>Map 3: Regions long forgotten camping spot. Put your big boy pants on and Good luck! Even the best get beaten once or twice... or few times.</p>
-    </div>
-</div>
+    <div class="mapSelectionScreen">
 
 
-<!-- Confirmation Modal -->
-<div id="confirmationModal" class="modal">
-    <div class="modal-content">
-        <h2>Confirm Map Selection</h2>
-        <p>Do you want to play on the chosen map?</p>
-        <button onclick="confirmSelection()">Yes</button>
-        <button onclick="hideConfirmation()">No</button>
+
+        <div class="map" id="Map1">
+            <img src="../js/model/assets/gameMap/Map1.png" alt="Map 1">
+
+                <div class="blurryBackground">
+                    <p class="mapText">Map 1: Welcome to the open fields that are waiting for you to explore. Great choice for those who are just discovering fauna of our little region. </p>
+                    <button class="startButton" onclick="confirmSelection()">Start Game</button>
+                    <button class="backButton" onclick="reset()">Back</button>
+                </div>
+
+             </div>
+
+        <div class="map" id="Map2">
+            <img src="../js/model/assets/gameMap/Map2.png" alt="Map 2">
+
+            <div class="blurryBackground">
+                <p class="mapText">Map 2: Forest area that hides some secrets. For those who need a bit more umf in life!</p>
+                <button class="startButton"  onclick="confirmSelection()">Start Game</button>
+                <button class="backButton" onclick="reset()">Back</button>
+            </div>
+
+        </div>
+
+        <div class="map" id="Map3">
+            <img src="../js/model/assets/gameMap/Map3.png" alt="Map 3">
+
+            <div class="blurryBackground">
+                <p class="mapText">Map 3: Regions long forgotten camping spot. Put your big boy pants on and Good luck! Even the best get beaten once or twice... or few times.</p>
+                <button class="startButton"  onclick="confirmSelection()">Start Game</button>
+                <button class="backButton" onclick="reset()">Back</button>
+            </div>
+
+           </div>
     </div>
 </div>
 
