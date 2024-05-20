@@ -5,7 +5,7 @@ import {goblin, slime, wolf, bee, Cyclops, Mech, dragonWiz, akaname} from "./Ene
 --- variables ---
  */
 const baseComposition = {
-    'Bee': {count: 3, increment: 0.5},
+    'Bee': {count: 4, increment: 0.5},
     'Wolf': {count: 1, increment: 0.3},
     'Goblin': {count: 0, increment: 2},
     'Slime': {count: 0, increment: 0.5}
@@ -107,10 +107,11 @@ export function calculateWave(round) {
     const waveEnemies = [];
     Object.keys(composition).forEach(type => {
         let count = composition[type];
+        let xOffSet = 0;  // Initialize xOffSet within this loop to reset for each type
         for (let i = 0; i < count; i++) {
-            let xOffSet = i * 60;  // Offset for the x position of the enemies
             let activePath = choosePath();
             createEnemyType(xOffSet, activePath, type, waveEnemies);
+            xOffSet += 10;  // Increment the xOffSet within the loop
         }
     });
 
@@ -151,50 +152,15 @@ function createEnemyType(xOffSet, activePath, type, waveEnemies) {
     }
 }
 
-
-
-
-
 /**
- * Chooses the path for the enemies to follow. Based on a random number.
- * @returns {[{x: number, y: number},{x: number, y: number},*,*]} - The path for the enemies to follow.
- * @author Philip
+ * Chooses the path for the enemies to follow based on a random number.
+ * @returns {{x: number, y: number}[]} - The path for the enemies to follow.
+ * @author Philip, Muhamed
  */
 function choosePath(){
-    let activePath;
-    const random = Math.random();
-    const randomNumber = Math.floor(random * 3) + 1; // !!!!add path for each map. Only hase 3 right now
-
-    switch (randomNumber) {
-        case 1:
-            activePath = pathRoutesForMap.Route1
-            break;
-
-        case 2:
-            activePath = pathRoutesForMap.Route2
-            break;
-
-        case 3:
-            activePath = pathRoutesForMap.Route3
-            break;
-
-        case 4:
-            activePath = pathRoutesForMap.Route4
-            break;
-
-        case 5:
-            activePath = pathRoutesForMap.Route5
-            break;
-
-        case 6:
-            activePath = pathRoutesForMap.Route6
-            break;
-
-        default:
-            console.log('Something went wrong when choosing the path for enemies!');
-            break;
-    }
-    return activePath;
+    const routeCount = pathRoutesForMap.length; // Get the number of available routes
+    const randomIndex = Math.floor(Math.random() * routeCount); // Choose a random index based on the available routes
+    return pathRoutesForMap[randomIndex]; // Return the randomly chosen route
 }
 
 /*
@@ -215,6 +181,3 @@ export function testEnemyType(){
     waveEnemies.reverse();
     return waveEnemies;
 }
-
-
-
