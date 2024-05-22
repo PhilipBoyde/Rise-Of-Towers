@@ -207,7 +207,7 @@ export class Enemy extends SpriteController {
     }
 
     removeFreeze() {
-        this.speed *= 4; /*Is yet to be added to the constructor, ordinary speed should be the regular speed
+        this.speed *= 3; /*Is yet to be added to the constructor, ordinary speed should be the regular speed
         before the freeze.
         */
         this.isFrozen = false; /*isFrozen is also not added to the constructor, should originally be false, but is set

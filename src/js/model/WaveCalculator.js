@@ -107,11 +107,11 @@ export function calculateWave(round) {
     const waveEnemies = [];
     Object.keys(composition).forEach(type => {
         let count = composition[type];
-        let xOffSet = 0;  // Initialize xOffSet within this loop to reset for each type
+        let xOffSet = 0;  // Initializes xOffSet within loop to reset for each type
         for (let i = 0; i < count; i++) {
             let activePath = choosePath();
             createEnemyType(xOffSet, activePath, type, waveEnemies);
-            xOffSet += 10;  // Increment the xOffSet within the loop
+            xOffSet -= 20;  // Increments the xOffSet within the loop
         }
     });
 

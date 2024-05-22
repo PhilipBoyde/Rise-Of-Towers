@@ -17,12 +17,12 @@ export class ArcherTower extends Tower {
             "../js/model/assets/Tower/Projectile/Inferno/FB500-4.png",
             "../js/model/assets/Tower/Projectile/Inferno/FB500-5.png"
         ];
-        const towerType = "Archer";
+        const towerType = "Archer"; // not used
         const towerOptions = {
-            frameWidth: 280/4, // Bredden på varje frame (280 / 4)
-            frameHeight:  1024, // Höjden på varje frame
-            frameIndex: 6, // Aktuell frame-index
-            frameCount:4, // Antal frames i bilden
+            frameWidth: 280/4,
+            frameHeight:  1024,
+            frameIndex: 6,
+            frameCount:4, 
             frameUpdateCounter:0  ,
             frameSpeed: 10
         };
@@ -37,7 +37,7 @@ export class ArcherTower extends Tower {
             5, // maxLevel
             60, // Base Shooting speed
             5, // Projectile speed
-            imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
+            imagePaths, // image paths for the tower
             projectileImagePaths,
             towerOptions,
             towerType,
@@ -67,10 +67,10 @@ export class WizardTower extends Tower {
 
         const towerType = "Wizard";
         const towerOptions = {
-            frameWidth: 1100/ 11, // Bredden på varje frame (280 / 4)
-            frameHeight: 1300, // Höjden på varje frame
-            frameIndex: 0, // Aktuell frame-index
-            frameCount:11, // Antal frames i bilden
+            frameWidth: 1100/ 11, // every frame width (1100 / 11)
+            frameHeight: 1300, // frames height
+            frameIndex: 0, // Actual frame-index
+            frameCount:11, // number of frames in the image
             frameUpdateCounter:  0,
             frameSpeed: 12
         };
@@ -80,21 +80,21 @@ export class WizardTower extends Tower {
             tiles,
             200, // cost
             300,
-            170, // range
-            80, // damage
+            200, // range
+            7, // damage
             3, // maxLevel
-            110, // Shooting speed
-            4.5, // Projectile speed
-            imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
+            25, // Shooting speed
+            8, // Projectile speed
+            imagePaths, // sends image paths to the parent Tower class
             projectileImagePaths,
             towerOptions,
             towerType,
             status,
             {upgradeInfo: { //Info about the different upgrades
                 level2: {
-                    cost: 200,
-                    damage: 200,
-                    speed: 115
+                    cost: 250,
+                    damage: 10,
+                    speed: 30
                 },
 
                 level3: {
@@ -256,10 +256,10 @@ export class IceTower extends Tower{
         super(
             gameCtx,
             tiles,
-            700, // cost
+            300, // cost
             800,
             200, // range
-            5, // damage
+            1, // damage
             3, // maxLevel
             80, // Shooting speed
             5, // Projectile speed
@@ -271,13 +271,13 @@ export class IceTower extends Tower{
             {upgradeInfo: { //Info about the different upgrades
                     level2: {
                         cost: 200,
-                        damage: 200,
+                        damage: 2,
                         speed: 115
                     },
 
                     level3: {
                         cost: "$$$",
-                        damage: 300,
+                        damage: 3,
                         speed: 120,
                         img: "../js/model/assets/Tower/IceT.png"
                     }

@@ -203,10 +203,10 @@ function selectTower(buttonID) {
 
     switch (buttonID) {
         case 1: // Ice Tower
-            if (coins >= 700){
+            if (coins >= 300){
                 activeTowers.push(new IceTower(towerCtx, activeTiles, showTowerRadius));
                 allPlacedTowers.push(activeTileID);
-                removeCoins(700);
+                removeCoins(300);
                 setActiveTowers(activeTowers);
             }
             break;
