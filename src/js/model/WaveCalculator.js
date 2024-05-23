@@ -12,10 +12,23 @@ const baseComposition = {
 };
 
 const specialRounds = {
-    5: {'Goblin': 8},
-    10: {'Goblin': 16},
-    15: {'Cyclops': 1},
-    20: {'Goblin': 5, 'Cyclops': 1}
+    0: {'Wolf': 1},
+    1: {'Goblin': 1, 'Wolf': 1},
+    2: {'Goblin': 2, 'Wolf': 2},
+    3: {'Goblin': 3, 'Wolf': 3, 'Slime': 1},
+    4: {'Goblin': 5, 'Wolf': 5, 'Slime': 2},
+    5: {'Goblin': 8, 'Wolf': 8, 'Slime': 3, 'Bee': 1},
+    6: {'Goblin': 10, 'Wolf': 10, 'Slime': 4, 'Bee': 4},
+    7: {'Goblin': 12, 'Wolf': 10, 'Slime': 5, 'Bee': 6},
+    8: {'Goblin': 14, 'Wolf': 8, 'Slime': 5, 'Bee': 8},
+    9: {'Goblin': 16, 'Wolf': 6, 'Slime': 5, 'Bee': 10},
+    10: {'Goblin': 16, 'Wolf': 15, 'Slime': 8, 'Bee': 12},
+    11: {'Goblin': 17, 'Wolf': 10, 'Slime': 8, 'Bee': 12},
+    12: {'Goblin': 18, 'Wolf': 10, 'Slime': 8, 'Bee': 12},
+    13: {'Goblin': 20, 'Wolf': 12, 'Slime': 9, 'Bee': 12},
+    14: {'Goblin': 20, 'Wolf': 15, 'Slime': 10, 'Bee': 15},
+    15: {'Goblin': 10, 'Cyclops': 1, 'Bee': 10 } ,
+    20: {'Goblin': 20, 'Cyclops': 2}
 };
 
 let currentWave = 1; // Start with wave 1

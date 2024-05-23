@@ -221,19 +221,19 @@ function selectTower(buttonID) {
             break;
 
         case 3: // InfernoTower
-            if(coins >= 700){
+            if(coins >= 900){
                 activeTowers.push(new InfernoTower(towerCtx, activeTiles, showTowerRadius));
                 allPlacedTowers.push(activeTileID);
-                removeCoins(700);
+                removeCoins(900);
                 setActiveTowers(activeTowers);
             }
             break;
 
         case 4: // StoneTower
-            if(coins >= 300){
+            if(coins >= 700){
                 activeTowers.push(new StoneTower(towerCtx, activeTiles, showTowerRadius));
                 allPlacedTowers.push(activeTileID);
-                removeCoins(300);
+                removeCoins(700);
                 setActiveTowers(activeTowers);
             }
             break;

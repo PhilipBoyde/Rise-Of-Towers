@@ -18,9 +18,9 @@ import {gameStatus} from "./SettingsController.js";
 --- variables ---
  */
 
-let /** @type number */ activeWave = 0;
+let /** @type number */ activeWave = 1;
 let /** @type number */ playerHealth = 20;
-let /** @type number */ coins = 20000;
+let /** @type number */ coins = 600;
 updateCoins();
 
 let /** @type array */ activeTowers = [];
