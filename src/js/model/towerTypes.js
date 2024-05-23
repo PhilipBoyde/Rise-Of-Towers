@@ -262,7 +262,7 @@ export class IceTower extends Tower{
             300, // cost
             300,
             200, // range
-            1, // damage
+            10, // damage
             3, // maxLevel
             80, // Shooting speed
             5, // Projectile speed
