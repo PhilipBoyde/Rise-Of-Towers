@@ -20,7 +20,7 @@ import {gameStatus} from "./SettingsController.js";
 
 let /** @type number */ activeWave = 0;
 let /** @type number */ playerHealth = 20;
-let /** @type number */ coins = 500;
+let /** @type number */ coins = 20000;
 updateCoins();
 
 let /** @type array */ activeTowers = [];

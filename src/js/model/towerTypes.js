@@ -22,7 +22,7 @@ export class ArcherTower extends Tower {
             frameWidth: 280/4,
             frameHeight:  1024,
             frameIndex: 6,
-            frameCount:4, 
+            frameCount:4,
             frameUpdateCounter:0  ,
             frameSpeed: 10
         };
@@ -92,7 +92,7 @@ export class WizardTower extends Tower {
             status,
             {upgradeInfo: { //Info about the different upgrades
                 level2: {
-                    cost: 250,
+                    cost: 450,
                     damage: 10,
                     speed: 30
                 },
@@ -127,10 +127,10 @@ export class InfernoTower extends Tower{
             "../js/model/assets/Tower/Projectile/Inferno/B500-4.png"
         ];
         const towerOptions = {
-            frameWidth: 280/ 4, // Bredden på varje frame (280 / 4)
-            frameHeight: 130, // Höjden på varje frame
-            frameIndex: 0, // Aktuell frame-index
-            frameCount:4, // Antal frames i bilden
+            frameWidth: 280/ 4,
+            frameHeight: 130,
+            frameIndex: 0,
+            frameCount:4,
             frameUpdateCounter:  0,
             frameSpeed: 10
         };
@@ -138,29 +138,29 @@ export class InfernoTower extends Tower{
         super(
             gameCtx,
             tiles,
-            700,
-            400,
+            900,
+            900,
             250,
-            20,
+            85,
             3,
-            35,
-            4.5,
+            35, // shooting speed
+            7,
             imagePaths,
             projectileImagePaths,
             towerOptions,
             towerType,
             status,
-            {upgradeInfo: { //Info about the different upgrades
+            {upgradeInfo: { // Info about the different upgrades
                     level2: {
-                        cost: 200,
-                        damage: 200,
-                        speed: 115
+                        cost: 900,
+                        damage: 100,
+                        speed: 30
                     },
 
                     level3: {
                         cost: "$$$",
-                        damage: 300,
-                        speed: 120
+                        damage: 175,
+                        speed: 18
                     }
                 }},
 
@@ -188,10 +188,10 @@ export class StoneTower extends Tower {
             "../js/model/assets/Tower/Projectile/Stone/Stone7.png",
         ];
         const towerOptions = {
-            frameWidth: 280/ 4, // Bredden på varje frame (280 / 4)
-            frameHeight: 130, // Höjden på varje frame
-            frameIndex: 0, // Aktuell frame-index
-            frameCount:4, // Antal frames i bilden
+            frameWidth: 280/ 4,
+            frameHeight: 130,
+            frameIndex: 0,
+            frameCount:4,
             frameUpdateCounter:  0,
             frameSpeed: 10
         };
@@ -202,10 +202,10 @@ export class StoneTower extends Tower {
             700,
             500,
             250,
-            20,
+            30,
             3,
-            35,
-            4.5,
+            95,
+            10,
             imagePaths,
             projectileImagePaths,
             towerOptions,
@@ -213,18 +213,21 @@ export class StoneTower extends Tower {
             status,
             {upgradeInfo: { //Info about the different upgrades
                     level2: {
-                        cost: 200,
-                        damage: 200,
-                        speed: 115
+                        cost: 700,
+                        damage: 45,
+                        speed: 35,
+                        aoeRadius:70
                     },
 
                     level3: {
                         cost: "$$$",
-                        damage: 300,
-                        speed: 120
+                        damage: 60,
+                        speed: 120,
+                        aoeRadius:100
                     }
                 }},
 
+            50,
         );
     }
 }
@@ -257,7 +260,7 @@ export class IceTower extends Tower{
             gameCtx,
             tiles,
             300, // cost
-            800,
+            300,
             200, // range
             1, // damage
             3, // maxLevel
@@ -270,13 +273,15 @@ export class IceTower extends Tower{
             status,
             {upgradeInfo: { //Info about the different upgrades
                     level2: {
-                        cost: 200,
+                        cost: 500,
+                        range: 300,
                         damage: 2,
                         speed: 115
                     },
 
                     level3: {
                         cost: "$$$",
+                        range: 400,
                         damage: 3,
                         speed: 120,
                         img: "../js/model/assets/Tower/IceT.png"

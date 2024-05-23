@@ -8,13 +8,13 @@ import { Projectile } from "./Projectile.js";
  * @param {Object} tiles - Tiles information.
  * @param {number} cost - The cost of the tower.
  * @param {number} range - The range of the tower.
- * @param {number} damage - The damage of the tower.
+ * @param {number} damage - The damage tower deals to the enemies.
  * @param {number} upgradeCost - The cost of upgrading the tower.
  * @param {number} maxLevel - The maximum level of the tower.
  * @param {number} speed - The shooting speed of the tower.
  * @param {number} projectileSpeed - The speed of the projectile.
  * @param {string[]} imagePaths - Array of image paths for tower frames.
- * @author Muhammed
+ * @author Muhamed
  * @author Philip
  * @author Mahyar
  */
@@ -25,7 +25,7 @@ export class Tower {
      * @param {Object} tiles - Tiles information.
      * @param {number} cost - The cost of the tower.
      * @param {number} range - The range of the tower.
-     * @param {number} damage - The damage of the tower.
+     * @param {number} damage - The damage dealt to the enemies.
      * @param {number} upgradeCost - The cost of upgrading the tower.
      * @param {number} maxLevel - The maximum level of the tower.
      * @param {number} speed - The shooting speed of the tower.
@@ -34,8 +34,11 @@ export class Tower {
      * @param projectileImagePath
      * @param options
      * @param towerType
+     * @param showRange
+     * @param upgradeInfo
+     * @param aoeRadius
      */
-    constructor(gameCtx, tiles, cost,upgradeCost, range, damage, maxLevel, speed, projectileSpeed, imagePaths, projectileImagePath, options, towerType, showRange, {upgradeInfo}) {
+    constructor(gameCtx, tiles, cost,upgradeCost, range, damage, maxLevel, speed, projectileSpeed, imagePaths, projectileImagePath, options, towerType, showRange, {upgradeInfo}, aoeRadius = 0) {
         this.gameCtx = gameCtx;
         this.upgradeInfo = upgradeInfo;
 
@@ -68,6 +71,7 @@ export class Tower {
         this.imagePaths = imagePaths; // Store the image paths for later use
         this.projectileImagePath = projectileImagePath;
         this.showRange = showRange;
+        this.aoeRadius = aoeRadius;
 
 
         this.loadImages(this.imagePaths);
@@ -239,8 +243,10 @@ export class Tower {
                 target[0],
                 this.handleProjectileRemoval.bind(this), // Bind the current context
                 this.gameCtx,
-                this.projectileImagePath
-            );
+                this.projectileImagePath,
+                enemies,
+                this.aoeRadius
+        );
             this.projectiles.push(projectile);
 
 
@@ -285,7 +291,10 @@ export class Tower {
      * @param {Object[]} enemies - The enemies on the canvas.
      */
     update(enemies) {
-        this.projectiles.forEach(projectile => projectile.move());
+        this.projectiles.forEach(projectile => {
+            projectile.enemies = enemies; // Ensure projectiles have access to the enemies array
+            projectile.move();
+        });
         this.projectiles = this.projectiles.filter(projectile => !projectile.markedForDeletion);
 
         if (this.delay === this.speed) {
