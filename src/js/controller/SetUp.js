@@ -43,8 +43,8 @@ addEventListener("click", function() {
 /*
 --- Give dependencies ---
  */
-setMapControllerDependencies(gameCanvas, gameBackgroundCtx); // for mapController.js
-setPlacementTilesDependencies(gameCanvas, gameHoverCtx); // for placementTiles.js
+setMapControllerDependencies(gameBackground, gameBackgroundCtx); // for mapController.js
+setPlacementTilesDependencies(gameHover, gameHoverCtx); // for placementTiles.js
 setGameControllerDependencies(gameCanvas, enemyCtx, gameHover, interactiveCanvas); // for Controller.js
 setTowerGameLoopDependencies(towerCanvas, towerCtx); // for TowerGameLoopController.js
 

@@ -107,9 +107,6 @@ export class Tower {
                 this.upgradeCost = this.upgradeInfo.level3.cost;
                 this.damage = this.upgradeInfo.level3.damage;
                 this.speed = this.upgradeInfo.level3.speed;
-                this.imagePaths = this.upgradeInfo.level3.img;
-                this.towerImages = []
-                this.loadImages(this.imagePaths);
                 break;
 
             case "MAX":

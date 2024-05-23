@@ -1,11 +1,6 @@
 /** @type HTMLElement */
 import {disableGameWaveButton, enableGameWaveButton, setFpsStatus, startGame, stopGame} from "./Controller.js";
-import {
-    allButtonStatus,
-    changeTowerAreaStatus,
-    selectTile,
-    setSettingsStatusForTower
-} from "./TowerGameLoopController.js";
+import {allButtonStatus, changeTowerAreaStatus, selectTile, setSettingsStatusForTower} from "./TowerGameLoopController.js";
 
 document.getElementById("closeSettings").addEventListener("click", closeSettings);
 /** @type HTMLElement */ document.getElementById("settingsButton").addEventListener("click", openSettings);
