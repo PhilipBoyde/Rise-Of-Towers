@@ -7,11 +7,8 @@
     <link rel="icon" href="../js/model/assets/img/SiteIcon.png" type="image/x-icon">
     <link rel="stylesheet" href="../Css/gameStyle.css">
     <link rel="stylesheet" href="../Css/transition.css">
-
-
-
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
-<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 <body>
 <div class="transition transition-3 is-active">
     <div class="transitionText"></div>
@@ -29,22 +26,22 @@
         <button id="speedButton"> >>></button>
         <div class="towers">
             <h1 id="towerLabel">Towers</h1>
-            <button id="tower1">
+            <button id="tower1" class="towerButton" data-damage="10" data-range="150" data-description="Deals low damage to enemies, but slows them down. Great in combination with other towers. Upgrade it do get bigger range">
                 <img id="tower1Image" src="../js/model/assets/icons/tower/IceIcon2.png" alt="">
                 <span id="tower1Name">Ice</span>
                 <span id="tower1Cost">Cost: 300</span>
             </button>
-            <button id="tower2">
+            <button id="tower2" class="towerButton" data-damage="20" data-range="200" data-description="Fast shooting,but lower damage, great for starting.">
                 <img id="tower2Image" src="../js/model/assets/icons/tower/book_04g.png" alt="">
                 <span id="tower2Name">Wizard</span>
                 <span id="tower2Cost">Cost: 200</span>
             </button>
-            <button id="tower3">
+            <button id="tower3" class="towerButton" data-damage="30" data-range="250" data-description="Fast shooting, high damage,great range, high price.">
                 <img id="tower3Image" src="../js/model/assets/icons/tower/candle.png" alt="">
                 <span id="tower3Name">Inferno</span>
                 <span id="tower3Cost">Cost: 900</span>
             </button>
-            <button id="tower4">
+            <button id="tower4" class="towerButton" data-damage="40" data-range="300" data-description="Deals AoE damage, but can be a bit slow. You would not want this to be your only tower">
                 <img id="tower4Image" src="../js/model/assets/icons/tower/stone2Icon.png" alt="">
                 <span id="tower4Name">Stone</span>
                 <span id="tower4Cost">Cost: 700</span>
@@ -95,7 +92,7 @@
     </div>
 
     <!-- Tower Info -->
-    <div class ="towerInfo">
+    <div class="towerInfo">
         <span id="towerInfoName">Tower Name</span>
         <span id="towerInfoStats">Level: 1 <br> Damage: 0 <br>Speed: 0 <br> ----------- <br> Upgrade: 200</span>
 
@@ -107,10 +104,13 @@
             <img id="sellButtonIMG" src="../js/model/assets/icons/SellButton.png" alt=" ">
         </button>
     </div>
-
 </div>
 
-    <script type="module" src="../js/controller/SetUp.js"></script>
-    <script type="module" src="../js/transitionAnimation.js"></script>
+<!-- Tooltip -->
+<div class="tooltip" id="tooltip"></div>
+
+<script type="module" src="../js/controller/SetUp.js"></script>
+<script type="module" src="../js/transitionAnimation.js"></script>
+<script src="../js/controller/GameController.js"></script>
 </body>
 </html>

@@ -31,7 +31,7 @@ let activeTowers = [];
 let img = new Image();
 let /** @type number */ activeWave = 1;
 let /** @type number */ playerHealth = 20;
-let /** @type number */ coins = 600;
+let /** @type number */ coins = 700;
 updateCoins();
 
 let /** @type array */ activeTowers = [];
@@ -291,4 +291,31 @@ function fpsCounterUpdate(fps){
         fpsAccumulator = 0;
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const towerButtons = document.querySelectorAll('.towerButton');
+    const tooltip = document.getElementById('tooltip');
+
+    towerButtons.forEach(button => {
+        button.addEventListener('mouseenter', (event) => {
+            const damage = button.getAttribute('data-damage');
+            const range = button.getAttribute('data-range');
+            const description = button.getAttribute('data-description');
+            tooltip.innerHTML = `Damage: ${damage}<br>Range: ${range}<br>${description}`;
+            tooltip.style.display = 'block';
+            const rect = button.getBoundingClientRect();
+            tooltip.style.left = `${rect.left + window.pageXOffset}px`;
+            tooltip.style.top = `${rect.top + window.pageYOffset - tooltip.offsetHeight}px`;
+        });
+
+        button.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+        });
+
+        button.addEventListener('mousemove', (event) => {
+            tooltip.style.left = `${event.pageX}px`;
+            tooltip.style.top = `${event.pageY - tooltip.offsetHeight - 10}px`;
+        });
+    });
+});
 

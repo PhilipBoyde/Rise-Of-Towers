@@ -81,10 +81,10 @@ export class WizardTower extends Tower {
             200, // cost
             300,
             200, // range
-            7, // damage
+            9, // damage
             3, // maxLevel
             25, // Shooting speed
-            8, // Projectile speed
+            9, // Projectile speed
             imagePaths, // sends image paths to the parent Tower class
             projectileImagePaths,
             towerOptions,
@@ -141,7 +141,7 @@ export class InfernoTower extends Tower{
             900,
             900,
             250,
-            85,
+            70,
             3,
             35, // shooting speed
             7,
@@ -202,9 +202,9 @@ export class StoneTower extends Tower {
             700,
             500,
             250,
-            30,
+            40,
             3,
-            95,
+            120,
             10,
             imagePaths,
             projectileImagePaths,
@@ -215,14 +215,14 @@ export class StoneTower extends Tower {
                     level2: {
                         cost: 700,
                         damage: 45,
-                        speed: 35,
+                        speed: 95,
                         aoeRadius:70
                     },
 
                     level3: {
                         cost: "$$$",
                         damage: 60,
-                        speed: 120,
+                        speed: 60,
                         aoeRadius:100
                     }
                 }},

@@ -895,6 +895,34 @@ body, html{
     height: 32px;
 }
 
+/* Tooltip container */
+.tooltip {
+    position: absolute;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.85); /* Darker background */
+    color: #fff;
+    text-align: left; /* Left align text */
+    padding: 10px; /* Increased padding for more content */
+    border-radius: 10px; /* Slightly more rounded corners */
+    z-index: 10;
+    font-family: "VT323", monospace;
+    font-size: 30px; /* Slightly larger font size */
+    max-width: 200px; /* Limit width to avoid too wide tooltips */
+}
+
+/* Tooltip arrow */
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(211, 207, 207, 0.85) transparent transparent transparent;
+}
+
+
 /*
 .UIScreen #sellButton {
     border: 3px solid #4F4537;

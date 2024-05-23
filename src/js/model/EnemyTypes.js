@@ -1,12 +1,5 @@
 import {Enemy} from '../controller/EnemyController.js';
 
-/*
--ToDO
-- Add more enemies
-- add boss
-- add resistance to enemies eg magic resistance, physical resistance
-- add easter egg?
- */
 
 /**
  * Class for the slime enemy. Extends the Enemy class.
@@ -29,7 +22,7 @@ export class slime extends Enemy {
             0.9, //speed
             path,
             100, //health
-            10, //coins
+            20, //coins
             {spriteImages: { //Sprite images for the wolf enemy
                     up: '../js/model/assets/EnemySprites/Slime/U_Walk.png',
                     down: '../js/model/assets/EnemySprites/Slime/D_Walk.png',
@@ -112,7 +105,7 @@ export class bee extends Enemy {
             3, //speed
             path,
             20, //health
-            2, //coins
+            20, //coins
             {spriteImages: { //Sprite images for the wolf enemy
                     up: '../js/model/assets/EnemySprites/Bee/U_Walk.png',
                     down: '../js/model/assets/EnemySprites/Bee/D_Walk.png',
@@ -190,7 +183,7 @@ export class Cyclops extends Enemy {
             {position},
             0.3, //speed
             path,
-            1500, //health
+            15000, //health
             300, //coins
             {spriteImages: {
                     up: '../js/model/assets/EnemySprites/Boss/Cyclops/walk4.png',
