@@ -9,11 +9,13 @@ let currentSlide = 1; // Initialize the current slide index
 
 // Define an array of image paths corresponding to each slide
 const imagePaths = [
-    "../js/model/assets/Tutorial/baseTower.jpg", // slide 2
-    "../js/model/assets/Tutorial/Base.png",       // slide 3
-    "../js/model/assets/Tutorial/baseTower.jpg", // slide 4
-    "../js/model/assets/Tutorial/baseTower.jpg", // slide 5
-    "../js/model/assets/Tutorial/baseTower.jpg"  // slide 6
+    "../js/model/assets/Tutorial/CoinsAndHealth.png", // slide 2
+    "../js/model/assets/Tutorial/TowerPlecement.png",       // slide 3
+    "../js/model/assets/Tutorial/TowersICon.png",       // slide 4
+    "../js/model/assets/Tutorial/TowerRadiaEnemies.png", // slide 5
+    "../js/model/assets/Tutorial/TowerAndUpgrade.png", // slide 6
+    "../js/model/assets/Tutorial/VanligaEnemies.png",  // slide 7
+    "../js/model/assets/Tutorial/BossEnemies.png"  // slide 8
 ];
 
 // Add event listeners to buttons when the DOM is fully loaded
@@ -35,7 +37,7 @@ function nextSlide() {
     currentText.style.display = "none"; // Hide current text
 
     currentSlide++;
-    if (currentSlide > 7) {
+    if (currentSlide > 9) {
         currentSlide = 1; // Reset to the first slide if it exceeds the total number of slides
     }
 
@@ -46,7 +48,7 @@ function nextSlide() {
     const imageContainer = document.querySelector(".imageContainer");
     imageContainer.innerHTML = ""; // Clear the existing images
 
-    if (currentSlide >= 2 && currentSlide <= 6) {
+    if (currentSlide >= 2 && currentSlide <= 9) {
         const towerImage = document.createElement("img");
         towerImage.src = imagePaths[currentSlide - 2]; // Adjust index to match array index
         imageContainer.appendChild(towerImage);
@@ -62,7 +64,7 @@ function prevSlide() {
 
     currentSlide--;
     if (currentSlide < 1) {
-        currentSlide = 7; // Reset to the last slide if it goes below the first slide
+        currentSlide = 9; // Reset to the last slide if it goes below the first slide
     }
 
     const newText = document.querySelector(".slide" + currentSlide);
@@ -72,7 +74,7 @@ function prevSlide() {
     const imageContainer = document.querySelector(".imageContainer");
     imageContainer.innerHTML = ""; // Clear the existing images
 
-    if (currentSlide >= 2 && currentSlide <= 6) {
+    if (currentSlide >= 2 && currentSlide <= 9) {
         const towerImage = document.createElement("img");
         towerImage.src = imagePaths[currentSlide - 2]; // Adjust index to match array index
         imageContainer.appendChild(towerImage);
