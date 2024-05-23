@@ -1,4 +1,4 @@
-import {calculateWave, testEnemyType} from "../model/WaveCalculator.js";
+import {calculateWave} from "../model/WaveCalculator.js";
 import {gameIsRunning, updateHoverTiles} from "./placementTiles.js";
 import {gameStatus} from "./SettingsController.js";
 //import {} from "../controller/SpriteTowerController.js";
@@ -25,9 +25,6 @@ const /** HTMLCanvasElement */ interactiveCanvas = document.querySelector('#Game
 const /** HTMLCanvasElement */ gameHover = document.querySelector('#GameHover');
 const /** number */ activeMapNbr = 1;  
 let /** number */ round = 0;
-let playerHealth = 20;
-let coins = 1000;
-let activeTowers = [];
 let img = new Image();
 let /** @type number */ activeWave = 1;
 let /** @type number */ playerHealth = 20;
