@@ -8,13 +8,13 @@ import { Projectile } from "./Projectile.js";
  * @param {Object} tiles - Tiles information.
  * @param {number} cost - The cost of the tower.
  * @param {number} range - The range of the tower.
- * @param {number} damage - The damage of the tower.
+ * @param {number} damage - The damage tower deals to the enemies.
  * @param {number} upgradeCost - The cost of upgrading the tower.
  * @param {number} maxLevel - The maximum level of the tower.
  * @param {number} speed - The shooting speed of the tower.
  * @param {number} projectileSpeed - The speed of the projectile.
  * @param {string[]} imagePaths - Array of image paths for tower frames.
- * @author Muhammed
+ * @author Muhamed
  * @author Philip
  * @author Mahyar
  */
@@ -25,7 +25,7 @@ export class Tower {
      * @param {Object} tiles - Tiles information.
      * @param {number} cost - The cost of the tower.
      * @param {number} range - The range of the tower.
-     * @param {number} damage - The damage of the tower.
+     * @param {number} damage - The damage dealt to the enemies.
      * @param {number} upgradeCost - The cost of upgrading the tower.
      * @param {number} maxLevel - The maximum level of the tower.
      * @param {number} speed - The shooting speed of the tower.
@@ -34,14 +34,18 @@ export class Tower {
      * @param projectileImagePath
      * @param options
      * @param towerType
+     * @param showRange
+     * @param upgradeInfo
+     * @param aoeRadius
      */
-    constructor(gameCtx, tiles, cost, range, damage, upgradeCost, maxLevel, speed, projectileSpeed, imagePaths, projectileImagePath, options, towerType) {
+    constructor(gameCtx, tiles, cost,upgradeCost, range, damage, maxLevel, speed, projectileSpeed, imagePaths, projectileImagePath, options, towerType, showRange, {upgradeInfo}, aoeRadius = 0) {
         this.gameCtx = gameCtx;
+        this.upgradeInfo = upgradeInfo;
+
         this.positionID = tiles.positionID;
         delete tiles.positionID;
 
         this.towerType = towerType.toString();
-
         this.level = 1;
 
 
@@ -66,8 +70,11 @@ export class Tower {
         this.projectiles = [];
         this.imagePaths = imagePaths; // Store the image paths for later use
         this.projectileImagePath = projectileImagePath;
+        this.showRange = showRange;
+        this.aoeRadius = aoeRadius;
 
-        this.loadImages(imagePaths);
+
+        this.loadImages(this.imagePaths);
 
         this.frameWidth = options.frameWidth; // Bredden på varje frame (280 / 4)
         this.frameHeight = options.frameHeight; // Höjden på varje frame
@@ -78,9 +85,45 @@ export class Tower {
 
     }
 
+    getPositionID(){
+        return this.positionID;
+    }
+
+    getTowerValue(){
+        return this.cost;
+    }
+
+    upgradeTower(){
+        this.level += 1;
+
+        switch (this.level){
+            case 2:
+                this.upgradeCost = this.upgradeInfo.level2.cost;
+                this.damage = this.upgradeInfo.level2.damage;
+                this.speed = this.upgradeInfo.level2.speed;
+                break;
+
+            case 3:
+                this.upgradeCost = this.upgradeInfo.level3.cost;
+                this.damage = this.upgradeInfo.level3.damage;
+                this.speed = this.upgradeInfo.level3.speed;
+                break;
+
+            case "MAX":
+                console.log("Tower is at MAX level")
+                break;
+
+            default:
+                break;
+        }
+
+        if (this.level === this.maxLevel){
+            this.level = this.level + " MAX";
+        }
+    }
+
     /**
      * Loads tower images.
-     * @param {string[]} imagePaths - Array of image paths for tower frames.
      */
     loadImages(imagePaths) {
         this.towerImages = [];
@@ -90,7 +133,7 @@ export class Tower {
             towerImage.src = path;
             towerImage.onload = () => {
                 loadedImages++;
-                if (loadedImages === imagePaths.length) {
+                if (loadedImages === this.imagePaths.length) {
                     this.drawTower();
                 }
             };
@@ -127,12 +170,20 @@ export class Tower {
         return closestTile;
     }
 
+    setStatusOfTowerRange(status){
+        this.showRange = status;
+    }
     /**
      * Draws the tower on the canvas.
      * @private
      */
     drawTower() {
-        this.displayRange();
+        this.updateAnimation();
+
+        if (this.showRange){
+            this.displayRange();
+        }
+
         if (this.towerImages.every(image => image.complete)) {
             // Alla bilder har laddats, rita tornet med den aktuella frame från towerImages-arrayen
             const towerImage = this.towerImages[0];
@@ -189,8 +240,10 @@ export class Tower {
                 target[0],
                 this.handleProjectileRemoval.bind(this), // Bind the current context
                 this.gameCtx,
-                this.projectileImagePath
-            );
+                this.projectileImagePath,
+                enemies,
+                this.aoeRadius
+        );
             this.projectiles.push(projectile);
 
 
@@ -205,9 +258,14 @@ export class Tower {
         const index = this.projectiles.indexOf(projectile);
         if (index > -1) {
             this.projectiles.splice(index, 1);
-            this.projectiles.setInvisible();
+
+            try{
+                this.projectiles.setInvisible();
+            }catch (e) {} //Projectiles can sometimes be called when they don't exist. This fixes that
         }
-    }
+
+
+        }
 
     /**
      * Updates the tower animation.
@@ -230,9 +288,10 @@ export class Tower {
      * @param {Object[]} enemies - The enemies on the canvas.
      */
     update(enemies) {
-        this.updateAnimation();
-        this.drawTower();
-        this.projectiles.forEach(projectile => projectile.move());
+        this.projectiles.forEach(projectile => {
+            projectile.enemies = enemies; // Ensure projectiles have access to the enemies array
+            projectile.move();
+        });
         this.projectiles = this.projectiles.filter(projectile => !projectile.markedForDeletion);
 
         if (this.delay === this.speed) {

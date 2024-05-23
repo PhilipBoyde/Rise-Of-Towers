@@ -1,10 +1,36 @@
+.transitionText {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "VT323", cursive;
+    font-size: 150px;
+    color: #ffffff;
+    filter: drop-shadow(0 0 0.75rem #000000);
+    top: 40vh;
+}
+
+@keyframes loading {
+    0% { content: "Loading ."; }
+    25% { content: "Loading .."; }
+    50% { content: "Loading ..."; }
+    75% { content: "Loading ...."; }
+    100% { content: "Loading ....."; }
+}
+
+.transitionText::after {
+    content: " ";
+    animation: loading 1.7s infinite;
+}
+
+
 .transition-1 {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 6;
+    z-index: 10;
     background-color: rgb(107, 67, 45);
     opacity: 0;
     pointer-events: none;
@@ -22,7 +48,7 @@
     left: -100%;
     width: 100%;
     bottom: 0;
-    z-index: 6;
+    z-index: 10;
     background-color: rgb(107, 67, 45);
     transition: 0.5s ease-out;
 }
@@ -37,7 +63,7 @@
     right: -100%;
     width: 100%;
     bottom: 0;
-    z-index: 6;
+    z-index: 10;
     background-color: rgb(107, 67, 45);
     transition: 0.5s ease-out;
 }

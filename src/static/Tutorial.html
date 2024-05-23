@@ -5,9 +5,18 @@
     <title>Rise Of Towers | Tutorial</title>
     <link rel="icon" href="../js/model/assets/img/SiteIcon.png" type="image/x-icon">
     <link rel="stylesheet" href="../Css/tutorialStyle.css">
+    <link rel="stylesheet" href="../Css/transition.css">
+
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<!-- transition, does not work
+<div class="transition transition-1 is-active">
+    <div class = "transitionText"></div>
+</div>
+-->
+
 
 <audio src="../js/model/assets/sounds/relax-intro-103890.mp3" autoplay loop></audio>
 <div class="mainBorder">
@@ -71,7 +80,12 @@
 <div id="textHead" class="custom-title"></div>
 <div id="textSmall" class="custom-content"></div>
 
-<script src="../js/controller/script.js"></script>
+<!-- for transition, does not work
+<script type="module" src="../js/transitionAnimation.js"></script>
+-->
 
+<script src="../js/controller/script.js"></script>
 </body>
 </html>
+
+<!-- @Author: Mahyar -->

@@ -1,8 +1,15 @@
+/*
+@author: Philip
+ */
 * {
     user-select: none;
     overflow: hidden;
 }
 
+/*
+The background image is animated to zoom in and out.
+@author: Philip
+ */
 @keyframes zoomInOut {
     0%, 100% {
         background-size: 100% 100%;
@@ -14,6 +21,10 @@
     }
 }
 
+/*
+sets the background image and the margin and padding to 0. Also centers the content of the page.
+@author: Philip
+ */
 body{
     background-image: url("../js/model/assets/img/nedladdning.png");
     margin: 0;
@@ -26,6 +37,11 @@ body{
 
 }
 
+/*
+The colorWave animation is used to change the color of the text in the game name.
+The color changes between black and a dark green color.
+@author: Philip
+ */
 @keyframes colorWave {
     0%, 100% {
         color: black;
@@ -35,6 +51,12 @@ body{
     }
 }
 
+/*
+The mainBorder class is used to create a border around the content of the page.
+The border is blurred and has a white background with a border radius of 20px.
+The content is centered in the border.
+@author: Philip
+ */
 .mainBorder{
     display: flex;
     align-items: center;
@@ -47,6 +69,10 @@ body{
     border-radius: 20px;
 }
 
+/*
+The buttonContainer class is used to center the buttons in the page.
+@author: Philip
+ */
 .buttonContainer, .highScoreListContainer{
     display: flex;
     justify-content: center;
@@ -56,6 +82,10 @@ body{
     gap: 10px;
 }
 
+/*
+The highScores class is used to style the high score list.
+@author: Philip
+ */
 #highScores{
     width: 80%;
     height: 80%;
@@ -64,6 +94,11 @@ body{
     border-radius: 2px;
 }
 
+/*
+The button class is used to style the buttons in the page.
+The buttons have a white background with a border of 3px and a border radius of 45px.
+@author: Philip
+ */
 .buttonContainer button{
     width: 350px;
     height: 60px;
@@ -77,12 +112,22 @@ body{
     font-size: 40px;
 }
 
+/*
+The button:hover class is used to style the buttons when the mouse hovers over them.
+The background color changes to a dark brown color and the text color changes to white.
+@author: Philip
+ */
 .buttonContainer button:hover {
     background: #402f1d;
     color: white;
     font-size: 3.2em;
 }
 
+/*
+The button:active class is used to style the buttons when they are clicked.
+The background color changes to a dark brown color and the text color changes to white.
+@author: Philip
+ */
 #GameName{
     color: #000000;
     margin-top: 10px;
@@ -96,6 +141,10 @@ body{
     animation: colorWave 4s infinite;
 }
 
+/*
+The highScoreListContainer class is used to style the high score list container.
+@author: Philip
+ */
 .highScoreListContainer h2{
     color: rgb(35, 29, 29);
     margin-top: 10px;

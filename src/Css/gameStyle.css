@@ -1,5 +1,7 @@
 * {
     user-select: none;
+    font-family: "VT323", monospace;
+    font-weight: lighter;
 }
 
 body, html{
@@ -17,6 +19,7 @@ body, html{
 
 /*
 ------ Canvas Styling ------
+@Author Philip
  */
 .canvasContainer {
     display: flex;
@@ -30,7 +33,7 @@ body, html{
     border-radius: 20px;
 }
 
-#GameBackground, #GameBackground, #GameHover{ /* Everything that needs to be on top of the canvas */
+#GameBackground, #GameBackground, #GameHover, #TowerScreen { /* Everything that needs to be on top of the canvas */
     position: absolute;
     top: 20px;
     left: 20px;
@@ -47,7 +50,11 @@ body, html{
 }
 
 #GameHover {
-    z-index: 2;
+    z-index: 4;
+}
+
+#TowerScreen {
+    z-index: 3;
 }
 
 #GameUI {
@@ -60,6 +67,7 @@ body, html{
 
 /*
 ------ In-Game UI Styling ------
+              @Author Philip
  */
 .UIScreen {
     height: 960px;
@@ -68,6 +76,7 @@ body, html{
 }
 /*
 --heart--
+@Author: Philip & Mahyar
  */
 
 .UIScreen #heartAnimation{
@@ -108,6 +117,7 @@ body, html{
 
 /*
 --coin--
+@Author Philip & Mahyar
  */
 .UIScreen #CoinsCounter {
     position: absolute;
@@ -144,6 +154,7 @@ body, html{
 
 /*
 --wave--
+@Author Philip
  */
 .UIScreen #WaveCounter {
     position: absolute;
@@ -171,11 +182,12 @@ body, html{
 
 /*
 --button GameWave--
+@Author Philip
  */
 
 .UIScreen #GameWaveButton {
     border: 3px solid #4F4537;
-    border-radius: 45px;
+    border-radius: 20px;
     transition: all 0.3s;
     cursor: pointer;
     background: #DFE0DF;
@@ -203,255 +215,338 @@ body, html{
 
 /*
 --button towers--
+@Author Philip
  */
 
-.UIScreen #sellButton {
+.UIScreen #speedButton {
     border: 3px solid #4F4537;
-    border-radius: 45px;
-    transition: all 0.3s;
+    border-radius: 20px;
     cursor: pointer;
     background: #DFE0DF;
     font-weight: 550;
     font-family: "VT323", cursive;
     font-size: 30px;
-    width: 185px;
+    width: 92px;
     height: 50px;
 
     position: absolute;
     top: 88%;
-    left: 84.6%;
+    left: 91.5%;
+
 }
 
-.UIScreen #sellButton:hover {
-    background: #fd9e00;
+/*
+------ Tower Button Styling ------
+ */
+.UIScreen .towers {
+    position: absolute;
+    width: 183px;
+    height: 250px;
+    top: 20%;
+    background: #483d27;
+    border: rgba(63, 63, 63, 0.63);
+    border: 3px solid;
+    border-radius: 10px;
+}
+
+.towers #towerLabel {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    font-size: 50px;
+    top: 3%;
+    left: 15%;
     color: white;
-    font-size: 2.2em;
-    filter: drop-shadow(0 0 20px #fd9e00);
 }
 
-.UIScreen #sellButton:hover:disabled {
-    cursor: not-allowed;
+.UIScreen #tower1, .UIScreen #tower2, .UIScreen #tower3, .UIScreen #tower4 {
+    border: 2px solid #4F4537;
+    border-radius: 10px;
+    background: #ffffff;
+    transition: all 0.3s;
+    cursor: pointer;
+    font-weight: 550;
+    font-family: "VT323", cursive;
+    font-size: 30px;
+    width: 80px;
+    height: 80px;
+
+    position: absolute;
 }
-.UIScreen #mainMenuButton{
+
+.UIScreen #tower1Image, .UIScreen #tower2Image, .UIScreen #tower3Image, .UIScreen #tower4Image {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    filter: drop-shadow(4px 4px #000000);
+}
+
+.UIScreen #tower1Cost, .UIScreen #tower2Cost, .UIScreen #tower3Cost, .UIScreen #tower4Cost {
+    position: absolute;
+    font-size: 18px;
+    top: 75%;
+    left: 10%;
+}
+
+.UIScreen #tower1Name, .UIScreen #tower2Name, .UIScreen #tower3Name, .UIScreen #tower4Name {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    top: -35%;
+}
+
+.UIScreen #tower1:disabled, .UIScreen #tower2:disabled, .UIScreen #tower3:disabled, .UIScreen #tower4:disabled {
+    cursor: not-allowed;
+    filter: blur(1px);
+    background-color: gray;
+}
+
+.UIScreen #tower1:disabled:hover, .UIScreen #tower2:disabled:hover, .UIScreen #tower3:disabled:hover, .UIScreen #tower4:disabled:hover {
+    background: gray;
+    color: #676767;
+    font-size: 30px;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 11, 0));
+
+}
+
+.UIScreen #tower1:hover, .UIScreen #tower2:hover, .UIScreen #tower3:hover, .UIScreen #tower4:hover {
+    background: rgba(0, 255, 227, 0.45);
+    color: white;
+    font-size: 2em;
+    filter: drop-shadow(0 0 20px #118275);
+}
+
+.UIScreen #tower1 {
+    top: 25%;
+    left: 5%;
+}
+
+
+.UIScreen #tower2 {
+    top: 25%;
+    left: 50%;
+}
+
+.UIScreen #tower3 {
+    top: 63%;
+    left: 5%;
+}
+
+.UIScreen #tower4 {
+    top: 63%;
+    left: 50%;
+}
+
+
+
+/*
+--button Setting--
+@Author Philip
+ */
+
+.UIScreen #settingsButton {
+    transition: all 0.3s;
+    border: 3px solid rgba(79, 69, 55, 0);
+    cursor: pointer;
+    background: rgba(223, 224, 223, 0);
+    width: auto;
+    height: auto;
+
+    position: absolute;
+    top: 25px;
+    right: 15px;
+}
+
+.UIScreen #settingsButton:hover {
+    transform: rotate(360deg);
+    transition: transform 0.5s ease-in-out;
+}
+
+/*
+--settings--
+@author Philip
+ */
+.settings {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    background: rgba(86, 69, 41, 0.86);
+    font-family: "VT323", cursive;
+    border-radius: 9px;
+    width: 400px;
+    height: 300px;
+    z-index: 4;
+    animation: flyIn 1.5s forwards;
+}
+
+.settings.flyOut {
+    animation: flyOut 1s forwards;
+}
+
+@keyframes flyIn {
+    0% {
+        transform: translateY(-100vh);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes flyOut {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100vh);
+    }
+}
+
+.settings #restartButton {
     border: 3px solid #4F4537;
     border-radius: 45px;
     transition: all 0.3s;
     cursor: pointer;
     background: #DFE0DF;
-    font-weight: 550;
-    font-family: "VT323", cursive;
+    font-family: "VT323", monospace;
     font-size: 30px;
     width: 185px;
     height: 50px;
 
     position: absolute;
-    top: 83%;
-    left: 84.6%;
+    top: 90%;
+    left: 50%;
 }
 
-.UIScreen #mainMenuButton:hover{
-    background: #fd9e00;
+.settings #restartButton:hover {
+    background: #ad0000;
     color: white;
-    font-size:2.2em ;
-    filter: drop-shadow(0 0 20px #fd9e00);
-}
-.UIScreen #mainMenuButton:hover:disabled{
-    cursor: not-allowed;
+    font-size: 43px;
+    filter: drop-shadow(0 0 20px #ef0000);
 }
 
-.UIScreen #tower1 {
-    border: 3px solid #4F4537;
-    border-radius: 10px;
-    transition: all 0.3s;
-    cursor: pointer;
-    background: #DFE0DF;
-    font-weight: 550;
-    font-family: "VT323", cursive;
+.settings h1 {
+    color: #ffffff;
+    font-weight: lighter;
     font-size: 20px;
-    width: 75px;
-    height: 75px;
-
     position: absolute;
-    top: 40%;
-    right: 30px;
-
+    top: 5px;
+    left: 10px;
 }
 
-.UIScreen #tower1:disabled {
-    cursor: not-allowed;
-    color: rgba(0, 0, 0, 0.36);
-    font-size: 30px;
-}
-
-.UIScreen #tower1:hover{
-        background: #fd9e00;
-        color: white;
-        font-size:2.2em ;
-        filter: drop-shadow(0 0 20px #fd9e00);
-}
-
-.UIScreen #tower2 {
+.settings #closeSettings {
+    position: absolute;
+    top: 10px;
+    font-family: "VT323", cursive;
+    right: 15px;
+    width: auto;
+    height: auto;
+    font-size: 50px;
+    color: #ffffff;
+    background: rgba(86, 69, 41, 0.86);
     border: 3px solid #4F4537;
-    border-radius: 10px;
+    border-radius: 9px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.settings #closeSettings:hover {
+    color: #c8160d;
+    transition: transform 1s ease-in-out;
+}
+
+.settings #homeScreenButton {
+    border: 3px solid #4F4537;
+    border-radius: 45px;
     transition: all 0.3s;
     cursor: pointer;
     background: #DFE0DF;
-    font-weight: 550;
-    font-family: "VT323", cursive;
+    font-family: "VT323", monospace;
     font-size: 30px;
-    width: 75px;
-    height: 75px;
+    width: 185px;
+    height: 50px;
 
     position: absolute;
+    top: 90%;
+    left: 3%;
+}
+
+.settings #homeScreenButton:hover {
+    background: #3c6229;
+    color: white;
+    font-size: 43px;
+    filter: drop-shadow(0 0 20px #3c6229);
+}
+
+.checkbox1, .checkbox2 {
+    appearance: none;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    background-color: transparent;
+    display: inline-block;
+    position: absolute;
+
+
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.checkbox1:before, .checkbox2:before {
+    content: "";
+    background-color: #2ebb00;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+.checkbox1:checked:before, .checkbox2:checked:before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.checkbox1 {
+    top: 20%;
+    left: 5%;
+}
+
+.checkbox2 {
     top: 40%;
-    left: 85%;
+    left: 5%;
 }
 
-.UIScreen #tower2:disabled {
-    cursor: not-allowed;
-    color: rgba(0, 0, 0, 0.36);
-    font-size: 30px;
-}
-
-.UIScreen #tower2:hover{
-    background: #fd9e00;
-    color: white;
-    font-size:2.2em ;
-    filter: drop-shadow(0 0 20px #fd9e00);
-}
-#tower1 .infoIce{
-    position: absolute;
-    top: 5%;
+#CheckboxFPSLabel {
     font-family: "VT323", cursive;
-    height: 1px;
-    bottom: 10px;
-    right:  11px;
-    font-size: 12px;
-    font-weight: bolder;
-    text-decoration: underline;
-}
-.cost1 {
-    top: 68%;
-    right: 5px;
+    font-weight: lighter;
+    color: #ffffff;
+    font-size: 28px;
     position: absolute;
-    font-size: 16px;
-    font-weight: bold;
+    top: 15%;
+    left: 19%;
 }
 
-#tower2 .infoWizard{
-    position: absolute;
-    top: 5%;
+#CheckboxTowerRadiusLabel{
     font-family: "VT323", cursive;
-    height: 1px;
-    bottom: 10px;
-    right: 5px;
-    font-size: 12px;
-    font-weight: bolder;
-    text-decoration: underline;
-}
-.cost2{
-    top: 68%;
-    right: 5px;
+    font-weight: lighter;
+    color: #ffffff;
+    font-size: 28px;
     position: absolute;
-    font-size: 16px;
-    font-weight: bold;
+    top: 35%;
+    left: 19%;
 }
-
-.UIScreen #tower3{
-    position: absolute;
-    border-radius: 10px;
-    background: #DFE0DF;
-    font-weight: 550;
-    font-family: "VT323", cursive;
-    top: 32%;
-    left:85% ;
-    width:75px;
-    height:75px;
-    opacity: 100%;
-    border: 3px solid #4F4537;
-}
-#tower3 .cost3{
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    font-weight: bold;
-    font-size: 16px;
-    color: black;
-    top: 70%;
-}
-#tower3 .infoInferno{
-    position: absolute;
-    top: 8%;
-    font-family: "VT323", cursive;
-    height: 1px;
-    bottom: 10px;
-    font-weight: bolder;
-
-    right: 5px;
-    font-size: 12px;
-    text-decoration: underline;
-}
-.UIScreen #tower3:hover{
-    background: #fd9e00;
-    color: white;
-    font-size:2.2em ;
-    filter: drop-shadow(0 0 20px #fd9e00);
-}
-#tower3 .image{
-    top: 65%;
-}
-.UIScreen #tower3:disabled{
-    cursor: not-allowed;
-    color: rgba(0, 0, 0, 0.36);
-    font-size: 30px;
-}
-
-
-
-
-.UIScreen #tower4{
-    position: absolute;
-    top: 32%;
-    right: 30px;
-    border-radius: 10px;
-    height: 75px;
-    width: 75px;
-}
-#tower4 .cost4{
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    font-family: "VT323", cursive;
-    font-weight: bold;
-    font-size: 16px;
-    height: 1px;
-    color: black;
-    top: 70%;
-}
-#tower4 .infoSten{
-    position: absolute;
-    top: 8%;
-    font-family: "VT323", cursive;
-    height: 1px;
-    bottom: 10px;
-    font-weight: bolder;
-
-    right: 5px;
-    font-size: 12px;
-    text-decoration: underline;
-}
-
-
-.UIScreen #tower4:hover{
-    background: #fd9e00;
-    color: white;
-    font-size:2.2em ;
-    filter: drop-shadow(0 0 20px #fd9e00);
-}
-
 
 /*
 ------ Effect Canvas Styling ------
+@Author Philip
  */
 
 #fpsCounter{
@@ -482,7 +577,7 @@ body, html{
     font-family: "VT323", cursive;
     font-size: 200px;
     border-radius: 19px;
-    z-index: 4;
+    z-index: 20;
 }
 
 #GameOver .buttonContainer{
@@ -512,3 +607,321 @@ body, html{
     color: white;
     font-size: 0.2em;
 }
+
+/*
+------ settings Styling ------
+ */
+
+#settingsButton {
+    position: absolute;
+    right: 1%;
+    top: 2.5%;
+    background-color: rgba(11,42,0,0);
+    border: 2px solid rgba(79, 69, 55, 0);
+    transform: rotate(0deg);
+    transition: transform 0.5s ease-in-out;
+}
+
+#settingsButton #settingsIMG {
+    width: 35px;
+    height: 35px;
+}
+
+#settingsButton:hover {
+    cursor: pointer;
+    transform: rotate(360deg);
+}
+
+/*
+------ settingsMenu Styling ------
+ */
+
+.settingsScreen {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    font-family: "VT323", monospace;
+    background: rgba(86, 69, 41, 0.86);
+    border-radius: 9px;
+    width: 400px;
+    height: 300px;
+    z-index: 4;
+    animation: flyIn 1.5s forwards;
+}
+
+.settingsScreen.flyOut {
+    animation: flyOut 1.5s forwards;
+}
+
+@keyframes flyIn {
+    0% {
+        transform: translateY(-100vh);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes flyOut {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100vh);
+    }
+}
+
+.settingsScreen #restartButton {
+    border: 3px solid #4F4537;
+    border-radius: 45px;
+    transition: all 0.3s;
+    font-family: "VT323", monospace;
+    cursor: pointer;
+    background: white;
+    font-size: 30px;
+    width: 185px;
+    height: 50px;
+
+    position: absolute;
+    top: 90%;
+    left: 50%;
+}
+
+.settingsScreen #restartButton:hover {
+    background: #ad0000;
+    color: white;
+    font-size: 43px;
+    filter: drop-shadow(0 0 20px #ef0000);
+}
+
+.settingsScreen h1 {
+    color: white;
+    font-weight: lighter;
+    font-size: 20px;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+}
+
+.settingsScreen #closeSettings {
+    position: absolute;
+    top: 10px;
+    font-family: "VT323", monospace;
+    right: 15px;
+    width: auto;
+    height: auto;
+    font-size: 50px;
+    color: #ffffff;
+    background-color: transparent;
+    border: 2px solid transparent;
+    border-radius: 9px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.settingsScreen #closeSettings:hover {
+    color: #ef0000;
+    transform: scale(1.2);
+}
+
+.settingsScreen #homeScreenButton {
+    border: 3px solid #4F4537;
+    border-radius: 45px;
+    transition: all 0.3s;
+    font-family: "VT323", monospace;
+    cursor: pointer;
+    background: white;
+    font-size: 30px;
+    width: 185px;
+    height: 50px;
+
+    position: absolute;
+    top: 90%;
+    left: 3%;
+}
+
+.settingsScreen #homeScreenButton:hover {
+    background: #3c6229;
+    color: white;
+    font-size: 43px;
+    filter: drop-shadow(0 0 20px #3c6229);
+}
+
+.checkbox1, .checkbox2 {
+    appearance: none;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    background-color: transparent;
+    display:  inline-block;
+    position: absolute;
+
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.checkbox1:before, .checkbox2:before {
+    content: ""'';
+    background-color: #2ebb00;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+.checkbox1:checked:before, .checkbox2:checked:before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.checkbox1 {
+    top: 20%;
+    left: 5%;
+}
+
+.checkbox2 {
+    top: 40%;
+    left: 5%;
+}
+
+#CheckboxFPSLabel {
+    font-family: "VT323", monospace;
+    font-weight: lighter;
+    color: white;
+    font-size: 28px;
+    position: absolute;
+    top: 15%;
+    left: 19%;
+}
+
+#CheckboxTowerRadiusLabel {
+    font-family: "VT323", monospace;
+    font-weight: lighter;
+    color: white;
+    font-size: 28px;
+    position: absolute;
+    top: 35%;
+    left: 19%;
+}
+
+/*
+------ TowerInfo Styling ------
+ */
+
+.towerInfo {
+    display: none;
+    position: absolute;
+    background: rgba(86, 69, 41, 0.86);
+    border-radius: 4px;
+    z-index: 7;
+
+
+    width: 125px;
+    height: 150px;
+
+    top: 256px; /* TopLeft 20px */
+    left: 254px; /* TopLeft 20px */
+}
+
+.towerInfo #towerInfoName {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: lighter;
+}
+
+.towerInfo #towerInfoStats {
+    color: white;
+    position: relative;
+    left: 5px;
+    font-size: 23px;
+}
+
+.towerInfo #sellButton {
+    cursor: pointer;
+    position: relative;
+    left: 10%;
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-color: transparent;
+}
+
+#sellButton #sellButtonIMG {
+    width: 32px;
+    height: 32px;
+}
+
+.towerInfo #sellButton:hover #sellButtonIMG {
+    width: 35px;
+    height: 35px;
+}
+
+.towerInfo #sellButton:hover:disabled {
+    cursor: not-allowed;
+}
+
+
+
+
+.towerInfo #upgradeButton {
+    cursor: pointer;
+    position: relative;
+    left: 5%;
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-color: transparent;
+}
+
+.towerInfo #upgradeButton:hover #upgradeButtonIMG {
+    width: 35px;
+    height: 35px;
+    background: transparent;
+    border-color: transparent;
+}
+
+#upgradeButton #upgradeButtonIMG {
+    width: 32px;
+    height: 32px;
+}
+
+/*
+.UIScreen #sellButton {
+    border: 3px solid #4F4537;
+    border-radius: 20px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: #DFE0DF;
+    font-weight: 550;
+    font-family: "VT323", cursive;
+    font-size: 30px;
+    width: 92px;
+    height: 50px;
+
+    position: absolute;
+    top: 88%;
+    left: 84.6%;
+}
+
+.UIScreen #sellButton:hover {
+    background: #fd9e00;
+    color: white;
+    font-size: 2.2em;
+    filter: drop-shadow(0 0 20px #fd9e00);
+}
+
+.UIScreen #sellButton:hover:disabled {
+    cursor: not-allowed;
+}
+
+ */

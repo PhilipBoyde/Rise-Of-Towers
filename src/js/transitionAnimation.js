@@ -24,5 +24,10 @@ window.onload = () => {
                 window.location.href = target;
             }, 500);
         });
+
+        // Check if all images are loaded and current page is Game.html
+        if (window.allImagesLoaded && window.location.href.includes('Game.html')) {
+            console.log('All images are loaded');
+        }
     }
 }

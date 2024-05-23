@@ -5,17 +5,30 @@ import {goblin, slime, wolf, bee, Cyclops, Mech, dragonWiz, akaname} from "./Ene
 --- variables ---
  */
 const baseComposition = {
-    'Bee': {count: 3, increment: 0.5},
+    'Bee': {count: 4, increment: 0.5},
     'Wolf': {count: 1, increment: 0.3},
     'Goblin': {count: 0, increment: 2},
     'Slime': {count: 0, increment: 0.5}
 };
 
 const specialRounds = {
-    5: {'Goblin': 8},
-    10: {'Goblin': 16},
-    15: {'Cyclops': 1},
-    20: {'Goblin': 5, 'Cyclops': 1}
+    0: {'Wolf': 1},
+    1: {'Goblin': 1, 'Wolf': 1},
+    2: {'Goblin': 2, 'Wolf': 2},
+    3: {'Goblin': 3, 'Wolf': 3, 'Slime': 1},
+    4: {'Goblin': 5, 'Wolf': 5, 'Slime': 2},
+    5: {'Goblin': 8, 'Wolf': 8, 'Slime': 3, 'Bee': 1},
+    6: {'Goblin': 10, 'Wolf': 10, 'Slime': 4, 'Bee': 4},
+    7: {'Goblin': 12, 'Wolf': 10, 'Slime': 5, 'Bee': 6},
+    8: {'Goblin': 14, 'Wolf': 8, 'Slime': 5, 'Bee': 8},
+    9: {'Goblin': 16, 'Wolf': 6, 'Slime': 5, 'Bee': 10},
+    10: {'Goblin': 16, 'Wolf': 15, 'Slime': 8, 'Bee': 12},
+    11: {'Goblin': 17, 'Wolf': 10, 'Slime': 8, 'Bee': 12},
+    12: {'Goblin': 18, 'Wolf': 10, 'Slime': 8, 'Bee': 12},
+    13: {'Goblin': 20, 'Wolf': 12, 'Slime': 9, 'Bee': 12},
+    14: {'Goblin': 20, 'Wolf': 15, 'Slime': 10, 'Bee': 15},
+    15: {'Goblin': 10, 'Cyclops': 1, 'Bee': 10 } ,
+    20: {'Goblin': 20, 'Cyclops': 2}
 };
 
 let currentWave = 1; // Start with wave 1
@@ -33,15 +46,15 @@ let pathRoutesForMap = []; // path to be used for the wave
  */
 export function changeMapRoutes(activeMapNbr){
     switch (activeMapNbr) { // Load the map based paths based on the activeMap variable
-        case 1:
+        case "1":
             pathRoutesForMap = Map1Paths;
             break;
 
-        case 2:
+        case "2":
             pathRoutesForMap = Map2Paths;
             break;
 
-        case 3:
+        case "3":
             pathRoutesForMap = Map3Paths;
             break;
 
@@ -107,10 +120,11 @@ export function calculateWave(round) {
     const waveEnemies = [];
     Object.keys(composition).forEach(type => {
         let count = composition[type];
+        let xOffSet = 0;  // Initializes xOffSet within loop to reset for each type
         for (let i = 0; i < count; i++) {
-            let xOffSet = i * 60;  // Offset for the x position of the enemies
             let activePath = choosePath();
             createEnemyType(xOffSet, activePath, type, waveEnemies);
+            xOffSet -= 20;  // Increments the xOffSet within the loop
         }
     });
 
@@ -151,38 +165,15 @@ function createEnemyType(xOffSet, activePath, type, waveEnemies) {
     }
 }
 
-
-
-
-
 /**
- * Chooses the path for the enemies to follow. Based on a random number.
- * @returns {[{x: number, y: number},{x: number, y: number},*,*]} - The path for the enemies to follow.
- * @author Philip
+ * Chooses the path for the enemies to follow based on a random number.
+ * @returns {{x: number, y: number}[]} - The path for the enemies to follow.
+ * @author Philip, Muhamed
  */
 function choosePath(){
-    let activePath;
-    const random = Math.random();
-    const randomNumber = Math.floor(random * 3) + 1;
-
-    switch (randomNumber) {
-        case 1:
-            activePath = pathRoutesForMap.Route1
-            break;
-
-        case 2:
-            activePath = pathRoutesForMap.Route2
-            break;
-
-        case 3:
-            activePath = pathRoutesForMap.Route3
-            break;
-
-        default:
-            console.log('Something went wrong when choosing the path for enemies!');
-            break;
-    }
-    return activePath;
+    const routeCount = pathRoutesForMap.length; // Get the number of available routes
+    const randomIndex = Math.floor(Math.random() * routeCount); // Choose a random index based on the available routes
+    return pathRoutesForMap[randomIndex]; // Return the randomly chosen route
 }
 
 /*
@@ -203,6 +194,3 @@ export function testEnemyType(){
     waveEnemies.reverse();
     return waveEnemies;
 }
-
-
-

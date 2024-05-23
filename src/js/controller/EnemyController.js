@@ -81,7 +81,8 @@ export class Enemy extends SpriteController {
      */
     draw(gameCtx) {
         super.drawSprite(gameCtx, this.oriantaion);
-        this.drawHitBox(gameCtx);
+        this.drawHealthBar(gameCtx)
+        //this.drawHitBox(gameCtx);
         // health bar
 
     }
@@ -95,7 +96,7 @@ export class Enemy extends SpriteController {
         gameCtx.strokeStyle = '#ff0000';
         gameCtx.lineWidth = 3;
         gameCtx.strokeRect(this.position.x, this.position.y, this.width, this.height);
-        this.drawHealthBar(gameCtx)
+
     }
 
     /**
@@ -206,7 +207,7 @@ export class Enemy extends SpriteController {
     }
 
     removeFreeze() {
-        this.speed *= 4; /*Is yet to be added to the constructor, ordinary speed should be the regular speed
+        this.speed *= 3; /*Is yet to be added to the constructor, ordinary speed should be the regular speed
         before the freeze.
         */
         this.isFrozen = false; /*isFrozen is also not added to the constructor, should originally be false, but is set
