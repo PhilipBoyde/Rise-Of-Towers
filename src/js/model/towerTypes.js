@@ -1,52 +1,6 @@
 import { Tower } from "../controller/TowerController.js";
 
 /**
- * Class for the Archer Tower. Extends the Tower class.
- * @class ArcherTower
- * @extends Tower
- * @author Philip
- */
-export class ArcherTower extends Tower {
-    constructor(gameCtx, tiles, status) {
-        const imagePaths = ["../js/model/assets/Tower/Tower1/4.png"];
-        //const projectileImagePaths =["../js/model/assets/Tower/Projectile/FB500-2.png"];
-
-        const projectileImagePaths = [
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-2.png",
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-3.png",
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-4.png",
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-5.png"
-        ];
-        const towerType = "Archer"; // not used
-        const towerOptions = {
-            frameWidth: 280/4,
-            frameHeight:  1024,
-            frameIndex: 6,
-            frameCount:4, 
-            frameUpdateCounter:0  ,
-            frameSpeed: 10
-        };
-
-        super(
-            gameCtx,
-            tiles,
-            100, // base cost
-            200,
-            200, // range
-            20, // Base damage
-            5, // maxLevel
-            60, // Base Shooting speed
-            5, // Projectile speed
-            imagePaths, // image paths for the tower
-            projectileImagePaths,
-            towerOptions,
-            towerType,
-            status,
-        );
-    }
-}
-
-/**
  * Class for the Wizard Tower. Extends the Tower class.
  * @class WizardTower
  * @extends Tower
@@ -279,7 +233,6 @@ export class IceTower extends Tower{
                         cost: "$$$",
                         damage: 3,
                         speed: 120,
-                        img: "../js/model/assets/Tower/IceT.png"
                     }
                 }},
         );
