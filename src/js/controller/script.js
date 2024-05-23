@@ -7,6 +7,26 @@
 
 let currentSlide = 1; // Initialize the current slide index
 
+// Define an array of image paths corresponding to each slide
+const imagePaths = [
+    "../js/model/assets/Tutorial/baseTower.jpg", // slide 2
+    "../js/model/assets/Tutorial/Base.png",       // slide 3
+    "../js/model/assets/Tutorial/baseTower.jpg", // slide 4
+    "../js/model/assets/Tutorial/baseTower.jpg", // slide 5
+    "../js/model/assets/Tutorial/baseTower.jpg"  // slide 6
+];
+
+// Add event listeners to buttons when the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", function() {
+    const prevButton = document.getElementById("prevButton");
+    const nextButton = document.getElementById("nextButton");
+
+    if (prevButton && nextButton) {
+        prevButton.addEventListener("click", prevSlide);
+        nextButton.addEventListener("click", nextSlide);
+    }
+});
+
 /**
  * Function to navigate to the next slide and update displayed content accordingly.
  */
@@ -23,42 +43,13 @@ function nextSlide() {
     newText.style.display = "block"; // Show next text
 
     // Determine which picture should be shown
-    if (currentSlide === 2) {
-        document.querySelector("#towerImageContainerSlide2").style.display = "block";
-        document.querySelector("#towerImageContainerSlide3").style.display = "none";
-        document.querySelector("#towerImageContainerSlide4").style.display = "none";
-        document.querySelector("#towerImageContainerSlide5").style.display = "none";
-        document.querySelector("#towerImageContainerSlide6").style.display = "none";
-    } else if (currentSlide === 3) {
-        document.querySelector("#towerImageContainerSlide2").style.display = "none";
-        document.querySelector("#towerImageContainerSlide3").style.display = "block";
-        document.querySelector("#towerImageContainerSlide4").style.display = "none";
-        document.querySelector("#towerImageContainerSlide5").style.display = "none";
-        document.querySelector("#towerImageContainerSlide6").style.display = "none";
-    } else if (currentSlide === 4) {
-        document.querySelector("#towerImageContainerSlide2").style.display = "none";
-        document.querySelector("#towerImageContainerSlide3").style.display = "none";
-        document.querySelector("#towerImageContainerSlide4").style.display = "block";
-        document.querySelector("#towerImageContainerSlide5").style.display = "none";
-        document.querySelector("#towerImageContainerSlide6").style.display = "none";
-    } else if (currentSlide === 5) {
-        document.querySelector("#towerImageContainerSlide2").style.display = "none";
-        document.querySelector("#towerImageContainerSlide3").style.display = "none";
-        document.querySelector("#towerImageContainerSlide4").style.display = "none";
-        document.querySelector("#towerImageContainerSlide5").style.display = "block";
-        document.querySelector("#towerImageContainerSlide6").style.display = "none";
-    } else if (currentSlide === 6) {
-        document.querySelector("#towerImageContainerSlide2").style.display = "none";
-        document.querySelector("#towerImageContainerSlide3").style.display = "none";
-        document.querySelector("#towerImageContainerSlide4").style.display = "none";
-        document.querySelector("#towerImageContainerSlide5").style.display = "none";
-        document.querySelector("#towerImageContainerSlide6").style.display = "block";
-    } else {
-        document.querySelector("#towerImageContainerSlide2").style.display = "none";
-        document.querySelector("#towerImageContainerSlide3").style.display = "none";
-        document.querySelector("#towerImageContainerSlide4").style.display = "none";
-        document.querySelector("#towerImageContainerSlide5").style.display = "none";
-        document.querySelector("#towerImageContainerSlide6").style.display = "none";
+    const imageContainer = document.querySelector(".imageContainer");
+    imageContainer.innerHTML = ""; // Clear the existing images
+
+    if (currentSlide >= 2 && currentSlide <= 6) {
+        const towerImage = document.createElement("img");
+        towerImage.src = imagePaths[currentSlide - 2]; // Adjust index to match array index
+        imageContainer.appendChild(towerImage);
     }
 }
 
@@ -78,41 +69,12 @@ function prevSlide() {
     newText.style.display = "block"; // Show previous text
 
     // Determine which picture should be displayed
-    if (currentSlide === 2) {
-        document.querySelector("#towerImageContainerSlide2").style.display = "block";
-        document.querySelector("#towerImageContainerSlide3").style.display = "none";
-        document.querySelector("#towerImageContainerSlide4").style.display = "none";
-        document.querySelector("#towerImageContainerSlide5").style.display = "none";
-        document.querySelector("#towerImageContainerSlide6").style.display = "none";
-    } else if (currentSlide === 3) {
-        document.querySelector("#towerImageContainerSlide2").style.display = "none";
-        document.querySelector("#towerImageContainerSlide3").style.display = "block";
-        document.querySelector("#towerImageContainerSlide4").style.display = "none";
-        document.querySelector("#towerImageContainerSlide5").style.display = "none";
-        document.querySelector("#towerImageContainerSlide6").style.display = "none";
-    } else if (currentSlide === 4) {
-        document.querySelector("#towerImageContainerSlide2").style.display = "none";
-        document.querySelector("#towerImageContainerSlide3").style.display = "none";
-        document.querySelector("#towerImageContainerSlide4").style.display = "block";
-        document.querySelector("#towerImageContainerSlide5").style.display = "none";
-        document.querySelector("#towerImageContainerSlide6").style.display = "none";
-    } else if (currentSlide === 5) {
-        document.querySelector("#towerImageContainerSlide2").style.display = "none";
-        document.querySelector("#towerImageContainerSlide3").style.display = "none";
-        document.querySelector("#towerImageContainerSlide4").style.display = "none";
-        document.querySelector("#towerImageContainerSlide5").style.display = "block";
-        document.querySelector("#towerImageContainerSlide6").style.display = "none";
-    } else if (currentSlide === 6) {
-        document.querySelector("#towerImageContainerSlide2").style.display = "none";
-        document.querySelector("#towerImageContainerSlide3").style.display = "none";
-        document.querySelector("#towerImageContainerSlide4").style.display = "none";
-        document.querySelector("#towerImageContainerSlide5").style.display = "none";
-        document.querySelector("#towerImageContainerSlide6").style.display = "block";
-    } else {
-        document.querySelector("#towerImageContainerSlide2").style.display = "none";
-        document.querySelector("#towerImageContainerSlide3").style.display = "none";
-        document.querySelector("#towerImageContainerSlide4").style.display = "none";
-        document.querySelector("#towerImageContainerSlide5").style.display = "none";
-        document.querySelector("#towerImageContainerSlide6").style.display = "none";
+    const imageContainer = document.querySelector(".imageContainer");
+    imageContainer.innerHTML = ""; // Clear the existing images
+
+    if (currentSlide >= 2 && currentSlide <= 6) {
+        const towerImage = document.createElement("img");
+        towerImage.src = imagePaths[currentSlide - 2]; // Adjust index to match array index
+        imageContainer.appendChild(towerImage);
     }
 }
