@@ -1,5 +1,5 @@
 import {InfernoTower, WizardTower, IceTower, StoneTower} from "../model/towerTypes.js";
-import {addCoins, getCoins, removeCoins, setActiveTowers} from "./Controller.js";
+import {addCoins, getCoins, removeCoins, setActiveTowers, showErrorPopup} from "./Controller.js";
 
 document.getElementById("tower1").addEventListener("click", () => selectTower(1));
 document.getElementById("tower2").addEventListener("click", () => selectTower(2));
@@ -136,6 +136,9 @@ function upgradeTower(){
     if (coins >= activeTower.upgradeCost){
         removeCoins(activeTower.upgradeCost)
         activeTower.upgradeTower()
+    } else {
+        showErrorPopup()
+
     }
 }
 
@@ -208,6 +211,8 @@ function selectTower(buttonID) {
                 allPlacedTowers.push(activeTileID);
                 removeCoins(300);
                 setActiveTowers(activeTowers);
+            } else {
+                showErrorPopup()
             }
             break;
 
@@ -217,6 +222,8 @@ function selectTower(buttonID) {
                 allPlacedTowers.push(activeTileID);
                 removeCoins(200);
                 setActiveTowers(activeTowers);
+            } else {
+                showErrorPopup()
             }
             break;
 
@@ -226,7 +233,10 @@ function selectTower(buttonID) {
                 allPlacedTowers.push(activeTileID);
                 removeCoins(900);
                 setActiveTowers(activeTowers);
+            } else {
+                showErrorPopup()
             }
+
             break;
 
         case 4: // StoneTower
@@ -235,6 +245,8 @@ function selectTower(buttonID) {
                 allPlacedTowers.push(activeTileID);
                 removeCoins(700);
                 setActiveTowers(activeTowers);
+            } else {
+                showErrorPopup()
             }
             break;
 

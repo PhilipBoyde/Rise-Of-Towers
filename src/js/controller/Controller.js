@@ -316,3 +316,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+/**
+ * Function to show an error popup when player tries to buy or upgrade a tower
+ * without having enough coins.
+ * @author Muhamed
+ */
+export function showErrorPopup() {
+    const errorPopup = document.getElementById('errorPopup');
+    errorPopup.style.display = 'block';
+    errorPopup.style.opacity = '1';
+
+    setTimeout(() => {
+        errorPopup.style.opacity = '0';
+        setTimeout(() => {
+            errorPopup.style.display = 'none';
+        }, 300); // Match this duration with the transition duration in CSS
+    }, 2000); // Display the message for 2 seconds
+}
