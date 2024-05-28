@@ -3,6 +3,7 @@ import {setTowerGameLoopDependencies} from "./TowerGameLoopController.js";
 import {setGameControllerDependencies} from "./Controller.js";
 import {setMapControllerDependencies} from "./mapController.js";
 import {setPlacementTilesDependencies} from "./placementTiles.js";
+import {SaveController} from "./SaveController.js";
 //import "./SettingsController.js";
 
 

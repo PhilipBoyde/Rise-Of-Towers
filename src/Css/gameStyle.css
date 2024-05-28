@@ -214,28 +214,6 @@ body, html{
 }
 
 /*
---button towers--
-@Author Philip
- */
-
-.UIScreen #speedButton {
-    border: 3px solid #4F4537;
-    border-radius: 20px;
-    cursor: pointer;
-    background: #DFE0DF;
-    font-weight: 550;
-    font-family: "VT323", cursive;
-    font-size: 30px;
-    width: 92px;
-    height: 50px;
-
-    position: absolute;
-    top: 88%;
-    left: 91.5%;
-
-}
-
-/*
 ------ Tower Button Styling ------
  */
 .UIScreen .towers {
@@ -550,7 +528,7 @@ body, html{
  */
 
 #fpsCounter{
-    display: flex;
+    display: none;
     position: absolute;
     top: 10px;
     left: 30px;
@@ -580,16 +558,36 @@ body, html{
     z-index: 20;
 }
 
+#GameOver .saveHighscoreContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: auto;
+    width: auto;
+    gap: 10px;
+}
+
+#GameOver .saveHighscoreContainer #playerName{
+    height: auto;
+    width: 350px;
+    font-size: 40px;
+    border: 3px solid #000000;
+    border-radius: 15px;
+}
+
 #GameOver .buttonContainer{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    height: 0;
+    height: auto;
+    width: auto;
+    top: 100px;
     gap: 10px;
 }
 
-#GameOver .buttonContainer button{
+#GameOver button{
     width: 350px;
     height: 60px;
     border: 3px solid #000000;
@@ -602,7 +600,7 @@ body, html{
     font-size: 30px;
 }
 
-#GameOver .buttonContainer button:hover {
+#GameOver  button:hover {
     background: #dc0000;
     color: white;
     font-size: 0.2em;

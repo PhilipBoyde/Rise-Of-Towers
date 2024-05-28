@@ -4,6 +4,7 @@ import {gameStatus} from "./SettingsController.js";
 //import {} from "../controller/SpriteTowerController.js";
 //import {} from "../controller/SpriteController.js";
 //import { MapController } from './mapController.js';
+import {SaveController} from "./SaveController.js";
 
 
 /**
@@ -46,6 +47,7 @@ let /** @type HTMLCanvasElement */ enemyCanvas;
 let /** @type HTMLCanvasElement */ gameHoverCanvas;
 let /** @type CanvasRenderingContext2D */ enemyCtx;
 let /** @type CanvasRenderingContext2D */ gameHoverCtx;
+const saveCon = new SaveController();
 
 const /** @type HTMLElement */fpsCounterElement = document.querySelector('#fpsCounter');
 
@@ -238,7 +240,6 @@ function gameLoop(enemies) {
             activeTowers.forEach(tower => { // tower
                 tower.drawTower();
             });
-
              */
 
             addCoins(100)
@@ -269,6 +270,35 @@ function gameLoop(enemies) {
     // Request next frame
     enemyAnimationID = requestAnimationFrame(() => gameLoop(enemies));
 }
+
+/**
+ * @author Emil
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('saveScoreButton').addEventListener('click', saveHighScorec);
+});
+
+/**
+ * @author Philip
+ * @author Emil
+ */
+export function saveHighScorec() {
+
+    if(!saveCon){
+        console.error('SaveController not initialized');
+        return;
+    }
+
+    let playerScore = getCoins() * activeWave ;
+    let playerName = document.getElementById('playerName').value;
+
+    if (playerName.trim().length === 0) {
+        alert("Please enter a name and score to save highscore");
+    } else {
+        saveCon.addHighscore(playerName.trim(), playerScore);
+    }
+}
+
 
 
 /**

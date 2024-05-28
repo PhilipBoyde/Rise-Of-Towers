@@ -20,10 +20,10 @@
     <canvas id="GameHover"></canvas>
     <canvas id="TowerScreen"></canvas>
     <canvas id="GameUI"></canvas>
+
     <!-- UI Screen -->
     <div class="UIScreen">
         <button id="GameWaveButton">Start Wave</button>
-        <button id="speedButton"> >>></button>
         <div class="towers">
             <h1 id="towerLabel">Towers</h1>
             <button id="tower1" class="towerButton" data-damage="10" data-range="150" data-description="Deals low damage to enemies, but slows them down. Great in combination with other towers. Upgrade it do get bigger range">
@@ -56,6 +56,7 @@
             <img id="settingsIMG" src="../js/model/assets/icons/settingsButton.png" alt="">
         </button>
     </div>
+
     <!-- Settings Screen -->
     <div class="settingsScreen">
         <h1>Settings</h1>
@@ -86,10 +87,18 @@
             <a href="../../index.html">
                 <button>Back</button>
             </a>
+
+        </div>
+        <div class="saveHighscoreContainer">
+            <input type="text" id="playerName" placeholder="Enter Your Name">
+            <button id="saveScoreButton">Save HighScore</button>
         </div>
 
-        <h1 id="fpsCounter">Average<br>FPS: .... </h1>
+
+
     </div>
+
+    <h1 id="fpsCounter">Average<br>FPS: .... </h1>
 
     <!-- Tower Info -->
     <div class="towerInfo">
