@@ -10,7 +10,7 @@ const baseComposition = {
     'Wolf': {count: 1, increment: 0.3},
     'Goblin': {count: 0, increment: 2},
     'Slime': {count: 0, increment: 0.5},
-    'Mech': {count: 0, increment: 0.5},
+    'akaname': {count: 0, increment: 0.5},
 };
 
 const specialRounds = {
