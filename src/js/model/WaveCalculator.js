@@ -1,5 +1,6 @@
 import {Map1Paths, Map2Paths, Map3Paths} from "./pathRouteManager.js";
-import {goblin, slime, wolf, bee, Cyclops, Mech, dragonWiz, akaname} from "./EnemyTypes.js";
+import {goblin, slime, wolf, bee, Cyclops, Mech, dragonWiz} from "./EnemyTypes.js";
+import {akaname} from "./EnemyTypes.js";
 
 /*
 --- variables ---
@@ -9,26 +10,27 @@ const baseComposition = {
     'Wolf': {count: 1, increment: 0.3},
     'Goblin': {count: 0, increment: 2},
     'Slime': {count: 0, increment: 0.5},
+    'Mech': {count: 0, increment: 0.5},
 };
 
 const specialRounds = {
     0: {'Wolf': 1},
-    1: {'Goblin': 1, 'Wolf': 1, 'Mech': 1},
+    1: {'Goblin': 1, 'Wolf': 1},
     2: {'Goblin': 2, 'Wolf': 2},
     3: {'Goblin': 3, 'Wolf': 3, 'Slime': 1},
     4: {'Goblin': 5, 'Wolf': 5, 'Slime': 2},
-    5: {'Goblin': 8, 'Wolf': 8, 'Slime': 3, 'Bee': 1},
+    5: {'Goblin': 5, 'Wolf': 7, 'Slime': 2, 'Bee': 1, 'akaname': 1},
     6: {'Goblin': 10, 'Wolf': 10, 'Slime': 4, 'Bee': 4},
-    7: {'Goblin': 12, 'Wolf': 10, 'Slime': 5, 'Bee': 6},
-    8: {'Goblin': 14, 'Wolf': 8, 'Slime': 5, 'Bee': 8},
-    9: {'dragonWiz': 1,'Goblin': 6, 'Wolf': 6, 'Slime': 5, 'Bee': 10},
-    10: {'Goblin': 16, 'Wolf': 15, 'Slime': 8, 'Bee': 12},
-    11: {'Goblin': 17, 'Wolf': 10, 'Slime': 8, 'Bee': 12},
-    12: {'Goblin': 18, 'Wolf': 10, 'Slime': 8, 'Bee': 12},
+    7: {'Goblin': 10, 'akaname': 4, 'Slime': 5, 'Bee': 6},
+    8: {'Goblin': 14, 'akaname': 6, 'Slime': 5, 'Bee': 8},
+    9: {'Goblin': 10, 'akaname': 8, 'Slime': 5, 'Bee': 10},
+    10: {'Goblin': 10, 'Wolf': 10, 'Slime': 8, 'dragonWiz': 1, 'Bee': 12},
+    11: {'Goblin': 17, 'Wolf': 10, 'dragonWiz': 3, 'Bee': 12},
+    12: {'Goblin': 18, 'akaname': 10, 'dragonWiz': 5, 'Bee': 12},
     13: {'Goblin': 20, 'Wolf': 12, 'Slime': 9, 'Bee': 12},
     14: {'Goblin': 20, 'Wolf': 15, 'Slime': 10, 'Bee': 15},
-    15: {'Goblin': 10, 'Cyclops': 1, 'Bee': 10 } ,
-    20: {'Goblin': 20, 'Cyclops': 2}
+    15: {'akaname': 10, 'Mech': 1, 'dragonWiz': 5 } ,
+    20: {'Mech': 2, 'Cyclops': 2}
 };
 
 let pathRoutesForMap = []; // path to be used for the wave
@@ -122,7 +124,7 @@ export function calculateWave(round) {
         for (let i = 0; i < count; i++) {
             let activePath = choosePath();
             createEnemyType(xOffSet, activePath, type, waveEnemies);
-            xOffSet -= 20;  // Increments the xOffSet within the loop
+            xOffSet -= 15;  // Increments the xOffSet within the loop
         }
     });
 
@@ -155,6 +157,15 @@ function createEnemyType(xOffSet, activePath, type, waveEnemies) {
             break;
         case 'Cyclops':
             waveEnemies.push(new Cyclops({position: {x: activePath[0].x + xOffSet, y: activePath[0].y}}, activePath));
+            break;
+        case 'Mech':
+            waveEnemies.push(new Mech({position: {x: activePath[0].x + xOffSet, y: activePath[0].y}}, activePath));
+            break;
+        case 'dragonWiz':
+            waveEnemies.push(new dragonWiz({position: {x: activePath[0].x + xOffSet, y: activePath[0].y}}, activePath));
+            break;
+        case 'akaname':
+            waveEnemies.push(new akaname({position: {x: activePath[0].x + xOffSet, y: activePath[0].y}}, activePath));
             break;
         // Add other cases as needed
         default:
