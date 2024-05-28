@@ -181,10 +181,10 @@ export class Cyclops extends Enemy {
     constructor({position = {x: 0, y: 0}}, path) {
         super(
             {position},
-            0.3, //speed
+            0.7, //speed
             path,
-            15000, //health
-            300, //coins
+            5000, //health
+            500, //coins
             {spriteImages: {
                     up: '../js/model/assets/EnemySprites/Boss/Cyclops/walk4.png',
                     down: '../js/model/assets/EnemySprites/Boss/Cyclops/walk4.png',
@@ -212,7 +212,7 @@ export class Mech extends Enemy {
             0.5, //speed
             path,
             10000, //health
-            300, //coins
+            700, //coins
             {spriteImages: {
                     up: '../js/model/assets/EnemySprites/Boss/Mech/walk2.png',
                     down: '../js/model/assets/EnemySprites/Boss/Mech/walk2.png',
@@ -239,7 +239,7 @@ export class dragonWiz extends Enemy {
             {position},
             1.5, //speed
             path,
-            10000, //health
+            600, //health
             25, //coins
             {spriteImages: {
                     up: '../js/model/assets/EnemySprites/dragonWiz/walk.png',
