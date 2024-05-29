@@ -93,14 +93,14 @@ export class WizardTower extends Tower {
             {upgradeInfo: { //Info about the different upgrades
                 level2: {
                     cost: 450,
-                    damage: 10,
-                    speed: 30
+                    damage: 18,
+                    speed: 20
                 },
 
                 level3: {
                     cost: "$$$",
-                    damage: 300,
-                    speed: 120
+                    damage: 30,
+                    speed: 16
                 }
                 }},
         );
