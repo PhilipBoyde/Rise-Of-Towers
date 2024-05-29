@@ -1,3 +1,9 @@
+/*
+Defines CSS styles for the main content of the page, including background image, text styling, and map selection elements.
+
+Author: Philip, Muhamed, Emil
+*/
+
 * {
     user-select: none;
     overflow: hidden;
@@ -190,25 +196,3 @@ button:hover {
     color: white;
     font-size: 3.2em;
 }
-
-/*
-.mapText {
-    display: none;
-    position: absolute;
-    right: 0;
-    width: 30vw;
-    z-index: 2;
-}
-
-.blurryBackground {
-    display: none;
-    position: absolute;
-    right: 0;
-    width: 30vw;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(5px);
-    border-radius: 10px;
-    z-index: 1;
-    }
- */
-

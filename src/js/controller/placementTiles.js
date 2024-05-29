@@ -3,9 +3,6 @@ import {map2TowerArea} from "../model/map2/Map2PlacebleArea.js";
 import {map3TowerArea} from "../model/map3/Map3PlacebleArea.js";
 import {selectTile} from "./TowerGameLoopController.js";
 
-/*
---- variables ---
- */
 let gameCanvas = undefined;
 let lastHovered = undefined;
 let gameStatus = false;
@@ -15,9 +12,6 @@ const mouse = {
     x: 'undefined',
     y: 'undefined'
 }
-/*
---- end of variables ---
- */
 
 /**
  * 2D array to hold the placement tiles data. Used to create the placement tiles. Right now only supports map1TowerArea.
@@ -245,10 +239,6 @@ export class PlaceableTile{
     }
 }
 
-
-
-
-
 /*
 --- Event listeners ---
  */
@@ -277,21 +267,4 @@ window.addEventListener('click', (ev) =>{
         }
     }
 });
-
-// The following code is used to check if the mouse is hovering over a tile and if so, update the hover effect on the tile. It is right now only used for reference and is not used in the game.
-/*
-let lastHover = false;
-window.addEventListener('mousemove', (ev) => { // Use canvas
-    const rect = gameCanvas.getBoundingClientRect()
-    mouse.x = ev.clientX - rect.left
-    mouse.y = ev.clientY - rect.top
-
-    if (mouse.x >= 0 && mouse.x <= rect.width && mouse.y >= 0 && mouse.y <= rect.height) { //inside canvas
-        hoveredTiles = isTile()
-
-        updateHoverTiles()
-    }
-});
-
- */
 

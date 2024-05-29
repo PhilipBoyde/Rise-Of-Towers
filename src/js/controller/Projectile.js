@@ -1,6 +1,9 @@
 /**
  * Projectile class that handles the projectile movement and damage.
  * @class Projectile
+ * @author Mahyar
+ * @author Philip
+ * @author Muhamed
  */
 export class Projectile {
     /**
@@ -17,6 +20,10 @@ export class Projectile {
      * @param {string[]} imagePaths - array of image paths for the projectile
      * @param {Object[]} enemies - array of all enemies in the game
      * @param {number} aoeRadius - radius for AoE damage
+     * @author Mahyar
+     * @author Philip
+     * @author Muhamed
+     *
      */
     constructor(towerType, x, y, speed, damage, target, onDelete, gameCtx, imagePaths,enemies,aoeRadius) {
         this.towerType = towerType;
@@ -40,6 +47,8 @@ export class Projectile {
 
     /**
      * Loads images from the given image paths.
+     * @author Mahyar
+     * @author Philip
      */
     loadImage() {
         this.images = [];
@@ -59,6 +68,8 @@ export class Projectile {
 
     /**
      * Moves the projectile towards the target.
+     * @author Mahyar
+     * @author Philip
      */
     move() {
         this.draw();
@@ -87,6 +98,7 @@ export class Projectile {
 
     /**
      * Applies AoE damage to all enemies within the AoE radius.
+     * @author Muhamed
      */
     applyAoEDamage() {
         if (!Array.isArray(this.enemies)) {
@@ -112,6 +124,8 @@ export class Projectile {
 
     /**
      * Draws the projectile on the canvas.
+     * @author Mahyar
+     * @author Philip
      */
     draw() {
         const frameChangeInterval = 400;
@@ -134,7 +148,12 @@ export class Projectile {
         }
         requestAnimationFrame(this.draw.bind(this));
     }
-
+    /**
+     * Marks the object for deletion by setting a flag.
+     * When called, this method sets the 'markedForDeletion' flag to true,
+     * indicating that the object should be removed or hidden from the game environment.
+     * @author Mahyar
+     */
     setInvisible() {
         this.markedForDeletion = true;
     }

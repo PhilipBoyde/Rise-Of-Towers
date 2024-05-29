@@ -6,6 +6,9 @@ import { SpriteController } from './SpriteController.js';
  * @extends SpriteController - controls the sprite images for the enemy sprite
  * @class Enemy - controls the enemy sprite
  * @author Philip
+ * @author Mahyar
+ * @author Muhamed
+ * @author Emil
  */
 export class Enemy extends SpriteController {
     isFrozen = false;
@@ -22,6 +25,7 @@ export class Enemy extends SpriteController {
      * @param height - height of the enemy hitbox
      * @param frames - settings for sprite frames in sprite controller
      * @author Philip
+     * @author Emil
      */
     constructor( //start of constructor, sets the position, speed, path, health, sprite images, width, height and frames for the enemy sprite
         {position = {x: 0, y: 0}},
@@ -78,6 +82,7 @@ export class Enemy extends SpriteController {
      * function to control what should be drawn on the canvas.
      * @param gameCtx - the game context
      * @author Philip
+     * @author Muhamed
      */
     draw(gameCtx) {
         super.drawSprite(gameCtx, this.oriantaion);
@@ -194,60 +199,36 @@ export class Enemy extends SpriteController {
     }
 
 
-
+    /**
+     * Applies a slow effect to the enemy, reducing its speed to one-third of its original value.
+     * If the enemy is already frozen, the effect is not applied again.
+     * After 7 seconds, the slow effect is removed.
+     * @author Mahyar
+     * @author Emil
+     */
     slowEffect() {
-
         if (!this.isFrozen) {
+            // Reduce the speed of the enemy to one-third of its original value
             this.speed /= 3;
+            // Set the isFrozen flag to true to indicate that the enemy is frozen
             this.isFrozen = true;
+            // Remove the freeze effect after 7 seconds
             setTimeout(() => {
                 this.removeFreeze();
-            }, 7000); //Enemies remain frozen for 7 seconds. Then the effect is removed.
+            }, 7000);
         }
     }
 
+    /**
+     * Removes the freeze effect from the enemy, restoring its speed to its original value.
+     * The isFrozen flag is also reset to false.
+     * @author Mahyar
+     * @author Emil
+     */
     removeFreeze() {
-        this.speed *= 3; /*Is yet to be added to the constructor, ordinary speed should be the regular speed
-        before the freeze.
-        */
-        this.isFrozen = false; /*isFrozen is also not added to the constructor, should originally be false, but is set
-        to true when the slowEffect is enabled (slowEffect method is ran).
-        */
 
+        this.speed *= 3;
+        // Reset the isFrozen flag to false
+        this.isFrozen = false;
     }
-
 }
-
-
-
-/*
---- Old code used for reference ---
-
-    update(gameCtx) { //Makes calculation to get the next position of the enemy sprite
-        this.draw(gameCtx);
-
-        const path = this.path[this.pathIndex]
-        console.log(this.position.y)
-        const yDistance = path.y - this.center.y
-        const xDistance = path.x - this.center.x
-
-        const angle = Math.atan2(yDistance, xDistance);
-        this.position.x += Math.cos(angle) * this.speed;
-        this.position.y += Math.sin(angle) * this.speed;
-        this.center = {
-            x: this.position.x + this.width / 2,
-            y: this.position.y + this.height / 2
-        }
-
-        if (Math.round(this.center.x) === Math.round(path.x) && Math.round(this.center.y) === Math.round(path.y)) {
-            this.pathIndex++;
-        }
-
-        return this.pathIndex === this.path.length;
-    }
-        /*
-        if (Math.round(this.center.x) === Math.round(path.x) &&  Math.round(this.center.y) === Math.round(path.y) && this.pathIndex < this.path.length - 1) {
-            this.pathIndex++;
-        }
-
-         */

@@ -41,9 +41,6 @@ addEventListener("click", function() {
     }
 });
 
-/*
---- Give dependencies ---
- */
 setMapControllerDependencies(gameBackground, gameBackgroundCtx); // for mapController.js
 setPlacementTilesDependencies(gameHover, gameHoverCtx); // for placementTiles.js
 setGameControllerDependencies(gameCanvas, enemyCtx, gameHover, interactiveCanvas); // for Controller.js
@@ -82,8 +79,4 @@ if (gameCanvas && interactiveCanvas && towerCanvas && gameHover){
     console.error('Canvas not found')
 }
 
-
-/*
---- Event listeners ---
- */
 

@@ -1,39 +1,44 @@
 /**
- * @author Philip
+ * Handles saving player scores and managing the highscore list.
+ * This controller interacts with localStorage to store and retrieve highscores.
+ * @class SaveController
  * @author Emil
+ * @author Philip
  */
-export class SaveController{
-
+export class SaveController {
 
     /**
-     * @author Emil Åqvist
+     * Constructs a new SaveController instance.
+     * Initializes necessary elements and properties for managing highscores.
+     * @constructor
+     * @author Emil
+     * @author Philip
      */
     constructor() {
         this.highScoresList = document.getElementById('highScores');
         this.playerNameInput = document.getElementById('playerName');
         this.saveNameButton = document.getElementById('saveNameButton');
         this.currentScore = 0;
-
     }
 
     /**
+     * Creates an empty highscore list in localStorage if it doesn't already exist.
+     * This method is called upon initialization to ensure the highscore list is available.
+     * @author Emil
      * @author Philip
-     * @Author Emil
      */
-    createHigscoreList(){
+    createHighscoreList() {
         if (!localStorage.getItem('highscoreList')) {
-            // Initialize an empty highscore list
             const highscoreList = [];
-            console.log("Created HigscoreList")
-            // Store the highscore list in localStorage
             localStorage.setItem('highscoreList', JSON.stringify(highscoreList));
         }
     }
 
     /**
-     * @author Philip
+     * Retrieves the highscore list from localStorage.
+     * @returns {Array} The highscore list or an empty array if not found.
      * @author Emil
-     * @returns {any|*[]}
+     * @author Philip
      */
     getHighscoreList() {
         const highscoreList = JSON.parse(localStorage.getItem('highscoreList'));
@@ -41,19 +46,21 @@ export class SaveController{
     }
 
     /**
-     * @author Philip
+     * Displays the highscore list in the user interface.
+     * Only displays a maximum of 10 entries.
      * @author Emil
+     * @author Philip
      */
     displayHighscoreList() {
         const highscoreList = this.getHighscoreList();
         const ol = document.getElementById('highscoreList');
         ol.innerHTML = ''; // Clear any existing list items
         let count = 0;
-        let maxAmmout = 10;
+        const maxAmount = 10;
 
         highscoreList.forEach((entry, index) => {
             count++;
-            if(count <= maxAmmout) {
+            if (count <= maxAmount) {
                 const list = document.createElement('li');
                 list.textContent = `${entry.name} ${entry.score}`;
                 ol.appendChild(list);
@@ -63,30 +70,22 @@ export class SaveController{
         });
     }
 
-
     /**
-     *
-     * @author Philip
+     * Adds a new highscore entry to the list.
+     * If the highscore list doesn't exist, it's created.
+     * The list is then sorted in descending order of scores and stored back in localStorage.
+     * Finally, the user is redirected to the main game page.
+     * @param {string} name - The name of the player.
+     * @param {number} score - The score achieved by the player.
      * @author Emil
-     * @param name
-     * @param score
+     * @author Philip
      */
     addHighscore(name, score) {
-        this.createHigscoreList();
-        // Retrieve the current highscore list
+        this.createHighscoreList();
         const highscoreList = this.getHighscoreList();
-        // Add the new score to the list
         highscoreList.push({ name: name, score: score });
-        // Sort the list in descending order of scores
         highscoreList.sort((a, b) => b.score - a.score);
-        // Store the updated list back in localStorage
         localStorage.setItem('highscoreList', JSON.stringify(highscoreList));
-        //this.displayHighscoreList();
-
-        window.location.href = "../../../Tower-Defense-Game/index.html"
+        window.location.href = "../../../Tower-Defense-Game/index.html";
     }
-
-
-
 }
-

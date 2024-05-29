@@ -1,7 +1,6 @@
 import {calculateWave} from "../model/WaveCalculator.js";
 import {gameIsRunning, updateHoverTiles} from "./placementTiles.js";
 import {gameStatus} from "./SettingsController.js";
-//import {} from "../controller/SpriteTowerController.js";
 //import {} from "../controller/SpriteController.js";
 //import { MapController } from './mapController.js';
 import {SaveController} from "./SaveController.js";
@@ -55,6 +54,11 @@ const /** @type HTMLElement */fpsCounterElement = document.querySelector('#fpsCo
 /** @type HTMLElement */ document.getElementById("GameWaveButton").addEventListener("click", nexWave);
 document.getElementById('restartButton').addEventListener('click', restart)
 
+
+/**
+ * Restart the game
+ * @author Mahyar
+ */
 function restart(){
     window.location.reload();
 }
@@ -64,6 +68,15 @@ function restart(){
 /*
 --- dependencies ---
  */
+/**
+ * Sets the dependencies for the game controller, including the enemy canvas, enemy context,
+ * game hover canvas, and game hover context.
+ * @param {HTMLCanvasElement} newEnemyCanvas - The canvas element for rendering enemies.
+ * @param {CanvasRenderingContext2D} newEnemyCtx - The rendering context for the enemy canvas.
+ * @param {HTMLCanvasElement} newGameHoverCanvas - The canvas element for rendering game hover effects.
+ * @param {CanvasRenderingContext2D} newGameHoverCtx - The rendering context for the game hover canvas.
+ * @author Philip
+ */
 export function setGameControllerDependencies(newEnemyCanvas, newEnemyCtx, newGameHoverCanvas, newGameHoverCtx){
     enemyCanvas = newEnemyCanvas;
     enemyCtx = newEnemyCtx;
@@ -71,17 +84,36 @@ export function setGameControllerDependencies(newEnemyCanvas, newEnemyCtx, newGa
     gameHoverCtx = newGameHoverCtx;
 }
 
+/**
+ * Sets the active towers in the game controller.
+ * @param {Tower[]} towers - An array containing the active towers in the game.
+ * @author Philip
+ */
 export function setActiveTowers(towers){
     activeTowers = towers;
 }
 
+/**
+ * Stops the game loop by cancelling the animation frame.
+ * @author Philip
+ */
 export function stopGame(){
     cancelAnimationFrame(enemyAnimationID);
 }
 
+/**
+ * Starts the game loop.
+ * @author Philip
+ */
 export function startGame(){
     gameLoop(enemies);
 }
+
+/**
+ * Sets the status of the frames-per-second (FPS) counter.
+ * @param {boolean} status - The status of the FPS counter. True to show the FPS counter, false to hide it.
+ * @author Philip
+ */
 
 export function setFpsStatus(status){
     showFPS = status;
@@ -92,6 +124,7 @@ export function setFpsStatus(status){
         fpsCounterElement.style.display = 'none';
     }
 }
+
 
 /**
  * Loads the next wave of enemies.
@@ -196,11 +229,16 @@ export function addCoins(amount){
     coins += amount;
     updateCoins();
 }
-
+/**
+ * Removes the specified amount of coins from the player's total.
+ * @param {number} amount - The amount of coins to remove.
+ * @author Philip
+ */
 export function removeCoins(amount){
     coins -= amount;
     updateCoins();
 }
+
 
 /**
  * Updates the coin counter on the game screen. based on the amount of coins the player has.
@@ -211,11 +249,14 @@ function updateCoins(){
     CoinsCounter.textContent = coins;
     //setCoinsToTowerGameLoop(coins);
 }
-
+/**
+ * Retrieves the current amount of coins the player has.
+ * @returns {number} The current amount of coins.
+ * @author Philip
+ */
 export function getCoins(){
     return coins;
 }
-
 
 /**
  * The main game loop. Updates the game state and draws the game.
@@ -278,18 +319,27 @@ function gameLoop(enemies) {
 }
 
 /**
+ * Initializes an event listener for the DOMContentLoaded event.
+ * When the DOM content is fully loaded, the function adds an event listener to the 'saveScoreButton' element.
+ * When the 'saveScoreButton' is clicked, it triggers the saveHighScorec function.
  * @author Emil
+ * @returns {void}
  */
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('saveScoreButton').addEventListener('click', saveHighScorec);
 });
 
 /**
- * @author Philip
+ * Saves the player's high score to the high score list.
+ * If the SaveController is not initialized, an error is logged and the function returns.
+ * Calculates the player's score by multiplying the current number of coins by the active wave.
+ * Retrieves the player's name from the input field and trims any leading or trailing whitespace.
+ * If the player's name is empty, an alert is displayed prompting the player to enter a name and score.
+ * Otherwise, the player's name and score are added to the high score list using the SaveController.
  * @author Emil
+ * @returns {void}
  */
 export function saveHighScorec() {
-
     if(!saveCon){
         console.error('SaveController not initialized');
         return;
@@ -304,6 +354,7 @@ export function saveHighScorec() {
         saveCon.addHighscore(playerName.trim(), playerScore);
     }
 }
+
 
 
 

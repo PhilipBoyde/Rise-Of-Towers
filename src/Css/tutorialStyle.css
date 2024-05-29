@@ -1,3 +1,13 @@
+/*
+A CSS style sheet for a webpage containing various layout and design elements,
+including background image, flexbox layout, animations, buttons with hover effects,
+and responsive design for different screen sizes.
+
+Author: Mahyar
+*/
+
+
+
 body {
     background-image: url("../js/model/assets/img/nedladdning.png");
     margin: 0;

@@ -105,7 +105,14 @@ let allImagesLoaded = false;
 // Counter to track how many images have loaded
 let imagesLoadedCount = 0;
 
-// Preload and "warm up" images
+/**
+ * Preloads images from the provided array of URLs.
+ * This function iterates over each URL in the array, creates an Image object for each URL, and sets up an onload event handler.
+ * When each image is loaded, the count of loaded images is incremented.
+ * If all images have been successfully loaded, a global flag 'allImagesLoaded' is set to true.
+ * @param {string[]} imageUrls - An array of URLs of images to preload.
+ * @author Philip
+ */
 imageUrls.forEach(url => {
     const img = new Image();
     img.onload = () => {

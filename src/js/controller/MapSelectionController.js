@@ -1,5 +1,9 @@
-/** Controller for map selection page. */
-
+/**
+ * Controller for the map selection page.
+ * Handles the selection of maps, highlighting the selected map, and confirming the map selection.
+ * Provides functionality to reset the map selection and display the difficulty labels.
+ * Manages the behavior of map images and associated text when clicked.
+ */
 document.getElementById("Map1").addEventListener("click", () => {
     console.log("Map 1 click")
     selectMap(1)
@@ -15,6 +19,7 @@ document.getElementById("Map3").addEventListener("click", () => {
 let images /** @type NodeListOf */ = document.querySelectorAll('.map img');
 let texts /** @type NodeListOf */ = document.querySelectorAll('.mapText');
 let backgrounds  /** @type NodeListOf */ = document.querySelectorAll('.blurryBackground');
+
 /**
  * Global variable to keep track of the selected map.
  */
@@ -23,8 +28,9 @@ let selectedMap;
 /**
  * Highlights the selected map and shows the confirmation modal.
  *
- * @param mapId - The ID of the selected map.
+ * @param {number} mapId - The ID of the selected map.
  * @author Muhamed
+ * @author Emil
  */
 function selectMap(mapId) {
     // Remove the selected class from any previously selected map
@@ -49,12 +55,18 @@ function selectMap(mapId) {
     });
 }
 
+/**
+ * Displays the difficulty label for the selected map.
+ *
+ * @param {number} selectedMap - The ID of the selected map.
+ * @author Emil
+ */
 function showDifficultyLbl(selectedMap){
     console.log("Is called")
     console.log('Showing difficulty label for Map ID:', selectedMap);
     document.querySelectorAll('.difficulty-label').forEach(label => {
-            label.style.display = 'none';
-        });
+        label.style.display = 'none';
+    });
 
     const mapHolder = document.getElementById(`Map${selectedMap}`);
     console.log('Map holder:', mapHolder);
@@ -72,22 +84,10 @@ function showDifficultyLbl(selectedMap){
     }
 }
 
-function highLightMap(mapID) {
-    document.querySelectorAll('.map').forEach(map =>{
-        map.classList.remove('selected');
-    });
-
-    const mapElem = document.getElementById(`Map${mapID}`);
-    if(mapElem){
-        mapElem.classList.add('selected');
-    }
-
-}
-
-
 /**
  * Confirms the selection of the map and redirects to the game page with the selected map.
  *
+ * @returns {void}
  * @author Muhamed
  */
 function confirmSelection() {
@@ -98,7 +98,11 @@ function confirmSelection() {
 
 /**
  * Resets the map selection by removing the selected class from all maps.
+ * Resets the size, position, and display of map images and associated text.
+ * Displays the difficulty labels.
+ * @returns {void}
  * @author Philip
+ * @author Emil
  */
 function reset(){
     console.log("Resetting")
@@ -131,7 +135,7 @@ function reset(){
             label.classList.add('divHardLeft');
         }
 
-       // label.style.position = 'absolute';
+        // label.style.position = 'absolute';
         //label.style.left = '50%';
         //label.style.top = '300px';
         //label.style.transform = 'translateX(-50%, -50%)';
@@ -147,12 +151,14 @@ window.onload = function() {
     });
 }
 
-
 /**
- * Event listener for the map images. When an image is clicked, it is enlarged and the associated text is displayed.
- * If the image has been clicked before, it is reset to its original size and the text is hidden.
- * @param image - The image that was clicked.
- * @param index - The index of the image in the images array.
+ * Event listener for the map images.
+ * Enlarges the clicked image and displays the associated text.
+ * If the image has been clicked before, it resets to its original size and hides the text.
+ *
+ * @param {HTMLElement} image - The image that was clicked.
+ * @param {number} index - The index of the image in the images array.
+ * @returns {void}
  * @author Philip
  */
 images.forEach(function(image, index) {

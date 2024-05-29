@@ -177,6 +177,7 @@ export class Cyclops extends Enemy {
      * @param position
      * @param path
      * @author Philip
+     * @author Muhamed
      */
     constructor({position = {x: 0, y: 0}}, path) {
         super(
@@ -205,6 +206,13 @@ export class Cyclops extends Enemy {
     }
 }
 
+/**
+ * Class representing a Mech enemy.
+ * @extends Enemy
+ * @class Mech
+ * @author Philip
+ * @author Muhamed
+ */
 export class Mech extends Enemy {
     constructor({position = {x: 0, y: 0}}, path) { // !!NOT DONE!!
         super(
@@ -233,6 +241,13 @@ export class Mech extends Enemy {
     }
 }
 
+/**
+ * Class representing a dragonWiz enemy.
+ * @extends Enemy
+ * @class dragonWiz
+ * @author Philip
+ * @author Muhamed
+ */
 export class dragonWiz extends Enemy {
     constructor({position = {x: 0, y: 0}}, path) { // !!NOT DONE!!
         super(
@@ -261,6 +276,12 @@ export class dragonWiz extends Enemy {
     }
 }
 
+/**
+ * Class representing a akaname enemy.
+ * @extends Enemy
+ * @class akaname
+ * @author Philip
+ */
 export class akaname extends Enemy {
     constructor({position = {x: 0, y: 0}}, path) { // !!NOT DONE!!
         super(

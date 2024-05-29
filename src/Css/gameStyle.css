@@ -937,35 +937,3 @@ body, html{
     opacity: 0;
     transition: opacity 0.3s;
 }
-
-
-/*
-.UIScreen #sellButton {
-    border: 3px solid #4F4537;
-    border-radius: 20px;
-    transition: all 0.3s;
-    cursor: pointer;
-    background: #DFE0DF;
-    font-weight: 550;
-    font-family: "VT323", cursive;
-    font-size: 30px;
-    width: 92px;
-    height: 50px;
-
-    position: absolute;
-    top: 88%;
-    left: 84.6%;
-}
-
-.UIScreen #sellButton:hover {
-    background: #fd9e00;
-    color: white;
-    font-size: 2.2em;
-    filter: drop-shadow(0 0 20px #fd9e00);
-}
-
-.UIScreen #sellButton:hover:disabled {
-    cursor: not-allowed;
-}
-
- */

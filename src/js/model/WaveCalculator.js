@@ -2,9 +2,6 @@ import {Map1Paths, Map2Paths, Map3Paths} from "./pathRouteManager.js";
 import {goblin, slime, wolf, bee, Cyclops, Mech, dragonWiz} from "./EnemyTypes.js";
 import {akaname} from "./EnemyTypes.js";
 
-/*
---- variables ---
- */
 const baseComposition = {
     'Bee': {count: 4, increment: 0.5},
     'Wolf': {count: 1, increment: 0.3},
@@ -34,10 +31,6 @@ const specialRounds = {
 };
 
 let pathRoutesForMap = []; // path to be used for the wave
-
-/*
---- end of variables ---
- */
 
 /**
  * Changes the map based on the activeMap variable.
@@ -70,7 +63,8 @@ export function changeMapRoutes(activeMapNbr){
  *
  * @param {number} round - The current round number.
  * @returns {Object} The composition of enemy types and their counts for the given round.
- * @author Philip, Muhamed
+ * @author Philip
+ * @author Muhamed
  */
 function getWaveComposition(round) {
     if (specialRounds[round]) {
@@ -112,7 +106,8 @@ function addCyclopsIfNeeded(composition, round) {
  * The path for the enemies to follow is also chosen based on a random number.
  * @param round
  * @returns {*[]}
- * @author Philip, Muhamed
+ * @author Philip
+ * @author Muhamed
  */
 export function calculateWave(round) {
     let composition = getWaveComposition(round);
@@ -139,7 +134,8 @@ export function calculateWave(round) {
  * @param {Object} activePath - The path the enemy will follow.
  * @param {string} type - The type of enemy to create.
  * @param {Array} waveEnemies - The array to which the new enemy will be added.
- * @author Philip, Muhamed
+ * @author Philip
+ * @author Muhamed
  */
 function createEnemyType(xOffSet, activePath, type, waveEnemies) {
     switch (type) {
@@ -177,29 +173,12 @@ function createEnemyType(xOffSet, activePath, type, waveEnemies) {
 /**
  * Chooses the path for the enemies to follow based on a random number.
  * @returns {{x: number, y: number}[]} - The path for the enemies to follow.
- * @author Philip, Muhamed
+ * @author Philip
+ * @author Muhamed
  */
 function choosePath(){
     const routeCount = pathRoutesForMap.length; // Get the number of available routes
     const randomIndex = Math.floor(Math.random() * routeCount); // Choose a random index based on the available routes
     return pathRoutesForMap[randomIndex]; // Return the randomly chosen route
-}
 
-/*
---- for testing purposes only not used in the final version ---
- */
-export function testEnemyType(){
-    let waveEnemies = [];
-    let activePath = choosePath();
-    let xOffSet = 0;
-
-    for (let i = 0; i < 1; i++) {
-        const enemy = new Cyclops({position: {x: activePath[0].x + xOffSet, y: activePath[0].y}}, activePath)
-        waveEnemies.push(enemy);
-        xOffSet += 40;
-        activePath = choosePath();
-    }
-
-    waveEnemies.reverse();
-    return waveEnemies;
 }

@@ -37,6 +37,9 @@ export class Tower {
      * @param showRange
      * @param upgradeInfo
      * @param aoeRadius
+     * @author Philip
+     * @author Mahyar
+     * @author Muhamed
      */
     constructor(gameCtx, tiles, cost,upgradeCost, range, damage, maxLevel, speed, projectileSpeed, imagePaths, projectileImagePath, options, towerType, showRange, {upgradeInfo}, aoeRadius = 0) {
         this.gameCtx = gameCtx;
@@ -73,7 +76,6 @@ export class Tower {
         this.showRange = showRange;
         this.aoeRadius = aoeRadius;
 
-
         this.loadImages(this.imagePaths);
 
         this.frameWidth = options.frameWidth; // Bredden på varje frame (280 / 4)
@@ -81,49 +83,71 @@ export class Tower {
         this.frameIndex = options.frameIndex; // Aktuell frame-index
         this.frameCount = options.frameCount; // Antal frames i bilden
         this.frameUpdateCounter = options.frameUpdateCounter;
-        this.frameSpeed = options.frameSpeed; // Hastigheten för att byta frame (? frames per sekund)
+        this.frameSpeed = options.frameSpeed; // Hastigheten för att byta frame (frames per sekund)
 
     }
 
+    /**
+     *returns a position of a tower
+     * @returns {*}
+     * @author Philip
+     */
     getPositionID(){
         return this.positionID;
     }
 
+    /**
+     * Return the cost av a tower
+     * @returns {cost}
+     * @author Philip
+     */
     getTowerValue(){
         return this.cost;
     }
 
-    upgradeTower(){
-        this.level += 1;
+    /**
+     * This metod is used to check the upgraded tower
+     * it uses switch case and change the variables of any tower that has been upgraded
+     * @author Mahyar
+     * @author Philip
+     */
+    upgradeTower() {
+        if (this.level < this.maxLevel) {
+            this.level += 1;
 
-        switch (this.level){
-            case 2:
-                this.upgradeCost = this.upgradeInfo.level2.cost;
-                this.damage = this.upgradeInfo.level2.damage;
-                this.speed = this.upgradeInfo.level2.speed;
-                break;
+            switch (this.level) {
+                case 2:
+                    this.upgradeCost = this.upgradeInfo.level2.cost;
+                    this.damage = this.upgradeInfo.level2.damage;
+                    this.speed = this.upgradeInfo.level2.speed;
+                    break;
 
-            case 3:
-                this.upgradeCost = this.upgradeInfo.level3.cost;
-                this.damage = this.upgradeInfo.level3.damage;
-                this.speed = this.upgradeInfo.level3.speed;
-                break;
+                case 3:
+                    this.upgradeCost = this.upgradeInfo.level3.cost;
+                    this.damage = this.upgradeInfo.level3.damage;
+                    this.speed = this.upgradeInfo.level3.speed;
+                    break;
 
-            case "MAX":
-                console.log("Tower is at MAX level")
-                break;
+                default:
+                    console.log(`Unknown level: ${this.level}`);
+                    break;
+            }
 
-            default:
-                break;
-        }
+            if (this.level === this.maxLevel) {
+                console.log("Tower is at MAX level");
+            }
 
-        if (this.level === this.maxLevel){
-            this.level = this.level + " MAX";
+            console.log(`Upgraded to level ${this.level}: cost=${this.upgradeCost}, damage=${this.damage}, speed=${this.speed}`);
+        } else {
+            console.log("Tower is already at MAX level");
         }
     }
 
+
     /**
      * Loads tower images.
+     * @author Philip
+     * @author Mahyar
      */
     loadImages(imagePaths) {
         this.towerImages = [];
@@ -148,6 +172,7 @@ export class Tower {
      * @param towerType
      * @returns {Object} - the tile in the left corner.
      * @author Philip
+     * @author Mahyar
      */
     findClosestToTopLeft(Tiles, towerType) {
 
@@ -170,12 +195,17 @@ export class Tower {
         return closestTile;
     }
 
+    /**
+     * Status flag for the tower range to hide or show range
+     * @author Philip
+     */
     setStatusOfTowerRange(status){
         this.showRange = status;
     }
     /**
      * Draws the tower on the canvas.
-     * @private
+     * @author Mahyar
+     * @author Philip
      */
     drawTower() {
         this.updateAnimation();
@@ -206,6 +236,8 @@ export class Tower {
      * Finds the enemies within the tower range.
      * @param {Object[]} enemies - the enemies on the canvas.
      * @returns {Object[]} - the enemies within the tower range.
+     * @author Philip
+     * @author Mahyar
      */
     findTargets(enemies) {
         enemies.sort((a, b) => a.pathIndex - b.pathIndex); // sort enemies by pathIndex (the further the enemy is on the path, the higher the pathIndex)
@@ -222,6 +254,9 @@ export class Tower {
     /**
      * Shoots the enemies within the tower range.
      * @param {Object[]} enemies - The enemies on the canvas.
+     * @author Philip
+     * @author Mahyar
+     * @author Muhamed
      */
     shoot(enemies) {
         //  targeting part
@@ -253,6 +288,8 @@ export class Tower {
     /**
      * Handles the removal of the projectile from the canvas when it hits the target.
      * @param {Projectile} projectile - The projectile that is shot from the tower.
+     * @author Philip
+     * @author Mahyar
      */
     handleProjectileRemoval(projectile) {
         const index = this.projectiles.indexOf(projectile);
@@ -269,6 +306,7 @@ export class Tower {
 
     /**
      * Updates the tower animation.
+     * @author Mahyar
      */
     updateAnimation() {
         if (this.frameUpdateCounter >= this.frameSpeed) {
@@ -286,6 +324,9 @@ export class Tower {
     /**
      * Updates the tower.
      * @param {Object[]} enemies - The enemies on the canvas.
+     * @author Mahyar
+     * @author Muhamed
+     * @author Philip
      */
     update(enemies) {
         this.projectiles.forEach(projectile => {
@@ -312,6 +353,8 @@ export class Tower {
 
     /**
      * Displays the range of the tower on the canvas.
+     * @author Philip
+     * @author Muhamed
      */
     displayRange() {
         this.gameCtx.fillStyle = '#ff0000';
@@ -319,37 +362,5 @@ export class Tower {
         this.gameCtx.arc(this.x + 32, this.y + 32, this.range, 0, Math.PI * 2); // test value
         this.gameCtx.stroke();
     }
-
-
-
-    // The following code is not used in the final version of the game, and is kept for reference for later development.
-/*
-canUpgrade(coins) {
-        return this.level < this.maxLevel && coins >= this.upgradeCost;
-
-    }
-
-    export
-
-    upgrade(coins) {
-        if (this.canUpgrade(coins)) {
-            this.level ++;
-            this.range += 20; // for ex. Increase range by 20 each upgrade
-            this.damage += 15; // and damage by 15 each upgrade
-            this.upgradeCost *= 1.5; // it increases cost for upgrading by 50%
-            coins -= this.upgradeCost; // subtract the cost from player's coins
-            this.updateTowerStats(); // Redraw or recalculate relevant stats
-        } else {
-            console.log("Tower is at maximum level! or Not enough coins to upgrade!");
-        }
-    }
-
-    updateTowerStats() { // Redraw the tower with new stats
-        this.drawTower();
-        this.displayRange();
-    }
-
-
- */
 }
 

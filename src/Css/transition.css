@@ -1,3 +1,10 @@
+/*
+Defines CSS styles for transition effects,
+including text animation for loading, and sliding transition effects for elements.
+
+Author: Philip
+*/
+
 .transitionText {
     position: relative;
     display: flex;

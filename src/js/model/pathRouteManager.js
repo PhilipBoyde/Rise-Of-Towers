@@ -4,7 +4,8 @@ import {map3Path1Route1, map3Path1Route2, map3Path1Route3, map3Path1Route4, map3
 
 /**
  * Arrays to hold the paths for each map.
- * @author Philip, Muhamed
+ * @author Philip
+ * @author Muhamed
  */
 export const Map1Paths = [
         map1Path1Route1,
