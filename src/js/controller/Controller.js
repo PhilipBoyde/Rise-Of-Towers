@@ -24,6 +24,7 @@ const  /** HTMLCanvasElement */ gameCanvas = document.querySelector('#GameScreen
 const gameBackground = document.querySelector('#GameBackground');
 const /** HTMLCanvasElement */ interactiveCanvas = document.querySelector('#GameUI');
 const /** HTMLCanvasElement */ gameHover = document.querySelector('#GameHover');
+const reloadPage = document.querySelector('restartButton')
 const /** number */ activeMapNbr = 1;  
 let /** number */ round = 0;
 let img = new Image();
@@ -52,6 +53,11 @@ const saveCon = new SaveController();
 const /** @type HTMLElement */fpsCounterElement = document.querySelector('#fpsCounter');
 
 /** @type HTMLElement */ document.getElementById("GameWaveButton").addEventListener("click", nexWave);
+document.getElementById('restartButton').addEventListener('click', restart)
+
+function restart(){
+    window.location.reload();
+}
 
 // let selectedTower = null;
 
