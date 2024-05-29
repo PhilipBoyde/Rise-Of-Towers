@@ -4,22 +4,17 @@
 
 <div align="center">
   <img src="https://img.shields.io/badge/Website-Online-brightgreen"/>
-  <img src="https://img.shields.io/badge/Database-Offline-red"/>
 </div>
 
 <div align="center">
-  <img src="https://img.shields.io/badge/Version-Early%20development-blue"/>
+  <img src="https://img.shields.io/badge/Version-v.1-blue"/>
   <img src="https://img.shields.io/badge/License-MIT-green"/>
 </div>
 
 ![Image Alt Text](ReadMePictures/MainMenu.png)
 
-<h1> About </h1>
-
-<h1> Known bugs </h1>
-* sell button not working * <br> 
-* Towers targeting wrong enemys * <br>
-* Adding multiple towers to the same spot using settings pause function * <br>
+<h1>About</h1>
+This project was developed as a school assignment and is no longer being updated. 
 
 
 <h1>Assets Used</h1>
