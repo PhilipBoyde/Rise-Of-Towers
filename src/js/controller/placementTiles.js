@@ -150,7 +150,7 @@ function getTiles(tile, allTiles) {
         tile2: neighbors[0],
         tile3: neighbors[1],
         tile4: neighbors[2],
-        positionID: tile.position.x + tile.position.y + neighbors[0].position.x + neighbors[0].position.y + neighbors[1].position.x + neighbors[1].position.y + neighbors[2].position.x + neighbors[2].position.y,
+        positionID: tile.position.x * tile.position.y * neighbors[0].position.x * neighbors[0].position.y * neighbors[1].position.x * neighbors[1].position.y * neighbors[2].position.x * neighbors[2].position.y,
     }
 }
 
