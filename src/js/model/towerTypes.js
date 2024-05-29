@@ -1,56 +1,11 @@
 import { Tower } from "../controller/TowerController.js";
-
-/**
- * Class for the Archer Tower. Extends the Tower class.
- * @class ArcherTower
- * @extends Tower
- * @author Philip
- */
-export class ArcherTower extends Tower {
-    constructor(gameCtx, tiles, status) {
-        const imagePaths = ["../js/model/assets/Tower/Tower1/4.png"];
-        //const projectileImagePaths =["../js/model/assets/Tower/Projectile/FB500-2.png"];
-
-        const projectileImagePaths = [
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-2.png",
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-3.png",
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-4.png",
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-5.png"
-        ];
-        const towerType = "Archer";
-        const towerOptions = {
-            frameWidth: 280/4, // Bredden på varje frame (280 / 4)
-            frameHeight:  1024, // Höjden på varje frame
-            frameIndex: 6, // Aktuell frame-index
-            frameCount:4, // Antal frames i bilden
-            frameUpdateCounter:0  ,
-            frameSpeed: 10
-        };
-
-        super(
-            gameCtx,
-            tiles,
-            100, // cost
-            200, // range
-            20, // damage
-            120, // upgradeCost
-            5, // maxLevel
-            60, // Shooting speed
-            5, // Projectile speed
-            imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
-            projectileImagePaths,
-            towerOptions,
-            towerType,
-            status
-        );
-    }
-}
-
 /**
  * Class for the Wizard Tower. Extends the Tower class.
  * @class WizardTower
  * @extends Tower
  * @author Philip
+ * @author Muhamed
+ * @author Mahyar
  */
 export class WizardTower extends Tower {
     constructor(gameCtx, tiles, status) {
@@ -67,11 +22,11 @@ export class WizardTower extends Tower {
 
         const towerType = "Wizard";
         const towerOptions = {
-            frameWidth: 1100/ 11, // Bredden på varje frame (280 / 4)
-            frameHeight: 1300, // Höjden på varje frame
-            frameIndex: 0, // Aktuell frame-index
-            frameCount:11, // Antal frames i bilden
-            frameUpdateCounter:  0,
+            frameWidth: 1100 / 11, // every frame width (1100 / 11)
+            frameHeight: 1300, // frames height
+            frameIndex: 0, // Actual frame-index
+            frameCount: 11, // number of frames in the image
+            frameUpdateCounter: 0,
             frameSpeed: 12
         };
 
@@ -79,17 +34,39 @@ export class WizardTower extends Tower {
             gameCtx,
             tiles,
             200, // cost
-            170, // range
-            80, // damage
-            300, // upgradeCost
-            5, // maxLevel
-            110, // Shooting speed
-            4.5, // Projectile speed
-            imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
+            300,
+            200, // range
+            9, // damage
+            3, // maxLevel
+            25, // Shooting speed
+            9, // Projectile speed
+            imagePaths, // sends image paths to the parent Tower class
             projectileImagePaths,
             towerOptions,
             towerType,
-            status
+            status,
+            { upgradeInfo: { //Info about the different upgrades
+                    level2: {
+                        cost: 200,
+                        upgradeCost: 300,
+                        range: 200,
+                        damage: 18,
+                        maxLevel: 3,
+                        speed: 25,
+                        projectileSpeed: 15
+                    },
+
+                    level3: {
+                        cost: "$$$",
+                        upgradeCost: 0,
+                        range: 200,
+                        damage: 30,
+                        maxLevel: 3,
+                        speed: 30,
+                        projectileSpeed: 25
+
+                    }
+                }},
         );
     }
 }
@@ -99,8 +76,11 @@ export class WizardTower extends Tower {
  * @class InfernoTower
  * @extends Tower
  * @author Emil
+ * @author Philip
+ * @author Muhamed
+ * @author Mahyar
  */
-export class InfernoTower extends Tower{
+export class InfernoTower extends Tower {
     constructor(gameCtx, tiles, status) {
         const imagePaths = ["../js/model/assets/Tower/InfernoT.png"];
         const projectileImagePaths = [
@@ -114,30 +94,50 @@ export class InfernoTower extends Tower{
             "../js/model/assets/Tower/Projectile/Inferno/B500-4.png"
         ];
         const towerOptions = {
-            frameWidth: 280/ 4, // Bredden på varje frame (280 / 4)
-            frameHeight: 130, // Höjden på varje frame
-            frameIndex: 0, // Aktuell frame-index
-            frameCount:4, // Antal frames i bilden
-            frameUpdateCounter:  0,
+            frameWidth: 280 / 4,
+            frameHeight: 130,
+            frameIndex: 0,
+            frameCount: 4,
+            frameUpdateCounter: 0,
             frameSpeed: 10
         };
         const towerType = "Inferno";
         super(
             gameCtx,
             tiles,
-            700,
+            900,
+            900,
             250,
-            20,
-            1000,
-            2,
-            35,
-            4.5,
+            70,
+            3,
+            35, // shooting speed
+            7,
             imagePaths,
             projectileImagePaths,
             towerOptions,
             towerType,
-            status
+            status,
+            { upgradeInfo: { // Info about the different upgrades
+                    level2: {
+                        cost: 900,
+                        upgradeCost: 900,
+                        range: 260,
+                        damage: 100,
+                        maxLevel: 3,
+                        speed: 36,
+                        projectileSpeed: 7,
+                    },
 
+                    level3: {
+                        cost: "$$$",
+                        upgradeCost: 900,
+                        range: 270,
+                        damage: 175,
+                        maxLevel: 3,
+                        speed: 37,
+                        projectileSpeed: 7
+                    }
+                }},
         );
     }
 }
@@ -146,12 +146,13 @@ export class InfernoTower extends Tower{
  * Class for the Stone Tower. Extends the Tower class.
  * @class StoneTower
  * @extends Tower
- * @author Muhammed
+ * @author Muhamed
  * @author Emil
+ * @author Philip
+ * @author Mahyar
  */
 export class StoneTower extends Tower {
     constructor(gameCtx, tiles, status) {
-
 
         const imagePaths = ["../js/model/assets/Tower/StoneT.png"];
         const projectileImagePaths = [
@@ -162,11 +163,11 @@ export class StoneTower extends Tower {
             "../js/model/assets/Tower/Projectile/Stone/Stone7.png",
         ];
         const towerOptions = {
-            frameWidth: 280/ 4, // Bredden på varje frame (280 / 4)
-            frameHeight: 130, // Höjden på varje frame
-            frameIndex: 0, // Aktuell frame-index
-            frameCount:4, // Antal frames i bilden
-            frameUpdateCounter:  0,
+            frameWidth: 280 / 4,
+            frameHeight: 130,
+            frameIndex: 0,
+            frameCount: 4,
+            frameUpdateCounter: 0,
             frameSpeed: 10
         };
         const towerType = "Stone";
@@ -174,63 +175,58 @@ export class StoneTower extends Tower {
             gameCtx,
             tiles,
             700,
+            500,
             250,
-            20,
-            1000,
-            2,
-            35,
-            4.5,
+            40,
+            3,
+            90,
+            10,
             imagePaths,
             projectileImagePaths,
             towerOptions,
             towerType,
-            status
+            status,
+            { upgradeInfo: { //Info about the different upgrades
+                    level2: {
+                        cost: 700,
+                        upgradeCost: 500,
+                        range: 250,
+                        damage: 45,
+                        maxLevel: 3,
+                        speed: 95,
+                        projectileSpeed: 12,
+                        aoeRadius: 70
+                    },
 
+                    level3: {
+                        cost: "$$$",
+                        upgradeCost: 500,
+                        range: 252,
+                        damage: 60,
+                        maxLevel: 3,
+                        speed: 96,
+                        projectileSpeed: 15,
+                        aoeRadius: 100
+                    }
+                }},
+            50,
         );
     }
 }
+
 /**
-    *Class for the Fast(4th) tower. Extends the Tower class.
-    * @class FastTower
-    * @extends Tower
-    * @author Muhammed
-    */
-export class FastTower extends Tower {
+ * Class for the Ice Tower. Extends the Tower class.
+ * @class IceTower
+ * @extends Tower
+ * @author Mahyar
+ * @author Philip
+ * @author Muhamed
+ */
+export class IceTower extends Tower {
     constructor(gameCtx, tiles, status) {
-        const imagePaths = [""];
-        const projectileImagePath = [""];
-        const towerType = "Fast";
-        const towerOptions = {
-            frameWidth: 410/ 4, // Bredden på varje frame (280 / 4)
-            frameHeight: 130, // Höjden på varje frame
-            frameIndex: 0, // Aktuell frame-index
-            frameCount:4, // Antal frames i bilden
-            frameUpdateCounter:  0,
-            frameSpeed: 10
-        };
-        super(
-            gameCtx,
-            tiles,
-            150, // cost, higher cost than archer-
-            250, // range, smaller range than archer
-            10, // damage, higher damage than archer
-            180, // upgradeCost
-            3, //
-            30, //Shooting speed
-            12, // projectile speed
-            imagePaths,
-            projectileImagePath,
-            towerOptions,
-            towerType,
-            status
-        );
-    }
-}
-
-export class IceTower extends Tower{
-    constructor(gameCtx, tiles, status) {
-        const imagePaths = ["../js/model/assets/Tower/IceT.png"];
-        //const projectileImagePaths =["../js/model/assets/Tower/Projectile/FB500-2.png"];
+        const imagePaths = ["../js/model/assets/Tower/Tower1/walla.png"];
+        // const projectileImagePaths = ["../js/model/assets/Tower/Projectile/FB500-2.png"];
+        // ../js/model/assets/Tower/IceT.png
 
         const projectileImagePaths = [
             "../js/model/assets/Tower/Projectile/Ice/Ice3.png",
@@ -238,34 +234,53 @@ export class IceTower extends Tower{
             "../js/model/assets/Tower/Projectile/Ice/Ice5.png",
             "../js/model/assets/Tower/Projectile/Ice/Ice6.png",
             "../js/model/assets/Tower/Projectile/Ice/Ice7.png",
-
         ];
         const towerType = "Ice";
         const towerOptions = {
-            frameWidth: 280/4, // Bredden på varje frame (280 / 4)
-            frameHeight:  1024, // Höjden på varje frame
+            frameWidth: 280 / 4, // Bredden på varje frame (280 / 4)
+            frameHeight: 1024, // Höjden på varje frame
             frameIndex: 0, // Aktuell frame-index
-            frameCount:4, // Antal frames i bilden
-            frameUpdateCounter:0  ,
-            frameSpeed: 10
+            frameCount: 4, // Antal frames i bilden
+            frameUpdateCounter: 0,
+            frameSpeed: 19
         };
 
         super(
             gameCtx,
             tiles,
-            100, // cost
+            300, // cost
+            300,
             200, // range
-            20, // damage
-            120, // upgradeCost
-            5, // maxLevel
-            60, // Shooting speed
+            10, // damage
+            3, // maxLevel
+            80, // Shooting speed
             5, // Projectile speed
             imagePaths, // Skicka bildsökvägar till överordnad Tower-klass
             projectileImagePaths,
             towerOptions,
             towerType,
-            status
+            status,
+            { upgradeInfo: { //Info about the different upgrades
+                    level2: {
+                        cost: 500,
+                        upgradeCost: 300,
+                        range: 300,
+                        damage: 15,
+                        maxLevel: 3,
+                        speed: 115,
+                        projectileSpeed: 7
+                    },
+
+                    level3: {
+                        cost: "$$$",
+                        upgradeCost: 300,
+                        range: 400,
+                        damage: 20,
+                        maxLevel: 3,
+                        speed: 120,
+                        projectileSpeed: 10
+                    }
+                }},
         );
     }
 }
-

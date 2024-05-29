@@ -1,30 +1,70 @@
 import {map1TowerArea} from "../model/map1/Map1PlacebleArea.js";
-import {selectTile} from "./Controller.js";
+import {map2TowerArea} from "../model/map2/Map2PlacebleArea.js";
+import {map3TowerArea} from "../model/map3/Map3PlacebleArea.js";
+import {selectTile} from "./TowerGameLoopController.js";
 
-/*
---- variables ---
- */
-const /** HTMLCanvasElement */ gameHover = document.querySelector('#GameHover');
-const gameHoverCtx = gameHover.getContext('2d');
-let gameCanvas;
+let gameCanvas = undefined;
 let lastHovered = undefined;
-let gameStatus = false
-const placementTilesData2D = [];
+let gameStatus = false;
+let gameHoverCtx =  undefined;
+const placementTiles = []
 const mouse = {
     x: 'undefined',
     y: 'undefined'
 }
-/*
---- end of variables ---
- */
 
 /**
  * 2D array to hold the placement tiles data. Used to create the placement tiles. Right now only supports map1TowerArea.
  * @type {*[]}
  * @author Philip
  */
-for (let i = 0; i < map1TowerArea.length; i+= 35) { // 35 is the width of the map
-    placementTilesData2D.push(map1TowerArea.slice(i, i + 35));
+
+export function changeTowerArea(mapId){
+    let towerArea = [];
+    const placementTilesData2D = [];
+
+
+    switch (mapId) {
+        case "1":
+            towerArea = map1TowerArea;
+            break
+
+        case "2":
+            towerArea = map2TowerArea;
+            break;
+
+        case "3":
+            towerArea = map3TowerArea;
+            break;
+    }
+
+    for (let i = 0; i < towerArea.length; i+= 35) { // 35 is the width of the map
+        placementTilesData2D.push(towerArea.slice(i, i + 35));
+    }
+    initializePlacement(placementTilesData2D);
+}
+
+/**
+ * Array to hold the placement tiles. Used to create the placement tiles.
+ * @type {*[]} - Array to hold the placement tiles.
+ * @param placementTilesData2D - The 2D array that holds the placement tiles data.
+ * @author Philip
+ */
+function initializePlacement(placementTilesData2D){
+
+    placementTilesData2D.forEach(((row, yIndex) => {
+        row.forEach((tile , xIndex) => {
+            if (tile === 61){
+                placementTiles.push(new PlaceableTile(
+                    {position: {
+                            x: xIndex * 32,
+                            y: yIndex * 32,
+                        }},
+                    (yIndex * xIndex) //tile ID
+                ));
+            }
+        })
+    }));
 }
 
 /**
@@ -37,12 +77,15 @@ export function gameIsRunning(running){
 }
 
 /**
- * Sets the game canvas to the canvas that is used for the game.
+ * Sets the game canvas and the CanvasRenderingContext2D for hover effect of the game.
  * @param newGameCanvas - The canvas that is used for the game.
+ * @param placementCtx - The CanvasRenderingContext2D that is used for the hover effect on the tiles.
  * @author Philip
  */
-export function setGameInfo(newGameCanvas){
-    gameCanvas = newGameCanvas
+
+export function setPlacementTilesDependencies(newGameCanvas, placementCtx){
+    gameCanvas = newGameCanvas;
+    gameHoverCtx = placementCtx;
 }
 
 
@@ -101,7 +144,7 @@ function getTiles(tile, allTiles) {
         tile2: neighbors[0],
         tile3: neighbors[1],
         tile4: neighbors[2],
-        positionID: tile.position.x + tile.position.y + neighbors[0].position.x + neighbors[0].position.y + neighbors[1].position.x + neighbors[1].position.y + neighbors[2].position.x + neighbors[2].position.y,
+        positionID: tile.position.x * tile.position.y * neighbors[0].position.x * neighbors[0].position.y * neighbors[1].position.x * neighbors[1].position.y * neighbors[2].position.x * neighbors[2].position.y,
     }
 }
 
@@ -196,28 +239,6 @@ export class PlaceableTile{
     }
 }
 
-/**
- * Array to hold the placement tiles. Used to create the placement tiles.
- * @type {*[]} - Array to hold the placement tiles.
- * @param placementTilesData2D - The 2D array that holds the placement tiles data.
- * @author Philip
- */
-const placementTiles = []
-placementTilesData2D.forEach(((row, yIndex) => {
-    row.forEach((tile , xIndex) => {
-        if (tile === 61){
-            placementTiles.push(new PlaceableTile(
-                {position: {
-                        x: xIndex * 32,
-                        y: yIndex * 32,
-                    }},
-                (yIndex * xIndex) //tile ID
-            ));
-        }
-    })
-}));
-
-
 /*
 --- Event listeners ---
  */
@@ -246,21 +267,4 @@ window.addEventListener('click', (ev) =>{
         }
     }
 });
-
-// The following code is used to check if the mouse is hovering over a tile and if so, update the hover effect on the tile. It is right now only used for reference and is not used in the game.
-/*
-let lastHover = false;
-window.addEventListener('mousemove', (ev) => { // Use canvas
-    const rect = gameCanvas.getBoundingClientRect()
-    mouse.x = ev.clientX - rect.left
-    mouse.y = ev.clientY - rect.top
-
-    if (mouse.x >= 0 && mouse.x <= rect.width && mouse.y >= 0 && mouse.y <= rect.height) { //inside canvas
-        hoveredTiles = isTile()
-
-        updateHoverTiles()
-    }
-});
-
- */
 

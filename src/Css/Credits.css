@@ -1,3 +1,11 @@
+/*
+Defines CSS styles for the credits page,
+including background image, text styling for the rolling credits,
+and button styling for returning to the main page.
+
+Author: Muhamed
+*/
+
 body {
     font-family: 'Rockwell Extra Bold', serif;
     margin: 0;
@@ -50,11 +58,12 @@ body {
     z-index: 1000;
 }
 
-button {
+.button {
     font-family: 'Press Start 2P', cursive;
     background-color: #0c0b0b;
     border: none;
     color: #d50909;
+    font-size: 20px;
     padding: 0.5rem 1rem;
     text-transform: uppercase;
     outline: none;

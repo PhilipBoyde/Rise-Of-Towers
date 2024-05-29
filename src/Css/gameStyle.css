@@ -1,5 +1,7 @@
 * {
     user-select: none;
+    font-family: "VT323", monospace;
+    font-weight: lighter;
 }
 
 body, html{
@@ -212,59 +214,30 @@ body, html{
 }
 
 /*
---button towers--
-@Author Philip
- */
-
-.UIScreen #sellButton {
-    border: 3px solid #4F4537;
-    border-radius: 20px;
-    transition: all 0.3s;
-    cursor: pointer;
-    background: #DFE0DF;
-    font-weight: 550;
-    font-family: "VT323", cursive;
-    font-size: 30px;
-    width: 92px;
-    height: 50px;
-
-    position: absolute;
-    top: 88%;
-    left: 84.6%;
-}
-
-.UIScreen #sellButton:hover {
-    background: #fd9e00;
-    color: white;
-    font-size: 2.2em;
-    filter: drop-shadow(0 0 20px #fd9e00);
-}
-
-.UIScreen #sellButton:hover:disabled {
-    cursor: not-allowed;
-}
-
-.UIScreen #speedButton {
-    border: 3px solid #4F4537;
-    border-radius: 20px;
-    cursor: pointer;
-    background: #DFE0DF;
-    font-weight: 550;
-    font-family: "VT323", cursive;
-    font-size: 30px;
-    width: 92px;
-    height: 50px;
-
-    position: absolute;
-    top: 88%;
-    left: 91.5%;
-
-}
-
-/*
 ------ Tower Button Styling ------
  */
-.UIScreen #tower1, .UIScreen #tower2, .UIScreen #tower3, .UIScreen #tower4, .UIScreen #tower5 {
+.UIScreen .towers {
+    position: absolute;
+    width: 183px;
+    height: 250px;
+    top: 20%;
+    background: #483d27;
+    border: rgba(63, 63, 63, 0.63);
+    border: 3px solid;
+    border-radius: 10px;
+}
+
+.towers #towerLabel {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    font-size: 50px;
+    top: 3%;
+    left: 15%;
+    color: white;
+}
+
+.UIScreen #tower1, .UIScreen #tower2, .UIScreen #tower3, .UIScreen #tower4 {
     border: 2px solid #4F4537;
     border-radius: 10px;
     background: #ffffff;
@@ -273,39 +246,42 @@ body, html{
     font-weight: 550;
     font-family: "VT323", cursive;
     font-size: 30px;
-    width: 185px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
 
     position: absolute;
 }
 
-.UIScreen #tower1Image, .UIScreen #tower2Image, .UIScreen #tower3Image, .UIScreen #tower4Image, .UIScreen #tower5Image {
+.UIScreen #tower1Image, .UIScreen #tower2Image, .UIScreen #tower3Image, .UIScreen #tower4Image {
     position: absolute;
-    top: 17%;
-    left: 4%;
+    top: 30%;
+    left: 30%;
+    filter: drop-shadow(4px 4px #000000);
 }
 
-.UIScreen #tower1Cost, .UIScreen #tower2Cost, .UIScreen #tower3Cost, .UIScreen #tower4Cost, .UIScreen #tower5Cost{
+.UIScreen #tower1Cost, .UIScreen #tower2Cost, .UIScreen #tower3Cost, .UIScreen #tower4Cost {
     position: absolute;
     font-size: 18px;
-    top: 50%;
-    left: 25%;
+    top: 75%;
+    left: 10%;
 }
 
-.UIScreen #tower1Name, .UIScreen #tower2Name, .UIScreen #tower3Name, .UIScreen #tower4Name, .UIScreen #tower5Name{
-    position: absolute;
+.UIScreen #tower1Name, .UIScreen #tower2Name, .UIScreen #tower3Name, .UIScreen #tower4Name {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 25px;
-    top: 10%;
-    left: 25%;
+    top: -35%;
 }
 
-.UIScreen #tower1:disabled, .UIScreen #tower2:disabled, .UIScreen #tower3:disabled, .UIScreen #tower4:disabled, .UIScreen #tower5:disabled {
+.UIScreen #tower1:disabled, .UIScreen #tower2:disabled, .UIScreen #tower3:disabled, .UIScreen #tower4:disabled {
     cursor: not-allowed;
     filter: blur(1px);
     background-color: gray;
 }
 
-.UIScreen #tower1:disabled:hover, .UIScreen #tower2:disabled:hover, .UIScreen #tower3:disabled:hover, .UIScreen #tower4:disabled:hover, .UIScreen #tower5:disabled:hover {
+.UIScreen #tower1:disabled:hover, .UIScreen #tower2:disabled:hover, .UIScreen #tower3:disabled:hover, .UIScreen #tower4:disabled:hover {
     background: gray;
     color: #676767;
     font-size: 30px;
@@ -313,39 +289,34 @@ body, html{
 
 }
 
-.UIScreen #tower1:hover, .UIScreen #tower2:hover, .UIScreen #tower3:hover, .UIScreen #tower4:hover, .UIScreen #tower5:hover {
-    background: #8c343c;
+.UIScreen #tower1:hover, .UIScreen #tower2:hover, .UIScreen #tower3:hover, .UIScreen #tower4:hover {
+    background: rgba(0, 255, 227, 0.45);
     color: white;
     font-size: 2em;
-    filter: drop-shadow(0 0 20px #8c343c);
+    filter: drop-shadow(0 0 20px #118275);
 }
 
 .UIScreen #tower1 {
-    top: 80%;
-    left: 84.6%;
+    top: 25%;
+    left: 5%;
 }
 
 
 .UIScreen #tower2 {
-    top: 75%;
-    left: 84.6%;
+    top: 25%;
+    left: 50%;
 }
 
 .UIScreen #tower3 {
-    top: 70%;
-    left: 84.6%;
+    top: 63%;
+    left: 5%;
 }
 
 .UIScreen #tower4 {
-    top: 65%;
-    left: 84.6%;
+    top: 63%;
+    left: 50%;
 }
 
-.UIScreen #tower5 {
-    top: 60%;
-    left: 84.6%;
-
-}
 
 
 /*
@@ -587,16 +558,36 @@ body, html{
     z-index: 20;
 }
 
+#GameOver .saveHighscoreContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: auto;
+    width: auto;
+    gap: 10px;
+}
+
+#GameOver .saveHighscoreContainer #playerName{
+    height: auto;
+    width: 350px;
+    font-size: 40px;
+    border: 3px solid #000000;
+    border-radius: 15px;
+}
+
 #GameOver .buttonContainer{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    height: 0;
+    height: auto;
+    width: auto;
+    top: 100px;
     gap: 10px;
 }
 
-#GameOver .buttonContainer button{
+#GameOver button{
     width: 350px;
     height: 60px;
     border: 3px solid #000000;
@@ -609,7 +600,7 @@ body, html{
     font-size: 30px;
 }
 
-#GameOver .buttonContainer button:hover {
+#GameOver  button:hover {
     background: #dc0000;
     color: white;
     font-size: 0.2em;
@@ -816,4 +807,133 @@ body, html{
     position: absolute;
     top: 35%;
     left: 19%;
+}
+
+/*
+------ TowerInfo Styling ------
+ */
+
+.towerInfo {
+    display: none;
+    position: absolute;
+    background: rgba(86, 69, 41, 0.86);
+    border-radius: 4px;
+    z-index: 7;
+
+
+    width: 125px;
+    height: 150px;
+
+    top: 256px; /* TopLeft 20px */
+    left: 254px; /* TopLeft 20px */
+}
+
+.towerInfo #towerInfoName {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: lighter;
+}
+
+.towerInfo #towerInfoStats {
+    color: white;
+    position: relative;
+    left: 5px;
+    font-size: 23px;
+}
+
+.towerInfo #sellButton {
+    cursor: pointer;
+    position: relative;
+    left: 10%;
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-color: transparent;
+}
+
+#sellButton #sellButtonIMG {
+    width: 32px;
+    height: 32px;
+}
+
+.towerInfo #sellButton:hover #sellButtonIMG {
+    width: 35px;
+    height: 35px;
+}
+
+.towerInfo #sellButton:hover:disabled {
+    cursor: not-allowed;
+}
+
+
+
+
+.towerInfo #upgradeButton {
+    cursor: pointer;
+    position: relative;
+    left: 5%;
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-color: transparent;
+}
+
+.towerInfo #upgradeButton:hover #upgradeButtonIMG {
+    width: 35px;
+    height: 35px;
+    background: transparent;
+    border-color: transparent;
+}
+
+#upgradeButton #upgradeButtonIMG {
+    width: 32px;
+    height: 32px;
+}
+
+/* Tooltip container */
+.tooltip {
+    position: absolute;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.85); /* Darker background */
+    color: #fff;
+    text-align: left; /* Left align text */
+    padding: 10px; /* Increased padding for more content */
+    border-radius: 10px; /* Slightly more rounded corners */
+    z-index: 10;
+    font-family: "VT323", monospace;
+    font-size: 30px; /* Slightly larger font size */
+    max-width: 200px; /* Limit width to avoid too wide tooltips */
+}
+
+/* Tooltip arrow */
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(211, 207, 207, 0.85) transparent transparent transparent;
+}
+
+/* For buying and upgrading */
+.error-popup {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: "VT323", monospace;
+    font-size: 40px;
+    display: none;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s;
 }

@@ -1,0 +1,198 @@
+/*
+Defines CSS styles for the main content of the page, including background image, text styling, and map selection elements.
+
+Author: Philip, Muhamed, Emil
+*/
+
+* {
+    user-select: none;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+
+    background-image: url("../js/model/assets/img/00010-165442584.jpg");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    animation: zoomInOut 20s infinite;
+}
+
+@keyframes zoomInOut {
+    0%, 100% {
+        background-size: 100% 100%;
+        background-position: center;
+    }
+    50% {
+        background-size: 120% 120%;
+        background-position: center;
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    font-family: "VT323", monospace;
+    font-weight: lighter;
+    font-size: 100px;
+    height: 10%;
+
+    padding: 10px;
+    filter: blur(10,10,10,10);
+    border: 2px solid #402f1d;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+}
+
+
+.difficulty-label{
+    position: absolute;
+    font-family: "VT323", monospace;
+    font-size: 40px;
+    background-color: rgba(0,0,0,0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 10;
+    display: block;
+
+}
+
+.divEz{
+    position: absolute;
+    top: 300px;
+    left: calc(16.67% );
+    transform: translateX(-50%);
+    color: lawngreen;
+}
+.divEzLeft{
+    left: calc(16.67% - 30px);
+}
+
+.divMed{
+    left: calc(50% - 30px);
+    position: absolute;
+    transform: translateX(-50%);
+    top: 300px;
+    color: orange;
+}
+.divMedLeft{
+    left: calc(50% - 30px);
+}
+
+.divHard{
+    position: absolute;
+    top: 300px;
+    left: calc(83.33% - 30px);
+    transform: translateX(-50%);
+    color: red;
+}
+.divHardLeft{
+    left: calc(83.33% - 30px);
+}
+
+.mapSelectionScreen {
+    display: flex;
+    align-items: center;
+    padding: 5vh 1vw;
+
+    gap: 10px;
+    height: 60vh;
+
+    filter: blur(10,10,10,10);
+    border: 2px solid #402f1d;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+}
+
+
+
+.map img {
+    margin: 10px;
+    height: 80%;
+    width: 30vw;
+    object-fit: contain;
+    text-align: center;
+
+    border: 2px solid #402f1d;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+.map img:hover {
+    cursor: pointer;
+    border: 2px solid #2a401d;
+    filter: drop-shadow(0 0 20px #2a401d);
+    z-index: 0;
+}
+
+.map img.no-hover:hover {
+    cursor: pointer;
+    border: 2px solid #402f1d;
+    filter: none;
+    z-index: 2;
+}
+
+.mapText {
+    display: none;
+    width: 100%;
+    z-index: 2;
+    font-family: "VT323", monospace;
+    font-size: 45px;
+}
+
+.blurryBackground {
+    display: none;
+    position: absolute;
+    right: 0;
+    width: 30vw;
+    background: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+    backdrop-filter: blur(5px); /* Blurry background */
+    border-radius: 10px;
+    z-index: 1;
+    padding-left: 20px; /* Additional left padding to move the text to the right */
+}
+
+.blurryBackground button {
+    position: absolute;
+    width: 45%;
+    height: 60px;
+    border: 3px solid #402f1d;
+    border-radius: 45px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: white;
+    font-weight: 550;
+    font-family: "VT323", cursive;
+    font-size: 40px;
+
+    bottom: 2%;
+}
+
+.blurryBackground .startButton {
+    left: 3%;
+}
+
+.blurryBackground .backButton {
+    right: 2%;
+}
+
+button:hover {
+    background: #402f1d;
+    color: white;
+    font-size: 3.2em;
+}

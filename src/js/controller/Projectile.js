@@ -1,6 +1,9 @@
 /**
  * Projectile class that handles the projectile movement and damage.
  * @class Projectile
+ * @author Mahyar
+ * @author Philip
+ * @author Muhamed
  */
 export class Projectile {
     /**
@@ -15,8 +18,14 @@ export class Projectile {
      * @param {function} onDelete - function to delete the projectile
      * @param {CanvasRenderingContext2D} gameCtx - the game context
      * @param {string[]} imagePaths - array of image paths for the projectile
+     * @param {Object[]} enemies - array of all enemies in the game
+     * @param {number} aoeRadius - radius for AoE damage
+     * @author Mahyar
+     * @author Philip
+     * @author Muhamed
+     *
      */
-    constructor(towerType, x, y, speed, damage, target, onDelete, gameCtx, imagePaths) {
+    constructor(towerType, x, y, speed, damage, target, onDelete, gameCtx, imagePaths,enemies,aoeRadius) {
         this.towerType = towerType;
         this.gameCtx = gameCtx;
         this.onDelete = onDelete;
@@ -27,6 +36,8 @@ export class Projectile {
         this.target = target;
         this.markedForDeletion = false;
         this.imagePaths = imagePaths;
+        this.enemies = enemies;
+        this.aoeRadius = aoeRadius;
         this.imageLoaded = false;
         this.imageIndex = 0;
         this.frameCount = 0;
@@ -36,6 +47,8 @@ export class Projectile {
 
     /**
      * Loads images from the given image paths.
+     * @author Mahyar
+     * @author Philip
      */
     loadImage() {
         this.images = [];
@@ -55,6 +68,8 @@ export class Projectile {
 
     /**
      * Moves the projectile towards the target.
+     * @author Mahyar
+     * @author Philip
      */
     move() {
         this.draw();
@@ -65,19 +80,52 @@ export class Projectile {
         this.x += dx * ratio;
         this.y += dy * ratio;
 
-
         // Check if the projectile hits the target
         if (Math.abs(this.x - this.target.center.x) < 5 && Math.abs(this.y - this.target.center.y) < 5) {
-            this.target.health -= this.damage;
-           if (this.towerType === "Ice") {
-               this.target.slowEffect();
-           }
+            if (this.towerType === "Stone") {
+                console.log("Applying AoE damage");
+                this.applyAoEDamage();
+            } else {
+                this.target.health -= this.damage;
+                if (this.towerType === "Ice") {
+                    this.target.slowEffect();
+                }
+            }
             this.markedForDeletion = true;
+            this.onDelete(this); // Ensure the projectile is properly deleted
         }
     }
 
     /**
+     * Applies AoE damage to all enemies within the AoE radius.
+     * @author Muhamed
+     */
+    applyAoEDamage() {
+        if (!Array.isArray(this.enemies)) {
+            console.error("Enemies is not an array:", this.enemies);
+            return;
+        }
+        console.log("Applying AoE damage to enemies:", this.enemies);
+        this.enemies.forEach(enemy => {
+            if (enemy && enemy.center) {
+                const dx = enemy.center.x - this.target.center.x;
+                const dy = enemy.center.y - this.target.center.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance <= this.aoeRadius) {
+                    console.log(`Damaging enemy at distance: ${distance}`);
+                    enemy.health -= this.damage;
+                    console.log(`Enemy health after damage: ${enemy.health}`);
+                }
+            } else {
+                console.error("Invalid enemy object:", enemy);
+            }
+        });
+    }
+
+    /**
      * Draws the projectile on the canvas.
+     * @author Mahyar
+     * @author Philip
      */
     draw() {
         const frameChangeInterval = 400;
@@ -100,7 +148,12 @@ export class Projectile {
         }
         requestAnimationFrame(this.draw.bind(this));
     }
-
+    /**
+     * Marks the object for deletion by setting a flag.
+     * When called, this method sets the 'markedForDeletion' flag to true,
+     * indicating that the object should be removed or hidden from the game environment.
+     * @author Mahyar
+     */
     setInvisible() {
         this.markedForDeletion = true;
     }

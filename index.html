@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Rise Of Towers</title>
 
     <link rel="icon" href="src/js/model/assets/img/SiteIcon.png" type="image/x-icon">
@@ -15,7 +16,11 @@
 
 <audio src="src/js/model/assets/sounds/relax-intro-103890.mp3" autoplay loop></audio>
 
-<div class="transition transition-1 is-active"></div>
+<!-- Transition -->
+<div class="transition transition-1 is-active">
+    <div class = "transitionText"></div>
+</div>
+
 
 <div class="mainBorder">
 
@@ -23,8 +28,8 @@
     <div class="buttonContainer">
         <h1 id="GameName">Rise Of <br> Towers</h1>
 
-        <a href="src/static/Game.html">
-            <button>Play Game</button>
+        <a href="src/static/MapSelection.html">
+            <button>Play</button>
         </a>
 
         <a href="src/static/Tutorial.html">
@@ -42,13 +47,15 @@
     <div class="highScoreListContainer">
         <h2>HighScores</h2>
 
-        <ol id="highScores">
-            1. OFFLINE
+        <ol id="highscoreList">
+
         </ol>
+
     </div>
 
 </div>
     <script type="module" src="src/js/transitionAnimation.js"></script>
+    <script type="module" src="src/js/controller/indexController.js"></script>
 
 </body>
 </html>

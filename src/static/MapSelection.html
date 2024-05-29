@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Selection</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="icon" href="../js/model/assets/img/SiteIcon.png" type="image/x-icon">
+    <link href="../Css/MapSelection.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="content">
+    <h1>Select a Map</h1>
+    <div class="mapSelectionScreen">
+
+
+
+        <div class="map" id="Map1">
+            <div class="divEz difficulty-label">Easy</div>
+            <img src="../js/model/assets/gameMap/Map1.png" alt="Map 1">
+
+                <div class="blurryBackground">
+                    <p class="mapText">Map 1: Welcome to the open fields that are waiting for you to explore. Great choice for those who are just discovering fauna of our little region. </p>
+                    <button class="startButton" onclick="confirmSelection()">Start Game</button>
+                    <button class="backButton" onclick="reset()">Back</button>
+                </div>
+
+             </div>
+
+        <div class="map" id="Map2">
+            <div class="divMed difficulty-label">Medium</div>
+            <img src="../js/model/assets/gameMap/Map2.png" alt="Map 2">
+
+            <div class="blurryBackground">
+                <p class="mapText">Map 2: Forest area that hides some secrets. For those who need a bit more umf in life!</p>
+                <button class="startButton"  onclick="confirmSelection()">Start Game</button>
+                <button class="backButton" onclick="reset()">Back</button>
+            </div>
+
+
+        </div>
+        <div class="map" id="Map3">
+            <div class="divHard difficulty-label">Hard</div>
+            <img src="../js/model/assets/gameMap/Map3.png" alt="Map 3">
+
+            <div class="blurryBackground">
+                <p class="mapText">Map 3: Regions long forgotten camping spot. Put your big boy pants on and Good luck! Even the best get beaten once or twice... or few times.</p>
+                <button class="startButton"  onclick="confirmSelection()">Start Game</button>
+                <button class="backButton" onclick="reset()">Back</button>
+            </div>
+
+           </div>
+    </div>
+</div>
+
+<script src="../js/controller/MapSelectionController.js"></script>
+</body>
+</html>
+
+
+<!-- @Author: Philip, Muhamed, Emil -->

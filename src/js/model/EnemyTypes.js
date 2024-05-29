@@ -1,12 +1,5 @@
 import {Enemy} from '../controller/EnemyController.js';
 
-/*
--ToDO
-- Add more enemies
-- add boss
-- add resistance to enemies eg magic resistance, physical resistance
-- add easter egg?
- */
 
 /**
  * Class for the slime enemy. Extends the Enemy class.
@@ -29,7 +22,7 @@ export class slime extends Enemy {
             0.9, //speed
             path,
             100, //health
-            10, //coins
+            20, //coins
             {spriteImages: { //Sprite images for the wolf enemy
                     up: '../js/model/assets/EnemySprites/Slime/U_Walk.png',
                     down: '../js/model/assets/EnemySprites/Slime/D_Walk.png',
@@ -112,7 +105,7 @@ export class bee extends Enemy {
             3, //speed
             path,
             20, //health
-            2, //coins
+            20, //coins
             {spriteImages: { //Sprite images for the wolf enemy
                     up: '../js/model/assets/EnemySprites/Bee/U_Walk.png',
                     down: '../js/model/assets/EnemySprites/Bee/D_Walk.png',
@@ -155,7 +148,7 @@ export class goblin extends Enemy {
             path,
             100, //health
             20, //coins
-            {spriteImages: { //Sprite images for the wolf enemy
+            {spriteImages: {
                     up: '../js/model/assets/EnemySprites/Goblin/U_Walk.png',
                     down: '../js/model/assets/EnemySprites/Goblin/D_Walk.png',
                     right: '../js/model/assets/EnemySprites/Goblin/R_Walk.png',
@@ -184,14 +177,15 @@ export class Cyclops extends Enemy {
      * @param position
      * @param path
      * @author Philip
+     * @author Muhamed
      */
     constructor({position = {x: 0, y: 0}}, path) {
         super(
             {position},
-            0.3, //speed
+            0.7, //speed
             path,
-            1500, //health
-            100, //coins
+            5000, //health
+            500, //coins
             {spriteImages: {
                     up: '../js/model/assets/EnemySprites/Boss/Cyclops/walk4.png',
                     down: '../js/model/assets/EnemySprites/Boss/Cyclops/walk4.png',
@@ -212,6 +206,13 @@ export class Cyclops extends Enemy {
     }
 }
 
+/**
+ * Class representing a Mech enemy.
+ * @extends Enemy
+ * @class Mech
+ * @author Philip
+ * @author Muhamed
+ */
 export class Mech extends Enemy {
     constructor({position = {x: 0, y: 0}}, path) { // !!NOT DONE!!
         super(
@@ -219,7 +220,7 @@ export class Mech extends Enemy {
             0.5, //speed
             path,
             10000, //health
-            300, //coins
+            700, //coins
             {spriteImages: {
                     up: '../js/model/assets/EnemySprites/Boss/Mech/walk2.png',
                     down: '../js/model/assets/EnemySprites/Boss/Mech/walk2.png',
@@ -240,13 +241,20 @@ export class Mech extends Enemy {
     }
 }
 
+/**
+ * Class representing a dragonWiz enemy.
+ * @extends Enemy
+ * @class dragonWiz
+ * @author Philip
+ * @author Muhamed
+ */
 export class dragonWiz extends Enemy {
     constructor({position = {x: 0, y: 0}}, path) { // !!NOT DONE!!
         super(
             {position},
             1.5, //speed
             path,
-            10000, //health
+            600, //health
             25, //coins
             {spriteImages: {
                     up: '../js/model/assets/EnemySprites/dragonWiz/walk.png',
@@ -268,6 +276,12 @@ export class dragonWiz extends Enemy {
     }
 }
 
+/**
+ * Class representing a akaname enemy.
+ * @extends Enemy
+ * @class akaname
+ * @author Philip
+ */
 export class akaname extends Enemy {
     constructor({position = {x: 0, y: 0}}, path) { // !!NOT DONE!!
         super(
