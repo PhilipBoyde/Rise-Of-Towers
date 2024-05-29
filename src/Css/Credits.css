@@ -50,7 +50,7 @@ body {
     z-index: 1000;
 }
 
-button {
+.button {
     font-family: 'Press Start 2P', cursive;
     background-color: #0c0b0b;
     border: none;

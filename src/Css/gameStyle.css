@@ -214,28 +214,6 @@ body, html{
 }
 
 /*
---button towers--
-@Author Philip
- */
-
-.UIScreen #speedButton {
-    border: 3px solid #4F4537;
-    border-radius: 20px;
-    cursor: pointer;
-    background: #DFE0DF;
-    font-weight: 550;
-    font-family: "VT323", cursive;
-    font-size: 30px;
-    width: 92px;
-    height: 50px;
-
-    position: absolute;
-    top: 88%;
-    left: 91.5%;
-
-}
-
-/*
 ------ Tower Button Styling ------
  */
 .UIScreen .towers {
@@ -550,7 +528,7 @@ body, html{
  */
 
 #fpsCounter{
-    display: flex;
+    display: none;
     position: absolute;
     top: 10px;
     left: 30px;
@@ -580,16 +558,36 @@ body, html{
     z-index: 20;
 }
 
+#GameOver .saveHighscoreContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: auto;
+    width: auto;
+    gap: 10px;
+}
+
+#GameOver .saveHighscoreContainer #playerName{
+    height: auto;
+    width: 350px;
+    font-size: 40px;
+    border: 3px solid #000000;
+    border-radius: 15px;
+}
+
 #GameOver .buttonContainer{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    height: 0;
+    height: auto;
+    width: auto;
+    top: 100px;
     gap: 10px;
 }
 
-#GameOver .buttonContainer button{
+#GameOver button{
     width: 350px;
     height: 60px;
     border: 3px solid #000000;
@@ -602,7 +600,7 @@ body, html{
     font-size: 30px;
 }
 
-#GameOver .buttonContainer button:hover {
+#GameOver  button:hover {
     background: #dc0000;
     color: white;
     font-size: 0.2em;
@@ -894,6 +892,52 @@ body, html{
     width: 32px;
     height: 32px;
 }
+
+/* Tooltip container */
+.tooltip {
+    position: absolute;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.85); /* Darker background */
+    color: #fff;
+    text-align: left; /* Left align text */
+    padding: 10px; /* Increased padding for more content */
+    border-radius: 10px; /* Slightly more rounded corners */
+    z-index: 10;
+    font-family: "VT323", monospace;
+    font-size: 30px; /* Slightly larger font size */
+    max-width: 200px; /* Limit width to avoid too wide tooltips */
+}
+
+/* Tooltip arrow */
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(211, 207, 207, 0.85) transparent transparent transparent;
+}
+
+/* For buying and upgrading */
+.error-popup {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: "VT323", monospace;
+    font-size: 40px;
+    display: none;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
 
 /*
 .UIScreen #sellButton {

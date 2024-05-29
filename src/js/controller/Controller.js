@@ -1,9 +1,10 @@
-import {calculateWave, testEnemyType} from "../model/WaveCalculator.js";
+import {calculateWave} from "../model/WaveCalculator.js";
 import {gameIsRunning, updateHoverTiles} from "./placementTiles.js";
 import {gameStatus} from "./SettingsController.js";
 //import {} from "../controller/SpriteTowerController.js";
 //import {} from "../controller/SpriteController.js";
 //import { MapController } from './mapController.js';
+import {SaveController} from "./SaveController.js";
 
 
 /**
@@ -28,7 +29,7 @@ let /** number */ round = 0;
 let img = new Image();
 let /** @type number */ activeWave = 1;
 let /** @type number */ playerHealth = 20;
-let /** @type number */ coins = 600;
+let /** @type number */ coins = 700;
 updateCoins();
 
 let /** @type array */ activeTowers = [];
@@ -46,6 +47,7 @@ let /** @type HTMLCanvasElement */ enemyCanvas;
 let /** @type HTMLCanvasElement */ gameHoverCanvas;
 let /** @type CanvasRenderingContext2D */ enemyCtx;
 let /** @type CanvasRenderingContext2D */ gameHoverCtx;
+const saveCon = new SaveController();
 
 const /** @type HTMLElement */fpsCounterElement = document.querySelector('#fpsCounter');
 
@@ -238,7 +240,6 @@ function gameLoop(enemies) {
             activeTowers.forEach(tower => { // tower
                 tower.drawTower();
             });
-
              */
 
             addCoins(100)
@@ -270,6 +271,35 @@ function gameLoop(enemies) {
     enemyAnimationID = requestAnimationFrame(() => gameLoop(enemies));
 }
 
+/**
+ * @author Emil
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('saveScoreButton').addEventListener('click', saveHighScorec);
+});
+
+/**
+ * @author Philip
+ * @author Emil
+ */
+export function saveHighScorec() {
+
+    if(!saveCon){
+        console.error('SaveController not initialized');
+        return;
+    }
+
+    let playerScore = getCoins() * activeWave ;
+    let playerName = document.getElementById('playerName').value;
+
+    if (playerName.trim().length === 0) {
+        alert("Please enter a name and score to save highscore");
+    } else {
+        saveCon.addHighscore(playerName.trim(), playerScore);
+    }
+}
+
+
 
 /**
  * Updates the FPS counter on the game screen.
@@ -289,3 +319,47 @@ function fpsCounterUpdate(fps){
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const towerButtons = document.querySelectorAll('.towerButton');
+    const tooltip = document.getElementById('tooltip');
+
+    towerButtons.forEach(button => {
+        button.addEventListener('mouseenter', (event) => {
+            const damage = button.getAttribute('data-damage');
+            const range = button.getAttribute('data-range');
+            const description = button.getAttribute('data-description');
+            tooltip.innerHTML = `Damage: ${damage}<br>Range: ${range}<br>${description}`;
+            tooltip.style.display = 'block';
+            const rect = button.getBoundingClientRect();
+            tooltip.style.left = `${rect.left + window.pageXOffset}px`;
+            tooltip.style.top = `${rect.top + window.pageYOffset - tooltip.offsetHeight}px`;
+        });
+
+        button.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+        });
+
+        button.addEventListener('mousemove', (event) => {
+            tooltip.style.left = `${event.pageX}px`;
+            tooltip.style.top = `${event.pageY - tooltip.offsetHeight - 10}px`;
+        });
+    });
+});
+
+/**
+ * Function to show an error popup when player tries to buy or upgrade a tower
+ * without having enough coins.
+ * @author Muhamed
+ */
+export function showErrorPopup() {
+    const errorPopup = document.getElementById('errorPopup');
+    errorPopup.style.display = 'block';
+    errorPopup.style.opacity = '1';
+
+    setTimeout(() => {
+        errorPopup.style.opacity = '0';
+        setTimeout(() => {
+            errorPopup.style.display = 'none';
+        }, 300); // Match this duration with the transition duration in CSS
+    }, 2000); // Display the message for 2 seconds
+}
