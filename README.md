@@ -3,7 +3,7 @@
 </h1>
 
 <div align="center">
-  <img src="https://img.shields.io/badge/Website-Online-brightgreen"/>
+  <img src="https://img.shields.io/badge/Website-unstable-orange"/>
 </div>
 
 <div align="center">
@@ -14,7 +14,8 @@
 ![Image Alt Text](ReadMePictures/MainMenu.png)
 
 <h1>About</h1>
-This project was developed as a school assignment and is no longer being updated. 
+This project was developed as a school assignment and is no longer being updated.
+For optimal performance and to mitigate some known bugs in the web version, it is recommended to run the game within an IDE like IntelliJ and use localhost.
 
 
 <h1>Assets Used</h1>
