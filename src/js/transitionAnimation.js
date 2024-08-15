@@ -27,7 +27,7 @@ window.onload = () => {
 
         // Check if all images are loaded and current page is Game.html
         if (window.allImagesLoaded && window.location.href.includes('Game.html')) {
-            console.log('All images are loaded');
+            console.log('All assets are loaded');
         }
     }
 }

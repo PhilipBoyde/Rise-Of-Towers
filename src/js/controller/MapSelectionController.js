@@ -5,17 +5,15 @@
  * Manages the behavior of map images and associated text when clicked.
  */
 document.getElementById("Map1").addEventListener("click", () => {
-    console.log("Map 1 click")
     selectMap(1)
 });
 document.getElementById("Map2").addEventListener("click", () => {
-    console.log("Map 2 click")
     selectMap(2)
 });
 document.getElementById("Map3").addEventListener("click", () => {
-    console.log("Map 3 click")
     selectMap(3)
 });
+
 let images /** @type NodeListOf */ = document.querySelectorAll('.map img');
 let texts /** @type NodeListOf */ = document.querySelectorAll('.mapText');
 let backgrounds  /** @type NodeListOf */ = document.querySelectorAll('.blurryBackground');
@@ -35,7 +33,7 @@ let selectedMap;
 function selectMap(mapId) {
     // Remove the selected class from any previously selected map
     const previousSelectedMap = document.querySelector('.map.selected');
-    console.log(`Map${mapId} clicked`);
+    //console.log(`Map${mapId} clicked`);
 
 
     if (previousSelectedMap) {
@@ -62,25 +60,20 @@ function selectMap(mapId) {
  * @author Emil
  */
 function showDifficultyLbl(selectedMap){
-    console.log("Is called")
-    console.log('Showing difficulty label for Map ID:', selectedMap);
     document.querySelectorAll('.difficulty-label').forEach(label => {
         label.style.display = 'none';
     });
 
     const mapHolder = document.getElementById(`Map${selectedMap}`);
-    console.log('Map holder:', mapHolder);
     if (mapHolder){
         const difficultyLbl = mapHolder.querySelector('.difficulty-label');
-        console.log('Difficulty label:', difficultyLbl);
         if (difficultyLbl){
-            console.log("Actually displaying dif label")
             difficultyLbl.style.display = 'block';
         } else {
-            console.log("Dif lbl not found in map container");
+            //console.log("Dif lbl not found in map container");
         }
     }else {
-        console.log("Map container not found");
+        console.error("Map container not found");
     }
 }
 
@@ -105,7 +98,6 @@ function confirmSelection() {
  * @author Emil
  */
 function reset(){
-    console.log("Resetting")
     images.forEach(function (img) {
         img.style.width = '30vw';
         img.style.position = 'initial';
@@ -122,7 +114,6 @@ function reset(){
     });
 
     document.querySelectorAll('.difficulty-label').forEach(function (label){
-        console.log("Resetting difficulty labels");
 
         if (label.classList.contains('divEz')){
             label.style.top = '300px';
@@ -135,13 +126,9 @@ function reset(){
             label.classList.add('divHardLeft');
         }
 
-        // label.style.position = 'absolute';
-        //label.style.left = '50%';
-        //label.style.top = '300px';
-        //label.style.transform = 'translateX(-50%, -50%)';
         label.style.width = 'auto';
         label.style.display = 'block';
-        console.log( 'End of difflbl reset should show: '+label.style.display);
+        //console.log( 'End of difflbl reset should show: '+label.style.display);
     });
 
 }

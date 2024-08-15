@@ -69,7 +69,7 @@ function towerLoop() {
  * @author Philip
  */
 export function selectTile(tile) {
-    console.log(tile);
+    //console.log(tile);
 
     if (allPlacedTowers.length >= 0 && !inSettings) {
 
@@ -105,7 +105,7 @@ function updateTowerStatus() {
         const towerID = tower.getPositionID();
 
         if (towerID === activeTileID) {
-            console.log(tower.x + ", " + tower.y);
+            //console.log(tower.x + ", " + tower.y);
             activeTower = tower;
 
             // updates stats
@@ -204,7 +204,7 @@ function sellTower() {
  */
 function selectTower(buttonID) {
     coins = getCoins();
-    console.log(coins);
+    //console.log(coins);
 
     switch (buttonID) {
         case 1: // Ice Tower

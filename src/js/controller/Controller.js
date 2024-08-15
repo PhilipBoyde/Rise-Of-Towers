@@ -1,18 +1,10 @@
 import {calculateWave} from "../model/WaveCalculator.js";
 import {gameIsRunning, updateHoverTiles} from "./placementTiles.js";
 import {gameStatus} from "./SettingsController.js";
+import {SaveController} from "./SaveController.js";
 //import {} from "../controller/SpriteController.js";
 //import { MapController } from './mapController.js';
-import {SaveController} from "./SaveController.js";
 
-
-/**
- *  -TODO-
- *  - balance the game
- *  - add more bosses
- *  - add enemy death animations
- *  - flush out the tower targeting system
- */
 
 /*
 --- variables ---
