@@ -1,21 +1,18 @@
 <h1 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Pixelify+Sans&size=60&duration=4000&pause=1000&color=00AA3D&background=2EF3FF00&center=true&vCenter=true&random=false&width=435&lines=Rise+Of+Towers!;DA336A" />
+  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Pixelify+Sans&size=60&pause=3000&color=00B319&center=true&vCenter=true&width=435&lines=Rise+Of+Towers!" alt="Typing SVG" /></a>
 </h1>
 
 <div align="center">
-  <img src="https://img.shields.io/badge/Website-unstable-orange"/>
-</div>
-
-<div align="center">
+  <img src="https://img.shields.io/badge/Website-Online-darkgreen"/>
   <img src="https://img.shields.io/badge/Version-v.1-blue"/>
-  <img src="https://img.shields.io/badge/License-MIT-green"/>
+  <img src="https://img.shields.io/badge/Maintained-No-red"/>
+  <img src="https://img.shields.io/badge/License-MIT-orange"/>
 </div>
 
 ![Image Alt Text](ReadMePictures/MainMenu.png)
 
 <h1>About</h1>
-This project was developed as a school assignment and is no longer being updated.
-For optimal performance and to mitigate some known bugs in the web version, it is recommended to run the game within an IDE like IntelliJ and use localhost.
+This project was developed as a school assignment and is no longer being updated!
 
 
 <h1>Assets Used</h1>
