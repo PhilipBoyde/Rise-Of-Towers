@@ -83,7 +83,7 @@ export class Projectile {
         // Check if the projectile hits the target
         if (Math.abs(this.x - this.target.center.x) < 5 && Math.abs(this.y - this.target.center.y) < 5) {
             if (this.towerType === "Stone") {
-                console.log("Applying AoE damage");
+                
                 this.applyAoEDamage();
             } else {
                 this.target.health -= this.damage;
@@ -105,16 +105,16 @@ export class Projectile {
             console.error("Enemies is not an array:", this.enemies);
             return;
         }
-        console.log("Applying AoE damage to enemies:", this.enemies);
+        //console.log("Applying AoE damage to enemies:", this.enemies);
         this.enemies.forEach(enemy => {
             if (enemy && enemy.center) {
                 const dx = enemy.center.x - this.target.center.x;
                 const dy = enemy.center.y - this.target.center.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 if (distance <= this.aoeRadius) {
-                    console.log(`Damaging enemy at distance: ${distance}`);
+                    
                     enemy.health -= this.damage;
-                    console.log(`Enemy health after damage: ${enemy.health}`);
+                    
                 }
             } else {
                 console.error("Invalid enemy object:", enemy);

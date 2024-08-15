@@ -12,12 +12,12 @@ export class WizardTower extends Tower {
         const imagePaths = ["../js/model/assets/Tower/Tower1/RedMoonTower_free_idle_animation4.png"];
 
         const projectileImagePaths = [
-            "../js/model/assets/Tower/Projectile/Mage/Mage.png",
-            "../js/model/assets/Tower/Projectile/Mage/Mage3.png",
-            "../js/model/assets/Tower/Projectile/Mage/Mage4.png",
-            "../js/model/assets/Tower/Projectile/Mage/Mage5.png",
-            "../js/model/assets/Tower/Projectile/Mage/Mage6.png",
-            "../js/model/assets/Tower/Projectile/Mage/Mage7.png",
+            "../js/model/assets/Tower_Projectiles/Mage/Mage.png",
+            "../js/model/assets/Tower_Projectiles/Mage/Mage3.png",
+            "../js/model/assets/Tower_Projectiles/Mage/Mage4.png",
+            "../js/model/assets/Tower_Projectiles/Mage/Mage5.png",
+            "../js/model/assets/Tower_Projectiles/Mage/Mage6.png",
+            "../js/model/assets/Tower_Projectiles/Mage/Mage7.png",
         ];
 
         const towerType = "Wizard";
@@ -84,14 +84,14 @@ export class InfernoTower extends Tower {
     constructor(gameCtx, tiles, status) {
         const imagePaths = ["../js/model/assets/Tower/InfernoT.png"];
         const projectileImagePaths = [
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-1.png",
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-2.png",
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-3.png",
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-4.png",
-            "../js/model/assets/Tower/Projectile/Inferno/FB500-5.png",
-            "../js/model/assets/Tower/Projectile/Inferno/B500-2.png",
-            "../js/model/assets/Tower/Projectile/Inferno/B500-3.png",
-            "../js/model/assets/Tower/Projectile/Inferno/B500-4.png"
+            "../js/model/assets/Tower_Projectiles/Inferno/FB500-1.png",
+            "../js/model/assets/Tower_Projectiles/Inferno/FB500-2.png",
+            "../js/model/assets/Tower_Projectiles/Inferno/FB500-3.png",
+            "../js/model/assets/Tower_Projectiles/Inferno/FB500-4.png",
+            "../js/model/assets/Tower_Projectiles/Inferno/FB500-5.png",
+            "../js/model/assets/Tower_Projectiles/Inferno/B500-2.png",
+            "../js/model/assets/Tower_Projectiles/Inferno/B500-3.png",
+            "../js/model/assets/Tower_Projectiles/Inferno/B500-4.png"
         ];
         const towerOptions = {
             frameWidth: 280 / 4,
@@ -156,11 +156,11 @@ export class StoneTower extends Tower {
 
         const imagePaths = ["../js/model/assets/Tower/StoneT.png"];
         const projectileImagePaths = [
-            "../js/model/assets/Tower/Projectile/Stone/Stone3.png",
-            "../js/model/assets/Tower/Projectile/Stone/Stone4.png",
-            "../js/model/assets/Tower/Projectile/Stone/Stone5.png",
-            "../js/model/assets/Tower/Projectile/Stone/Stone6.png",
-            "../js/model/assets/Tower/Projectile/Stone/Stone7.png",
+            "../js/model/assets/Tower_Projectiles/Stone/Stone3.png",
+            "../js/model/assets/Tower_Projectiles/Stone/Stone4.png",
+            "../js/model/assets/Tower_Projectiles/Stone/Stone5.png",
+            "../js/model/assets/Tower_Projectiles/Stone/Stone6.png",
+            "../js/model/assets/Tower_Projectiles/Stone/Stone7.png",
         ];
         const towerOptions = {
             frameWidth: 280 / 4,
@@ -229,11 +229,11 @@ export class IceTower extends Tower {
         // ../js/model/assets/Tower/IceT.png
 
         const projectileImagePaths = [
-            "../js/model/assets/Tower/Projectile/Ice/Ice3.png",
-            "../js/model/assets/Tower/Projectile/Ice/Ice4.png",
-            "../js/model/assets/Tower/Projectile/Ice/Ice5.png",
-            "../js/model/assets/Tower/Projectile/Ice/Ice6.png",
-            "../js/model/assets/Tower/Projectile/Ice/Ice7.png",
+            "../js/model/assets/Tower_Projectiles/Ice/Ice3.png",
+            "../js/model/assets/Tower_Projectiles/Ice/Ice4.png",
+            "../js/model/assets/Tower_Projectiles/Ice/Ice5.png",
+            "../js/model/assets/Tower_Projectiles/Ice/Ice6.png",
+            "../js/model/assets/Tower_Projectiles/Ice/Ice7.png",
         ];
         const towerType = "Ice";
         const towerOptions = {
